@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { IconBaseProps } from "react-icons";
+import type {IconBaseProps} from "react-icons";
 
 const MiniLogo: FC = (props: IconBaseProps) => {
   return (

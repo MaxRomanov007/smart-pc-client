@@ -6,11 +6,6 @@ msgstr ""
 "X-Generator: next-intl\n"
 "X-Crowdin-SourceKey: msgstr\n"
 
-#. index page greeting
-#: src\app\[locale]\page.tsx
-msgid "3Gr7nP"
-msgstr "Hello, {name}"
-
 #. title of index page in metadata
 #: src\app\[locale]\page.tsx
 msgid "FmhFdY"
