@@ -16,6 +16,10 @@ msgstr "Sign In"
 msgid "F62y+K"
 msgstr "Sign Out"
 
+#: src\app\[locale]\(components)\test-toast-button.tsx
+msgid "JuWtVZ"
+msgstr "Test Toast"
+
 #. user greeting
 #: src\app\[locale]\page.tsx
 msgid "3Gr7nP"

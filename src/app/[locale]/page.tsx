@@ -6,6 +6,7 @@ import RomanovDigitalFullLogo from "@/components/icons/logo/romanov-digital/full
 import SmartPCLogo from "@/components/icons/logo/smart-pc/full";
 import { getSession } from "@/utils/auth";
 import SignOutButton from "@/app/[locale]/(components)/sign-out-button";
+import TestToastButton from "@/app/[locale]/(components)/test-toast-button";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getExtracted();
@@ -36,6 +37,8 @@ export default async function MainPage() {
         </Text>
 
         <SignOutButton />
+
+        <TestToastButton />
 
         <Icon
           color={{ _light: "colorPalette.700", _dark: "colorPalette.300" }}
