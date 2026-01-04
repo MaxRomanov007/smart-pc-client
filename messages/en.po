@@ -16,6 +16,21 @@ msgstr "Hide menu"
 msgid "hlmmXh"
 msgstr "Show menu"
 
+#. navigation menu title in the drawer
+#: src\app\[locale]\(components)\layout\menu-drawer.tsx
+msgid "tKMlOc"
+msgstr "Menu"
+
+#. tab item text for different tabs
+#: src\app\[locale]\(components)\layout\navigation-tab.tsx
+msgid "DuVYw/"
+msgstr "{tabName, select, first {Fist} second {Second} third {Third} fourth {Fourth} fifth {Fifth} other {Unknown tab name}}"
+
+#. tab item tooltip for different tabs
+#: src\app\[locale]\(components)\layout\navigation-tab.tsx
+msgid "igCbzB"
+msgstr "{tabName, select, first {Fist tab} second {Second tab} third {Third tab} fourth {Fourth tab} fifth {Fifth tab} other {Unknown tab name}}"
+
 #. sign out button text
 #: src\app\[locale]\(components)\sign-out-button.tsx
 msgid "F62y+K"
@@ -25,18 +40,13 @@ msgstr "Sign Out"
 msgid "JuWtVZ"
 msgstr "Test Toast"
 
-#. user greeting
-#: src\app\[locale]\page.tsx
-msgid "3Gr7nP"
-msgstr "Hello, {name}"
-
 #. title of index page in metadata
 #: src\app\[locale]\page.tsx
 msgid "FmhFdY"
 msgstr "Index page"
 
 #. sign in button tooltip
-#: src\components\button\sign-in-button.tsx
+#: src\components\button\auth\sign-in-button.tsx
 msgid "Ub+AGc"
 msgstr "Sign In"
 

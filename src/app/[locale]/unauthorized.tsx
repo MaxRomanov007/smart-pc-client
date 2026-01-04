@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AbsoluteCenter } from "@chakra-ui/react";
-import SignInButton from "@/components/button/sign-in-button";
+import SignInButton from "@/components/button/auth/sign-in-button";
 
 export const metadata: Metadata = {
   title: "Unauthorized",
