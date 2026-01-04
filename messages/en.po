@@ -6,10 +6,15 @@ msgstr ""
 "X-Generator: next-intl\n"
 "X-Crowdin-SourceKey: msgstr\n"
 
-#. sign in button text
-#: src\app\[locale]\(components)\sign-in-button.tsx
-msgid "Ub+AGc"
-msgstr "Sign In"
+#. tooltip of change visibility button for side panel to hide it
+#: src\app\[locale]\(components)\layout\functional-block.tsx
+msgid "f3RyOl"
+msgstr "Hide menu"
+
+#. tooltip of change visibility button for side panel to show it
+#: src\app\[locale]\(components)\layout\functional-block.tsx
+msgid "hlmmXh"
+msgstr "Show menu"
 
 #. sign out button text
 #: src\app\[locale]\(components)\sign-out-button.tsx
@@ -29,3 +34,28 @@ msgstr "Hello, {name}"
 #: src\app\[locale]\page.tsx
 msgid "FmhFdY"
 msgstr "Index page"
+
+#. sign in button tooltip
+#: src\components\button\sign-in-button.tsx
+msgid "Ub+AGc"
+msgstr "Sign In"
+
+#. localization select tooltip
+#: src\components\i18n\localization-select.tsx
+msgid "i3hxQt"
+msgstr "Choose locale"
+
+#. tooltip of color mode button to change to light theme
+#: src\components\ui\chakra\color-mode.tsx
+msgid "7l91tE"
+msgstr "Change to light theme"
+
+#. tooltip of color mode button to change to dark theme
+#: src\components\ui\chakra\color-mode.tsx
+msgid "bT/Gni"
+msgstr "Change to dark theme"
+
+#. tooltip of color mode button to change to system theme
+#: src\components\ui\chakra\color-mode.tsx
+msgid "JK+cUU"
+msgstr "Change to system theme"

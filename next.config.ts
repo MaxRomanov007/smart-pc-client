@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["@chakra-ui/react"],
     authInterrupts: true,
   },
+
+  images: {
+    remotePatterns: [new URL(process.env.IMAGES_SERVER_URL_PATTERN!)],
+  },
 };
 
 const withNextIntl = createNextIntlPlugin({
