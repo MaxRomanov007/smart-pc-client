@@ -1,5 +1,5 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import UserButton from "@/components/button/user-button";
+import UserButton from "@/components/button/auth/user-button";
 import Logo from "@/app/[locale]/(components)/layout/logo";
 import FunctionalBlock from "@/app/[locale]/(components)/layout/functional-block";
 
