@@ -2,10 +2,12 @@
 
 import type { IconButtonProps, SpanProps } from "@chakra-ui/react";
 import { ClientOnly, IconButton, Skeleton, Span } from "@chakra-ui/react";
-import { ThemeProvider, useTheme } from "next-themes";
 import type { ThemeProviderProps } from "next-themes";
+import { ThemeProvider, useTheme } from "next-themes";
 import * as React from "react";
 import { LuLaptopMinimal, LuMoon, LuSun } from "react-icons/lu";
+import { Tooltip } from "@/components/ui/chakra/tooltip";
+import { useExtracted } from "next-intl";
 
 export type ColorModeProviderProps = ThemeProviderProps;
 
@@ -65,29 +67,62 @@ export function ColorModeIcon() {
 
 type ColorModeButtonProps = Omit<IconButtonProps, "aria-label">;
 
+const ColorModeButtonTooltip = ({
+  colorMode,
+  children,
+}: {
+  colorMode: ColorMode;
+  children: React.ReactNode;
+}) => {
+  const t = useExtracted();
+
+  const tooltip =
+    colorMode === "system"
+      ? t({
+          message: "Change to dark theme",
+          description: "tooltip of color mode button to change to dark theme",
+        })
+      : colorMode === "dark"
+        ? t({
+            message: "Change to light theme",
+            description:
+              "tooltip of color mode button to change to light theme",
+          })
+        : t({
+            message: "Change to system theme",
+            description:
+              "tooltip of color mode button to change to system theme",
+          });
+
+  return <Tooltip content={tooltip}>{children}</Tooltip>;
+};
+
 export const ColorModeButton = React.forwardRef<
   HTMLButtonElement,
   ColorModeButtonProps
 >(function ColorModeButton(props, ref) {
-  const { toggleColorMode } = useColorMode();
+  const { toggleColorMode, colorMode } = useColorMode();
+
   return (
     <ClientOnly fallback={<Skeleton boxSize="9" />}>
-      <IconButton
-        onClick={toggleColorMode}
-        variant="ghost"
-        aria-label="Toggle color mode"
-        size="sm"
-        ref={ref}
-        {...props}
-        css={{
-          _icon: {
-            width: "5",
-            height: "5",
-          },
-        }}
-      >
-        <ColorModeIcon />
-      </IconButton>
+      <ColorModeButtonTooltip colorMode={colorMode}>
+        <IconButton
+          onClick={toggleColorMode}
+          variant="ghost"
+          aria-label="Toggle color mode"
+          size="md"
+          ref={ref}
+          {...props}
+          css={{
+            _icon: {
+              width: "5",
+              height: "5",
+            },
+          }}
+        >
+          <ColorModeIcon />
+        </IconButton>
+      </ColorModeButtonTooltip>
     </ClientOnly>
   );
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { authClient } from "@/utils/auth";
+import { authClient } from "@/utils/auth/client";
 import { type MouseEventHandler, useState } from "react";
 import { Button } from "@chakra-ui/react";
 import { useExtracted } from "next-intl";

@@ -4,7 +4,7 @@ import { AbsoluteCenter, HStack, Icon, Text, VStack } from "@chakra-ui/react";
 import RomanovDigitalMiniLogo from "@/components/icons/logo/romanov-digital/mini";
 import RomanovDigitalFullLogo from "@/components/icons/logo/romanov-digital/full";
 import SmartPCLogo from "@/components/icons/logo/smart-pc/full";
-import { getSession } from "@/utils/auth";
+import { getSession } from "@/utils/auth/server";
 import SignOutButton from "@/app/[locale]/(components)/sign-out-button";
 import TestToastButton from "@/app/[locale]/(components)/test-toast-button";
 

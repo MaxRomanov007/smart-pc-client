@@ -1,9 +1,7 @@
-import { genericOAuth } from "better-auth/plugins";
 import { betterAuth } from "better-auth";
-import { createAuthClient } from "better-auth/client";
-import { genericOAuthClient } from "better-auth/client/plugins";
-import { unauthorized } from "next/dist/client/components/unauthorized";
+import { genericOAuth } from "better-auth/plugins";
 import { headers } from "next/dist/server/request/headers";
+import { unauthorized } from "next/dist/client/components/unauthorized";
 
 export const SSO_PROVIDER_ID = "sso";
 
@@ -51,10 +49,6 @@ export const auth = betterAuth({
     storeStateStrategy: "cookie",
     storeAccountCookie: true,
   },
-});
-
-export const authClient = createAuthClient({
-  plugins: [genericOAuthClient()],
 });
 
 export const getSession = async () => {
