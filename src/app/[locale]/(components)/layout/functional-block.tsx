@@ -19,8 +19,6 @@ export default function FunctionalBlock({
   const t = useExtracted();
   const isBurgerMenu = useBreakpointValue({ base: true, md: false });
 
-  console.log(isBurgerMenu);
-
   const tooltipText = isPanelOpen
     ? t({
         message: "Hide menu",

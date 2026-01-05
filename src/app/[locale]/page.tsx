@@ -13,5 +13,5 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MainPage() {
-  return <div />;
+  return <div>Тут будет какой нибудь текст</div>;
 }

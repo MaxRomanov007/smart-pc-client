@@ -18,7 +18,7 @@ export default function MenuDrawer(props: Props) {
 
   return (
     <Drawer.Root placement="bottom">
-      <Drawer.Trigger>
+      <Drawer.Trigger asChild>
         <IconButton size="sm" variant="ghost" {...props}>
           <LuMenu />
         </IconButton>

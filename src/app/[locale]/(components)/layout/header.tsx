@@ -1,7 +1,7 @@
 import { Grid, GridItem } from "@chakra-ui/react";
-import UserButton from "@/components/button/auth/user-button";
 import Logo from "@/app/[locale]/(components)/layout/logo";
 import FunctionalBlock from "@/app/[locale]/(components)/layout/functional-block";
+import UserButton from "@/components/button/auth/user-button";
 
 interface Props {
   setIsPanelOpen: (open: boolean) => void;
