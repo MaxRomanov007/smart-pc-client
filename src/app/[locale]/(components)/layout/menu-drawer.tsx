@@ -1,23 +1,25 @@
-import {
-  CloseButton,
-  Drawer,
-  IconButton,
-  Portal,
-  VStack,
-} from "@chakra-ui/react";
+import { CloseButton, Drawer, IconButton, Portal } from "@chakra-ui/react";
 import { LuMenu } from "react-icons/lu";
 import { useExtracted } from "next-intl";
-import { NAVIGATION_TABS } from "@/config/navigation/tabs";
-import NavigationTab from "@/app/[locale]/(components)/layout/navigation-tab";
-import type { ComponentProps } from "react";
+import { type ComponentProps, useState } from "react";
+import TabList from "@/app/[locale]/(components)/layout/tab-list";
 
 type Props = ComponentProps<typeof IconButton>;
 
 export default function MenuDrawer(props: Props) {
   const t = useExtracted();
+  const [open, setOpen] = useState(false);
+
+  const handleTabSelect = () => {
+    setOpen(false);
+  };
 
   return (
-    <Drawer.Root placement="bottom">
+    <Drawer.Root
+      placement="bottom"
+      open={open}
+      onOpenChange={(d) => setOpen(d.open)}
+    >
       <Drawer.Trigger asChild>
         <IconButton size="sm" variant="ghost" {...props}>
           <LuMenu />
@@ -34,11 +36,7 @@ export default function MenuDrawer(props: Props) {
               })}
             </Drawer.Header>
             <Drawer.Body>
-              <VStack as="nav">
-                {NAVIGATION_TABS.map((tab) => (
-                  <NavigationTab key={tab.name} tab={tab} />
-                ))}
-              </VStack>
+              <TabList onSelect={handleTabSelect} />
             </Drawer.Body>
             <Drawer.CloseTrigger asChild>
               <CloseButton size="sm" />

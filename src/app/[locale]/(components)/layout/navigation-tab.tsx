@@ -1,4 +1,6 @@
-import type { NavigationTab } from "@/@types/ui/navigation-tab";
+"use client";
+
+import type { INavigationTab } from "@/@types/ui/i-navigation-tab";
 import AccentIcon from "@/components/ui/icon/accent-icon";
 import { Button } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
@@ -6,11 +8,18 @@ import { Link } from "@/i18n/navigation";
 import { useExtracted } from "next-intl";
 
 interface Props {
-  tab: NavigationTab;
+  tab: INavigationTab;
   collapsed?: boolean;
+  isSelected?: boolean;
+  onSelect?: (tab: INavigationTab) => void;
 }
 
-export default function NavigationTab({ tab, collapsed }: Props) {
+export default function NavigationTab({
+  tab,
+  collapsed,
+  isSelected,
+  onSelect,
+}: Props) {
   const t = useExtracted();
 
   const tooltipText = t({
@@ -31,14 +40,19 @@ export default function NavigationTab({ tab, collapsed }: Props) {
     description: `tab item text for different tabs`,
   });
 
+  const handleClick = () => {
+    onSelect?.(tab);
+  };
+
   return (
     <Tooltip content={tooltipText}>
       <Button
         w="full"
         justifyContent="start"
-        variant="ghost"
+        variant={isSelected ? "subtle" : "ghost"}
         px={2.5}
         size={["sm", null, "md"]}
+        onClick={handleClick}
         asChild
       >
         <Link href={tab.href}>
