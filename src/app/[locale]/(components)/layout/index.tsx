@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
         <HStack h="full" alignItems="start">
           <SidePanel open={isPanelOpen} hideBelow="md" />
-          <Box bgColor="bg" w="full" h="full" rounded="md">
+          <Box bgColor="bg" w="full" h="full" rounded="md" p={2}>
             {children}
           </Box>
         </HStack>

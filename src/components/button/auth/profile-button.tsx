@@ -32,7 +32,14 @@ export default function ProfileButton({
           <Avatar.Image src={user.image ?? ""} />
         </Avatar.Root>
 
-        <Text hideBelow="md">{user.name}</Text>
+        <Text
+          hideBelow="md"
+          maxW={40}
+          textOverflow="ellipsis"
+          overflow="hidden"
+        >
+          {user.name}
+        </Text>
       </HStack>
     </Button>
   );

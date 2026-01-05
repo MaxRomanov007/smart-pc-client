@@ -31,8 +31,9 @@ msgstr "{tabName, select, first {Fist} second {Second} third {Third} fourth {Fou
 msgid "igCbzB"
 msgstr "{tabName, select, first {Fist tab} second {Second tab} third {Third tab} fourth {Fourth tab} fifth {Fifth tab} other {Unknown tab name}}"
 
-#. sign out button text
+#. user menu sign out text
 #: src\app\[locale]\(components)\sign-out-button.tsx
+#: src\components\button\auth\profile-menu.tsx
 msgid "F62y+K"
 msgstr "Sign Out"
 
@@ -44,6 +45,16 @@ msgstr "Test Toast"
 #: src\app\[locale]\page.tsx
 msgid "FmhFdY"
 msgstr "Index page"
+
+#. confirmation dialog text for sign out action
+#: src\components\button\auth\profile-menu.tsx
+msgid "9rVNwM"
+msgstr "After sign out, you will be able to sign back into your account."
+
+#. confirmation dialog title for sign out action
+#: src\components\button\auth\profile-menu.tsx
+msgid "G2c0ij"
+msgstr "Sign out of your account?"
 
 #. sign in button tooltip
 #: src\components\button\auth\sign-in-button.tsx
@@ -69,3 +80,13 @@ msgstr "Change to dark theme"
 #: src\components\ui\chakra\color-mode.tsx
 msgid "JK+cUU"
 msgstr "Change to system theme"
+
+#. confirmation dialog cancel button text
+#: src\components\ui\dialog\confirmation-dialog\content.tsx
+msgid "47FYwb"
+msgstr "Cancel"
+
+#. confirmation dialog confirm button text
+#: src\components\ui\dialog\confirmation-dialog\content.tsx
+msgid "N2IrpM"
+msgstr "Confirm"
