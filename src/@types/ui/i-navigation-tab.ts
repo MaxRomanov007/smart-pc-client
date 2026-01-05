@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 
-export type NavigationTab = {
+export interface INavigationTab {
   icon: ReactNode;
   href: string;
   name: string;
-};
+}

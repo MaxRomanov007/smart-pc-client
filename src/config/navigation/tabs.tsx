@@ -1,10 +1,10 @@
-import type { NavigationTab } from "@/@types/ui/navigation-tab";
+import type { INavigationTab } from "@/@types/ui/i-navigation-tab";
 import { LuAirVent } from "react-icons/lu";
 import { BsLuggageFill, BsLungs } from "react-icons/bs";
 import { GiLuciferCannon } from "react-icons/gi";
 import { CgArrowLongUpC } from "react-icons/cg";
 
-export const NAVIGATION_TABS: NavigationTab[] = [
+export const NAVIGATION_TABS: INavigationTab[] = [
   {
     icon: <LuAirVent />,
     href: "#",
