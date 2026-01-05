@@ -41,6 +41,21 @@ msgstr "Sign Out"
 msgid "JuWtVZ"
 msgstr "Test Toast"
 
+#. not found page link button for main page text
+#: src\app\[locale]\not-found.tsx
+msgid "/sD7Tl"
+msgstr "Go to main page"
+
+#. not found page title
+#: src\app\[locale]\not-found.tsx
+msgid "2VD9+S"
+msgstr "This page couldn't be found"
+
+#. not found page help text with offer for go to the main page
+#: src\app\[locale]\not-found.tsx
+msgid "uZwoDU"
+msgstr "Looks like mistakes in url. Check it or go to the main page"
+
 #. title of index page in metadata
 #: src\app\[locale]\page.tsx
 msgid "FmhFdY"
