@@ -7,12 +7,12 @@ msgstr ""
 "X-Crowdin-SourceKey: msgstr\n"
 
 #. tooltip of change visibility button for side panel to hide it
-#: src\app\[locale]\(components)\layout\functional-block.tsx
+#: src\app\[locale]\(components)\layout\functional-block-left.tsx
 msgid "f3RyOl"
 msgstr "Hide menu"
 
 #. tooltip of change visibility button for side panel to show it
-#: src\app\[locale]\(components)\layout\functional-block.tsx
+#: src\app\[locale]\(components)\layout\functional-block-left.tsx
 msgid "hlmmXh"
 msgstr "Show menu"
 
@@ -30,16 +30,6 @@ msgstr "{tabName, select, first {Fist} second {Second} third {Third} fourth {Fou
 #: src\app\[locale]\(components)\layout\navigation-tab.tsx
 msgid "igCbzB"
 msgstr "{tabName, select, first {Fist tab} second {Second tab} third {Third tab} fourth {Fourth tab} fifth {Fifth tab} other {Unknown tab name}}"
-
-#. user menu sign out text
-#: src\app\[locale]\(components)\sign-out-button.tsx
-#: src\components\button\auth\profile-menu.tsx
-msgid "F62y+K"
-msgstr "Sign Out"
-
-#: src\app\[locale]\(components)\test-toast-button.tsx
-msgid "JuWtVZ"
-msgstr "Test Toast"
 
 #. not found page link button for main page text
 #: src\app\[locale]\not-found.tsx
@@ -65,6 +55,11 @@ msgstr "Index page"
 #: src\components\button\auth\profile-menu.tsx
 msgid "9rVNwM"
 msgstr "After sign out, you will be able to sign back into your account."
+
+#. user menu sign out text
+#: src\components\button\auth\profile-menu.tsx
+msgid "F62y+K"
+msgstr "Sign Out"
 
 #. confirmation dialog title for sign out action
 #: src\components\button\auth\profile-menu.tsx
