@@ -1,11 +1,11 @@
 "use client";
 
-import type { INavigationTab } from "@/@types/ui/i-navigation-tab";
+import type { INavigationTab } from "@/@types/ui/navigation/navigation-tab";
 import AccentIcon from "@/components/ui/icon/accent-icon";
 import { Button } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
 import { Link } from "@/i18n/navigation";
-import { useExtracted } from "next-intl";
+import { useTranslations } from "next-intl";
 
 interface Props {
   tab: INavigationTab;
@@ -20,32 +20,14 @@ export default function NavigationTab({
   isSelected,
   onSelect,
 }: Props) {
-  const t = useExtracted();
-
-  const tooltipText = t({
-    message:
-      "{tabName, select, first {Fist tab} second {Second tab} third {Third tab} fourth {Fourth tab} fifth {Fifth tab} other {Unknown tab name}}",
-    values: {
-      tabName: tab.name,
-    },
-    description: `tab item tooltip for different tabs`,
-  });
-
-  const text = t({
-    message:
-      "{tabName, select, first {Fist} second {Second} third {Third} fourth {Fourth} fifth {Fifth} other {Unknown tab name}}",
-    values: {
-      tabName: tab.name,
-    },
-    description: `tab item text for different tabs`,
-  });
+  const t = useTranslations();
 
   const handleClick = () => {
     onSelect?.(tab);
   };
 
   return (
-    <Tooltip content={tooltipText}>
+    <Tooltip content={t(tab.tooltipMessageId)}>
       <Button
         w="full"
         justifyContent="start"
@@ -58,7 +40,7 @@ export default function NavigationTab({
         <Link href={tab.href}>
           <AccentIcon>{tab.icon}</AccentIcon>
 
-          {!collapsed && text}
+          {!collapsed && t(tab.textMessageId)}
         </Link>
       </Button>
     </Tooltip>

@@ -1,4 +1,4 @@
-import type { INavigationTab } from "@/@types/ui/i-navigation-tab";
+import type { INavigationTab } from "@/@types/ui/navigation/navigation-tab";
 import { LuAirVent } from "react-icons/lu";
 import { BsLuggageFill, BsLungs } from "react-icons/bs";
 import { GiLuciferCannon } from "react-icons/gi";
@@ -8,26 +8,31 @@ export const NAVIGATION_TABS: INavigationTab[] = [
   {
     icon: <LuAirVent />,
     href: "#",
-    name: "first",
+    tooltipMessageId: "FirstTabTooltipMessage",
+    textMessageId: "FirstTabTextMessage",
   },
   {
     icon: <BsLungs />,
     href: "#",
-    name: "second",
+    tooltipMessageId: "SecondTabTooltipMessage",
+    textMessageId: "SecondTabTextMessage",
   },
   {
     icon: <BsLuggageFill />,
     href: "#",
-    name: "third",
+    tooltipMessageId: "ThirdTabTooltipMessage",
+    textMessageId: "ThirdTabTextMessage",
   },
   {
     icon: <GiLuciferCannon />,
     href: "#",
-    name: "fourth",
+    tooltipMessageId: "FourthTabTooltipMessage",
+    textMessageId: "FourthTabTextMessage",
   },
   {
     icon: <CgArrowLongUpC />,
     href: "#",
-    name: "fifth",
+    tooltipMessageId: "FifthTabTooltipMessage",
+    textMessageId: "FifthTabTextMessage",
   },
 ];

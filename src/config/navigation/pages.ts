@@ -1,3 +1,3 @@
-export const PAGES = {
-  INDEX: "/",
-} as const;
+export class PAGES {
+  static index = "/";
+}

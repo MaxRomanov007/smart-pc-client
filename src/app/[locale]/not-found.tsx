@@ -34,7 +34,7 @@ export default async function LocalePage() {
                 "not found page help text with offer for go to the main page",
             })}
           </Text>
-          <LinkButton href={PAGES.INDEX}>
+          <LinkButton href={PAGES.index}>
             {t({
               message: "Go to main page",
               description: "not found page link button for main page text",
