@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
-import { Box } from "@chakra-ui/react";
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import { BREADCRUMBS } from "@/config/navigation/breadcrumbs";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getExtracted();
@@ -14,5 +15,23 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MainPage() {
-  return <Box w={1000} h={1000} bgColor="red"></Box>;
+  const t = await getExtracted();
+
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          BREADCRUMBS.first(t),
+          {
+            label: "Title",
+            href: "/",
+          },
+          {},
+          {
+            label: "Current",
+          },
+        ]}
+      />
+    </>
+  );
 }

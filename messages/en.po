@@ -21,16 +21,6 @@ msgstr "Show menu"
 msgid "tKMlOc"
 msgstr "Menu"
 
-#. tab item text for different tabs
-#: src\app\[locale]\(components)\layout\navigation-tab.tsx
-msgid "DuVYw/"
-msgstr "{tabName, select, first {Fist} second {Second} third {Third} fourth {Fourth} fifth {Fifth} other {Unknown tab name}}"
-
-#. tab item tooltip for different tabs
-#: src\app\[locale]\(components)\layout\navigation-tab.tsx
-msgid "igCbzB"
-msgstr "{tabName, select, first {Fist tab} second {Second tab} third {Third tab} fourth {Fourth tab} fifth {Fifth tab} other {Unknown tab name}}"
-
 #. not found page link button for main page text
 #: src\app\[locale]\not-found.tsx
 msgid "/sD7Tl"
@@ -100,3 +90,8 @@ msgstr "Cancel"
 #: src\components\ui\dialog\confirmation-dialog\content.tsx
 msgid "N2IrpM"
 msgstr "Confirm"
+
+#. confirmation dialog confirm button text
+#: src\components\ui\dialog\confirmation-dialog\content.tsx
+msgid "FirstTabTooltipMessage"
+msgstr "HELLO"
