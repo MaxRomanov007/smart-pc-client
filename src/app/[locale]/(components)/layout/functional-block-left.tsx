@@ -12,7 +12,7 @@ interface Props {
   isPanelOpen: boolean;
 }
 
-export default function FunctionalBlock({
+export default function FunctionalBlockLeft({
   isPanelOpen,
   setIsPanelOpen,
 }: Props) {
@@ -44,7 +44,7 @@ export default function FunctionalBlock({
         />
       )}
 
-      <ColorModeButton size={["sm", null, "md"]} />
+      <ColorModeButton size="md" hideBelow="md" />
 
       <LocalizationSelect />
     </HStack>

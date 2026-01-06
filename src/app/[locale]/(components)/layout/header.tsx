@@ -1,7 +1,7 @@
 import { Grid, GridItem } from "@chakra-ui/react";
 import Logo from "@/app/[locale]/(components)/layout/logo";
-import FunctionalBlock from "@/app/[locale]/(components)/layout/functional-block";
-import UserButton from "@/components/button/auth/user-button";
+import FunctionalBlockLeft from "@/app/[locale]/(components)/layout/functional-block-left";
+import FunctionalBlockRight from "@/app/[locale]/(components)/layout/functional-block-right";
 
 interface Props {
   setIsPanelOpen: (open: boolean) => void;
@@ -17,7 +17,7 @@ export default function Header({ isPanelOpen, setIsPanelOpen }: Props) {
       alignItems={"center"}
     >
       <GridItem>
-        <FunctionalBlock
+        <FunctionalBlockLeft
           isPanelOpen={isPanelOpen}
           setIsPanelOpen={setIsPanelOpen}
         />
@@ -28,7 +28,7 @@ export default function Header({ isPanelOpen, setIsPanelOpen }: Props) {
       </GridItem>
 
       <GridItem justifySelf="end">
-        <UserButton />
+        <FunctionalBlockRight />
       </GridItem>
     </Grid>
   );
