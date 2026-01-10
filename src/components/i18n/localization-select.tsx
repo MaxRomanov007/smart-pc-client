@@ -21,7 +21,7 @@ import { Tooltip } from "@/components/ui/chakra/tooltip";
 export default function LocalizationSelect(
   props: Omit<ComponentProps<typeof Box>, "children">,
 ) {
-  const t = useExtracted();
+  const t = useExtracted("localization-select");
   const router = useRouter();
   const locale = useLocale();
   const pathname = usePathname();

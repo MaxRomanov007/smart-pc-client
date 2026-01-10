@@ -8,16 +8,19 @@ msgstr ""
 
 #. tooltip of change visibility button for side panel to hide it
 #: src\app\[locale]\(components)\layout\functional-block-left.tsx
+msgctxt "header-left-functional-block"
 msgid "f3RyOl"
 msgstr "Hide menu"
 
 #. tooltip of change visibility button for side panel to show it
 #: src\app\[locale]\(components)\layout\functional-block-left.tsx
+msgctxt "header-left-functional-block"
 msgid "hlmmXh"
 msgstr "Show menu"
 
 #. navigation menu title in the drawer
 #: src\app\[locale]\(components)\layout\menu-drawer.tsx
+msgctxt "header-menu-drawer"
 msgid "tKMlOc"
 msgstr "Menu"
 
@@ -43,51 +46,67 @@ msgstr "Index page"
 
 #. confirmation dialog text for sign out action
 #: src\components\button\auth\profile-menu.tsx
+msgctxt "profile-button-menu"
 msgid "9rVNwM"
 msgstr "After sign out, you will be able to sign back into your account."
 
 #. user menu sign out text
 #: src\components\button\auth\profile-menu.tsx
+msgctxt "profile-button-menu"
 msgid "F62y+K"
 msgstr "Sign Out"
 
 #. confirmation dialog title for sign out action
 #: src\components\button\auth\profile-menu.tsx
+msgctxt "profile-button-menu"
 msgid "G2c0ij"
 msgstr "Sign out of your account?"
 
 #. sign in button tooltip
 #: src\components\button\auth\sign-in-button.tsx
+msgctxt "sign-in-button-tooltip"
+msgid "Ub+AGc"
+msgstr "Sign In"
+
+#. sign in button text
+#: src\components\button\auth\sign-in-button.tsx
+msgctxt "sign-in-button"
 msgid "Ub+AGc"
 msgstr "Sign In"
 
 #. localization select tooltip
 #: src\components\i18n\localization-select.tsx
+msgctxt "localization-select"
 msgid "i3hxQt"
 msgstr "Choose locale"
 
 #. tooltip of color mode button to change to light theme
 #: src\components\ui\chakra\color-mode.tsx
+msgctxt "color-mode-button"
 msgid "7l91tE"
 msgstr "Change to light theme"
 
 #. tooltip of color mode button to change to dark theme
 #: src\components\ui\chakra\color-mode.tsx
+msgctxt "color-mode-button"
 msgid "bT/Gni"
 msgstr "Change to dark theme"
 
 #. tooltip of color mode button to change to system theme
 #: src\components\ui\chakra\color-mode.tsx
+msgctxt "color-mode-button"
 msgid "JK+cUU"
 msgstr "Change to system theme"
 
 #. confirmation dialog cancel button text
 #: src\components\ui\dialog\confirmation-dialog\content.tsx
+msgctxt "confirmation-dialog"
 msgid "47FYwb"
 msgstr "Cancel"
 
 #. confirmation dialog confirm button text
 #: src\components\ui\dialog\confirmation-dialog\content.tsx
+msgctxt "confirmation-dialog"
 msgid "N2IrpM"
 msgstr "Confirm"
 

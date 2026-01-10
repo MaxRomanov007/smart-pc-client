@@ -7,7 +7,7 @@ import TabList from "@/app/[locale]/(components)/layout/tab-list";
 type Props = ComponentProps<typeof IconButton>;
 
 export default function MenuDrawer(props: Props) {
-  const t = useExtracted();
+  const t = useExtracted("header-menu-drawer");
   const [open, setOpen] = useState(false);
 
   const handleTabSelect = () => {
