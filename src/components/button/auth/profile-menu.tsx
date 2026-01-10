@@ -17,7 +17,7 @@ const MenuItemValues = {
 } as const;
 
 export default function ProfileMenu({ user }: Props) {
-  const t = useExtracted();
+  const t = useExtracted("profile-button-menu");
   const confirmationDialog = useConfirmationDialog();
 
   const handleSignOut = async () => {

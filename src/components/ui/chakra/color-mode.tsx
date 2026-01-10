@@ -74,7 +74,7 @@ const ColorModeButtonTooltip = ({
   colorMode: ColorMode;
   children: React.ReactNode;
 }) => {
-  const t = useExtracted();
+  const t = useExtracted("color-mode-button");
 
   const tooltip =
     colorMode === "system"

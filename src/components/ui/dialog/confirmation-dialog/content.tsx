@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function Content({ title, text, onConfirm }: Props) {
-  const t = useExtracted();
+  const t = useExtracted("confirmation-dialog");
 
   return (
     <>

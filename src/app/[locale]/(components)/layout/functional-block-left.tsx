@@ -16,7 +16,7 @@ export default function FunctionalBlockLeft({
   isPanelOpen,
   setIsPanelOpen,
 }: Props) {
-  const t = useExtracted();
+  const t = useExtracted("header-left-functional-block");
   const isBurgerMenu = useBreakpointValue({ base: true, md: false });
 
   const tooltipText = isPanelOpen

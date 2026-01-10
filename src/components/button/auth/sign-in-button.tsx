@@ -1,12 +1,7 @@
 "use client";
 
 import { useExtracted } from "next-intl";
-import {
-  type ComponentProps,
-  type MouseEventHandler,
-  type ReactNode,
-  useState,
-} from "react";
+import { type ComponentProps, type MouseEventHandler, type ReactNode, useState } from "react";
 import { authClient } from "@/utils/auth/client";
 import { SSO_PROVIDER_ID } from "@/utils/auth/server";
 import { Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
@@ -24,7 +19,7 @@ export default function SignInButton({
   rounded,
   ...props
 }: Props) {
-  const t = useExtracted();
+  const t = useExtracted("sign-in-button");
   const [loading, setLoading] = useState(false);
   const isCollapsed = useBreakpointValue([true, null, false]);
 
@@ -86,7 +81,7 @@ export default function SignInButton({
 }
 
 const SignInButtonTooltip = ({ children }: { children: ReactNode }) => {
-  const t = useExtracted();
+  const t = useExtracted("sign-in-button-tooltip");
 
   return (
     <Tooltip
