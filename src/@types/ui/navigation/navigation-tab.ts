@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
 
-export interface INavigationTab {
+export type INavigationTab = {
   icon: ReactNode;
   href: string;
-  tooltipMessageId: string;
-  textMessageId: string;
-}
+  label: string;
+  tooltip?: string;
+};

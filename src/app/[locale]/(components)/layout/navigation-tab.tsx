@@ -1,37 +1,33 @@
-"use client";
-
 import type { INavigationTab } from "@/@types/ui/navigation/navigation-tab";
 import AccentIcon from "@/components/ui/icon/accent-icon";
 import { Button } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
 import { Link } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { type MouseEventHandler } from "react";
 
 interface Props {
   tab: INavigationTab;
   collapsed?: boolean;
-  isSelected?: boolean;
+  selected?: boolean;
   onSelect?: (tab: INavigationTab) => void;
 }
 
 export default function NavigationTab({
   tab,
   collapsed,
-  isSelected,
+  selected,
   onSelect,
 }: Props) {
-  const t = useTranslations();
-
-  const handleClick = () => {
+  const handleClick: MouseEventHandler<HTMLButtonElement> = () => {
     onSelect?.(tab);
   };
 
   return (
-    <Tooltip content={t(tab.tooltipMessageId)}>
+    <Tooltip content={tab.tooltip}>
       <Button
         w="full"
         justifyContent="start"
-        variant={isSelected ? "subtle" : "ghost"}
+        variant={selected ? "subtle" : "ghost"}
         px={2.5}
         size={["sm", null, "md"]}
         onClick={handleClick}
@@ -40,7 +36,7 @@ export default function NavigationTab({
         <Link href={tab.href}>
           <AccentIcon>{tab.icon}</AccentIcon>
 
-          {!collapsed && t(tab.textMessageId)}
+          {!collapsed && tab.label}
         </Link>
       </Button>
     </Tooltip>
