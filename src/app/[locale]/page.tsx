@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
-import { BREADCRUMBS } from "@/config/navigation/breadcrumbs";
+import { getStandardBreadcrumbs } from "@/utils/ui/breadcrumbs/server";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getExtracted();
@@ -15,13 +15,13 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MainPage() {
-  const t = await getExtracted();
+  const breadcrumbs = await getStandardBreadcrumbs();
 
   return (
     <>
       <Breadcrumbs
         items={[
-          BREADCRUMBS.first(t),
+          breadcrumbs.dashboard,
           {
             label: "Title",
             href: "/",

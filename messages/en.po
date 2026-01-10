@@ -91,7 +91,15 @@ msgstr "Cancel"
 msgid "N2IrpM"
 msgstr "Confirm"
 
-#. confirmation dialog confirm button text
-#: src\components\ui\dialog\confirmation-dialog\content.tsx
-msgid "FirstTabTooltipMessage"
-msgstr "HELLO"
+#. dashboard breadcrumb
+#: src\utils\ui\breadcrumbs\client.ts
+#: src\utils\ui\breadcrumbs\server.ts
+msgctxt "breadcrumbs"
+msgid "hzSNj4"
+msgstr "Dashboard"
+
+#. dashboard tab item tooltip
+#: src\utils\ui\tabs\client.tsx
+msgctxt "navigation-tabs"
+msgid "hzSNj4"
+msgstr "Dashboard"
