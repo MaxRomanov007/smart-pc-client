@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 export default async function LocalePage() {
-  const t = await getExtracted();
+  const t = await getExtracted("not-found-page");
 
   return (
     <Center h="full">

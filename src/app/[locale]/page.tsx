@@ -4,7 +4,7 @@ import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import { getStandardBreadcrumbs } from "@/utils/ui/breadcrumbs/server";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const t = await getExtracted();
+  const t = await getExtracted("index-page-metadata");
 
   return {
     title: t({
