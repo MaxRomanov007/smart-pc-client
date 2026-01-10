@@ -1,7 +1,12 @@
 "use client";
 
 import { useExtracted } from "next-intl";
-import { type ComponentProps, type MouseEventHandler, type ReactNode, useState } from "react";
+import {
+  type ComponentProps,
+  type MouseEventHandler,
+  type ReactNode,
+  useState,
+} from "react";
 import { authClient } from "@/utils/auth/client";
 import { SSO_PROVIDER_ID } from "@/utils/auth/server";
 import { Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
