@@ -1,5 +1,5 @@
 import { type ComponentProps } from "react";
-import type { UseConfirmationDialogType } from "@/utils/ui/dialogs/confirmation/client";
+import type { UseConfirmationDialogType } from "@/utils/ui/dialogs/confirmation/useConfirmationDialog";
 import ConfirmationDialog from "@/components/ui/dialog/confirmation-dialog/dialog";
 
 interface ConfirmationDialogWithStoreProps extends Omit<

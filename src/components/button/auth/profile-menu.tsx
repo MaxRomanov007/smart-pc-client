@@ -5,7 +5,7 @@ import { useExtracted } from "next-intl";
 import { authClient, type User } from "@/utils/auth/client";
 import ProfileButton from "@/components/button/auth/profile-button";
 import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dialog/with-store";
-import { client } from "@/utils/ui/dialogs/confirmation/client";
+import { useConfirmationDialog } from "@/utils/ui/dialogs/confirmation/useConfirmationDialog";
 import type { SelectionDetails } from "@zag-js/menu";
 
 interface Props {
@@ -18,7 +18,7 @@ const MenuItemValues = {
 
 export default function ProfileMenu({ user }: Props) {
   const t = useExtracted();
-  const confirmationDialog = client();
+  const confirmationDialog = useConfirmationDialog();
 
   const handleSignOut = async () => {
     await authClient.signOut();

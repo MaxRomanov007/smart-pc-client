@@ -22,7 +22,7 @@ export type UseConfirmationDialogType = {
   setState: Dispatch<SetStateAction<ConfirmationDialogState>>;
 };
 
-export function client(): UseConfirmationDialogType {
+export function useConfirmationDialog(): UseConfirmationDialogType {
   const [state, setState] = useState<ConfirmationDialogState>({
     open: false,
     title: "",
