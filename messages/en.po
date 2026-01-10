@@ -24,6 +24,18 @@ msgctxt "header-menu-drawer"
 msgid "tKMlOc"
 msgstr "Menu"
 
+#. dashboard page description
+#: src\app\[locale]\dashboard\page.tsx
+msgctxt "dashboard-page"
+msgid "hiUVv0"
+msgstr "Manage and control your registered computers"
+
+#. dashboard page title
+#: src\app\[locale]\dashboard\page.tsx
+msgctxt "dashboard-page"
+msgid "Iw3cCk"
+msgstr "My PCs"
+
 #. not found page link button for main page text
 #: src\app\[locale]\not-found.tsx
 msgctxt "not-found-page"
