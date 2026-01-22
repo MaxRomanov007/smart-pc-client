@@ -2,6 +2,7 @@ import { betterAuth } from "better-auth";
 import { genericOAuth } from "better-auth/plugins";
 import { headers } from "next/dist/server/request/headers";
 import { unauthorized } from "next/dist/client/components/unauthorized";
+import type { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
 
 export const SSO_PROVIDER_ID = "sso";
 
@@ -17,9 +18,7 @@ export const auth = betterAuth({
           scopes: [
             "openid",
             "offline",
-            "users:read",
-            "products:read",
-            "orders:read",
+            "mqtt:pc:read"
           ],
           pkce: true,
           accessType: "offline",
@@ -51,7 +50,7 @@ export const auth = betterAuth({
   },
 });
 
-export const getSession = async () => {
+export async function getSession() {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -61,4 +60,28 @@ export const getSession = async () => {
   }
 
   return session;
+}
+
+type GetTokenResult = {
+  accessToken?: string;
+  error?: unknown;
 };
+
+export async function getToken(
+  requestHeaders?: ReadonlyHeaders,
+): Promise<GetTokenResult> {
+  if (!requestHeaders) {
+    requestHeaders = await headers();
+  }
+  try {
+    const { accessToken } = await auth.api.getAccessToken({
+      body: {
+        providerId: SSO_PROVIDER_ID,
+      },
+      headers: requestHeaders,
+    });
+    return { accessToken };
+  } catch (error) {
+    return { error };
+  }
+}

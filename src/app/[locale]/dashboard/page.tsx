@@ -3,6 +3,8 @@ import { Heading, Stack, Text } from "@chakra-ui/react";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import { getStandardBreadcrumbs } from "@/utils/ui/breadcrumbs/server";
 import { getExtracted } from "next-intl/server";
+import { WebSocketDemo } from "@/app/[locale]/dashboard/websocket-demo";
+import { getToken } from "@/utils/auth/server";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -11,6 +13,8 @@ export const metadata: Metadata = {
 export default async function DashboardPage() {
   const breadcrumbs = await getStandardBreadcrumbs(true);
   const t = await getExtracted("dashboard-page");
+  const token = await getToken()
+  console.log("token", token)
 
   return (
     <Stack gap={4} as="section">
@@ -28,6 +32,8 @@ export default async function DashboardPage() {
             description: "dashboard page description",
           })}
         </Text>
+
+        <WebSocketDemo/>
       </Stack>
     </Stack>
   );
