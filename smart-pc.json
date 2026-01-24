@@ -1,0 +1,102 @@
+{
+  "uuid": "e33c8988-598c-4cb9-b7ab-9c68d07ed02a",
+  "lastMigration": 33,
+  "name": "Smart pc",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 8080,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "5490db92-c4b4-4830-ad67-622f1f7cdc02",
+      "type": "crud",
+      "documentation": "user pcs route",
+      "method": "",
+      "endpoint": "pcs",
+      "responses": [
+        {
+          "uuid": "f58704b2-eb60-4514-a583-75d4d88039a6",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "iit1",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "slug",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "5490db92-c4b4-4830-ad67-622f1f7cdc02"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "978bb919-e6f6-4a8f-b5fa-79c3da297414",
+      "id": "iit1",
+      "name": "pcs",
+      "documentation": "user pcs",
+      "value": "[\n  {{#repeat 10}}\n  {{setVar 'fakeName' (faker 'person.jobTitle')}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{@fakeName}}\",\n    \"slug\": \"{{faker 'helpers.slugify' @fakeName}}\",\n    \"description\": \"{{faker 'food.description'}}\",\n    \"canPowerOn\": {{boolean}}\n  }\n  {{/repeat}}\n]"
+    }
+  ],
+  "callbacks": []
+}

@@ -15,7 +15,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <HStack h="full" alignItems="start" minH={0}>
         <SidePanel open={isPanelOpen} hideBelow="md" />
-        <PageScrollArea bgColor="bg" w="full" h="full" rounded="md">
+        <PageScrollArea bgColor="bg" w="full" h="full" rounded="md" p={[2, null, null, 4]}>
           {children}
         </PageScrollArea>
       </HStack>

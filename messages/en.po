@@ -96,6 +96,24 @@ msgctxt "localization-select"
 msgid "i3hxQt"
 msgstr "Choose locale"
 
+#. link button text
+#: src\components\pc\pc-card.tsx
+msgctxt "pc-card"
+msgid "d21Els"
+msgstr "Execute"
+
+#: src\components\ui\badge\offline-badge\client.tsx
+#: src\components\ui\badge\offline-badge\server.tsx
+msgctxt "offline-badge"
+msgid "K3uH1C"
+msgstr "offline"
+
+#: src\components\ui\badge\online-badge\client.tsx
+#: src\components\ui\badge\online-badge\server.tsx
+msgctxt "online-badge"
+msgid "v3MWTZ"
+msgstr "online"
+
 #. tooltip of color mode button to change to light theme
 #: src\components\ui\chakra\color-mode.tsx
 msgctxt "color-mode-button"

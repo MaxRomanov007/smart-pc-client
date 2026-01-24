@@ -82,6 +82,7 @@ export async function getToken(
     });
     return { accessToken };
   } catch (error) {
+    unauthorized();
     return { error };
   }
 }

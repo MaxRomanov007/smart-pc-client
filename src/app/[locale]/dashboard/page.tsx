@@ -3,8 +3,9 @@ import { Heading, Stack, Text } from "@chakra-ui/react";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 import { getStandardBreadcrumbs } from "@/utils/ui/breadcrumbs/server";
 import { getExtracted } from "next-intl/server";
-import { WebSocketDemo } from "@/app/[locale]/dashboard/websocket-demo";
 import { getToken } from "@/utils/auth/server";
+import { fetchUserPcs } from "@/services/pcs";
+import PcList from "@/components/pc/pc-list";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -14,7 +15,7 @@ export default async function DashboardPage() {
   const breadcrumbs = await getStandardBreadcrumbs(true);
   const t = await getExtracted("dashboard-page");
   const token = await getToken()
-  console.log("token", token)
+  const {data: pcs} = await fetchUserPcs(token.accessToken);
 
   return (
     <Stack gap={4} as="section">
@@ -32,9 +33,9 @@ export default async function DashboardPage() {
             description: "dashboard page description",
           })}
         </Text>
-
-        <WebSocketDemo/>
       </Stack>
+
+      <PcList pcs={pcs ? [pcs[0]] : []}/>
     </Stack>
   );
 }
