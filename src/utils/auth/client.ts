@@ -1,7 +1,8 @@
 import { createAuthClient } from "better-auth/react";
 import { genericOAuthClient } from "better-auth/client/plugins";
 import { SSO_PROVIDER_ID } from "@/utils/auth/server";
-import { use, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { unauthorized } from "next/dist/client/components/unauthorized";
 
 export const authClient = createAuthClient({
   plugins: [genericOAuthClient()],
@@ -13,7 +14,6 @@ export type User = typeof authClient.$Infer.Session.user;
 export function useToken() {
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<Error | null>(null);
 
   const { data: session } = authClient.useSession();
 
@@ -24,7 +24,6 @@ export function useToken() {
     }
 
     setLoading(true);
-    setError(null);
 
     try {
       const { data, error: tokenError } = await authClient.getAccessToken({
@@ -32,8 +31,7 @@ export function useToken() {
       });
 
       if (tokenError) {
-        setError(new Error(tokenError.message));
-        return null;
+        unauthorized()
       }
 
       const newToken = data?.accessToken || null;
@@ -48,5 +46,5 @@ export function useToken() {
     fetchToken();
   }, [fetchToken]);
 
-  return { token, fetchToken, loading, error, session };
+  return { token, fetchToken, loading, session };
 }
