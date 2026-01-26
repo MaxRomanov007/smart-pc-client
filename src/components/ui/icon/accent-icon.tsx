@@ -3,11 +3,13 @@ import type { ComponentProps } from "react";
 
 export default function AccentIcon({
   children,
+  colorPalette,
   ...props
 }: Omit<ComponentProps<typeof Icon>, "color">) {
+  const palette = colorPalette ? colorPalette : "colorPalette";
   return (
     <Icon
-      color={{ _light: "colorPalette.700", _dark: "colorPalette.300" }}
+      color={{ _light: palette + ".700", _dark: palette + ".300" }}
       {...props}
     >
       {children}
