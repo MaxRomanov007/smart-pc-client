@@ -5,3 +5,7 @@ export interface IPc {
   description: string;
   canPowerOn: boolean;
 }
+
+export interface IPcItem extends IPc {
+  online?: boolean;
+}

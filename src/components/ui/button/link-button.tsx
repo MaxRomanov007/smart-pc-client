@@ -6,9 +6,22 @@ interface Props extends ComponentProps<typeof Button> {
   href: string;
 }
 
-export default function LinkButton({ href, children, ...props }: Props) {
+export default function LinkButton({
+  href,
+  children,
+  disabled,
+  ...props
+}: Props) {
+  if (disabled) {
+    return (
+      <Button disabled={disabled} {...props}>
+        {children}
+      </Button>
+    );
+  }
+
   return (
-    <Button {...props}>
+    <Button asChild {...props}>
       <Link href={href}>
         <HStack>{children}</HStack>
       </Link>

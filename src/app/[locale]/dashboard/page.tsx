@@ -5,7 +5,7 @@ import { getStandardBreadcrumbs } from "@/utils/ui/breadcrumbs/server";
 import { getExtracted } from "next-intl/server";
 import { getToken } from "@/utils/auth/server";
 import { fetchUserPcs } from "@/services/pcs";
-import PcList from "@/components/pc/pc-list";
+import OnlinePcs from "@/app/[locale]/dashboard/(components)/pcs/online-pcs";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default async function DashboardPage() {
   const breadcrumbs = await getStandardBreadcrumbs(true);
   const t = await getExtracted("dashboard-page");
-  const token = await getToken()
-  const {data: pcs} = await fetchUserPcs(token.accessToken);
+  const token = await getToken();
+  const { data: userPcs } = await fetchUserPcs(token.accessToken);
 
   return (
     <Stack gap={4} as="section">
@@ -35,7 +35,7 @@ export default async function DashboardPage() {
         </Text>
       </Stack>
 
-      <PcList pcs={pcs ? [pcs[0]] : []}/>
+      {userPcs && <OnlinePcs pcs={userPcs} />}
     </Stack>
   );
 }
