@@ -35,7 +35,7 @@ export default async function DashboardPage() {
         </Text>
       </Stack>
 
-      {userPcs && <OnlinePcs pcs={userPcs} />}
+      {userPcs && <OnlinePcs pcs={[]} />}
     </Stack>
   );
 }
