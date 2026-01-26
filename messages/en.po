@@ -102,6 +102,18 @@ msgctxt "pc-card"
 msgid "d21Els"
 msgstr "Execute"
 
+#. pc list empty state description
+#: src\components\pc\pc-list-empty-state.tsx
+msgctxt "pc-list-empty-state"
+msgid "6Y8BHY"
+msgstr "There are not pcs registered on your account"
+
+#. pc list empty state title
+#: src\components\pc\pc-list-empty-state.tsx
+msgctxt "pc-list-empty-state"
+msgid "c5g+Gs"
+msgstr "Your pc list is empty"
+
 #: src\components\ui\badge\offline-badge\client.tsx
 #: src\components\ui\badge\offline-badge\server.tsx
 msgctxt "offline-badge"
