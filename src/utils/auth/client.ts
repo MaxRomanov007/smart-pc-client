@@ -1,14 +1,16 @@
 import { createAuthClient } from "better-auth/react";
-import { genericOAuthClient } from "better-auth/client/plugins";
-import { SSO_PROVIDER_ID } from "@/utils/auth/server";
+import {
+  genericOAuthClient,
+  inferAdditionalFields,
+} from "better-auth/client/plugins";
+import { auth, SSO_PROVIDER_ID } from "@/utils/auth/server";
 import { useCallback, useEffect, useState } from "react";
 import { unauthorized } from "next/dist/client/components/unauthorized";
 
 export const authClient = createAuthClient({
-  plugins: [genericOAuthClient()],
+  plugins: [genericOAuthClient(), inferAdditionalFields<typeof auth>()],
 });
 
-export type Session = typeof authClient.$Infer.Session;
 export type User = typeof authClient.$Infer.Session.user;
 
 export function useToken() {
@@ -31,7 +33,7 @@ export function useToken() {
       });
 
       if (tokenError) {
-        unauthorized()
+        unauthorized();
       }
 
       const newToken = data?.accessToken || null;
