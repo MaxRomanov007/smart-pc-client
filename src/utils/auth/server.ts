@@ -15,21 +15,18 @@ export const auth = betterAuth({
           discoveryUrl: process.env.SSO_DISCOVERY_URL!,
           clientId: process.env.SSO_CLIENT_ID!,
           clientSecret: process.env.SSO_CLIENT_SECRET!,
-          scopes: [
-            "openid",
-            "offline",
-            "mqtt:pc:read"
-          ],
+          scopes: ["openid", "offline", "mqtt:pc:read"],
           pkce: true,
           accessType: "offline",
           authentication: "basic",
-          mapProfileToUser: (options) => {
+          mapProfileToUser: (profile) => {
             return {
-              id: options.id,
-              email: options.email,
-              emailVerified: options.emailVerified,
-              image: options.traits?.picture,
-              name: [options.name?.first, options.name?.last].join(" "),
+              id: profile.id,
+              oid: profile.sub,
+              email: profile.email,
+              emailVerified: profile.emailVerified,
+              image: profile.traits?.picture,
+              name: [profile.name?.first, profile.name?.last].join(" "),
             };
           },
         },
@@ -47,6 +44,14 @@ export const auth = betterAuth({
   account: {
     storeStateStrategy: "cookie",
     storeAccountCookie: true,
+  },
+  user: {
+    additionalFields: {
+      oid: {
+        type: "string",
+        input: false,
+      },
+    },
   },
 });
 

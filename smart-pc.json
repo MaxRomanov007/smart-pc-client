@@ -1,7 +1,7 @@
 {
   "uuid": "e33c8988-598c-4cb9-b7ab-9c68d07ed02a",
   "lastMigration": 33,
-  "name": "Smart pc",
+  "name": "Smart PC",
   "endpointPrefix": "",
   "latency": 0,
   "port": 8080,
@@ -95,7 +95,7 @@
       "id": "iit1",
       "name": "pcs",
       "documentation": "user pcs",
-      "value": "[\n  {{#repeat 10}}\n  {{setVar 'fakeName' (faker 'person.jobTitle')}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{@fakeName}}\",\n    \"slug\": \"{{faker 'helpers.slugify' @fakeName}}\",\n    \"description\": \"{{faker 'food.description'}}\",\n    \"canPowerOn\": {{boolean}}\n  }\n  {{/repeat}}\n]"
+      "value": "[\n  {\n    \"id\": \"hello\",\n    \"name\": \"Hello\",\n    \"slug\": \"{{faker 'helpers.slugify' Hello}}\",\n    \"description\": \"Hello Hello Hello\",\n    \"canPowerOn\": true\n  },\n  {{#repeat 9}}\n  {{setVar 'fakeName' (faker 'person.jobTitle')}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{@fakeName}}\",\n    \"slug\": \"{{faker 'helpers.slugify' @fakeName}}\",\n    \"description\": \"{{faker 'food.description'}}\",\n    \"canPowerOn\": {{boolean}}\n  }\n  {{/repeat}}\n]"
     }
   ],
   "callbacks": []

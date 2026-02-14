@@ -5,19 +5,7 @@ export const MessageTypes = {
 
 type MessageType = (typeof MessageTypes)[keyof typeof MessageTypes];
 
-export interface IMessagePayload<
-  T extends MessageType = MessageType,
-  D = unknown,
-> {
+export interface IMessage<T extends MessageType = MessageType, D = unknown> {
   type: T;
   data: D;
-}
-
-export interface IMessage<T extends IMessagePayload> {
-  duplicate: boolean;
-  qos: number;
-  retained: boolean;
-  Topic: string;
-  message_id: number;
-  payload: T;
 }

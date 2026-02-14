@@ -1,60 +1,61 @@
 "use client";
 
 import { MessageTypes, type WebsocketMessage } from "@/@types/websocket";
-import useWebSocket from "react-use-websocket";
-import { PATHS } from "@/config/websocket/paths";
-import type { IPc, IPcItem } from "@/@types/pc/pc";
 import { useCallback, useEffect, useState } from "react";
+import type { IPc, IPcItem } from "@/@types/pc/pc";
 import PcList from "@/components/pc/pc-list";
+import useMqtt from "@/utils/hooks/mqtt";
 
 interface Props {
   pcs: IPc[];
   token: string;
+  userID: string;
 }
 
-export default function PcListUpdater({ token, pcs }: Props) {
+const mqttBrokerUrl = "ws://localhost:8083/mqtt" as const;
+
+export default function PcListUpdater({ token, pcs, userID }: Props) {
   const [pcItems, setPcItems] = useState<IPcItem[]>(
     pcs.map<IPcItem>((pc) => ({ ...pc, online: false })),
   );
 
-  const { lastJsonMessage } = useWebSocket<WebsocketMessage | null>(
-    PATHS.pcsStatuses(token),
-    {
-      shouldReconnect: () => true,
-      onMessage: (event) => {
-        try {
-          const message: WebsocketMessage | null = JSON.parse(event.data);
-          if (!message) {
-            return;
-          }
-          handleMessage(message);
-        } catch (error) {
-          console.error(error);
-        }
-      },
-    },
-  );
+  const handleMqttMessage = useCallback((topic: string, message: Buffer) => {
+    try {
+      const messageStr = message.toString();
+      const parsedMessage: WebsocketMessage = JSON.parse(messageStr);
 
-  const handleMessage = useCallback((message: WebsocketMessage) => {
-    if (message.payload.type !== MessageTypes.pcStatus) {
-      return;
+      if (parsedMessage.type !== MessageTypes.pcStatus) {
+        return;
+      }
+
+      const changedPcId = getPcIdFromTopic(topic);
+      const online = parsedMessage.data.status === "online";
+
+      setPcItems((prevItems) =>
+        prevItems.map((pcItem) =>
+          pcItem.id === changedPcId ? { ...pcItem, online } : pcItem,
+        ),
+      );
+    } catch (error) {
+      console.error("Error parsing MQTT message:", error);
     }
-
-    const changedPcId = getPcIdFromTopic(message.Topic);
-    const online = message.payload.data.status === "online";
-
-    setPcItems((prevItems) =>
-      prevItems.map((pcItem) =>
-        pcItem.id === changedPcId ? { ...pcItem, online } : pcItem,
-      ),
-    );
   }, []);
 
-  useEffect(() => {
-    if (!lastJsonMessage) return;
+  const { status, subscribe } = useMqtt(mqttBrokerUrl, {
+    onMessage: handleMqttMessage,
+    clientId: `pc-client-` + userID,
+    username: userID,
+    password: token,
+    clean: true,
+    reconnectPeriod: 1000,
+  });
 
-    handleMessage(lastJsonMessage);
-  }, [handleMessage, lastJsonMessage]);
+  useEffect(() => {
+    if (status === "connected") {
+      const topics = pcs.map((pc) => `users/${userID}/pcs/${pc.id}/status`);
+      subscribe(topics);
+    }
+  }, [status, subscribe, pcs, userID]);
 
   return <PcList pcs={pcItems} />;
 }
