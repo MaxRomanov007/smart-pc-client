@@ -24,11 +24,6 @@ msgctxt "header-menu-drawer"
 msgid "tKMlOc"
 msgstr "Menu"
 
-#: src\app\[locale]\dashboard\(components)\pcs\online-pcs.tsx
-msgctxt "online-pcs"
-msgid "KN7zKn"
-msgstr "Error"
-
 #. dashboard page description
 #: src\app\[locale]\dashboard\page.tsx
 msgctxt "dashboard-page"

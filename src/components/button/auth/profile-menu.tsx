@@ -2,26 +2,27 @@
 
 import { Menu, Portal } from "@chakra-ui/react";
 import { useExtracted } from "next-intl";
-import { authClient, type User } from "@/utils/auth/client";
 import ProfileButton from "@/components/button/auth/profile-button";
 import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dialog/with-store";
 import { useConfirmationDialog } from "@/utils/ui/dialogs/confirmation/useConfirmationDialog";
 import type { SelectionDetails } from "@zag-js/menu";
+import type { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 
 interface Props {
-  user: User;
+  session: Session;
 }
 
 const MenuItemValues = {
   signOut: "sign-out",
 } as const;
 
-export default function ProfileMenu({ user }: Props) {
+export default function ProfileMenu({ session }: Props) {
   const t = useExtracted("profile-button-menu");
   const confirmationDialog = useConfirmationDialog();
 
   const handleSignOut = async () => {
-    await authClient.signOut();
+    await signOut();
   };
 
   const handleSelect = (details: SelectionDetails) => {
@@ -47,7 +48,7 @@ export default function ProfileMenu({ user }: Props) {
     <>
       <Menu.Root onSelect={handleSelect}>
         <Menu.Trigger asChild>
-          <ProfileButton user={user} />
+          <ProfileButton session={session} />
         </Menu.Trigger>
         <Portal>
           <Menu.Positioner>

@@ -4,7 +4,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { Toaster } from "@/components/ui/chakra/toaster";
 import { LocaleProvider } from "@chakra-ui/react";
-import { TokenProvider } from "@/contexts/token";
+import { SessionProvider } from "next-auth/react";
 
 interface Props {
   locale: string;
@@ -17,7 +17,7 @@ export default async function Providers({ children, locale }: Props) {
     <NextIntlClientProvider messages={messages}>
       <LocaleProvider locale={locale}>
         <Provider>
-          <TokenProvider>{children}</TokenProvider>
+          <SessionProvider>{children}</SessionProvider>
           <Toaster />
         </Provider>
       </LocaleProvider>
