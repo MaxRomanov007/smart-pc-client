@@ -1,20 +1,22 @@
 import { Avatar, Button, HStack, Text } from "@chakra-ui/react";
 import type { ComponentProps } from "react";
-import type { User } from "@/utils/auth/client";
+import type { Session } from "next-auth";
 
 interface Props extends Omit<ComponentProps<typeof Button>, "children"> {
-  user: User;
+  session: Session;
   avatarProps?: ComponentProps<typeof Avatar.Root>;
 }
 
 export default function ProfileButton({
-  user,
   size,
   variant,
   rounded,
+  session,
   avatarProps,
   ...props
 }: Props) {
+  const name = [session.user.name.first, session.user.name.last].join(" ");
+
   return (
     <Button
       size={size ?? ["sm", null, "md"]}
@@ -28,8 +30,8 @@ export default function ProfileButton({
           size={avatarProps?.size ?? ["xs", null, "sm"]}
           {...avatarProps}
         >
-          <Avatar.Fallback name={user.name} />
-          <Avatar.Image src={user.image ?? ""} />
+          <Avatar.Fallback name={name} />
+          <Avatar.Image src={session.user.image ?? undefined} />
         </Avatar.Root>
 
         <Text
@@ -38,7 +40,7 @@ export default function ProfileButton({
           textOverflow="ellipsis"
           overflow="hidden"
         >
-          {user.name}
+          {name}
         </Text>
       </HStack>
     </Button>
