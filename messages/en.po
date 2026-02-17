@@ -36,6 +36,18 @@ msgctxt "dashboard-page"
 msgid "Iw3cCk"
 msgstr "My PCs"
 
+#. reset button text
+#: src\app\[locale]\error.tsx
+msgctxt "error-page"
+msgid "jm/spn"
+msgstr "Reset"
+
+#. error page title
+#: src\app\[locale]\error.tsx
+msgctxt "error-page"
+msgid "JqiqNj"
+msgstr "Something went wrong"
+
 #. not found page link button for main page text
 #: src\app\[locale]\not-found.tsx
 msgctxt "not-found-page"
