@@ -6,23 +6,19 @@ import ProfileButton from "@/components/button/auth/profile-button";
 import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dialog/with-store";
 import { useConfirmationDialog } from "@/utils/ui/dialogs/confirmation/useConfirmationDialog";
 import type { SelectionDetails } from "@zag-js/menu";
-import type { Session } from "next-auth";
-import { signOut } from "next-auth/react";
-
-interface Props {
-  session: Session;
-}
+import { useAuth } from "@/utils/hooks/auth";
 
 const MenuItemValues = {
   signOut: "sign-out",
 } as const;
 
-export default function ProfileMenu({ session }: Props) {
+export default function ProfileMenu() {
   const t = useExtracted("profile-button-menu");
   const confirmationDialog = useConfirmationDialog();
+  const { logOut, user } = useAuth();
 
   const handleSignOut = async () => {
-    await signOut();
+    logOut();
   };
 
   const handleSelect = (details: SelectionDetails) => {
@@ -48,7 +44,7 @@ export default function ProfileMenu({ session }: Props) {
     <>
       <Menu.Root onSelect={handleSelect}>
         <Menu.Trigger asChild>
-          <ProfileButton session={session} />
+          {user && <ProfileButton user={user} />}
         </Menu.Trigger>
         <Portal>
           <Menu.Positioner>

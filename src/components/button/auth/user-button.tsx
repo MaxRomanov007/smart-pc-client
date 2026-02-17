@@ -4,17 +4,17 @@ import { type Button, Skeleton } from "@chakra-ui/react";
 import SignInButton from "./sign-in-button";
 import type { ComponentProps } from "react";
 import ProfileMenu from "@/components/button/auth/profile-menu";
-import { useSession } from "next-auth/react";
+import { useAuth } from "@/utils/hooks/auth";
 
 type Props = ComponentProps<typeof Button>;
 
 export default function UserButton(props: Props) {
-  const { data, status } = useSession();
+  const { user, loginInProgress, isAuthenticated } = useAuth();
 
   return (
-    <Skeleton loading={status === "loading"}>
-      {status === "authenticated" && data?.user ? (
-        <ProfileMenu session={data} {...props} />
+    <Skeleton loading={loginInProgress}>
+      {isAuthenticated && user ? (
+        <ProfileMenu {...props} />
       ) : (
         <SignInButton {...props} />
       )}
