@@ -27,7 +27,12 @@ export default function useServiceQuery<T>(
       const result = await queryFn();
       if (ignoreRef.current) return;
 
-      if (result.error) throw result.error;
+      if (result.error) {
+        setError(result.error);
+        setData(undefined);
+        return;
+      }
+
       setData(result.data);
     } catch (err) {
       if (ignoreRef.current) return;
