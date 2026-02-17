@@ -3,8 +3,12 @@
 import { useEffect } from "react";
 import { useAuthContext } from "react-oauth2-code-pkce";
 import { useRouter } from "next/navigation";
+import { handleError } from "@/utils/errors";
+import { useExtracted } from "next-intl";
+import { Center, Spinner, Text, VStack } from "@chakra-ui/react";
 
 export default function AuthCallback() {
+  const t = useExtracted("auth-callback-error");
   const { token, error } = useAuthContext();
   const router = useRouter();
 
@@ -12,10 +16,33 @@ export default function AuthCallback() {
     if (token) {
       router.push("/");
     } else if (error) {
-      console.error("OAuth error:", error);
-      router.push("/?error=auth_failed");
+      handleError(
+        t({
+          message: "Authorization flow failed",
+          description: "authorization flow failed message title",
+        }),
+        error,
+      );
     }
-  }, [token, error, router]);
+  }, [token, error, router, t]);
 
-  return <div>Авторизация... Подождите секунду.</div>;
+  return (
+    <Center>
+      <VStack gap={4}>
+        <Text
+          color={{ _light: "colorPalette.700", _dark: "colorPalette.300" }}
+          textStyle="lg"
+        >
+          {t({
+            message: "Please wait for authorization to complete",
+            description: "loading title",
+          })}
+        </Text>
+        <Spinner
+          color={{ _light: "colorPalette.600", _dark: "colorPalette.300" }}
+          size={"xl"}
+        />
+      </VStack>
+    </Center>
+  );
 }

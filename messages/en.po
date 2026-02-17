@@ -24,6 +24,24 @@ msgctxt "header-menu-drawer"
 msgid "tKMlOc"
 msgstr "Menu"
 
+#. authorization flow failed message title
+#: src\app\[locale]\auth\callback\page.tsx
+msgctxt "auth-callback-error"
+msgid "3zYJKV"
+msgstr "Authorization flow failed"
+
+#. loading title
+#: src\app\[locale]\auth\callback\page.tsx
+msgctxt "auth-callback-error"
+msgid "UDm/vP"
+msgstr "Please wait for authorization to complete"
+
+#. pcs error message title
+#: src\app\[locale]\dashboard\(components)\pcs\online-pcs.tsx
+msgctxt "online-pcs"
+msgid "1Cd1br"
+msgstr "Error occurred while fetching pcs"
+
 #. dashboard page description
 #: src\app\[locale]\dashboard\page.tsx
 msgctxt "dashboard-page"

@@ -6,9 +6,11 @@ import { useSecureAuth } from "@/utils/hooks/auth";
 import useServiceQuery from "@/utils/hooks/services/use-service-query";
 import { fetchUserPcs } from "@/services/pcs";
 import { useCallback, useEffect } from "react";
-import { toaster } from "@/components/ui/chakra/toaster";
+import { handleError } from "@/utils/errors";
+import { useExtracted } from "next-intl";
 
 export default function OnlinePcs() {
+  const t = useExtracted("online-pcs");
   const { token, user } = useSecureAuth();
   const fetchPcsQuery = useCallback(() => fetchUserPcs(token), [token]);
   const {
@@ -20,19 +22,15 @@ export default function OnlinePcs() {
 
   useEffect(() => {
     if (!!error) {
-      console.log(error);
-      queueMicrotask(() =>
-        toaster.error({
-          title: "Error occurred while fetching pcs",
-          description: error.message,
+      handleError(
+        t({
+          message: "Error occurred while fetching pcs",
+          description: "pcs error message title",
         }),
+        error.message,
       );
-      throw {
-        message: "Error occurred while fetching pcs",
-        digest: error.message,
-      };
     }
-  }, [error]);
+  }, [error, t]);
 
   if (isError) {
     return null;
