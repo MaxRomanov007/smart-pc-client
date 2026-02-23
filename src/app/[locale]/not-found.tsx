@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Center, Container, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Container,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import AccentIcon from "@/components/ui/icon/accent-icon";
 import { LuAntenna } from "react-icons/lu";
 import LinkButton from "@/components/ui/button/link-button";
@@ -14,7 +20,7 @@ export default async function LocalePage() {
   const t = await getExtracted("not-found-page");
 
   return (
-    <Center h="full">
+    <AbsoluteCenter h="full">
       <Container maxW="sm">
         <VStack textAlign="center" gap={4}>
           <AccentIcon w={24} h={24}>
@@ -42,6 +48,6 @@ export default async function LocalePage() {
           </LinkButton>
         </VStack>
       </Container>
-    </Center>
+    </AbsoluteCenter>
   );
 }

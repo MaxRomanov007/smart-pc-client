@@ -12,7 +12,7 @@ export default function PcList({ pcs }: Props) {
   return (
     <PcListGrid empty={pcs.length === 0}>
       <For each={pcs} fallback={<PcListEmptyState />}>
-        {(pc) => <PcCard pc={pc} />}
+        {(pc) => <PcCard key={pc.id} pc={pc} />}
       </For>
     </PcListGrid>
   );

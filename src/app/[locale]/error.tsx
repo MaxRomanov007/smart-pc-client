@@ -1,8 +1,8 @@
 "use client";
 
 import {
+  AbsoluteCenter,
   Button,
-  Center,
   Container,
   Heading,
   Text,
@@ -22,7 +22,7 @@ export default function ErrorPage({
   const t = useExtracted("error-page");
 
   return (
-    <Center h="full">
+    <AbsoluteCenter h="full">
       <Container maxW="sm">
         <VStack textAlign="center" gap={4}>
           <AccentIcon w={24} h={24}>
@@ -34,7 +34,9 @@ export default function ErrorPage({
               description: "error page title",
             })}
           </Heading>
-          <Text color="fg.muted">{error.message}</Text>
+          <Text color="fg.muted" lineClamp={3}>
+            {error.message}
+          </Text>
           <Button onClick={() => reset()}>
             {t({
               message: "Reset",
@@ -43,6 +45,6 @@ export default function ErrorPage({
           </Button>
         </VStack>
       </Container>
-    </Center>
+    </AbsoluteCenter>
   );
 }
