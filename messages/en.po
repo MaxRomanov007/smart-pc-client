@@ -90,6 +90,18 @@ msgctxt "index-page-metadata"
 msgid "FmhFdY"
 msgstr "Index page"
 
+#. unauthorized page title
+#: src\app\[locale]\unauthorized.tsx
+msgctxt "unauthorized page"
+msgid "2uBtp/"
+msgstr "You're not authorized"
+
+#. description
+#: src\app\[locale]\unauthorized.tsx
+msgctxt "unauthorized page"
+msgid "3zq8KM"
+msgstr "You're not authorized. Sign in by click button below to access this page"
+
 #. confirmation dialog text for sign out action
 #: src\components\button\auth\profile-menu.tsx
 msgctxt "profile-button-menu"
