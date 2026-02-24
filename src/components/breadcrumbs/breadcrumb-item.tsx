@@ -1,4 +1,4 @@
-import type { IBreadcrumb } from "@/@types/ui/navigation/breadcrumb";
+import type { IBreadcrumb } from "@/types/ui/navigation/breadcrumb";
 import { Breadcrumb } from "@chakra-ui/react";
 import BreadcrumbLink from "@/components/breadcrumbs/breadcrumb-link";
 

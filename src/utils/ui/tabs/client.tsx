@@ -1,4 +1,4 @@
-import type { INavigationTab } from "@/@types/ui/navigation/navigation-tab";
+import type { INavigationTab } from "@/types/ui/navigation/navigation-tab";
 import { useExtracted } from "next-intl";
 import { PAGES } from "@/config/navigation/pages";
 import { LuHouse } from "react-icons/lu";

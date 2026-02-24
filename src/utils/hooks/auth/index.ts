@@ -1,5 +1,5 @@
 import { type IAuthContext, useAuthContext } from "react-oauth2-code-pkce";
-import type { IUser } from "@/@types/auth/user";
+import type { IUser } from "@/types/auth/user";
 import type {
   TLoginMethod,
   TPrimitiveRecord,
