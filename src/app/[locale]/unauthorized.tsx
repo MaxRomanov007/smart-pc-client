@@ -32,7 +32,7 @@ export default async function UnauthorizedPage() {
               description: "description",
             })}
           </Text>
-          <SignInButton variant="solid" />
+          <SignInButton variant="solid" rounded="md" />
         </VStack>
       </Container>
     </AbsoluteCenter>

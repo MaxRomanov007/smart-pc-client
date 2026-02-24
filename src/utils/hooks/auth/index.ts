@@ -7,8 +7,15 @@ import type {
 import { generateState } from "@/utils/strings/state";
 import { useEffect } from "react";
 import { unauthorized } from "next/dist/client/components/unauthorized";
+import { LOGIN_REDIRECT_PATH_KEY } from "@/config/storage";
 
-export interface IUseAuthResult extends IAuthContext {
+export interface IUseAuthResult extends Omit<IAuthContext, "logIn"> {
+  logIn: (
+    redirectPath?: string,
+    state?: string,
+    additionalParameters?: TPrimitiveRecord,
+    method?: TLoginMethod,
+  ) => void;
   user?: IUser;
   isAuthenticated: boolean;
 }
@@ -17,11 +24,17 @@ export function useAuth(): IUseAuthResult {
   const authContext = useAuthContext();
 
   const logIn = (
+    redirectPath?: string,
     state?: string,
     additionalParameters?: TPrimitiveRecord,
     method?: TLoginMethod,
   ) => {
     state = state ? state : generateState();
+
+    if (redirectPath) {
+      sessionStorage.setItem(LOGIN_REDIRECT_PATH_KEY, redirectPath);
+    }
+
     authContext.logIn(state, additionalParameters, method);
   };
 

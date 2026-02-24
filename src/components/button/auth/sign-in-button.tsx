@@ -10,6 +10,7 @@ import { Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { LuLogIn } from "react-icons/lu";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
 import { useAuth } from "@/utils/hooks/auth";
+import { usePathname } from "@/i18n/navigation";
 
 type Props = Omit<
   ComponentProps<typeof Button>,
@@ -25,9 +26,10 @@ export default function SignInButton({
   const t = useExtracted("sign-in-button");
   const isCollapsed = useBreakpointValue([true, null, false]);
   const { logIn, loginInProgress } = useAuth();
+  const pathname = usePathname();
 
   const handleClick: MouseEventHandler<HTMLButtonElement> = async () => {
-    logIn();
+    logIn(pathname);
   };
 
   if (isCollapsed) {
