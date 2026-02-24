@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { AbsoluteCenter, Container, Heading, Text, VStack } from "@chakra-ui/react";
+import {
+  AbsoluteCenter,
+  Container,
+  Heading,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import SignInButton from "@/components/button/auth/sign-in-button";
 import AccentIcon from "@/components/ui/icon/accent-icon";
 import { LuOctagonX } from "react-icons/lu";

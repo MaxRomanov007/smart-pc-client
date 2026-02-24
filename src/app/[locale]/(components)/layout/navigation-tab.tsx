@@ -1,4 +1,4 @@
-import type { INavigationTab } from "@/@types/ui/navigation/navigation-tab";
+import type { INavigationTab } from "@/types/ui/navigation/navigation-tab";
 import AccentIcon from "@/components/ui/icon/accent-icon";
 import { Button } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/chakra/tooltip";

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Data } from "@/@types/services/data";
+import type { Data } from "@/types/services/data";
 
 interface UseServiceQueryOptions<T> {
   enabled?: boolean;

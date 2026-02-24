@@ -1,5 +1,5 @@
-import type { IPc } from "@/@types/pc/pc";
-import type { Data } from "@/@types/services/data";
+import type { IPc } from "@/types/pc/pc";
+import type { Data } from "@/types/services/data";
 
 const pcServiceAddress = process.env.NEXT_PUBLIC_PC_SERVICE_ADDRESS;
 

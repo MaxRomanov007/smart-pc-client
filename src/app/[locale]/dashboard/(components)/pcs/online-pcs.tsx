@@ -8,6 +8,7 @@ import { fetchUserPcs } from "@/services/pcs";
 import { useCallback, useEffect } from "react";
 import { handleError } from "@/utils/errors";
 import { useExtracted } from "next-intl";
+import MQTTConnectionProvider from "@/utils/providers/mqtt";
 
 export default function OnlinePcs() {
   const t = useExtracted("online-pcs");
@@ -38,5 +39,9 @@ export default function OnlinePcs() {
 
   if (loading || !user || !pcs) return <PcListSkeleton />;
 
-  return <PcListUpdater token={token} pcs={pcs} userID={user.id} />;
+  return (
+    <MQTTConnectionProvider>
+      <PcListUpdater token={token} pcs={pcs} userID={user.id} />
+    </MQTTConnectionProvider>
+  );
 }

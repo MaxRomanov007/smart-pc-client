@@ -3,7 +3,7 @@
 import { VStack } from "@chakra-ui/react";
 import NavigationTab from "@/app/[locale]/(components)/layout/navigation-tab";
 import { usePathname } from "@/i18n/navigation";
-import type { INavigationTab } from "@/@types/ui/navigation/navigation-tab";
+import type { INavigationTab } from "@/types/ui/navigation/navigation-tab";
 import { useStandardTabs } from "@/utils/ui/tabs/client";
 
 interface Props {

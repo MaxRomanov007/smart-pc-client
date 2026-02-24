@@ -1,5 +1,5 @@
 import { Breadcrumb } from "@chakra-ui/react";
-import type { IBreadcrumb } from "@/@types/ui/navigation/breadcrumb";
+import type { IBreadcrumb } from "@/types/ui/navigation/breadcrumb";
 import BreadcrumbItem from "@/components/breadcrumbs/breadcrumb-item";
 import { Fragment } from "react";
 

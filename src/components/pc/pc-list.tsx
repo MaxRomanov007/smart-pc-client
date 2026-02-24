@@ -6,13 +6,20 @@ import PcListEmptyState from "@/components/pc/pc-list-empty-state";
 
 interface Props {
   pcs: IPcItem[];
+  powerOn?: (pc: IPcItem) => void;
 }
 
-export default function PcList({ pcs }: Props) {
+export default function PcList({ pcs, powerOn }: Props) {
   return (
     <PcListGrid empty={pcs.length === 0}>
       <For each={pcs} fallback={<PcListEmptyState />}>
-        {(pc) => <PcCard key={pc.id} pc={pc} />}
+        {(pc) => (
+          <PcCard
+            key={pc.id}
+            pc={pc}
+            powerOn={powerOn && (() => powerOn(pc))}
+          />
+        )}
       </For>
     </PcListGrid>
   );
