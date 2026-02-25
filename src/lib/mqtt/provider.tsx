@@ -1,6 +1,13 @@
 "use client";
 
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import mqtt, {
   MqttClient,
   type IClientOptions,
@@ -29,7 +36,7 @@ export function MQTTProvider({
 
   const topicFactory = useMemo(() => {
     return auth.user?.id ? new TopicFactory(auth.user.id) : null;
-  }, [auth.user?.id]);
+  }, [auth.user]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -39,6 +46,7 @@ export function MQTTProvider({
         clientRef.current.end(true);
         clientRef.current = null;
       }
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setStatus("offline");
       return;
     }
@@ -106,46 +114,53 @@ export function MQTTProvider({
     brokerUrl,
     wsPath,
     options,
+    auth.user,
   ]);
 
-  const publish = async (message: MQTTMessage) => {
-    if (!clientRef.current || !topicFactory) {
-      throw new Error("MQTT client not connected or user not authenticated");
-    }
+  const publish = useCallback(
+    async (message: MQTTMessage) => {
+      if (!clientRef.current || !topicFactory) {
+        throw new Error("MQTT client not connected or user not authenticated");
+      }
 
-    const fullTopic = topicFactory.makeUserTopic(message.topic);
+      const fullTopic = topicFactory.makeUserTopic(message.topic);
 
-    return new Promise<void>((resolve, reject) => {
-      clientRef.current!.publish(
-        fullTopic,
-        message.payload,
-        {
-          qos: message.qos ?? 1,
-          retain: message.retain,
-        },
-        (err) => {
-          if (err) reject(err);
-          else resolve();
-        },
-      );
-    });
-  };
+      return new Promise<void>((resolve, reject) => {
+        clientRef.current!.publish(
+          fullTopic,
+          message.payload,
+          {
+            qos: message.qos ?? 1,
+            retain: message.retain,
+          },
+          (err) => {
+            if (err) reject(err);
+            else resolve();
+          },
+        );
+      });
+    },
+    [topicFactory],
+  );
 
-  const subscribe = (topic: string, options?: IClientSubscribeOptions) => {
-    if (!clientRef.current || !topicFactory) {
-      return () => {};
-    }
+  const subscribe = useCallback(
+    (topic: string, options?: IClientSubscribeOptions) => {
+      if (!clientRef.current || !topicFactory) {
+        return () => {};
+      }
 
-    const fullTopic = topicFactory.makeUserTopic(topic);
+      const fullTopic = topicFactory.makeUserTopic(topic);
 
-    clientRef.current.subscribe(fullTopic, { qos: 1, ...options }, (err) => {
-      if (err) console.error(`[MQTT] Subscribe error for ${fullTopic}:`, err);
-    });
+      clientRef.current.subscribe(fullTopic, { qos: 1, ...options }, (err) => {
+        if (err) console.error(`[MQTT] Subscribe error for ${fullTopic}:`, err);
+      });
 
-    return () => {
-      clientRef.current?.unsubscribe(fullTopic);
-    };
-  };
+      return () => {
+        clientRef.current?.unsubscribe(fullTopic);
+      };
+    },
+    [topicFactory],
+  );
 
   const disconnect = () => {
     if (clientRef.current?.connected) {
@@ -154,17 +169,19 @@ export function MQTTProvider({
     }
   };
 
+  const getClient = useCallback(() => clientRef.current, [clientRef]);
+
   const value: IMqttContext = useMemo(
     () => ({
       status,
       error,
-      client: clientRef.current,
+      getClient,
       user: auth.user,
       publish,
       subscribe,
       disconnect,
     }),
-    [status, error, auth.user, publish, subscribe],
+    [status, error, getClient, auth.user, publish, subscribe],
   );
 
   return <MqttContext.Provider value={value}>{children}</MqttContext.Provider>;
