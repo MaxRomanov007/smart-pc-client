@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, Flex, HStack, IconButton, Spacer } from "@chakra-ui/react";
-import type { IPcItem } from "@/@types/pc/pc";
+import type { IPcItem } from "@/types/pc/pc";
 import LinkButton from "@/components/ui/button/link-button";
 import { PAGES } from "@/config/navigation/pages";
 import { LuActivity, LuMonitor, LuMonitorOff, LuPower } from "react-icons/lu";

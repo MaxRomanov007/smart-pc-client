@@ -4,7 +4,7 @@ import { Menu, Portal } from "@chakra-ui/react";
 import { useExtracted } from "next-intl";
 import ProfileButton from "@/components/button/auth/profile-button";
 import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dialog/with-store";
-import { useConfirmationDialog } from "@/utils/ui/dialogs/confirmation/useConfirmationDialog";
+import { useConfirmationDialog } from "@/utils/hooks/ui/dialogs/confirmation/useConfirmationDialog";
 import type { SelectionDetails } from "@zag-js/menu";
 import { useAuth } from "@/utils/hooks/auth";
 

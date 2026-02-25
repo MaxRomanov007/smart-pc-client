@@ -1,5 +1,5 @@
 import { For } from "@chakra-ui/react";
-import type { IPcItem } from "@/@types/pc/pc";
+import type { IPcItem } from "@/types/pc/pc";
 import PcCard from "@/components/pc/pc-card";
 import PcListGrid from "@/components/pc/pc-list-grid";
 import PcListEmptyState from "@/components/pc/pc-list-empty-state";

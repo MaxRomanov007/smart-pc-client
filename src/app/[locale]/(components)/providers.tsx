@@ -3,7 +3,7 @@ import { Provider } from "@/components/ui/chakra/provider";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { LocaleProvider } from "@chakra-ui/react";
-import AuthProvider from "@/components/providers/auth";
+import AuthProvider from "@/utils/providers/auth";
 
 interface Props {
   locale: string;

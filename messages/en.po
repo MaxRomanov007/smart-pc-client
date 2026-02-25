@@ -199,14 +199,14 @@ msgid "N2IrpM"
 msgstr "Confirm"
 
 #. dashboard breadcrumb
-#: src\utils\ui\breadcrumbs\client.ts
-#: src\utils\ui\breadcrumbs\server.ts
+#: src\utils\hooks\ui\breadcrumbs\client.ts
+#: src\utils\hooks\ui\breadcrumbs\server.ts
 msgctxt "breadcrumbs"
 msgid "hzSNj4"
 msgstr "Dashboard"
 
 #. dashboard tab item tooltip
-#: src\utils\ui\tabs\client.tsx
+#: src\utils\hooks\ui\tabs\client.tsx
 msgctxt "navigation-tabs"
 msgid "hzSNj4"
 msgstr "Dashboard"
