@@ -1,6 +1,6 @@
 import { Avatar, Button, HStack, Text } from "@chakra-ui/react";
 import type { ComponentProps } from "react";
-import type { IUser } from "@/@types/auth/user";
+import type { IUser } from "@/types/auth/user";
 
 interface Props extends Omit<ComponentProps<typeof Button>, "children"> {
   user: IUser;

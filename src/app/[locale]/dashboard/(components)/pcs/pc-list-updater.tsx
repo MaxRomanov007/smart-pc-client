@@ -1,7 +1,7 @@
 "use client";
 
 import { MessageTypes, type MqttMessage } from "@/types/mqtt";
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { IPc, IPcItem } from "@/types/pc/pc";
 import PcList from "@/components/pc/pc-list";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
@@ -19,6 +19,7 @@ export default function PcListUpdater({ token, pcs, userID }: Props) {
 
   const topics = useMemo(() => pcs.map((pc) => `pcs/${pc.id}/status`), [pcs]);
   useMqttJsonSubscribe<MqttMessage>(topics, {
+    qos: 1,
     onMessage: (message) => {
       if (message.payload.type !== MessageTypes.pcStatus) {
         return;
@@ -33,7 +34,6 @@ export default function PcListUpdater({ token, pcs, userID }: Props) {
         ),
       );
     },
-    qos: 1,
   });
 
   const powerOnPc = (pc: IPcItem) => {

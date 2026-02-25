@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Heading, Stack, Text } from "@chakra-ui/react";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
-import { getStandardBreadcrumbs } from "@/utils/ui/breadcrumbs/server";
+import { getStandardBreadcrumbs } from "@/utils/hooks/ui/breadcrumbs/server";
 import { getExtracted } from "next-intl/server";
 import OnlinePcs from "@/app/[locale]/dashboard/(components)/pcs/online-pcs";
 
