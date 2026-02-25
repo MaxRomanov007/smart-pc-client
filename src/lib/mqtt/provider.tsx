@@ -107,15 +107,7 @@ export function MQTTProvider({
       }
       clientRef.current = null;
     };
-  }, [
-    auth.isAuthenticated,
-    auth.user?.id,
-    auth.token,
-    brokerUrl,
-    wsPath,
-    options,
-    auth.user,
-  ]);
+  }, [auth.isAuthenticated, auth.token, brokerUrl, wsPath, options, auth.user]);
 
   const publish = useCallback(
     async (message: MQTTMessage) => {

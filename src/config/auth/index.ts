@@ -8,7 +8,7 @@ export const authConfig: TAuthConfig = {
     typeof window !== "undefined"
       ? `${window.location.origin}/auth/callback`
       : "http://localhost:3000/auth/callback",
-  scope: "openid offline mqtt:pc:read",
+  scope: "openid offline mqtt:pc:read mqtt:pc:command:write",
   decodeToken: false,
   autoLogin: false,
   storageKeyPrefix: "SSO_",

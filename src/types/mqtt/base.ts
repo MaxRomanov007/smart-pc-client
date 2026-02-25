@@ -1,11 +1,11 @@
-export const MessageTypes = {
-  pcStatus: "pc-status",
-  pcState: "pc-state",
-} as const;
+export enum MessageTypes {
+  pcStatus = "pc-status",
+  pcState = "pc-state",
+  command = "command",
+  wakerCommand = "waker-command",
+}
 
-type MessageType = (typeof MessageTypes)[keyof typeof MessageTypes];
-
-export interface IMessage<T extends MessageType = MessageType, D = unknown> {
+export interface IMessage<T extends MessageTypes = MessageTypes, D = unknown> {
   type: T;
   data: D;
 }

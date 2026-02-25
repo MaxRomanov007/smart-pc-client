@@ -198,6 +198,18 @@ msgctxt "confirmation-dialog"
 msgid "N2IrpM"
 msgstr "Confirm"
 
+#. default confirmation dialog title
+#: src\utils\hooks\commands\provider.tsx
+msgctxt "commands-provider"
+msgid "2oCaym"
+msgstr "Are you sure?"
+
+#. default confirmation dialog text
+#: src\utils\hooks\commands\provider.tsx
+msgctxt "commands-provider"
+msgid "qcCX8I"
+msgstr "Are you sure you want to execute command {name}"
+
 #. dashboard breadcrumb
 #: src\utils\hooks\ui\breadcrumbs\client.ts
 #: src\utils\hooks\ui\breadcrumbs\server.ts

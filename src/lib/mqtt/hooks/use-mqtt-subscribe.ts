@@ -17,7 +17,7 @@ export function useMqttSubscribe(
     ...subscribeOptions
   }: UseMqttSubscribeOptions,
 ) {
-  const { client, status, user } = useMqtt();
+  const { getClient, status, user } = useMqtt();
   const onMessageRef = useRef(onMessage);
   const topicsRef = useRef(topic);
 
@@ -31,7 +31,7 @@ export function useMqttSubscribe(
   }, [topic]);
 
   useEffect(() => {
-    if (status !== "connected" || !client || !user) {
+    if (status !== "connected" || !getClient() || !user) {
       return;
     }
 
@@ -40,7 +40,7 @@ export function useMqttSubscribe(
       ? topicsRef.current.map((t) => topicFactory.makeUserTopic(t))
       : [topicFactory.makeUserTopic(topicsRef.current)];
 
-    client.subscribe(topics, subscribeOptions, (err) => {
+    getClient()?.subscribe(topics, subscribeOptions, (err) => {
       if (err) {
         console.error("[MQTT] Subscribe error:", err);
       }
@@ -69,14 +69,14 @@ export function useMqttSubscribe(
       });
     };
 
-    client.on("message", messageHandler);
+    getClient()?.on("message", messageHandler);
 
     // Cleanup
     return () => {
       if (!persistent) {
-        client.unsubscribe(topics);
+        getClient()?.unsubscribe(topics);
       }
-      client.removeListener("message", messageHandler);
+      getClient()?.removeListener("message", messageHandler);
     };
-  }, [client, status, user, subscribeOptions, persistent]);
+  }, [getClient, status, user, subscribeOptions, persistent]);
 }
