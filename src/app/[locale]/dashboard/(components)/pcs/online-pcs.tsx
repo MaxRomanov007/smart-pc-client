@@ -9,6 +9,7 @@ import { useCallback, useEffect } from "react";
 import { handleError } from "@/utils/errors";
 import { useExtracted } from "next-intl";
 import MQTTConnectionProvider from "@/utils/providers/mqtt";
+import { CommandsProvider } from "@/utils/hooks/commands/provider";
 
 export default function OnlinePcs() {
   const t = useExtracted("online-pcs");
@@ -41,7 +42,9 @@ export default function OnlinePcs() {
 
   return (
     <MQTTConnectionProvider>
-      <PcListUpdater pcs={pcs} />
+      <CommandsProvider>
+        <PcListUpdater pcs={pcs} />
+      </CommandsProvider>
     </MQTTConnectionProvider>
   );
 }

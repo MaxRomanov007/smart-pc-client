@@ -1,10 +1,12 @@
 "use client";
 
 import { MessageTypes, type MqttMessage } from "@/types/mqtt";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { IPc, IPcItem } from "@/types/pc/pc";
 import PcList from "@/components/pc/pc-list";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
+import { useCommands } from "@/utils/hooks/commands/hook";
+import { useMqttJsonPublish } from "@/lib/mqtt/hooks/use-mqtt-json-publish";
 
 interface Props {
   pcs: IPc[];
@@ -34,8 +36,21 @@ export default function PcListUpdater({ pcs }: Props) {
     },
   });
 
+  const {publish, isConnected} = useMqttJsonPublish()
+  useEffect(() => {
+    if (!isConnected) return
+    console.log("sending")
+    publish({
+      topic: "pcs/hello/command",
+      payload: "hello",
+      qos: 1,
+    });
+  }, [isConnected, publish]);
+
+  const {doCommand} = useCommands()
+
   const powerOnPc = (pc: IPcItem) => {
-    // TODO: Handle pc power on function
+    doCommand(pc, "hello")
   };
 
   return <PcList pcs={pcItems} powerOn={powerOnPc} />;
