@@ -28,7 +28,7 @@ export interface MQTTMessage<P = string | Buffer> {
 export interface IMqttContext {
   status: MQTTConnectionStatus;
   error?: MQTTError;
-  client: MqttClient | null;
+  getClient: () => MqttClient | null;
   user?: IUser;
   publish: (message: MQTTMessage) => Promise<void>;
   subscribe: (topic: string, options?: IClientSubscribeOptions) => () => void;

@@ -8,11 +8,9 @@ import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
 
 interface Props {
   pcs: IPc[];
-  token: string;
-  userID: string;
 }
 
-export default function PcListUpdater({ token, pcs, userID }: Props) {
+export default function PcListUpdater({ pcs }: Props) {
   const [pcItems, setPcItems] = useState<IPcItem[]>(
     pcs.map<IPcItem>((pc) => ({ ...pc, online: false })),
   );

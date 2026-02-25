@@ -12,7 +12,7 @@ import MQTTConnectionProvider from "@/utils/providers/mqtt";
 
 export default function OnlinePcs() {
   const t = useExtracted("online-pcs");
-  const { token, user } = useSecureAuth();
+  const { token } = useSecureAuth();
   const fetchPcsQuery = useCallback(() => fetchUserPcs(token), [token]);
   const {
     data: pcs,
@@ -37,11 +37,11 @@ export default function OnlinePcs() {
     return null;
   }
 
-  if (loading || !user || !pcs) return <PcListSkeleton />;
+  if (loading || !pcs) return <PcListSkeleton />;
 
   return (
     <MQTTConnectionProvider>
-      <PcListUpdater token={token} pcs={pcs} userID={user.id} />
+      <PcListUpdater pcs={pcs} />
     </MQTTConnectionProvider>
   );
 }
