@@ -13,7 +13,7 @@ interface ConfirmationDialogProps extends Omit<
   withoutPortal?: boolean;
   children?: ReactNode;
   title?: string;
-  text?: string;
+  content?: string | ReactNode;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
 }
 
@@ -21,7 +21,7 @@ export default function ConfirmationDialog({
   withoutPortal,
   children,
   title,
-  text,
+  content,
   onConfirm,
   ...props
 }: ConfirmationDialogProps) {
@@ -30,10 +30,10 @@ export default function ConfirmationDialog({
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
 
       {withoutPortal ? (
-        <Content title={title} text={text} onConfirm={onConfirm} />
+        <Content title={title} content={content} onConfirm={onConfirm} />
       ) : (
         <Portal>
-          <Content title={title} text={text} onConfirm={onConfirm} />
+          <Content title={title} content={content} onConfirm={onConfirm} />
         </Portal>
       )}
     </Dialog.Root>

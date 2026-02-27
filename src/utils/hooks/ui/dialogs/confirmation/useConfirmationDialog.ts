@@ -1,6 +1,7 @@
 import {
   type Dispatch,
   type MouseEventHandler,
+  type ReactNode,
   type SetStateAction,
   useState,
 } from "react";
@@ -8,14 +9,14 @@ import {
 type ConfirmationDialogState = {
   open: boolean;
   title?: string;
-  text?: string;
+  content?: string | ReactNode;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
 };
 
 export type UseConfirmationDialogType = {
   show: (
     title: string,
-    text: string,
+    content: string | ReactNode,
     onConfirm?: MouseEventHandler<HTMLButtonElement>,
   ) => void;
   state: ConfirmationDialogState;
@@ -26,19 +27,19 @@ export function useConfirmationDialog(): UseConfirmationDialogType {
   const [state, setState] = useState<ConfirmationDialogState>({
     open: false,
     title: "",
-    text: "",
+    content: "",
     onConfirm: undefined,
   });
 
   const show = (
     title: string,
-    text: string,
+    content: string | ReactNode,
     onConfirm?: MouseEventHandler<HTMLButtonElement>,
   ) => {
     setState({
       open: true,
       title: title,
-      text: text,
+      content: content,
       onConfirm: onConfirm,
     });
   };
