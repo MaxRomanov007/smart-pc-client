@@ -36,21 +36,10 @@ export default function PcListUpdater({ pcs }: Props) {
     },
   });
 
-  const {publish, isConnected} = useMqttJsonPublish()
-  useEffect(() => {
-    if (!isConnected) return
-    console.log("sending")
-    publish({
-      topic: "pcs/hello/command",
-      payload: "hello",
-      qos: 1,
-    });
-  }, [isConnected, publish]);
-
-  const {doCommand} = useCommands()
+  const { doCommand } = useCommands();
 
   const powerOnPc = (pc: IPcItem) => {
-    doCommand(pc, "hello")
+    doCommand(pc, "hello");
   };
 
   return <PcList pcs={pcItems} powerOn={powerOnPc} />;

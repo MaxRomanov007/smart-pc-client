@@ -4,7 +4,7 @@ import ConfirmationDialog from "@/components/ui/dialog/confirmation-dialog/dialo
 
 interface ConfirmationDialogWithStoreProps extends Omit<
   ComponentProps<typeof ConfirmationDialog>,
-  "onConfirm" | "title" | "text" | "open" | "onOpenChange"
+  "onConfirm" | "title" | "content" | "open" | "onOpenChange"
 > {
   store: UseConfirmationDialogType;
 }
@@ -22,7 +22,7 @@ export default function ConfirmationDialogWithStore({
           open: d.open,
         }))
       }
-      text={store.state.text}
+      content={store.state.content}
       title={store.state.title}
       onConfirm={store.state.onConfirm}
       {...props}

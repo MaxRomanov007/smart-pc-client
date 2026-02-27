@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useAuthContext } from "react-oauth2-code-pkce";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { handleError } from "@/utils/errors";
 import { useExtracted } from "next-intl";
 import { Center, Spinner, Text, VStack } from "@chakra-ui/react";
@@ -12,6 +12,7 @@ export default function AuthCallback() {
   const t = useExtracted("auth-callback-error");
   const { token, error } = useAuthContext();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (token) {
@@ -30,6 +31,16 @@ export default function AuthCallback() {
       );
     }
   }, [token, error, router, t]);
+
+  useEffect(() => {
+    const error = searchParams.get("error");
+    if (!error) {
+      return;
+    }
+
+    const errorDescription = searchParams.get("error_description");
+    handleError("Authorization failed: " + error, errorDescription ?? undefined);
+  }, [searchParams]);
 
   return (
     <Center>
