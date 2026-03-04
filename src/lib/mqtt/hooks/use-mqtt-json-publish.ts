@@ -9,8 +9,14 @@ export function useMqttJsonPublish() {
     async (message: MQTTMessage<unknown>) => {
       const jsonMessage: MQTTMessage<string> = {
         ...message,
-        payload: JSON.stringify(message.payload),
+        payload: JSON.stringify(message.payload, (_, value) => {
+          if (value instanceof Map) {
+            return Object.fromEntries(value);
+          }
+          return value;
+        }),
       };
+
       await publish(jsonMessage);
     },
     [publish],
