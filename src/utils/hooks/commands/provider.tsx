@@ -5,6 +5,7 @@ import { useConfirmationDialog } from "@/utils/hooks/ui/dialogs/confirmation/use
 import { CommandsContext } from "@/utils/hooks/commands/context";
 import type {
   DoCommandFunction,
+  DoCommandMessageType,
   DoCommandOptions,
 } from "@/utils/hooks/commands/types";
 import type { CommandParameter } from "@/types/pc/command-parameter";
@@ -14,12 +15,35 @@ import { MessageTypes, type MqttMessage } from "@/types/mqtt";
 import { useExtracted } from "next-intl";
 import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dialog/with-store";
 import { ParametersFieldsetStateful } from "@/utils/hooks/commands/components/parameters-fieldset-stateful";
+import type { IPc } from "@/types/pc/pc";
 
 export function CommandsProvider({ children }: { children: ReactNode }) {
   const { publish, isConnected } = useMqttJsonPublish();
   const dialog = useConfirmationDialog();
   const t = useExtracted("commands-provider");
   const parametersRef = useRef<CommandParameter[]>([]);
+
+  const publishMessage = useCallback(
+    async (pc: IPc, name: string, type: DoCommandMessageType) => {
+      const parameter = new Map<string, string>();
+
+      parametersRef.current.forEach((param) =>
+        parameter.set(param.name, param.value.toString()),
+      );
+
+      const message: MQTTMessage<MqttMessage> = {
+        topic: `pcs/${pc.id}/command`,
+        payload: {
+          type: type,
+          data: { command: name, parameter },
+        },
+        qos: 1,
+      };
+
+      await publish(message);
+    },
+    [publish],
+  );
 
   const doCommand: DoCommandFunction = useCallback(
     async ({
@@ -31,13 +55,19 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
         message: "Are you sure?",
         description: "default confirmation dialog title",
       }),
-      dialogText = t({
+      text = t({
         message: "Are you sure you want to execute command {name}",
         values: { name },
         description: "default confirmation dialog text",
       }),
+      withoutDialog = false,
     }: DoCommandOptions) => {
       if (!isConnected) return;
+
+      if (withoutDialog) {
+        await publishMessage(pc, name, commandType);
+        return;
+      }
 
       parametersRef.current = params;
 
@@ -45,30 +75,13 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
         dialogTitle,
         <ParametersFieldsetStateful
           initialParameters={params}
-          text={dialogText}
+          text={text}
           parametersRef={parametersRef}
         />,
-        async () => {
-          const parameter = new Map<string, string>();
-
-          parametersRef.current.forEach((param) =>
-            parameter.set(param.name, param.value.toString()),
-          );
-
-          const message: MQTTMessage<MqttMessage> = {
-            topic: `pcs/${pc.id}/command`,
-            payload: {
-              type: commandType,
-              data: { command: name, parameter },
-            },
-            qos: 1,
-          };
-
-          await publish(message);
-        },
+        async () => await publishMessage(pc, name, commandType),
       );
     },
-    [dialog, isConnected, publish, t],
+    [dialog, isConnected, publishMessage, t],
   );
 
   return (
