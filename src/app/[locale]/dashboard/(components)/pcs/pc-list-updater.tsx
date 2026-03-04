@@ -1,12 +1,12 @@
 "use client";
 
 import { MessageTypes, type MqttMessage } from "@/types/mqtt";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import type { IPc, IPcItem } from "@/types/pc/pc";
 import PcList from "@/components/pc/pc-list";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
 import { useCommands } from "@/utils/hooks/commands/hook";
-import { useMqttJsonPublish } from "@/lib/mqtt/hooks/use-mqtt-json-publish";
+import { ParameterTypes } from "@/types/pc/command-parameter";
 
 interface Props {
   pcs: IPc[];
@@ -39,7 +39,29 @@ export default function PcListUpdater({ pcs }: Props) {
   const { doCommand } = useCommands();
 
   const powerOnPc = (pc: IPcItem) => {
-    doCommand(pc, "hello");
+    doCommand(pc, "hello", [
+      {
+        id: "1",
+        name: "param1",
+        description: "some description",
+        type: ParameterTypes.boolean,
+        value: false,
+      },
+      {
+        id: "2",
+        name: "param2",
+        description: "some description",
+        type: ParameterTypes.boolean,
+        value: false,
+      },
+      {
+        id: "3",
+        name: "param3",
+        description: "some description",
+        type: ParameterTypes.boolean,
+        value: false,
+      },
+    ]);
   };
 
   return <PcList pcs={pcItems} powerOn={powerOnPc} />;
