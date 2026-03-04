@@ -20,13 +20,10 @@ interface Props {
 export default function PcCard({ pc, powerOn }: Props) {
   const t = useExtracted("pc-card");
 
-  const handleClick = useCallback(
-    async () => {
-      powerOn?.();
-      await new Promise((r) => setTimeout(r, 1000));
-    },
-    [powerOn],
-  );
+  const handleClick = useCallback(async () => {
+    powerOn?.();
+    await new Promise((r) => setTimeout(r, 1000));
+  }, [powerOn]);
 
   return (
     <Card.Root opacity={pc.online || pc.canPowerOn ? 1 : 0.6}>
