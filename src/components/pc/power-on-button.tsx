@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { LuPower } from "react-icons/lu";
 import { IconButton } from "@chakra-ui/react";

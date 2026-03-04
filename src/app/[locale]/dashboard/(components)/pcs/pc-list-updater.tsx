@@ -42,7 +42,7 @@ export default function PcListUpdater({ pcs }: Props) {
       pc,
       name: "power-on",
       withoutDialog: true,
-      messageType: MessageTypes.wakerCommand
+      messageType: MessageTypes.wakerCommand,
     });
   };
 
