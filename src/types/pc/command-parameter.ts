@@ -4,18 +4,24 @@ export enum ParameterTypes {
   string = 3,
 }
 
-export interface ICommandParameterBase<
-  T extends ParameterTypes,
-  V extends string | number | boolean,
-> {
+export type CommandParameterValueType = boolean | number | string;
+
+type ParameterTypeFromValueType<T extends CommandParameterValueType> =
+  T extends boolean
+    ? ParameterTypes.boolean
+    : T extends number
+      ? ParameterTypes.number
+      : ParameterTypes.string;
+
+export interface ICommandParameter<T extends CommandParameterValueType> {
   id: string;
   name: string;
   description: string;
-  type: T;
-  value: V;
+  type: ParameterTypeFromValueType<T>;
+  value: T;
 }
 
 export type CommandParameter =
-  | ICommandParameterBase<ParameterTypes.boolean, boolean>
-  | ICommandParameterBase<ParameterTypes.number, number>
-  | ICommandParameterBase<ParameterTypes.string, string>;
+  | ICommandParameter<boolean>
+  | ICommandParameter<number>
+  | ICommandParameter<string>;

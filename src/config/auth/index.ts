@@ -4,6 +4,7 @@ export const authConfig: TAuthConfig = {
   clientId: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!,
   authorizationEndpoint: process.env.NEXT_PUBLIC_OAUTH_AUTH_URL!,
   tokenEndpoint: process.env.NEXT_PUBLIC_OAUTH_TOKEN_URL!,
+  logoutEndpoint: process.env.NEXT_PUBLIC_OAUTH_LOGOUT_URL!,
   redirectUri:
     typeof window !== "undefined"
       ? `${window.location.origin}/auth/callback`
