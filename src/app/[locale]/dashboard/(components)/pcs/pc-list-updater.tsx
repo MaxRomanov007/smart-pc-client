@@ -51,15 +51,15 @@ export default function PcListUpdater({ pcs }: Props) {
         id: "2",
         name: "param2",
         description: "some description",
-        type: ParameterTypes.boolean,
-        value: false,
+        type: ParameterTypes.number,
+        value: 0,
       },
       {
         id: "3",
         name: "param3",
         description: "some description",
-        type: ParameterTypes.boolean,
-        value: false,
+        type: ParameterTypes.string,
+        value: "",
       },
     ]);
   };
