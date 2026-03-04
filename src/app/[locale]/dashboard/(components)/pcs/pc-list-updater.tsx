@@ -6,7 +6,6 @@ import type { IPc, IPcItem } from "@/types/pc/pc";
 import PcList from "@/components/pc/pc-list";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
 import { useCommands } from "@/utils/hooks/commands/hook";
-import { ParameterTypes } from "@/types/pc/command-parameter";
 
 interface Props {
   pcs: IPc[];
@@ -41,30 +40,8 @@ export default function PcListUpdater({ pcs }: Props) {
   const powerOnPc = (pc: IPcItem) => {
     doCommand({
       pc,
-      name: "hello",
-      params: [
-        {
-          id: "1",
-          name: "param1",
-          description: "some description",
-          type: ParameterTypes.boolean,
-          value: false,
-        },
-        {
-          id: "2",
-          name: "param2",
-          description: "some description",
-          type: ParameterTypes.number,
-          value: 0,
-        },
-        {
-          id: "3",
-          name: "param3",
-          description: "some description",
-          type: ParameterTypes.string,
-          value: "",
-        },
-      ],
+      name: "power-on",
+      withoutDialog: true,
     });
   };
 
