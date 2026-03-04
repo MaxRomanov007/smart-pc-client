@@ -39,29 +39,33 @@ export default function PcListUpdater({ pcs }: Props) {
   const { doCommand } = useCommands();
 
   const powerOnPc = (pc: IPcItem) => {
-    doCommand(pc, "hello", [
-      {
-        id: "1",
-        name: "param1",
-        description: "some description",
-        type: ParameterTypes.boolean,
-        value: false,
-      },
-      {
-        id: "2",
-        name: "param2",
-        description: "some description",
-        type: ParameterTypes.number,
-        value: 0,
-      },
-      {
-        id: "3",
-        name: "param3",
-        description: "some description",
-        type: ParameterTypes.string,
-        value: "",
-      },
-    ]);
+    doCommand({
+      pc,
+      name: "hello",
+      params: [
+        {
+          id: "1",
+          name: "param1",
+          description: "some description",
+          type: ParameterTypes.boolean,
+          value: false,
+        },
+        {
+          id: "2",
+          name: "param2",
+          description: "some description",
+          type: ParameterTypes.number,
+          value: 0,
+        },
+        {
+          id: "3",
+          name: "param3",
+          description: "some description",
+          type: ParameterTypes.string,
+          value: "",
+        },
+      ],
+    });
   };
 
   return <PcList pcs={pcItems} powerOn={powerOnPc} />;

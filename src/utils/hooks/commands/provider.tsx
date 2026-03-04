@@ -1,10 +1,14 @@
+"use client";
+
 import { useMqttJsonPublish } from "@/lib/mqtt/hooks/use-mqtt-json-publish";
 import { useConfirmationDialog } from "@/utils/hooks/ui/dialogs/confirmation/useConfirmationDialog";
 import { CommandsContext } from "@/utils/hooks/commands/context";
-import type { DoCommandFunction } from "@/utils/hooks/commands/types";
+import type {
+  DoCommandFunction,
+  DoCommandOptions,
+} from "@/utils/hooks/commands/types";
 import type { CommandParameter } from "@/types/pc/command-parameter";
 import { type ReactNode, useCallback, useRef } from "react";
-import type { IPc } from "@/types/pc/pc";
 import type { MQTTMessage } from "@/lib/mqtt/types";
 import { MessageTypes, type MqttMessage } from "@/types/mqtt";
 import { useExtracted } from "next-intl";
@@ -18,23 +22,21 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
   const parametersRef = useRef<CommandParameter[]>([]);
 
   const doCommand: DoCommandFunction = useCallback(
-    async (
-      pc: IPc,
-      name: string,
-      params: CommandParameter[] = [],
-      commandType:
-        | MessageTypes.command
-        | MessageTypes.wakerCommand = MessageTypes.command,
-      dialogTitle: string = t({
+    async ({
+      pc,
+      name,
+      params = [],
+      commandType = MessageTypes.command,
+      dialogTitle = t({
         message: "Are you sure?",
         description: "default confirmation dialog title",
       }),
-      dialogText: string = t({
+      dialogText = t({
         message: "Are you sure you want to execute command {name}",
         values: { name },
         description: "default confirmation dialog text",
       }),
-    ) => {
+    }: DoCommandOptions) => {
       if (!isConnected) return;
 
       parametersRef.current = params;
