@@ -3,13 +3,15 @@ import type { CommandParameter } from "@/types/pc/command-parameter";
 import type { IPc } from "@/types/pc/pc";
 import { MessageTypes } from "@/types/mqtt";
 
-export type DoCommandMessageType = MessageTypes.command | MessageTypes.wakerCommand;
+export type DoCommandMessageType =
+  | MessageTypes.command
+  | MessageTypes.wakerCommand;
 
 export interface DoCommandOptions {
   pc: IPc;
   name: string;
   params?: CommandParameter[];
-  commandType?: DoCommandMessageType;
+  messageType?: DoCommandMessageType;
   dialogTitle?: string;
   text?: string;
   withoutDialog?: boolean;

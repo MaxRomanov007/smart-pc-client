@@ -50,7 +50,7 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
       pc,
       name,
       params = [],
-      commandType = MessageTypes.command,
+      messageType = MessageTypes.command,
       dialogTitle = t({
         message: "Are you sure?",
         description: "default confirmation dialog title",
@@ -65,7 +65,7 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
       if (!isConnected) return;
 
       if (withoutDialog) {
-        await publishMessage(pc, name, commandType);
+        await publishMessage(pc, name, messageType);
         return;
       }
 
@@ -78,7 +78,7 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
           text={text}
           parametersRef={parametersRef}
         />,
-        async () => await publishMessage(pc, name, commandType),
+        async () => await publishMessage(pc, name, messageType),
       );
     },
     [dialog, isConnected, publishMessage, t],

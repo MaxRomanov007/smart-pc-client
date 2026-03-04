@@ -1,15 +1,16 @@
 "use client";
 
-import { Card, Flex, HStack, IconButton, Spacer } from "@chakra-ui/react";
+import { Card, Flex, HStack, Spacer } from "@chakra-ui/react";
 import type { IPcItem } from "@/types/pc/pc";
 import LinkButton from "@/components/ui/button/link-button";
 import { PAGES } from "@/config/navigation/pages";
-import { LuActivity, LuMonitor, LuMonitorOff, LuPower } from "react-icons/lu";
+import { LuActivity, LuMonitor, LuMonitorOff } from "react-icons/lu";
 import AccentIcon from "@/components/ui/icon/accent-icon";
 import { useExtracted } from "next-intl";
 import OnlineBadge from "../ui/badge/online-badge/client";
 import OfflineBadge from "../ui/badge/offline-badge/client";
-import { type MouseEventHandler, useCallback } from "react";
+import { useCallback } from "react";
+import PowerOnButton from "@/components/pc/power-on-button";
 
 interface Props {
   pc: IPcItem;
@@ -19,9 +20,13 @@ interface Props {
 export default function PcCard({ pc, powerOn }: Props) {
   const t = useExtracted("pc-card");
 
-  const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
-    powerOn?.();
-  }, [powerOn]);
+  const handleClick = useCallback(
+    async () => {
+      powerOn?.();
+      await new Promise((r) => setTimeout(r, 1000));
+    },
+    [powerOn],
+  );
 
   return (
     <Card.Root opacity={pc.online || pc.canPowerOn ? 1 : 0.6}>
@@ -51,13 +56,10 @@ export default function PcCard({ pc, powerOn }: Props) {
             })}
           </LinkButton>
 
-          <IconButton
-            hidden={pc.online || !pc.canPowerOn}
-            variant="outline"
+          <PowerOnButton
+            visible={pc.online || !pc.canPowerOn}
             onClick={handleClick}
-          >
-            <LuPower />
-          </IconButton>
+          />
         </HStack>
       </Card.Footer>
     </Card.Root>
