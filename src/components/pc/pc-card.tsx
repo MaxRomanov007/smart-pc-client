@@ -54,7 +54,7 @@ export default function PcCard({ pc, powerOn }: Props) {
           </LinkButton>
 
           <PowerOnButton
-            visible={pc.online || !pc.canPowerOn}
+            hidden={pc.online || !pc.canPowerOn}
             onClick={handleClick}
           />
         </HStack>
