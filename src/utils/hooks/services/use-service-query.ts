@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { Data } from "@/types/services/data";
+import { type Response, StatusCodes } from "@/types/services/response";
 
 interface UseServiceQueryOptions<T> {
   enabled?: boolean;
@@ -7,11 +7,12 @@ interface UseServiceQueryOptions<T> {
 }
 
 export default function useServiceQuery<T>(
-  queryFn: () => Promise<Data<T>>,
+  queryFn: () => Promise<Response<T>>,
   options: UseServiceQueryOptions<T> = {},
 ) {
   const { enabled = true, initialData } = options;
   const [data, setData] = useState<T | undefined>(initialData);
+  const [status, setStatus] = useState<number>(0);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
   const ignoreRef = useRef(false);
@@ -27,8 +28,14 @@ export default function useServiceQuery<T>(
       const result = await queryFn();
       if (ignoreRef.current) return;
 
+      setStatus(result.status ?? StatusCodes.ok);
+
       if (result.error) {
-        setError(result.error);
+        setError(
+          result.error instanceof Error
+            ? result.error
+            : new Error(result.error),
+        );
         setData(undefined);
         return;
       }
@@ -55,6 +62,7 @@ export default function useServiceQuery<T>(
     data,
     error,
     loading,
+    status,
     refetch: execute,
     isSuccess: !loading && !error && data !== undefined,
     isError: !!error,

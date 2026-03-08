@@ -6,32 +6,78 @@
   "latency": 0,
   "port": 8080,
   "hostname": "",
-  "folders": [],
+  "folders": [
+    {
+      "uuid": "0c5cc31a-8061-4fdd-9de5-f3cd7c0a1481",
+      "name": "PCs",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "883d2fa2-3eb4-4061-81cf-58eae8d0c427"
+        },
+        {
+          "type": "route",
+          "uuid": "edb6be26-4ca9-4d65-a74d-5426ff245f9a"
+        }
+      ]
+    }
+  ],
   "routes": [
     {
-      "uuid": "5490db92-c4b4-4830-ad67-622f1f7cdc02",
-      "type": "crud",
-      "documentation": "user pcs route",
-      "method": "",
+      "uuid": "883d2fa2-3eb4-4061-81cf-58eae8d0c427",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
       "endpoint": "pcs",
       "responses": [
         {
-          "uuid": "f58704b2-eb60-4514-a583-75d4d88039a6",
-          "body": "{}",
+          "uuid": "b6c4baff-888b-4122-bb65-b3b4cb13cc82",
+          "body": "{\n  \"data\": {{data 'pcs'}} \n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
           "headers": [],
-          "bodyType": "DATABUCKET",
+          "bodyType": "INLINE",
           "filePath": "",
-          "databucketID": "iit1",
+          "databucketID": "",
           "sendFileAsBody": false,
           "rules": [],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
           "default": true,
-          "crudKey": "slug",
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "edb6be26-4ca9-4d65-a74d-5426ff245f9a",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "pcs/:slug",
+      "responses": [
+        {
+          "uuid": "8db37419-7fd6-497f-a456-f12e46956cca",
+          "body": "{{setVar 'result' (stringify (find (dataRaw 'pcs') (object slug=(urlParam 'slug'))))}}\n\n{{#if (eq (len @result) 0)}}\n{\n  \"status\": 1, \n  \"error\": \"not found\"\n}\n{{else}}\n{\n  \"data\": {{{@result}}}\n}\n{{/if}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
           "callbacks": []
         }
       ],
@@ -42,8 +88,8 @@
   ],
   "rootChildren": [
     {
-      "type": "route",
-      "uuid": "5490db92-c4b4-4830-ad67-622f1f7cdc02"
+      "type": "folder",
+      "uuid": "0c5cc31a-8061-4fdd-9de5-f3cd7c0a1481"
     }
   ],
   "proxyMode": false,

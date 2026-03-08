@@ -5,11 +5,11 @@ import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface Props {
-  visible: boolean;
+  hidden: boolean;
   onClick?: () => Promise<void> | void;
 }
 
-export default function PowerOnButton({ visible, onClick }: Props) {
+export default function PowerOnButton({ hidden, onClick }: Props) {
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleClick = async () => {
@@ -20,7 +20,7 @@ export default function PowerOnButton({ visible, onClick }: Props) {
 
   return (
     <IconButton
-      hidden={visible}
+      hidden={hidden}
       variant="outline"
       onClick={handleClick}
       loading={loading}
