@@ -45,7 +45,7 @@ export default function VolumeSlider({ pc, state, onVolumeChange }: Props) {
 
   return (
     <Slider.Root
-      minW="200px"
+      w={["full", "200px"]}
       value={[displayValue]}
       onValueChange={(e) => handleChange(e.value[0])}
       onValueChangeEnd={(e) => handleChangeEnd(e.value[0])}

@@ -14,7 +14,7 @@ interface Props {
 
 export default function VolumeControl({ pc, state, onStateChange }: Props) {
   return (
-    <HStack>
+    <HStack w="full" pe={[null, null, null, "50px"]}>
       <MuteButton
         pc={pc}
         state={state}

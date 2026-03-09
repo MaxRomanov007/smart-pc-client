@@ -17,7 +17,7 @@ export function PcInfo({ pc, volumeState, onVolumeChange }: Props) {
   const t = useExtracted("slug-pc-info");
 
   return (
-    <Stack>
+    <Stack w="full">
       <Field.Root orientation="horizontal">
         <Field.Label>
           {t({

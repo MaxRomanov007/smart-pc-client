@@ -75,6 +75,18 @@ msgctxt "pc-offline-state"
 msgid "s7c1Bg"
 msgstr "Go to {pageName}"
 
+#. cpu metric label
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\metrics\cpu-metric.tsx
+msgctxt "metrics"
+msgid "20Sod8"
+msgstr "CPU:"
+
+#. ram metric label
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\metrics\ram-metric.tsx
+msgctxt "metrics"
+msgid "C71NYG"
+msgstr "RAM:"
+
 #. pc volume label
 #: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
 msgctxt "slug-pc-info"
