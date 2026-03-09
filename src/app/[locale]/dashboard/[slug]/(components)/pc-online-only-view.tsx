@@ -5,6 +5,7 @@ import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
 import { type IMqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useState } from "react";
 import PcOfflineState from "@/app/[locale]/dashboard/[slug]/(components)/pc-offline-state";
+import PcStateCard from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card";
 
 interface Props {
   pc: IPc;
@@ -27,5 +28,5 @@ export default function PcOnlineOnlyView({ pc }: Props) {
     return <PcOfflineState pc={pc} />;
   }
 
-  return <div>{isOnline ? "Yes" : "No"}</div>;
+  return <PcStateCard pc={pc} />;
 }
