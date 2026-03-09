@@ -31,10 +31,10 @@ export default function MuteButton({ pc, state, onMutedChange }: Props) {
       return <LuVolumeX />;
     }
 
-    if (!state.current || state.current >= 50) {
-      return <LuVolume2 />;
-    } else if (state.current === 0) {
+    if (!state.current || state.current === 0) {
       return <LuVolume />;
+    } else if (state.current >= 50) {
+      return <LuVolume2 />;
     } else {
       return <LuVolume1 />;
     }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Card } from "@chakra-ui/react";
+import { Card, Flex } from "@chakra-ui/react";
 import { useExtracted } from "next-intl";
 import type { IPc } from "@/types/pc/pc";
 import { PcInfo } from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-info";
@@ -8,6 +8,7 @@ import type { IPcStateData } from "@/types/mqtt/pc-state";
 import { useCallback, useState } from "react";
 import { type IMqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
+import Metrics from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics";
 
 interface Props {
   pc: IPc;
@@ -72,11 +73,20 @@ export default function PcStateCard({ pc }: Props) {
       </Card.Header>
 
       <Card.Body>
-        <PcInfo
-          pc={pc}
-          volumeState={state.volume}
-          onVolumeChange={(volume) => setState((prev) => ({ ...prev, volume }))}
-        />
+        <Flex direction={["column", null, null, null, "row"]}>
+          <PcInfo
+            pc={pc}
+            volumeState={state.volume}
+            onVolumeChange={(volume) =>
+              setState((prev) => ({ ...prev, volume }))
+            }
+          />
+
+          <Metrics
+            cpuPercent={state.cpuPercent}
+            virtualMemory={state.virtualMemory}
+          />
+        </Flex>
       </Card.Body>
     </Card.Root>
   );
