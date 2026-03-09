@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageTypes, type MqttMessage } from "@/types/mqtt";
+import { type IMqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useMemo, useState } from "react";
 import type { IPc, IPcItem } from "@/types/pc/pc";
 import PcList from "@/components/pc/pc-list";
@@ -17,13 +17,9 @@ export default function PcListUpdater({ pcs }: Props) {
   );
 
   const topics = useMemo(() => pcs.map((pc) => `pcs/${pc.id}/status`), [pcs]);
-  useMqttJsonSubscribe<MqttMessage>(topics, {
+  useMqttJsonSubscribe<IMqttMessage<MqttMessageTypes.pcStatus>>(topics, {
     qos: 1,
     onMessage: (message) => {
-      if (message.payload.type !== MessageTypes.pcStatus) {
-        return;
-      }
-
       const changedPcId = getPcIdFromTopic(message.topic);
       const online = message.payload.data.status === "online";
 
@@ -42,7 +38,7 @@ export default function PcListUpdater({ pcs }: Props) {
       pc,
       name: "power-on",
       withoutDialog: true,
-      messageType: MessageTypes.wakerCommand,
+      messageType: MqttMessageTypes.wakerCommand,
     });
   };
 

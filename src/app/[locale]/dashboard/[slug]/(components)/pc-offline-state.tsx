@@ -18,7 +18,7 @@ import { PAGES } from "@/config/navigation/pages";
 import LinkButton from "@/components/ui/button/link-button";
 import PowerOnButton from "@/components/pc/power-on-button";
 import { useCommands } from "@/utils/hooks/commands/hook";
-import { MessageTypes } from "@/types/mqtt";
+import { MqttMessageTypes } from "@/types/mqtt";
 
 interface Props {
   pc: IPc;
@@ -38,7 +38,7 @@ export default function PcOfflineState({ pc }: Props) {
       pc,
       name: "power-on",
       withoutDialog: true,
-      messageType: MessageTypes.wakerCommand,
+      messageType: MqttMessageTypes.wakerCommand,
     });
     await new Promise((r) => setTimeout(r, 1000));
   }, [doCommand, pc]);

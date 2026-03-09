@@ -1,11 +1,11 @@
 import type { UseConfirmationDialogType } from "@/utils/hooks/ui/dialogs/confirmation/useConfirmationDialog";
 import type { CommandParameter } from "@/types/pc/command-parameter";
 import type { IPc } from "@/types/pc/pc";
-import { MessageTypes } from "@/types/mqtt";
+import { MqttMessageTypes } from "@/types/mqtt";
 
 export type DoCommandMessageType =
-  | MessageTypes.command
-  | MessageTypes.wakerCommand;
+  | MqttMessageTypes.command
+  | MqttMessageTypes.wakerCommand;
 
 export interface DoCommandOptions {
   pc: IPc;
