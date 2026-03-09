@@ -1,11 +1,10 @@
 "use client";
 
-import { useCommands } from "@/utils/hooks/commands/hook";
-import { useCallback, useMemo } from "react";
-import { IconButton } from "@chakra-ui/react";
+import { useMemo } from "react";
 import { LuVolume, LuVolume1, LuVolume2, LuVolumeX } from "react-icons/lu";
 import type { IPc } from "@/types/pc/pc";
 import type { VolumeState } from "@/types/mqtt/pc-state";
+import CommandIconButton from "@/components/button/command/command-icon-button";
 
 interface Props {
   pc: IPc;
@@ -14,18 +13,6 @@ interface Props {
 }
 
 export default function MuteButton({ pc, state, onMutedChange }: Props) {
-  const { doCommand } = useCommands();
-
-  const handleClick = useCallback(() => {
-    doCommand({
-      pc,
-      name: state.muted ? "unmute" : "mute",
-      withoutDialog: true,
-    });
-
-    onMutedChange?.(!state.muted);
-  }, [doCommand, state.muted, onMutedChange, pc]);
-
   const icon = useMemo(() => {
     if (state.muted) {
       return <LuVolumeX />;
@@ -41,8 +28,14 @@ export default function MuteButton({ pc, state, onMutedChange }: Props) {
   }, [state]);
 
   return (
-    <IconButton onClick={handleClick} variant="ghost" size="xs">
+    <CommandIconButton
+      pc={pc}
+      commandName={state.muted ? "unmute" : "mute"}
+      variant="ghost"
+      size="xs"
+      onClick={() => onMutedChange?.(!state.muted)}
+    >
       {icon}
-    </IconButton>
+    </CommandIconButton>
   );
 }

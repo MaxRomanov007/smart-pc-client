@@ -73,7 +73,7 @@ export default function PcStateCard({ pc }: Props) {
       </Card.Header>
 
       <Card.Body>
-        <Flex direction={["column", null, null, null, "row"]}>
+        <Flex direction={["column", null, null, null, "row"]} gap={4}>
           <PcInfo
             pc={pc}
             volumeState={state.volume}
