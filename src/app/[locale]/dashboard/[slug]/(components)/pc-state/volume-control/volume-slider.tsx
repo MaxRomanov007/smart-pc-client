@@ -4,7 +4,6 @@ import type { VolumeState } from "@/types/mqtt/pc-state";
 import type { IPc } from "@/types/pc/pc";
 import { useCommands } from "@/utils/hooks/commands/hook";
 import { Slider } from "@chakra-ui/react";
-import { ParameterTypes } from "@/types/pc/command-parameter";
 import { useState } from "react";
 
 interface Props {
@@ -33,11 +32,9 @@ export default function VolumeSlider({ pc, state, onVolumeChange }: Props) {
       withoutDialog: true,
       params: [
         {
-          id: "",
-          description: "",
           name: "volume",
-          type: ParameterTypes.number,
           value: volume,
+          shouldConvertToString: false,
         },
       ],
     });

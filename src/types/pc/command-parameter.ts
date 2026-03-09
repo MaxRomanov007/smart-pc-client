@@ -14,11 +14,12 @@ type ParameterTypeFromValueType<T extends CommandParameterValueType> =
       : ParameterTypes.string;
 
 export interface ICommandParameter<T extends CommandParameterValueType> {
-  id: string;
+  id?: string;
   name: string;
-  description: string;
-  type: ParameterTypeFromValueType<T>;
+  description?: string;
+  type?: ParameterTypeFromValueType<T>;
   value: T;
+  shouldConvertToString?: boolean;
 }
 
 export type CommandParameter =

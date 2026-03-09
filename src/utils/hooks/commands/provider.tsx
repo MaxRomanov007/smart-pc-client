@@ -25,10 +25,13 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
 
   const publishMessage = useCallback(
     async (pc: IPc, name: string, type: DoCommandMessageType) => {
-      const parameter = new Map<string, string>();
+      const parameter = new Map<string, unknown>();
 
       parametersRef.current.forEach((param) =>
-        parameter.set(param.name, param.value.toString()),
+        parameter.set(
+          param.name,
+          param.shouldConvertToString ? param.value.toString() : param.value,
+        ),
       );
 
       const message: MQTTMessage<MqttMessage> = {
