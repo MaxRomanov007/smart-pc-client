@@ -47,19 +47,11 @@ export function PcInfo({ pc, volumeState, onVolumeChange }: Props) {
       </Field.Root>
 
       {volumeState && (
-        <Field.Root orientation="horizontal" justifyContent="start">
-          <Field.Label>
-            {t({
-              message: "Volume:",
-              description: "pc volume label",
-            })}
-          </Field.Label>
-          <VolumeControl
-            pc={pc}
-            state={volumeState}
-            onStateChange={onVolumeChange}
-          />
-        </Field.Root>
+        <VolumeControl
+          pc={pc}
+          state={volumeState}
+          onStateChange={onVolumeChange}
+        />
       )}
     </Stack>
   );

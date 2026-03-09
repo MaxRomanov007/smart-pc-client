@@ -87,12 +87,6 @@ msgctxt "metrics"
 msgid "C71NYG"
 msgstr "RAM:"
 
-#. pc volume label
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
-msgctxt "slug-pc-info"
-msgid "PSfVUT"
-msgstr "Volume:"
-
 #. pc description label
 #: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
 msgctxt "slug-pc-info"
