@@ -11,7 +11,7 @@ import type {
 import type { CommandParameter } from "@/types/pc/command-parameter";
 import { type ReactNode, useCallback, useRef } from "react";
 import type { MQTTMessage } from "@/lib/mqtt/types";
-import { MessageTypes, type MqttMessage } from "@/types/mqtt";
+import { type MqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useExtracted } from "next-intl";
 import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dialog/with-store";
 import { ParametersFieldsetStateful } from "@/utils/hooks/commands/components/parameters-fieldset-stateful";
@@ -50,7 +50,7 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
       pc,
       name,
       params = [],
-      messageType = MessageTypes.command,
+      messageType = MqttMessageTypes.command,
       dialogTitle = t({
         message: "Are you sure?",
         description: "default confirmation dialog title",
