@@ -56,10 +56,6 @@ export function useMqttSubscribe(
       }
 
       if (!topics.some((topic) => topic === receivedTopic)) {
-        console.debug(
-          "received message from another topic, skipping",
-          receivedTopic,
-        );
         return;
       }
 

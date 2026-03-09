@@ -47,7 +47,7 @@ export function PcInfo({ pc, volumeState, onVolumeChange }: Props) {
       </Field.Root>
 
       {volumeState && (
-        <Field.Root orientation="horizontal">
+        <Field.Root orientation="horizontal" justifyContent="start">
           <Field.Label>
             {t({
               message: "Volume:",
