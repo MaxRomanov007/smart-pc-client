@@ -10,7 +10,7 @@ interface Props {
 
 export default function Metrics({ cpuPercent, virtualMemory }: Props) {
   return (
-    <Flex w="full">
+    <Flex w="full" direction={["column", "row"]}>
       <CpuMetric percent={cpuPercent} />
 
       <RamMetric

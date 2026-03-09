@@ -88,6 +88,8 @@ export default function PcStateCard({ pc }: Props) {
           />
         </Flex>
       </Card.Body>
+
+      <Card.Footer />
     </Card.Root>
   );
 }
