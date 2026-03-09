@@ -75,6 +75,36 @@ msgctxt "pc-offline-state"
 msgid "s7c1Bg"
 msgstr "Go to {pageName}"
 
+#. pc volume label
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
+msgctxt "slug-pc-info"
+msgid "PSfVUT"
+msgstr "Volume:"
+
+#. pc description label
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
+msgctxt "slug-pc-info"
+msgid "uTnplY"
+msgstr "Description:"
+
+#. pc name label
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
+msgctxt "slug-pc-info"
+msgid "WF8jKB"
+msgstr "Name:"
+
+#. card title
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-state-card.tsx
+msgctxt "pc-state-card"
+msgid "M7sV9I"
+msgstr "PC State"
+
+#. card description
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-state-card.tsx
+msgctxt "pc-state-card"
+msgid "Q790HF"
+msgstr "State of PC {name}"
+
 #. dashboard page description
 #: src\app\[locale]\dashboard\page.tsx
 msgctxt "dashboard-page"
