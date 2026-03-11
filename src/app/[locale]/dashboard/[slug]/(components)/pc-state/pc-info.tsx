@@ -1,19 +1,21 @@
 "use client";
 
-import { Editable, Field, Stack } from "@chakra-ui/react";
+import { Field, Stack } from "@chakra-ui/react";
 import type { IPc } from "@/types/pc/pc";
 import { useExtracted } from "next-intl";
-import EditableControl from "@/components/ui/editable/editable-control";
 import type { VolumeState } from "@/types/mqtt/pc-state";
 import VolumeControl from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control";
+import NameEditable from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/info-edit/name-editable";
+import DescriptionEditable from "./info-edit/description-editable";
 
 interface Props {
   pc: IPc;
   volumeState?: VolumeState;
   onVolumeChange?: (volume: VolumeState) => void;
+  onPcChange?: (volume: IPc) => void;
 }
 
-export function PcInfo({ pc, volumeState, onVolumeChange }: Props) {
+export function PcInfo({ pc, volumeState, onVolumeChange, onPcChange }: Props) {
   const t = useExtracted("slug-pc-info");
 
   return (
@@ -25,11 +27,7 @@ export function PcInfo({ pc, volumeState, onVolumeChange }: Props) {
             description: "pc name label",
           })}
         </Field.Label>
-        <Editable.Root defaultValue={pc.name}>
-          <Editable.Preview />
-          <Editable.Input />
-          <EditableControl />
-        </Editable.Root>
+        <NameEditable pc={pc} />
       </Field.Root>
 
       <Field.Root orientation="horizontal">
@@ -39,11 +37,12 @@ export function PcInfo({ pc, volumeState, onVolumeChange }: Props) {
             description: "pc description label",
           })}
         </Field.Label>
-        <Editable.Root defaultValue={pc.description}>
-          <Editable.Preview />
-          <Editable.Textarea />
-          <EditableControl />
-        </Editable.Root>
+        <DescriptionEditable
+          pc={pc}
+          onDescriptionChanged={(description) =>
+            onPcChange?.({ ...pc, description })
+          }
+        />
       </Field.Root>
 
       {volumeState && (

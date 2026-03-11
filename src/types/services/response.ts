@@ -1,6 +1,6 @@
 export enum StatusCodes {
-  ok = 0,
-  notFound = 1,
+  ok = "ok",
+  notFound = "not-found",
 }
 
 export interface Response<T> {

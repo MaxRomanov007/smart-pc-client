@@ -17,6 +17,10 @@
         },
         {
           "type": "route",
+          "uuid": "b153286b-2c6b-4ea4-b358-2737e7c6cd88"
+        },
+        {
+          "type": "route",
           "uuid": "edb6be26-4ca9-4d65-a74d-5426ff245f9a"
         }
       ]
@@ -32,7 +36,7 @@
       "responses": [
         {
           "uuid": "b6c4baff-888b-4122-bb65-b3b4cb13cc82",
-          "body": "{\n  \"data\": {{data 'pcs'}} \n}",
+          "body": "{\n  \"status\": \"ok\",\n  \"data\": {{data 'pcs'}} \n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -63,7 +67,38 @@
       "responses": [
         {
           "uuid": "8db37419-7fd6-497f-a456-f12e46956cca",
-          "body": "{{setVar 'result' (stringify (find (dataRaw 'pcs') (object slug=(urlParam 'slug'))))}}\n\n{{#if (eq (len @result) 0)}}\n{\n  \"status\": 1, \n  \"error\": \"not found\"\n}\n{{else}}\n{\n  \"data\": {{{@result}}}\n}\n{{/if}}",
+          "body": "{{setVar 'result' (find (dataRaw 'pcs') (object slug=(urlParam 'slug')))}}\n\n{{#unless @result}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify @result}}}\n  }\n{{/unless}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b153286b-2c6b-4ea4-b358-2737e7c6cd88",
+      "type": "http",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "pcs/:id",
+      "responses": [
+        {
+          "uuid": "c612f6f3-4142-4217-98bb-6d7f5011623d",
+          "body": "{{setVar 'found' (find (dataRaw 'pcs') (object id=(urlParam 'id')))}}\n\n{{#unless @found}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n\n  {{setVar 'value' (object)}}\n      \n  {{#if (lookup (bodyRaw) 'name')}}\n    {{setVar 'value' (objectMerge @value (object name=(bodyRaw 'name')))}}\n    {{setVar 'value' (objectMerge @value (object slug=(faker 'helpers.slugify' (bodyRaw 'name'))))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'description')}}\n    {{setVar 'value' (objectMerge @value (object description=(bodyRaw 'description')))}}\n  {{/if}}\n  {{#if (gt (len (stringify (body 'canPowerOn'))) 2)}}\n    {{setVar 'value' (objectMerge @value (object canPowerOn=(bodyRaw 'canPowerOn')))}}\n  {{/if}}\n\n  {{setData 'merge' 'pcs' (indexOf (dataRaw 'pcs') @found) @value}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify (find (dataRaw 'pcs') (object id=(urlParam 'id')))}}}\n  }\n{{/unless}}",
           "latency": 0,
           "statusCode": 200,
           "label": "",

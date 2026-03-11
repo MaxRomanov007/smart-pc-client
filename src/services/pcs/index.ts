@@ -37,3 +37,30 @@ export async function fetchUserPcBySlug(
     return { error: e as Error };
   }
 }
+
+interface IPcToPatch {
+  id: string;
+  name?: string;
+  description?: string;
+  canPowerOn?: boolean;
+}
+
+export async function changeUserPc(
+  token: string,
+  pc: IPcToPatch,
+): Promise<Response<IPc>> {
+  try {
+    const response = await fetch(`${pcServiceAddress}/pcs/${pc.id}`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(pc),
+    });
+    const data = await response.json();
+    return data as Response<IPc>;
+  } catch (e) {
+    return { error: e as Error };
+  }
+}

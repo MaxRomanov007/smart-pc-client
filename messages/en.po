@@ -75,6 +75,18 @@ msgctxt "pc-offline-state"
 msgid "s7c1Bg"
 msgstr "Go to {pageName}"
 
+#. error toast title
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\info-edit\description-editable.tsx
+msgctxt "slug-pc-description-editable"
+msgid "MfXyNt"
+msgstr "Error occurred while saving description"
+
+#. error toast title
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\info-edit\name-editable.tsx
+msgctxt "slug-pc-name-editable"
+msgid "5vTv+5"
+msgstr "Error occurred while saving name"
+
 #. cpu metric label
 #: src\app\[locale]\dashboard\[slug]\(components)\pc-state\metrics\cpu-metric.tsx
 msgctxt "metrics"
