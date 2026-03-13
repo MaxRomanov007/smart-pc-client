@@ -291,6 +291,13 @@ msgctxt "commands-provider"
 msgid "qcCX8I"
 msgstr "Are you sure you want to execute command {name}"
 
+#. index breadcrumb
+#: src\utils\hooks\ui\breadcrumbs\client.ts
+#: src\utils\hooks\ui\breadcrumbs\server.ts
+msgctxt "breadcrumbs"
+msgid "hCkFMJ"
+msgstr "Index"
+
 #. dashboard breadcrumb
 #: src\utils\hooks\ui\breadcrumbs\client.ts
 #: src\utils\hooks\ui\breadcrumbs\server.ts

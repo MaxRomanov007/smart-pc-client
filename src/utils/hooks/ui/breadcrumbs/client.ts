@@ -5,6 +5,13 @@ export function useStandardBreadcrumbs() {
   const t = useExtracted("breadcrumbs");
 
   return {
+    index: {
+      href: PAGES.index,
+      label: t({
+        message: "Index",
+        description: "index breadcrumb",
+      }),
+    },
     dashboard: {
       href: PAGES.dashboard,
       label: t({

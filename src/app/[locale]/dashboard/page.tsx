@@ -15,7 +15,7 @@ export default async function DashboardPage() {
 
   return (
     <Stack gap={4} as="section">
-      <Breadcrumbs items={[breadcrumbs.dashboard]} />
+      <Breadcrumbs items={[breadcrumbs.index, breadcrumbs.dashboard]} />
       <Stack gap={1}>
         <Heading size="3xl" as="h1">
           {t({
