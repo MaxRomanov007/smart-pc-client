@@ -5,7 +5,7 @@ import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
 
 interface Props {
-  hidden: boolean;
+  hidden?: boolean;
   onClick?: () => Promise<void> | void;
 }
 
