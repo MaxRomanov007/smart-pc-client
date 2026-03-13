@@ -1,16 +1,9 @@
 "use client";
 
-import {
-  AbsoluteCenter,
-  Button,
-  Container,
-  Heading,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
-import AccentIcon from "@/components/ui/icon/accent-icon";
+import { Button } from "@chakra-ui/react";
 import { LuTriangleAlert } from "react-icons/lu";
 import { useExtracted } from "next-intl";
+import NotificationPage from "@/components/ui/pages/notification-page";
 
 export default function ErrorPage({
   error,
@@ -22,29 +15,20 @@ export default function ErrorPage({
   const t = useExtracted("error-page");
 
   return (
-    <AbsoluteCenter h="full">
-      <Container maxW="sm">
-        <VStack textAlign="center" gap={4}>
-          <AccentIcon w={24} h={24}>
-            <LuTriangleAlert />
-          </AccentIcon>
-          <Heading as="h1">
-            {t({
-              message: "Something went wrong",
-              description: "error page title",
-            })}
-          </Heading>
-          <Text color="fg.muted" lineClamp={3}>
-            {error.message}
-          </Text>
-          <Button onClick={() => reset()}>
-            {t({
-              message: "Reset",
-              description: "reset button text",
-            })}
-          </Button>
-        </VStack>
-      </Container>
-    </AbsoluteCenter>
+    <NotificationPage
+      icon={<LuTriangleAlert />}
+      title={t({
+        message: "Something went wrong",
+        description: "error page title",
+      })}
+      description={error.message}
+    >
+      <Button onClick={() => reset()}>
+        {t({
+          message: "Reset",
+          description: "reset button text",
+        })}
+      </Button>
+    </NotificationPage>
   );
 }
