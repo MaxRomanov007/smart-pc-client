@@ -21,6 +21,7 @@ export default async function MainPage() {
     <>
       <Breadcrumbs
         items={[
+          breadcrumbs.index,
           breadcrumbs.dashboard,
           {
             label: "Title",

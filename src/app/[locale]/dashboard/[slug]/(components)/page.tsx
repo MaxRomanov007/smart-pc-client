@@ -11,6 +11,9 @@ import { StatusCodes } from "@/types/services/response";
 import { CommandsProvider } from "@/utils/hooks/commands/provider";
 import MQTTConnectionProvider from "@/utils/providers/mqtt";
 import PcOnlineOnlyView from "@/app/[locale]/dashboard/[slug]/(components)/pc-online-only-view";
+import { useStandardBreadcrumbs } from "@/utils/hooks/ui/breadcrumbs/client";
+import { Stack } from "@chakra-ui/react";
+import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 
 interface Props {
   slug: string;
@@ -29,6 +32,8 @@ export function SlugPcPage({ slug }: Props) {
     isError,
     status,
   } = useServiceQuery(fetchPcsQuery, { enabled: !!token });
+
+  const breadcrumbs = useStandardBreadcrumbs();
 
   useEffect(() => {
     if (!!error) {
@@ -63,7 +68,16 @@ export function SlugPcPage({ slug }: Props) {
   return (
     <MQTTConnectionProvider>
       <CommandsProvider>
-        <PcOnlineOnlyView pc={pc} />
+        <Stack gap={4}>
+          <Breadcrumbs
+            items={[
+              breadcrumbs.index,
+              breadcrumbs.dashboard,
+              { label: pc.name },
+            ]}
+          />
+          <PcOnlineOnlyView pc={pc} />
+        </Stack>
       </CommandsProvider>
     </MQTTConnectionProvider>
   );

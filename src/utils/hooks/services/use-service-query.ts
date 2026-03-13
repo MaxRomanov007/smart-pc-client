@@ -12,7 +12,7 @@ export default function useServiceQuery<T>(
 ) {
   const { enabled = true, initialData } = options;
   const [data, setData] = useState<T | undefined>(initialData);
-  const [status, setStatus] = useState<number>(0);
+  const [status, setStatus] = useState<string>("ok");
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
   const ignoreRef = useRef(false);
