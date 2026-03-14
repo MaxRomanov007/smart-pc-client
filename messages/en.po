@@ -123,6 +123,36 @@ msgctxt "pc-state-card"
 msgid "Q790HF"
 msgstr "State of PC {name}"
 
+#. unmute tooltip
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\mute-button.tsx
+msgctxt "pc-slug-page.pc-state.volume-control.mute-button"
+msgid "W9355R"
+msgstr "Unmute"
+
+#. mute tooltip
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\mute-button.tsx
+msgctxt "pc-slug-page.pc-state.volume-control.mute-button"
+msgid "x82IOl"
+msgstr "Mute"
+
+#. next track button
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\track-control-buttons.tsx
+msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
+msgid "1iX+o8"
+msgstr "Next track"
+
+#. previous track button
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\track-control-buttons.tsx
+msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
+msgid "PyAUyD"
+msgstr "Previous track"
+
+#. play-pause button
+#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\track-control-buttons.tsx
+msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
+msgid "QtwFGc"
+msgstr "Play / Pause"
+
 #. dashboard page description
 #: src\app\[locale]\dashboard\page.tsx
 msgctxt "dashboard-page"
@@ -278,6 +308,24 @@ msgstr "Cancel"
 msgctxt "confirmation-dialog"
 msgid "N2IrpM"
 msgstr "Confirm"
+
+#. cancel button tooltip
+#: src\components\ui\editable\editable-control.tsx
+msgctxt "components.ui.editable-control"
+msgid "47FYwb"
+msgstr "Cancel"
+
+#. edit button tooltip
+#: src\components\ui\editable\editable-control.tsx
+msgctxt "components.ui.editable-control"
+msgid "wEQDC6"
+msgstr "Edit"
+
+#. submit button tooltip
+#: src\components\ui\editable\editable-control.tsx
+msgctxt "components.ui.editable-control"
+msgid "wSZR47"
+msgstr "Submit"
 
 #. default confirmation dialog title
 #: src\utils\hooks\commands\provider.tsx

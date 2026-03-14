@@ -1,13 +1,11 @@
 "use client";
 
-import { ButtonGroup, HStack } from "@chakra-ui/react";
+import { HStack } from "@chakra-ui/react";
 import type { VolumeState } from "@/types/mqtt/pc-state";
 import MuteButton from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/mute-button";
 import type { IPc } from "@/types/pc/pc";
 import VolumeSlider from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/volume-slider";
-import CommandIconButton from "@/components/button/command/command-icon-button";
-import { PiPlayPauseBold } from "react-icons/pi";
-import { LuArrowLeftToLine, LuArrowRightToLine } from "react-icons/lu";
+import TrackControlButtons from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/track-control-buttons";
 
 interface Props {
   pc: IPc;
@@ -32,19 +30,7 @@ export default function VolumeControl({ pc, state, onStateChange }: Props) {
         }
       />
 
-      <ButtonGroup variant="ghost" size="xs" attached>
-        <CommandIconButton pc={pc} commandName="prev-track">
-          <LuArrowLeftToLine />
-        </CommandIconButton>
-
-        <CommandIconButton pc={pc} commandName="play-pause">
-          <PiPlayPauseBold />
-        </CommandIconButton>
-
-        <CommandIconButton pc={pc} commandName="next-track">
-          <LuArrowRightToLine />
-        </CommandIconButton>
-      </ButtonGroup>
+      <TrackControlButtons pc={pc} />
     </HStack>
   );
 }
