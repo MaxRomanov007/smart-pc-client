@@ -3,6 +3,8 @@
 import { LuPower } from "react-icons/lu";
 import { IconButton } from "@chakra-ui/react";
 import { useState } from "react";
+import { useExtracted } from "next-intl";
+import { Tooltip } from "@/components/ui/chakra/tooltip";
 
 interface Props {
   hidden?: boolean;
@@ -10,6 +12,7 @@ interface Props {
 }
 
 export default function PowerOnButton({ hidden, onClick }: Props) {
+  const t = useExtracted("pc-power-on-button");
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleClick = async () => {
@@ -19,13 +22,20 @@ export default function PowerOnButton({ hidden, onClick }: Props) {
   };
 
   return (
-    <IconButton
-      hidden={hidden}
-      variant="outline"
-      onClick={handleClick}
-      loading={loading}
+    <Tooltip
+      content={t({
+        message: "Power on",
+        description: "tooltip",
+      })}
     >
-      <LuPower />
-    </IconButton>
+      <IconButton
+        hidden={hidden}
+        variant="outline"
+        onClick={handleClick}
+        loading={loading}
+      >
+        <LuPower />
+      </IconButton>
+    </Tooltip>
   );
 }

@@ -201,6 +201,24 @@ msgctxt "index-page-metadata"
 msgid "FmhFdY"
 msgstr "Index page"
 
+#. title of index page
+#: src\app\[locale]\page.tsx
+msgctxt "index-page"
+msgid "FmhFdY"
+msgstr "Index page"
+
+#. description of index page
+#: src\app\[locale]\page.tsx
+msgctxt "index-page"
+msgid "J3/TKf"
+msgstr "Here you can navigate to any other page. Go to list of your pcs by button below"
+
+#. link button to dashboard text
+#: src\app\[locale]\page.tsx
+msgctxt "index-page"
+msgid "Oeu69m"
+msgstr "Go to dashboard"
+
 #. unauthorized page title
 #: src\app\[locale]\unauthorized.tsx
 msgctxt "unauthorized page"
@@ -266,6 +284,12 @@ msgstr "There are not pcs registered on your account"
 msgctxt "pc-list-empty-state"
 msgid "c5g+Gs"
 msgstr "Your pc list is empty"
+
+#. tooltip
+#: src\components\pc\power-on-button.tsx
+msgctxt "pc-power-on-button"
+msgid "539b0C"
+msgstr "Power on"
 
 #: src\components\ui\badge\offline-badge\client.tsx
 #: src\components\ui\badge\offline-badge\server.tsx

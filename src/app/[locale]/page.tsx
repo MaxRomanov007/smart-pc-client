@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getExtracted } from "next-intl/server";
-import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
-import { getStandardBreadcrumbs } from "@/utils/hooks/ui/breadcrumbs/server";
+import NotificationPage from "@/components/ui/pages/notification-page";
+import { LuCircleDashed } from "react-icons/lu";
+import LinkButton from "@/components/ui/button/link-button";
+import { PAGES } from "@/config/navigation/pages";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getExtracted("index-page-metadata");
@@ -15,24 +17,27 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MainPage() {
-  const breadcrumbs = await getStandardBreadcrumbs();
+  const t = await getExtracted("index-page");
 
   return (
-    <>
-      <Breadcrumbs
-        items={[
-          breadcrumbs.index,
-          breadcrumbs.dashboard,
-          {
-            label: "Title",
-            href: "/",
-          },
-          {},
-          {
-            label: "Current",
-          },
-        ]}
-      />
-    </>
+    <NotificationPage
+      icon={<LuCircleDashed />}
+      title={t({
+        message: "Index page",
+        description: "title of index page",
+      })}
+      description={t({
+        message:
+          "Here you can navigate to any other page. Go to list of your pcs by button below",
+        description: "description of index page",
+      })}
+    >
+      <LinkButton href={PAGES.dashboard}>
+        {t({
+          message: "Go to dashboard",
+          description: "link button to dashboard text",
+        })}
+      </LinkButton>
+    </NotificationPage>
   );
 }
