@@ -60,7 +60,7 @@ export default function PcStateCard({ pc }: Props) {
   return (
     <Card.Root>
       <Card.Header>
-        <Card.Title as={Card.Title}>
+        <Card.Title>
           {t({ message: "PC State", description: "card title" })}
         </Card.Title>
         <Card.Description>

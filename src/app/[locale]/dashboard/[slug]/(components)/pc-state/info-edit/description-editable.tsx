@@ -1,6 +1,6 @@
 "use client";
 
-import { Editable } from "@chakra-ui/react";
+import { Editable, Textarea } from "@chakra-ui/react";
 import EditableControl from "@/components/ui/editable/editable-control";
 import type { IPc } from "@/types/pc/pc";
 import { useCallback, useState } from "react";
@@ -51,8 +51,10 @@ export default function DescriptionEditable({
       onValueChange={(e) => setDescription(e.value)}
       onValueCommit={async () => await handleCommit()}
     >
-      <Editable.Preview />
-      <Editable.Input />
+      <Editable.Preview lineClamp={5} wordBreak="break-word" />
+      <Editable.Textarea asChild>
+        <Textarea autoresize maxHeight="5lh" />
+      </Editable.Textarea>
       <EditableControl />
     </Editable.Root>
   );
