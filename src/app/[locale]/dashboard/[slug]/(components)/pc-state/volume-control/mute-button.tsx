@@ -5,6 +5,8 @@ import { LuVolume, LuVolume1, LuVolume2, LuVolumeX } from "react-icons/lu";
 import type { IPc } from "@/types/pc/pc";
 import type { VolumeState } from "@/types/mqtt/pc-state";
 import CommandIconButton from "@/components/button/command/command-icon-button";
+import { Tooltip } from "@/components/ui/chakra/tooltip";
+import { useExtracted } from "next-intl";
 
 interface Props {
   pc: IPc;
@@ -13,6 +15,8 @@ interface Props {
 }
 
 export default function MuteButton({ pc, state, onMutedChange }: Props) {
+  const t = useExtracted("pc-slug-page.pc-state.volume-control.mute-button");
+
   const icon = useMemo(() => {
     if (state.muted) {
       return <LuVolumeX />;
@@ -28,14 +32,28 @@ export default function MuteButton({ pc, state, onMutedChange }: Props) {
   }, [state]);
 
   return (
-    <CommandIconButton
-      pc={pc}
-      commandName={state.muted ? "unmute" : "mute"}
-      variant="ghost"
-      size="xs"
-      onClick={() => onMutedChange?.(!state.muted)}
+    <Tooltip
+      content={
+        state.muted
+          ? t({
+              message: "Unmute",
+              description: "unmute tooltip",
+            })
+          : t({
+              message: "Mute",
+              description: "mute tooltip",
+            })
+      }
     >
-      {icon}
-    </CommandIconButton>
+      <CommandIconButton
+        pc={pc}
+        commandName={state.muted ? "unmute" : "mute"}
+        variant="ghost"
+        size="xs"
+        onClick={() => onMutedChange?.(!state.muted)}
+      >
+        {icon}
+      </CommandIconButton>
+    </Tooltip>
   );
 }
