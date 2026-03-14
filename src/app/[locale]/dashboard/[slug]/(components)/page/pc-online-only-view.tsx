@@ -4,15 +4,16 @@ import type { IPc } from "@/types/pc/pc";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
 import { type IMqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useState } from "react";
-import PcOfflineState from "@/app/[locale]/dashboard/[slug]/(components)/pc-offline-state";
+import PcOfflineState from "@/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state";
 import PcStateCard from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card";
+import LoadingState from "@/app/[locale]/dashboard/[slug]/(components)/page/loading-state";
 
 interface Props {
   pc: IPc;
 }
 
 export default function PcOnlineOnlyView({ pc }: Props) {
-  const [isOnline, setIsOnline] = useState<boolean>(false);
+  const [isOnline, setIsOnline] = useState<boolean | undefined>(undefined);
 
   useMqttJsonSubscribe<IMqttMessage<MqttMessageTypes.pcStatus>>(
     `pcs/${pc.id}/status`,
@@ -23,6 +24,10 @@ export default function PcOnlineOnlyView({ pc }: Props) {
       },
     },
   );
+
+  if (isOnline === undefined) {
+    return <LoadingState />;
+  }
 
   if (!isOnline) {
     return <PcOfflineState pc={pc} />;

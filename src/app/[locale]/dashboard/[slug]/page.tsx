@@ -1,4 +1,4 @@
-import { SlugPcPage } from "@/app/[locale]/dashboard/[slug]/(components)/page";
+import { SlugPcPage } from "@/app/[locale]/dashboard/[slug]/(components)/page/page";
 
 interface Props {
   params: Promise<{ slug: string }>;

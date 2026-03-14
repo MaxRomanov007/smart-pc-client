@@ -43,34 +43,34 @@ msgid "1Cd1br"
 msgstr "Error occurred while fetching pcs"
 
 #. pcs error message title
-#: src\app\[locale]\dashboard\[slug]\(components)\page.tsx
+#: src\app\[locale]\dashboard\[slug]\(components)\page\page.tsx
 msgctxt "slug-pc-page"
 msgid "6BQpYt"
 msgstr "Error occurred while fetching pc"
 
 #. page title
-#: src\app\[locale]\dashboard\[slug]\(components)\page.tsx
+#: src\app\[locale]\dashboard\[slug]\(components)\page\page.tsx
 msgctxt "slug-pc-page"
 msgid "9gf06z"
 msgstr "PC {name}"
 
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-offline-state.tsx
+#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
 msgctxt "pc-offline-state"
 msgid "d1pycG"
 msgstr "This PC is offline, click on button below, to go to {pageName} page, or try to power it on"
 
 #. title
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-offline-state.tsx
+#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
 msgctxt "pc-offline-state"
 msgid "e/wd7f"
 msgstr "PC is offline"
 
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-offline-state.tsx
+#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
 msgctxt "pc-offline-state"
 msgid "ir1oNB"
 msgstr "This PC is offline, click on button below, to go to {pageName} page"
 
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-offline-state.tsx
+#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
 msgctxt "pc-offline-state"
 msgid "s7c1Bg"
 msgstr "Go to {pageName}"

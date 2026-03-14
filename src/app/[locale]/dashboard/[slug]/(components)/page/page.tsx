@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 import { StatusCodes } from "@/types/services/response";
 import { CommandsProvider } from "@/utils/hooks/commands/provider";
 import MQTTConnectionProvider from "@/utils/providers/mqtt";
-import PcOnlineOnlyView from "@/app/[locale]/dashboard/[slug]/(components)/pc-online-only-view";
+import PcOnlineOnlyView from "@/app/[locale]/dashboard/[slug]/(components)/page/pc-online-only-view";
 import { useStandardBreadcrumbs } from "@/utils/hooks/ui/breadcrumbs/client";
 import { Stack } from "@chakra-ui/react";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
@@ -68,7 +68,7 @@ export function SlugPcPage({ slug }: Props) {
   return (
     <MQTTConnectionProvider>
       <CommandsProvider>
-        <Stack gap={4}>
+        <Stack gap={4} h="full">
           <Breadcrumbs
             items={[
               breadcrumbs.index,
