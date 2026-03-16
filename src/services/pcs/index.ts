@@ -26,7 +26,10 @@ export async function fetchUserPcBySlug(
   slug: string,
 ): Promise<Response<IPc>> {
   try {
-    const response = await fetch(`${pcServiceAddress}/pcs/${slug}`, {
+    const url = new URL(`${pcServiceAddress}/pcs`);
+    url.searchParams.set("slug", slug);
+
+    const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -57,6 +60,26 @@ export async function changeUserPc(
         "Content-Type": "application/json",
       },
       body: JSON.stringify(pc),
+    });
+    const data = await response.json();
+    return data as Response<IPc>;
+  } catch (e) {
+    return { error: e as Error };
+  }
+}
+
+export async function fetchUserPcCommands(
+  token: string,
+  slug: string,
+): Promise<Response<IPc>> {
+  try {
+    const url = new URL(`${pcServiceAddress}/pcs`);
+    url.searchParams.set("slug", slug);
+
+    const response = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     const data = await response.json();
     return data as Response<IPc>;

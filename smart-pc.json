@@ -1,7 +1,7 @@
 {
   "uuid": "e33c8988-598c-4cb9-b7ab-9c68d07ed02a",
   "lastMigration": 33,
-  "name": "Smart PC",
+  "name": "smart-pc",
   "endpointPrefix": "",
   "latency": 0,
   "port": 8080,
@@ -9,7 +9,7 @@
   "folders": [
     {
       "uuid": "0c5cc31a-8061-4fdd-9de5-f3cd7c0a1481",
-      "name": "PCs",
+      "name": "pcs",
       "children": [
         {
           "type": "route",
@@ -21,7 +21,21 @@
         },
         {
           "type": "route",
-          "uuid": "edb6be26-4ca9-4d65-a74d-5426ff245f9a"
+          "uuid": "bc3539b0-615e-4946-a211-b1ce3d1c34b6"
+        },
+        {
+          "type": "folder",
+          "uuid": "9efcbd4f-b8b4-467d-8717-f48ed351b749"
+        }
+      ]
+    },
+    {
+      "uuid": "9efcbd4f-b8b4-467d-8717-f48ed351b749",
+      "name": "commands",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "27ba8f22-52f2-4b79-9cd2-166a58c513ab"
         }
       ]
     }
@@ -39,7 +53,7 @@
           "body": "{\n  \"status\": \"ok\",\n  \"data\": {{data 'pcs'}} \n}",
           "latency": 0,
           "statusCode": 200,
-          "label": "",
+          "label": "get all user pcs",
           "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
@@ -52,35 +66,31 @@
           "default": true,
           "crudKey": "id",
           "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": null,
-      "streamingInterval": 0
-    },
-    {
-      "uuid": "edb6be26-4ca9-4d65-a74d-5426ff245f9a",
-      "type": "http",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "pcs/:slug",
-      "responses": [
+        },
         {
-          "uuid": "8db37419-7fd6-497f-a456-f12e46956cca",
-          "body": "{{setVar 'result' (find (dataRaw 'pcs') (object slug=(urlParam 'slug')))}}\n\n{{#unless @result}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify @result}}}\n  }\n{{/unless}}",
+          "uuid": "3bc3322d-5fc7-49d9-8e66-ec1674aa655a",
+          "body": "{{setVar 'result' (find (dataRaw 'pcs') (object slug=(queryParam 'slug')))}}\n\n{{#unless @result}}\n{\n  \"status\": \"not-found\",\n  \"error\": \"not found\"\n}\n{{else}}\n{\n  \"status\": \"ok\",\n  \"data\": {{{stringify @result}}}\n}\n{{/unless}}",
           "latency": 0,
           "statusCode": 200,
-          "label": "",
+          "label": "get user pc by slug",
           "headers": [],
           "bodyType": "INLINE",
           "filePath": "",
           "databucketID": "",
           "sendFileAsBody": false,
-          "rules": [],
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "slug",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true,
+          "default": false,
           "crudKey": "id",
           "callbacks": []
         }
@@ -99,6 +109,68 @@
         {
           "uuid": "c612f6f3-4142-4217-98bb-6d7f5011623d",
           "body": "{{setVar 'found' (find (dataRaw 'pcs') (object id=(urlParam 'id')))}}\n\n{{#unless @found}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n\n  {{setVar 'value' (object)}}\n      \n  {{#if (lookup (bodyRaw) 'name')}}\n    {{setVar 'value' (objectMerge @value (object name=(bodyRaw 'name')))}}\n    {{setVar 'value' (objectMerge @value (object slug=(faker 'helpers.slugify' (bodyRaw 'name'))))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'description')}}\n    {{setVar 'value' (objectMerge @value (object description=(bodyRaw 'description')))}}\n  {{/if}}\n  {{#if (gt (len (stringify (body 'canPowerOn'))) 2)}}\n    {{setVar 'value' (objectMerge @value (object canPowerOn=(bodyRaw 'canPowerOn')))}}\n  {{/if}}\n\n  {{setData 'merge' 'pcs' (indexOf (dataRaw 'pcs') @found) @value}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify (find (dataRaw 'pcs') (object id=(urlParam 'id')))}}}\n  }\n{{/unless}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "bc3539b0-615e-4946-a211-b1ce3d1c34b6",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "pcs/:id",
+      "responses": [
+        {
+          "uuid": "d2336bfe-cc94-4fa2-a553-f2ecdc264d1f",
+          "body": "{{setVar 'result' (find (dataRaw 'pcs') (object id=(urlParam 'id')))}}\n\n{{#unless @result}}\n{\n  \"status\": \"not-found\",\n  \"error\": \"not found\"\n}\n{{else}}\n{\n  \"status\": \"ok\",\n  \"data\": {{{stringify @result}}}\n}\n{{/unless}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "27ba8f22-52f2-4b79-9cd2-166a58c513ab",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "pcs/:pcID/commands",
+      "responses": [
+        {
+          "uuid": "0c231228-0b96-4063-83ed-618fa8e3e618",
+          "body": "{\n  \"status\": \"ok\",\n  \"data\": {{data 'commands'}} \n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -176,7 +248,21 @@
       "id": "iit1",
       "name": "pcs",
       "documentation": "user pcs",
-      "value": "[\n  {\n    \"id\": \"hello\",\n    \"name\": \"Hello\",\n    \"slug\": \"{{faker 'helpers.slugify' 'Hello'}}\",\n    \"description\": \"Hello Hello Hello\",\n    \"canPowerOn\": true,\n    \"commands\": [\n      {\n        \"id\": \"command1\",\n        \"name\": \"Command1\",\n        \"description\": \"Command1 Command1 Command1\",\n        \"parameters\": [\n          {\n            \"id\": \"command1parameter1\",\n            \"name\": \"Command1Parameter1\",\n            \"description\": \"Command1Parameter1 Command1Parameter1 Command1Parameter1\",\n            \"type\": 1\n          },\n          {\n            \"id\": \"command1parameter2\",\n            \"name\": \"Command1Parameter2\",\n            \"description\": \"Command1Parameter2 Command1Parameter2 Command1Parameter2\",\n            \"type\": 2\n          },\n          {\n            \"id\": \"command1parameter3\",\n            \"name\": \"Command1Parameter3\",\n            \"description\": \"Command1Parameter3 Command1Parameter3 Command1Parameter3\",\n            \"type\": 3\n          }\n        ]\n      },\n      {\n        \"id\": \"command2\",\n        \"name\": \"Command2\",\n        \"description\": \"Command2 Command2 Command2\",\n        \"parameters\": [\n          {\n            \"id\": \"command2parameter1\",\n            \"name\": \"Command2Parameter1\",\n            \"description\": \"Command2Parameter1 Command2Parameter1 Command2Parameter1\",\n            \"type\": 1\n          },\n          {\n            \"id\": \"command2parameter2\",\n            \"name\": \"Command2Parameter2\",\n            \"description\": \"Command2Parameter2 Command2Parameter2 Command2Parameter2\",\n            \"type\": 2\n          },\n          {\n            \"id\": \"command2parameter3\",\n            \"name\": \"Command2Parameter3\",\n            \"description\": \"Command2Parameter3 Command2Parameter3 Command2Parameter3\",\n            \"type\": 3\n          }\n        ]\n      },\n      {\n        \"id\": \"command3\",\n        \"name\": \"Command3\",\n        \"description\": \"Command3 Command3 Command3\",\n        \"parameters\": [\n          {\n            \"id\": \"command3parameter1\",\n            \"name\": \"Command3Parameter1\",\n            \"description\": \"Command3Parameter1 Command3Parameter1 Command3Parameter1\",\n            \"type\": 1\n          },\n          {\n            \"id\": \"command3parameter2\",\n            \"name\": \"Command3Parameter2\",\n            \"description\": \"Command3Parameter2 Command3Parameter2 Command3Parameter2\",\n            \"type\": 2\n          },\n          {\n            \"id\": \"command3parameter3\",\n            \"name\": \"Command3Parameter3\",\n            \"description\": \"Command3Parameter3 Command3Parameter3 Command3Parameter3\",\n            \"type\": 3\n          }\n        ]\n      }\n    ]\n  },\n  {{#repeat 9}}\n  {{setVar 'fakeName' (faker 'person.jobTitle')}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{@fakeName}}\",\n    \"slug\": \"{{faker 'helpers.slugify' @fakeName}}\",\n    \"description\": \"{{faker 'food.description'}}\",\n    \"canPowerOn\": {{boolean}},\n    \"commands\": [\n      {{#repeat (oneOf (array 1 2 3 4 5))}}\n      {\n        \"id\": \"{{uuid}}\",\n        \"name\": \"{{faker 'person.jobTitle'}}\",\n        \"description\": \"{{faker 'food.description'}}\",\n        \"parameters\": [\n          {{#repeat (oneOf (array 1 2 3 4 5))}}\n          {\n            \"id\": \"{{uuid}}\",\n            \"name\": \"{{faker 'person.jobTitle'}}\",\n            \"description\": \"{{faker 'food.description'}}\",\n            \"type\": {{oneOf (array 1 2 3)}}\n          }\n          {{/repeat}}\n        ]\n      }\n      {{/repeat}}\n    ]\n  }\n  {{/repeat}}\n]"
+      "value": "[\n  {\n    \"id\": \"hello\",\n    \"name\": \"Hello\",\n    \"slug\": \"{{faker 'helpers.slugify' 'Hello'}}\",\n    \"description\": \"Hello Hello Hello\",\n    \"canPowerOn\": true\n  },\n  {{#repeat 9}}\n  {{setVar 'fakeName' (faker 'person.jobTitle')}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{@fakeName}}\",\n    \"slug\": \"{{faker 'helpers.slugify' @fakeName}}\",\n    \"description\": \"{{faker 'food.description'}}\",\n    \"canPowerOn\": {{boolean}}\n  }\n  {{/repeat}}\n]"
+    },
+    {
+      "uuid": "6a191ae9-a3b2-490a-95f7-60e57975c720",
+      "id": "o03y",
+      "name": "commands",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": \"command\",\n    \"name\": \"Command\",\n    \"description\": \"Command Command Command\"\n  },\n  {{#repeat 4}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{faker 'person.jobTitle'}}\",\n    \"description\": \"{{faker 'food.description'}}\"\n  }\n  {{/repeat}}\n]"
+    },
+    {
+      "uuid": "1e97eabf-f99a-4482-b6fd-6269958a1cbd",
+      "id": "wcko",
+      "name": "command-parameters",
+      "documentation": "",
+      "value": "[\n  {\n    \"id\": \"parameter1\",\n    \"name\": \"Parameter1\",\n    \"description\": \"Parameter1 Parameter1 Parameter1\",\n    \"type\": 1\n  },\n  {\n    \"id\": \"parameter2\",\n    \"name\": \"Parameter2\",\n    \"description\": \"Parameter2 Parameter2 Parameter2\",\n    \"type\": 2\n  },\n  {\n    \"id\": \"parameter3\",\n    \"name\": \"Parameter3\",\n    \"description\": \"Parameter3 Parameter3 Parameter3\",\n    \"type\": 3\n  },\n  {{#repeat 2}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{faker 'person.jobTitle'}}\",\n    \"description\": \"{{faker 'food.description'}}\",\n    \"type\": {{oneOf (array 1 2 3)}}\n  }\n  {{/repeat}}\n]"
     }
   ],
   "callbacks": []
