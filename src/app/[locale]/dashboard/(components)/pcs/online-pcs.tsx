@@ -2,7 +2,7 @@
 
 import PcListUpdater from "@/app/[locale]/dashboard/(components)/pcs/pc-list-updater";
 import PcListSkeleton from "@/app/[locale]/dashboard/(components)/pcs/pc-list-skeleton";
-import { useSecureAuth } from "@/utils/hooks/auth";
+import { useSecureAuth } from "@/utils/hooks/auth/client";
 import useServiceQuery from "@/utils/hooks/services/use-service-query";
 import { fetchUserPcs } from "@/services/pcs";
 import { useCallback, useEffect } from "react";

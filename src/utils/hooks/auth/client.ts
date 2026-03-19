@@ -7,7 +7,8 @@ import type {
 import { generateState } from "@/utils/strings/state";
 import { useEffect } from "react";
 import { unauthorized } from "next/dist/client/components/unauthorized";
-import { LOGIN_REDIRECT_PATH_KEY } from "@/config/storage";
+import { LOGIN_REDIRECT_PATH_KEY } from "@/config/storage/session";
+import { ACCESS_TOKEN_COOKIE } from "@/config/storage/cookie";
 
 export interface IUseAuthResult extends Omit<IAuthContext, "logIn"> {
   logIn: (
@@ -23,6 +24,12 @@ export interface IUseAuthResult extends Omit<IAuthContext, "logIn"> {
 export function useAuth(): IUseAuthResult {
   const authContext = useAuthContext();
 
+  useEffect(() => {
+    if (authContext.token) {
+      document.cookie = `${ACCESS_TOKEN_COOKIE}=${authContext.token}; path=/`;
+    }
+  }, [authContext.token]);
+
   const logIn = (
     redirectPath?: string,
     state?: string,
@@ -30,6 +37,8 @@ export function useAuth(): IUseAuthResult {
     method?: TLoginMethod,
   ) => {
     state = state ? state : generateState();
+
+    console.log("state", state);
 
     if (redirectPath) {
       sessionStorage.setItem(LOGIN_REDIRECT_PATH_KEY, redirectPath);

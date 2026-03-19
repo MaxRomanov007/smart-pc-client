@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { handleError } from "@/utils/errors";
 import { useExtracted } from "next-intl";
 import { Center, Spinner, Text, VStack } from "@chakra-ui/react";
-import { LOGIN_REDIRECT_PATH_KEY } from "@/config/storage";
+import { LOGIN_REDIRECT_PATH_KEY } from "@/config/storage/session";
 
 export default function AuthCallback() {
   const t = useExtracted("auth-callback-error");
@@ -39,7 +39,10 @@ export default function AuthCallback() {
     }
 
     const errorDescription = searchParams.get("error_description");
-    handleError("Authorization failed: " + error, errorDescription ?? undefined);
+    handleError(
+      "Authorization failed: " + error,
+      errorDescription ?? undefined,
+    );
   }, [searchParams]);
 
   return (

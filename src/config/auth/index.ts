@@ -12,5 +12,4 @@ export const authConfig: TAuthConfig = {
   scope: "openid offline mqtt:pc:read mqtt:pc:state:read mqtt:pc:command:write",
   decodeToken: false,
   autoLogin: false,
-  storageKeyPrefix: "SSO_",
 };

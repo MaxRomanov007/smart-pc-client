@@ -1,6 +1,6 @@
 "use client";
 
-import { useSecureAuth } from "@/utils/hooks/auth";
+import { useSecureAuth } from "@/utils/hooks/auth/client";
 import { useCallback, useEffect } from "react";
 import { fetchUserPcBySlug } from "@/services/pcs";
 import useServiceQuery from "@/utils/hooks/services/use-service-query";

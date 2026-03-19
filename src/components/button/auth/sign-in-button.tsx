@@ -9,7 +9,7 @@ import {
 import { Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { LuLogIn } from "react-icons/lu";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
-import { useAuth } from "@/utils/hooks/auth";
+import { useAuth } from "@/utils/hooks/auth/client";
 import { usePathname } from "@/i18n/navigation";
 
 type Props = Omit<

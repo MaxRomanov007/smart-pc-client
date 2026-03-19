@@ -4,7 +4,7 @@ import { type Button, Skeleton } from "@chakra-ui/react";
 import SignInButton from "./sign-in-button";
 import type { ComponentProps } from "react";
 import ProfileMenu from "@/components/button/auth/profile-menu";
-import { useAuth } from "@/utils/hooks/auth";
+import { useAuth } from "@/utils/hooks/auth/client";
 
 type Props = ComponentProps<typeof Button>;
 

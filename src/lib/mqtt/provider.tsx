@@ -9,19 +9,19 @@ import {
   useState,
 } from "react";
 import mqtt, {
-  MqttClient,
   type IClientOptions,
   type IClientSubscribeOptions,
+  MqttClient,
 } from "mqtt";
 import { TopicFactory } from "./utils/topic-factory";
 import { MqttContext } from "./context";
 import type {
   IMqttContext,
-  MQTTProviderProps,
-  MQTTMessage,
   MQTTError,
+  MQTTMessage,
+  MQTTProviderProps,
 } from "./types";
-import { useSecureAuth } from "@/utils/hooks/auth";
+import { useSecureAuth } from "@/utils/hooks/auth/client";
 
 export function MQTTProvider({
   children,

@@ -6,7 +6,7 @@ import ProfileButton from "@/components/button/auth/profile-button";
 import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dialog/with-store";
 import { useConfirmationDialog } from "@/utils/hooks/ui/dialogs/confirmation/useConfirmationDialog";
 import type { SelectionDetails } from "@zag-js/menu";
-import { useAuth } from "@/utils/hooks/auth";
+import { useAuth } from "@/utils/hooks/auth/client";
 
 const MenuItemValues = {
   signOut: "sign-out",

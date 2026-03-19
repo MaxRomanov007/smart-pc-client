@@ -4,7 +4,7 @@ import { Editable, Textarea } from "@chakra-ui/react";
 import EditableControl from "@/components/ui/editable/editable-control";
 import type { IPc } from "@/types/pc/pc";
 import { useCallback, useState } from "react";
-import { useSecureAuth } from "@/utils/hooks/auth";
+import { useSecureAuth } from "@/utils/hooks/auth/client";
 import { changeUserPc } from "@/services/pcs";
 import { StatusCodes } from "@/types/services/response";
 import { toaster } from "@/components/ui/chakra/toaster";
