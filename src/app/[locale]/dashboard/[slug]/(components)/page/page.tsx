@@ -1,6 +1,5 @@
 "use client";
 
-import { useSecureAuth } from "@/utils/hooks/auth/client";
 import { useCallback, useEffect } from "react";
 import { fetchUserPcBySlug } from "@/services/pcs";
 import useServiceQuery from "@/utils/hooks/services/use-service-query";
@@ -9,11 +8,11 @@ import { useExtracted } from "next-intl";
 import { notFound } from "next/navigation";
 import { StatusCodes } from "@/types/services/response";
 import { CommandsProvider } from "@/utils/hooks/commands/provider";
-import MQTTConnectionProvider from "@/utils/providers/mqtt";
 import PcOnlineOnlyView from "@/app/[locale]/dashboard/[slug]/(components)/page/pc-online-only-view";
 import { useStandardBreadcrumbs } from "@/utils/hooks/ui/breadcrumbs/client";
 import { Stack } from "@chakra-ui/react";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
+import { useRequireAuth } from "@/lib/auth/use-auth";
 
 interface Props {
   slug: string;
@@ -21,17 +20,17 @@ interface Props {
 
 export function SlugPcPage({ slug }: Props) {
   const t = useExtracted("slug-pc-page");
-  const { token } = useSecureAuth();
+  const { accessToken } = useRequireAuth();
   const fetchPcsQuery = useCallback(
-    () => fetchUserPcBySlug(token, slug),
-    [slug, token],
+    () => fetchUserPcBySlug(accessToken ?? "", slug),
+    [slug, accessToken],
   );
   const {
     data: pc,
     error,
     isError,
     status,
-  } = useServiceQuery(fetchPcsQuery, { enabled: !!token });
+  } = useServiceQuery(fetchPcsQuery, { enabled: !!accessToken });
 
   const breadcrumbs = useStandardBreadcrumbs();
 
@@ -66,19 +65,13 @@ export function SlugPcPage({ slug }: Props) {
   }
 
   return (
-    <MQTTConnectionProvider>
-      <CommandsProvider>
-        <Stack gap={4} h="full">
-          <Breadcrumbs
-            items={[
-              breadcrumbs.index,
-              breadcrumbs.dashboard,
-              { label: pc.name },
-            ]}
-          />
-          <PcOnlineOnlyView pc={pc} />
-        </Stack>
-      </CommandsProvider>
-    </MQTTConnectionProvider>
+    <CommandsProvider>
+      <Stack gap={4} h="full">
+        <Breadcrumbs
+          items={[breadcrumbs.index, breadcrumbs.dashboard, { label: pc.name }]}
+        />
+        <PcOnlineOnlyView pc={pc} />
+      </Stack>
+    </CommandsProvider>
   );
 }

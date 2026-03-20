@@ -1,7 +1,7 @@
 import {
-  MqttClient,
   type IClientOptions,
   type IClientSubscribeOptions,
+  MqttClient,
 } from "mqtt";
 import type { ReactNode } from "react";
 import type { IUser } from "@/types/auth/user";
@@ -29,7 +29,7 @@ export interface IMqttContext {
   status: MQTTConnectionStatus;
   error?: MQTTError;
   getClient: () => MqttClient | null;
-  user?: IUser;
+  user: IUser | null;
   publish: (message: MQTTMessage) => Promise<void>;
   subscribe: (topic: string, options?: IClientSubscribeOptions) => () => void;
   disconnect: () => void;

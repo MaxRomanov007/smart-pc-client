@@ -1,67 +1,126 @@
 "use client";
 
-import { useEffect } from "react";
-import { useAuthContext } from "react-oauth2-code-pkce";
-import { useRouter, useSearchParams } from "next/navigation";
-import { handleError } from "@/utils/errors";
+/**
+ * auth/callback/page.tsx — обработка OAuth callback
+ *
+ * После того как пользователь авторизовался на OAuth сервере,
+ * он редиректится сюда с ?code=...&state=...
+ *
+ * Этот компонент:
+ * 1. Проверяет state (защита от CSRF)
+ * 2. Берёт PKCE verifier из sessionStorage
+ * 3. Обменивает code на tokens
+ * 4. Очищает sessionStorage
+ * 5. Редиректит на целевую страницу
+ */
+
+import { useEffect, useRef } from "react";
+import { useSearchParams } from "next/navigation";
+import { useAuthContextInternal } from "@/lib/auth/auth-context";
+import { tokenStorage } from "@/lib/auth/tokens";
+import {
+  LOGIN_REDIRECT_PATH_KEY,
+  PKCE_STATE_KEY,
+  PKCE_VERIFIER_KEY,
+} from "@/lib/auth/pkce";
+import { AbsoluteCenter, Spinner, Text, VStack } from "@chakra-ui/react";
 import { useExtracted } from "next-intl";
-import { Center, Spinner, Text, VStack } from "@chakra-ui/react";
-import { LOGIN_REDIRECT_PATH_KEY } from "@/config/storage/session";
+import { useRouter } from "@/i18n/navigation";
 
 export default function AuthCallback() {
-  const t = useExtracted("auth-callback-error");
-  const { token, error } = useAuthContext();
-  const router = useRouter();
+  const t = useExtracted("auth-callback-page");
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { setSessionFromTokens, logout } = useAuthContextInternal();
+
+  // Защита от двойного запуска в React Strict Mode
+  const isProcessing = useRef(false);
 
   useEffect(() => {
-    if (token) {
-      const redirectPath = sessionStorage.getItem(LOGIN_REDIRECT_PATH_KEY);
-      if (redirectPath) {
-        sessionStorage.removeItem(LOGIN_REDIRECT_PATH_KEY);
+    if (isProcessing.current) return;
+    isProcessing.current = true;
+
+    const handleCallback = async () => {
+      const code = searchParams.get("code");
+      const returnedState = searchParams.get("state");
+      const errorParam = searchParams.get("error");
+
+      if (errorParam) {
+        const description =
+          searchParams.get("error_description") ?? "Unknown error";
+        console.error("OAuth error:", errorParam, description);
+        router.replace("/");
+        return;
       }
-      router.push(redirectPath ?? "/");
-    } else if (error) {
-      handleError(
-        t({
-          message: "Authorization flow failed",
-          description: "authorization flow failed message title",
-        }),
-        error,
-      );
-    }
-  }, [token, error, router, t]);
 
-  useEffect(() => {
-    const error = searchParams.get("error");
-    if (!error) {
-      return;
-    }
+      if (!code || !returnedState) {
+        console.error("Missing code or state");
+        router.replace("/");
+        return;
+      }
 
-    const errorDescription = searchParams.get("error_description");
-    handleError(
-      "Authorization failed: " + error,
-      errorDescription ?? undefined,
-    );
-  }, [searchParams]);
+      // Валидация state (защита от CSRF)
+      const savedState = sessionStorage.getItem(PKCE_STATE_KEY);
+      if (!savedState || savedState !== returnedState) {
+        console.error("State mismatch");
+        sessionStorage.removeItem(PKCE_STATE_KEY);
+        sessionStorage.removeItem(PKCE_VERIFIER_KEY);
+        router.replace("/");
+        return;
+      }
+
+      const verifier = sessionStorage.getItem(PKCE_VERIFIER_KEY);
+      if (!verifier) {
+        console.error("PKCE verifier missing");
+        router.replace("/");
+        return;
+      }
+
+      // Очищаем sessionStorage до обмена токенов
+      sessionStorage.removeItem(PKCE_VERIFIER_KEY);
+      sessionStorage.removeItem(PKCE_STATE_KEY);
+
+      try {
+        const redirectUri = `${window.location.origin}/auth/callback`;
+        const tokens = await tokenStorage.exchangeCode(
+          code,
+          verifier,
+          redirectUri,
+        );
+
+        if (tokens.id_token) {
+          // Устанавливаем сессию через контекст — это единственный
+          // правильный способ обновить React state
+          setSessionFromTokens(
+            tokens.id_token,
+            tokens.access_token,
+            tokens.expires_in,
+          );
+        }
+
+        const redirectPath = sessionStorage.getItem(LOGIN_REDIRECT_PATH_KEY);
+        sessionStorage.removeItem(LOGIN_REDIRECT_PATH_KEY);
+        router.replace(redirectPath ?? "/");
+      } catch (error) {
+        console.error("Token exchange failed:", error);
+        await logout();
+        router.replace("/");
+      }
+    };
+
+    handleCallback();
+  }, [searchParams, router, setSessionFromTokens, logout]);
 
   return (
-    <Center>
+    <AbsoluteCenter>
       <VStack gap={4}>
-        <Text
-          color={{ _light: "colorPalette.700", _dark: "colorPalette.300" }}
-          textStyle="lg"
-        >
+        <Text textStyle="lg">
           {t({
-            message: "Please wait for authorization to complete",
-            description: "loading title",
+            message: "Completing authorization...",
           })}
         </Text>
-        <Spinner
-          color={{ _light: "colorPalette.600", _dark: "colorPalette.300" }}
-          size={"xl"}
-        />
+        <Spinner size="xl" />
       </VStack>
-    </Center>
+    </AbsoluteCenter>
   );
 }

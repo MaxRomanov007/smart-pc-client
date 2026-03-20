@@ -4,11 +4,11 @@ import { Editable, Textarea } from "@chakra-ui/react";
 import EditableControl from "@/components/ui/editable/editable-control";
 import type { IPc } from "@/types/pc/pc";
 import { useCallback, useState } from "react";
-import { useSecureAuth } from "@/utils/hooks/auth/client";
 import { changeUserPc } from "@/services/pcs";
 import { StatusCodes } from "@/types/services/response";
 import { toaster } from "@/components/ui/chakra/toaster";
 import { useExtracted } from "next-intl";
+import { useRequireAuth } from "@/lib/auth/use-auth";
 
 interface Props {
   pc: IPc;
@@ -19,13 +19,13 @@ export default function DescriptionEditable({
   pc,
   onDescriptionChanged,
 }: Props) {
-  const { token } = useSecureAuth();
+  const { accessToken } = useRequireAuth();
   const t = useExtracted("slug-pc-description-editable");
 
   const [description, setDescription] = useState<string>(pc.description);
 
   const handleCommit = useCallback(async () => {
-    const response = await changeUserPc(token, {
+    const response = await changeUserPc(accessToken ?? "", {
       id: pc.id,
       description,
     });
@@ -43,7 +43,14 @@ export default function DescriptionEditable({
     }
 
     onDescriptionChanged?.(description);
-  }, [description, onDescriptionChanged, pc.description, pc.id, t, token]);
+  }, [
+    description,
+    onDescriptionChanged,
+    pc.description,
+    pc.id,
+    t,
+    accessToken,
+  ]);
 
   return (
     <Editable.Root

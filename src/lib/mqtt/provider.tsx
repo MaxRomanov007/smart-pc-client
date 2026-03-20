@@ -21,7 +21,7 @@ import type {
   MQTTMessage,
   MQTTProviderProps,
 } from "./types";
-import { useSecureAuth } from "@/utils/hooks/auth/client";
+import { useAuth } from "@/lib/auth/use-auth";
 
 export function MQTTProvider({
   children,
@@ -29,7 +29,7 @@ export function MQTTProvider({
   wsPath = "/mqtt",
   options = {},
 }: MQTTProviderProps) {
-  const auth = useSecureAuth();
+  const auth = useAuth();
   const clientRef = useRef<MqttClient | null>(null);
   const [status, setStatus] = useState<IMqttContext["status"]>("offline");
   const [error, setError] = useState<MQTTError | undefined>();
@@ -41,7 +41,7 @@ export function MQTTProvider({
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    if (!auth.isAuthenticated || !auth.user?.id || !auth.token) {
+    if (!auth.isAuthenticated || !auth.user?.id || !auth.accessToken) {
       if (clientRef.current?.connected) {
         clientRef.current.end(true);
         clientRef.current = null;
@@ -61,7 +61,7 @@ export function MQTTProvider({
         options.clientId ??
         `nextjs-${auth.user!.id}-${Date.now().toString(36)}`,
       username: auth.user!.id,
-      password: auth.token,
+      password: auth.accessToken,
       clean: true,
       reconnectPeriod: 5000,
       connectTimeout: 30_000,
@@ -107,7 +107,14 @@ export function MQTTProvider({
       }
       clientRef.current = null;
     };
-  }, [auth.isAuthenticated, auth.token, brokerUrl, wsPath, options, auth.user]);
+  }, [
+    auth.isAuthenticated,
+    auth.accessToken,
+    brokerUrl,
+    wsPath,
+    options,
+    auth.user,
+  ]);
 
   const publish = useCallback(
     async (message: MQTTMessage) => {
