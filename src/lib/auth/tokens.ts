@@ -1,27 +1,8 @@
-/**
- * tokens.ts — управление токенами
- *
- * СТРАТЕГИЯ ХРАНЕНИЯ:
- * ┌─────────────────┬──────────────────────────────────────────────────┐
- * │ access_token    │ Только в памяти (модульная переменная)           │
- * │                 │ Сбрасывается при reload — восстанавливается      │
- * │                 │ через refresh() при initSession                  │
- * ├─────────────────┼──────────────────────────────────────────────────┤
- * │ refresh_token   │ httpOnly Secure cookie (path: /api/auth)         │
- * │                 │ JS не может прочитать. Переживает reload/restart │
- * ├─────────────────┼──────────────────────────────────────────────────┤
- * │ user (IUser)    │ React state в AuthContext                        │
- * │                 │ При reload восстанавливается из id_token,        │
- * │                 │ который возвращает /api/auth/refresh             │
- * └─────────────────┴──────────────────────────────────────────────────┘
- */
-
 import type { IOryIdTokenPayload, ITokenResponse, IUser } from "./types";
 
 export interface IRefreshResult {
   accessToken: string;
   expiresIn: number;
-  /** id_token для восстановления user при reload страницы */
   idToken: string | null;
 }
 
@@ -63,9 +44,6 @@ class TokenStorage {
     this.accessTokenExpiresAt = null;
   }
 
-  /**
-   * Обменять authorization code на токены (вызывается из callback страницы).
-   */
   async exchangeCode(
     code: string,
     verifier: string,
@@ -101,12 +79,6 @@ class TokenStorage {
     return tokens;
   }
 
-  /**
-   * Обновить access_token через refresh_token в httpOnly cookie.
-   * Возвращает полный IRefreshResult включая idToken для восстановления user.
-   *
-   * Мьютекс гарантирует один HTTP запрос при параллельных вызовах.
-   */
   async refresh(): Promise<IRefreshResult | null> {
     if (this.refreshPromise) {
       return this.refreshPromise;
@@ -126,9 +98,7 @@ class TokenStorage {
         method: "POST",
         credentials: "include",
       });
-    } catch {
-      // logout должен завершиться даже при сетевой ошибке
-    }
+    } catch {}
   }
 
   private async doRefresh(): Promise<IRefreshResult | null> {
@@ -157,7 +127,6 @@ class TokenStorage {
         idToken: data.id_token,
       };
     } catch (networkError) {
-      // Сетевая ошибка — не сбрасываем токен, возможно временная проблема
       console.error("Refresh network error:", networkError);
       return null;
     }
@@ -179,10 +148,6 @@ class TokenStorage {
 
 export const tokenStorage = new TokenStorage();
 
-/**
- * Распарсить id_token и извлечь IUser (Ory Kratos формат).
- * Только декодируем payload — не верифицируем подпись на клиенте.
- */
 export function parseUserFromIdToken(idToken: string): IUser | null {
   try {
     const parts = idToken.split(".");

@@ -37,7 +37,6 @@ export async function POST(request: NextRequest) {
       body: params.toString(),
     });
   } catch (networkError) {
-    // Сетевая ошибка — OAuth сервер недоступен
     console.error("OAuth server unreachable during refresh:", networkError);
     return NextResponse.json(
       { error: "OAuth server unavailable" },
@@ -46,10 +45,10 @@ export async function POST(request: NextRequest) {
   }
 
   if (!tokenResponse.ok) {
+    console.log(tokenResponse);
     const errorText = await tokenResponse.text();
     console.error("Refresh token rejected by OAuth server:", errorText);
 
-    // Очищаем невалидный refresh_token
     const errorResponse = NextResponse.json(
       { error: "Refresh failed" },
       { status: 401 },
@@ -60,16 +59,12 @@ export async function POST(request: NextRequest) {
 
   const tokens = await tokenResponse.json();
 
-  // ИСПРАВЛЕНИЕ: возвращаем id_token клиенту — он нужен для восстановления
-  // данных пользователя при reload страницы (user хранится только в памяти)
   const response = NextResponse.json({
     access_token: tokens.access_token,
     expires_in: tokens.expires_in,
     id_token: tokens.id_token ?? null,
   });
 
-  // Ротация refresh_token: если OAuth сервер выдал новый — обновляем cookie
-  // Ory Hydra с настройкой refresh_token_rotation всегда ротирует
   if (tokens.refresh_token && tokens.refresh_token !== refreshToken) {
     response.cookies.set(REFRESH_TOKEN_COOKIE, tokens.refresh_token, {
       httpOnly: true,

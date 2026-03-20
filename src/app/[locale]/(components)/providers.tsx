@@ -4,7 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { LocaleProvider } from "@chakra-ui/react";
 import { AuthProvider } from "@/lib/auth/auth-context";
-import MQTTConnectionProvider from "@/utils/providers/mqtt";
+import MQTTConnectionProvider from "@/components/providers/mqtt";
+import QueryProvider from "@/components/providers/query";
 
 interface Props {
   locale: string;
@@ -16,11 +17,13 @@ export default async function Providers({ children, locale }: Props) {
   return (
     <NextIntlClientProvider messages={messages}>
       <LocaleProvider locale={locale}>
-        <Provider>
-          <AuthProvider>
-            <MQTTConnectionProvider>{children}</MQTTConnectionProvider>
-          </AuthProvider>
-        </Provider>
+        <QueryProvider>
+          <Provider>
+            <AuthProvider>
+              <MQTTConnectionProvider>{children}</MQTTConnectionProvider>
+            </AuthProvider>
+          </Provider>
+        </QueryProvider>
       </LocaleProvider>
     </NextIntlClientProvider>
   );

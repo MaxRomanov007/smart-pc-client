@@ -2,6 +2,7 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import i18nextPlugin from "eslint-plugin-i18next";
+import pluginQuery from "@tanstack/eslint-plugin-query";
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -17,6 +18,7 @@ const eslintConfig = defineConfig([
   {
     plugins: {
       i18next: i18nextPlugin,
+      "@tanstack/query": pluginQuery,
     },
     rules: {
       "i18next/no-literal-string": [

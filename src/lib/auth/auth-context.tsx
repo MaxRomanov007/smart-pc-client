@@ -23,8 +23,6 @@ import {
   useCallback,
   useContext,
   useEffect,
-  useRef,
-  useState,
 } from "react";
 import { parseUserFromIdToken, tokenStorage } from "./tokens";
 import {
@@ -35,7 +33,11 @@ import {
   PKCE_STATE_KEY,
   PKCE_VERIFIER_KEY,
 } from "./pkce";
-import type { IAuthContext, IAuthState } from "./types";
+import type { IAuthContext, IAuthState, IUser } from "./types";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+
+export const AUTH_QUERY_KEY = ["auth-session"] as const;
+const REFRESH_BEFORE_EXPIRY_S = 60;
 
 interface IAuthContextInternal extends IAuthContext {
   setSessionFromTokens: (
@@ -53,163 +55,70 @@ const OAUTH_CONFIG = {
   scope: "openid offline mqtt:pc:read mqtt:pc:state:read mqtt:pc:command:write",
 };
 
-// Как часто "будильник" проверяет дедлайн пока вкладка активна.
-// Не критично точное — просто не пропустить окно.
-const CHECK_INTERVAL_MS = 30_000; // 30 секунд
-
-// За сколько до истечения токена начинаем refresh
-const REFRESH_BEFORE_EXPIRY_S = 60;
+interface ISessionData {
+  accessToken: string;
+  expiresIn: number;
+  idToken: string | null;
+  user: IUser | null;
+}
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [state, setState] = useState<IAuthState>({
-    user: null,
-    accessToken: null,
-    isAuthenticated: false,
-    isLoading: true,
-    error: null,
+  const queryClient = useQueryClient();
+
+  const {
+    data: session,
+    isLoading,
+    isFetching,
+  } = useQuery<ISessionData | null>({
+    queryKey: AUTH_QUERY_KEY,
+
+    queryFn: async (): Promise<ISessionData | null> => {
+      const result = await tokenStorage.refresh();
+      if (!result) return null;
+
+      return {
+        accessToken: result.accessToken,
+        expiresIn: result.expiresIn,
+        idToken: result.idToken,
+        user: result.idToken ? parseUserFromIdToken(result.idToken) : null,
+      };
+    },
+
+    staleTime: (query) => {
+      const data = query.state.data as ISessionData | null | undefined;
+      if (!data) return 0;
+      return Math.max(data.expiresIn - REFRESH_BEFORE_EXPIRY_S, 5) * 1000;
+    },
+    refetchOnWindowFocus: true,
+
+    refetchInterval: 30_000,
+    refetchIntervalInBackground: false,
+
+    retry: 3,
+
+    // null = пользователь не залогинен, не считаем ошибкой
+    throwOnError: false,
   });
 
-  // Абсолютный timestamp (ms) когда нужно сделать refresh.
-  // null = нет активной сессии.
-  const refreshDeadline = useRef<number | null>(null);
-
-  // Интервал-"будильник" — просто периодически вызывает checkAndRefresh
-  const checkInterval = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  // ─── Ядро: проверить дедлайн и при необходимости обновить токен ──────────
-
-  const checkAndRefresh = useCallback(async () => {
-    if (refreshDeadline.current === null) return;
-
-    const now = Date.now();
-
-    // Дедлайн ещё не наступил — ничего не делаем
-    if (now < refreshDeadline.current) return;
-
-    // Дедлайн наступил (или прошёл — например, вкладка была в фоне)
-    const result = await tokenStorage.refresh();
-
-    if (!result) {
-      refreshDeadline.current = null;
-      setState({
-        user: null,
-        accessToken: null,
-        isAuthenticated: false,
-        isLoading: false,
-        error: "Session expired",
-      });
-      return;
-    }
-
-    // Устанавливаем новый дедлайн от нового expires_in
-    refreshDeadline.current =
-      Date.now() + (result.expiresIn - REFRESH_BEFORE_EXPIRY_S) * 1000;
-
-    setState((prev) => ({
-      ...prev,
-      accessToken: result.accessToken,
-      user: result.idToken
-        ? (parseUserFromIdToken(result.idToken) ?? prev.user)
-        : prev.user,
-      error: null,
-    }));
-  }, []);
-
-  // ─── Установить дедлайн и запустить будильник ─────────────────────────────
-
-  const startRefreshSchedule = useCallback(
-    (expiresIn: number) => {
-      // Дедлайн = сейчас + (expiresIn - 60s)
-      // Если expiresIn маленький (< 70s) — обновим почти сразу
-      refreshDeadline.current =
-        Date.now() + Math.max(expiresIn - REFRESH_BEFORE_EXPIRY_S, 5) * 1000;
-
-      // Запускаем периодическую проверку если ещё не запущена
-      if (!checkInterval.current) {
-        checkInterval.current = setInterval(checkAndRefresh, CHECK_INTERVAL_MS);
-      }
-    },
-    [checkAndRefresh],
-  );
-
-  const stopRefreshSchedule = useCallback(() => {
-    refreshDeadline.current = null;
-    if (checkInterval.current) {
-      clearInterval(checkInterval.current);
-      checkInterval.current = null;
-    }
-  }, []);
-
-  // ─── visibilitychange: главная защита от "проспавшего" таймера ───────────
-
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === "visible") {
-        // Вкладка стала активной — сразу проверяем дедлайн.
-        // Если вкладка была в фоне 30+ минут и токен истёк — обновим мгновенно.
-        checkAndRefresh();
-      }
-    };
+    if (session?.accessToken) {
+      tokenStorage.setAccessToken(session.accessToken, session.expiresIn);
+    }
+  }, [session]);
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, [checkAndRefresh]);
-
-  // ─── Инициализация сессии при монтировании ────────────────────────────────
-
+  // auth:session-expired from axios interceptor
   useEffect(() => {
-    const initSession = async () => {
-      const result = await tokenStorage.refresh();
-
-      if (result) {
-        const user = result.idToken
-          ? parseUserFromIdToken(result.idToken)
-          : null;
-
-        setState({
-          user,
-          accessToken: result.accessToken,
-          isAuthenticated: true,
-          isLoading: false,
-          error: null,
-        });
-
-        startRefreshSchedule(result.expiresIn);
-      } else {
-        setState({
-          user: null,
-          accessToken: null,
-          isAuthenticated: false,
-          isLoading: false,
-          error: null,
-        });
-      }
-    };
-
-    initSession();
-
     const handleSessionExpired = () => {
-      stopRefreshSchedule();
-      setState({
-        user: null,
-        accessToken: null,
-        isAuthenticated: false,
-        isLoading: false,
-        error: "Session expired",
-      });
+      // Сбрасываем кэш query — следующий mount вызовет queryFn заново
+      queryClient.setQueryData(AUTH_QUERY_KEY, null);
+      tokenStorage.clearAccessToken();
     };
 
     window.addEventListener("auth:session-expired", handleSessionExpired);
-
     return () => {
-      stopRefreshSchedule();
       window.removeEventListener("auth:session-expired", handleSessionExpired);
     };
-  }, [startRefreshSchedule, stopRefreshSchedule]);
-
-  // ─── login ────────────────────────────────────────────────────────────────
+  }, [queryClient]);
 
   const login = useCallback(async (redirectPath?: string): Promise<void> => {
     const verifier = generateVerifier();
@@ -236,54 +145,57 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     window.location.href = `${OAUTH_CONFIG.authorizationEndpoint}?${params.toString()}`;
   }, []);
 
-  // ─── logout ───────────────────────────────────────────────────────────────
-
   const logout = useCallback(async (): Promise<void> => {
-    stopRefreshSchedule();
     await tokenStorage.logout();
-    setState({
-      user: null,
-      accessToken: null,
-      isAuthenticated: false,
-      isLoading: false,
-      error: null,
-    });
-  }, [stopRefreshSchedule]);
-
-  // ─── getValidToken (для axios interceptor) ────────────────────────────────
+    queryClient.setQueryData(AUTH_QUERY_KEY, null);
+    queryClient.removeQueries({ queryKey: AUTH_QUERY_KEY });
+  }, [queryClient]);
 
   const getValidToken = useCallback(async (): Promise<string | null> => {
     const current = tokenStorage.getAccessToken();
-    if (current && !tokenStorage.isAccessTokenExpiringSoon()) {
-      return current;
-    }
-    const result = await tokenStorage.refresh();
-    if (result) {
-      setState((prev) => ({ ...prev, accessToken: result.accessToken }));
-      return result.accessToken;
-    }
-    return null;
-  }, []);
+    if (current && !tokenStorage.isAccessTokenExpiringSoon()) return current;
 
-  // ─── setSessionFromTokens (для callback страницы) ────────────────────────
+    const result = await queryClient.fetchQuery<ISessionData | null>({
+      queryKey: AUTH_QUERY_KEY,
+      queryFn: async () => {
+        const r = await tokenStorage.refresh();
+        if (!r) return null;
+        return {
+          accessToken: r.accessToken,
+          expiresIn: r.expiresIn,
+          idToken: r.idToken,
+          user: r.idToken ? parseUserFromIdToken(r.idToken) : null,
+        };
+      },
+      staleTime: 0,
+    });
+
+    return result?.accessToken ?? null;
+  }, [queryClient]);
 
   const setSessionFromTokens = useCallback(
     (idToken: string, accessToken: string, expiresIn: number) => {
       const user = parseUserFromIdToken(idToken);
       tokenStorage.setAccessToken(accessToken, expiresIn);
 
-      setState({
-        user,
+      const sessionData: ISessionData = {
         accessToken,
-        isAuthenticated: true,
-        isLoading: false,
-        error: null,
-      });
-
-      startRefreshSchedule(expiresIn);
+        expiresIn,
+        idToken,
+        user,
+      };
+      queryClient.setQueryData(AUTH_QUERY_KEY, sessionData);
     },
-    [startRefreshSchedule],
+    [queryClient],
   );
+
+  const state: IAuthState = {
+    user: session?.user ?? null,
+    accessToken: session?.accessToken ?? null,
+    isAuthenticated: !!session?.accessToken,
+    isLoading: isLoading || isFetching,
+    error: null,
+  };
 
   const value: IAuthContextInternal = {
     ...state,

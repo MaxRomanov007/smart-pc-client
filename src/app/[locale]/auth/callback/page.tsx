@@ -1,19 +1,5 @@
 "use client";
 
-/**
- * auth/callback/page.tsx — обработка OAuth callback
- *
- * После того как пользователь авторизовался на OAuth сервере,
- * он редиректится сюда с ?code=...&state=...
- *
- * Этот компонент:
- * 1. Проверяет state (защита от CSRF)
- * 2. Берёт PKCE verifier из sessionStorage
- * 3. Обменивает code на tokens
- * 4. Очищает sessionStorage
- * 5. Редиректит на целевую страницу
- */
-
 import { useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { useAuthContextInternal } from "@/lib/auth/auth-context";
@@ -33,7 +19,6 @@ export default function AuthCallback() {
   const router = useRouter();
   const { setSessionFromTokens, logout } = useAuthContextInternal();
 
-  // Защита от двойного запуска в React Strict Mode
   const isProcessing = useRef(false);
 
   useEffect(() => {
@@ -59,7 +44,6 @@ export default function AuthCallback() {
         return;
       }
 
-      // Валидация state (защита от CSRF)
       const savedState = sessionStorage.getItem(PKCE_STATE_KEY);
       if (!savedState || savedState !== returnedState) {
         console.error("State mismatch");
@@ -76,7 +60,6 @@ export default function AuthCallback() {
         return;
       }
 
-      // Очищаем sessionStorage до обмена токенов
       sessionStorage.removeItem(PKCE_VERIFIER_KEY);
       sessionStorage.removeItem(PKCE_STATE_KEY);
 
@@ -89,8 +72,6 @@ export default function AuthCallback() {
         );
 
         if (tokens.id_token) {
-          // Устанавливаем сессию через контекст — это единственный
-          // правильный способ обновить React state
           setSessionFromTokens(
             tokens.id_token,
             tokens.access_token,

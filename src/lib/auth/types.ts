@@ -1,20 +1,15 @@
-/**
- * types.ts — общие типы для auth модуля
- */
-
 export interface IUserName {
   first: string;
   last: string;
 }
 
 export interface IUser {
-  id: string; // sub из JWT
-  email: string; // traits.email (Ory формат)
+  id: string;
+  email: string; // traits.email (Ory format)
   name: IUserName; // traits.name
   picture: string; // traits.picture
 }
 
-/** Ответ OAuth сервера при обмене code → tokens */
 export interface ITokenResponse {
   access_token: string;
   refresh_token?: string;
@@ -24,7 +19,6 @@ export interface ITokenResponse {
   scope?: string;
 }
 
-/** Декодированный id_token payload (Ory Kratos формат) */
 export interface IOryIdTokenPayload {
   sub: string;
   iss: string;
@@ -41,7 +35,6 @@ export interface IOryIdTokenPayload {
   };
 }
 
-/** Состояние AuthContext */
 export interface IAuthState {
   user: IUser | null;
   accessToken: string | null;
@@ -50,7 +43,6 @@ export interface IAuthState {
   error: string | null;
 }
 
-/** Публичный интерфейс AuthContext */
 export interface IAuthContext extends IAuthState {
   login: (redirectPath?: string) => Promise<void>;
   logout: () => Promise<void>;
