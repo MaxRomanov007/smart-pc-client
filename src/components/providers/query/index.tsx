@@ -18,7 +18,7 @@ export default function QueryProvider({ children }: Props) {
   const t = useExtracted("query-provider");
 
   useEffect(() => {
-    attachGlobalQueryErrorHandler(queryClient, {
+    return attachGlobalQueryErrorHandler(queryClient, {
       noConnection: t({
         message: "No connection",
         description: "no connection error message",

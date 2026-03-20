@@ -2,49 +2,43 @@
 
 import PcListUpdater from "@/app/[locale]/dashboard/(components)/pcs/pc-list-updater";
 import PcListSkeleton from "@/app/[locale]/dashboard/(components)/pcs/pc-list-skeleton";
-import useServiceQuery from "@/utils/hooks/services/use-service-query";
-import { fetchUserPcs } from "@/services/pcs";
-import { useCallback, useEffect } from "react";
+import { pcsApi } from "@/services/pcs";
 import { handleError } from "@/utils/errors";
 import { useExtracted } from "next-intl";
 import { CommandsProvider } from "@/utils/hooks/commands/provider";
 import { useRequireAuth } from "@/lib/auth/use-auth";
+import { useQuery } from "@tanstack/react-query";
+import { StatusCodes } from "@/types/services/response";
 
 export default function OnlinePcs() {
   const t = useExtracted("online-pcs");
-  const { accessToken } = useRequireAuth();
-  const fetchPcsQuery = useCallback(
-    () => fetchUserPcs(accessToken ?? ""),
-    [accessToken],
-  );
-  const {
-    data: pcs,
-    error,
-    isError,
-    loading,
-  } = useServiceQuery(fetchPcsQuery, { enabled: !!accessToken });
+  useRequireAuth();
 
-  useEffect(() => {
-    if (!!error) {
-      handleError(
-        t({
-          message: "Error occurred while fetching pcs",
-          description: "pcs error message title",
-        }),
-        error.message,
-      );
-    }
-  }, [error, t]);
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["pcs"],
+    queryFn: pcsApi.fetchUserPcs,
+    retry: false,
+  });
 
-  if (isError) {
+  if (error) {
     return null;
   }
 
-  if (loading || !pcs) return <PcListSkeleton />;
+  if (isLoading || !data) return <PcListSkeleton />;
+
+  if (data.status && data.status != StatusCodes.ok) {
+    handleError(
+      t({
+        message: "Error occurred while fetching user pcs",
+        description: "request error message",
+      }),
+      data.error?.toString(),
+    );
+  }
 
   return (
     <CommandsProvider>
-      <PcListUpdater pcs={pcs} />
+      <PcListUpdater pcs={data?.data ?? []} />
     </CommandsProvider>
   );
 }

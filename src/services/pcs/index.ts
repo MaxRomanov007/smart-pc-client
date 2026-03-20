@@ -1,7 +1,19 @@
 import type { IPc } from "@/types/pc/pc";
 import type { Response } from "@/types/services/response";
+import { createAxiosInstance } from "@/lib/axios/createAxiosInstance";
 
 const pcServiceAddress = process.env.NEXT_PUBLIC_PC_SERVICE_ADDRESS;
+
+if (!pcServiceAddress) {
+  throw new Error("NEXT_PUBLIC_PC_SERVICE_ADDRESS does not set");
+}
+
+const axios = createAxiosInstance(pcServiceAddress);
+
+export const pcsApi = {
+  fetchUserPcs: () =>
+    axios.get<Response<IPc[]>>("/pcs").then((resp) => resp.data),
+} as const;
 
 export async function fetchUserPcs(token: string): Promise<Response<IPc[]>> {
   if (!token) {

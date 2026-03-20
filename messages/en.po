@@ -29,11 +29,11 @@ msgctxt "auth-callback-page"
 msgid "ia2WSY"
 msgstr "Completing authorization..."
 
-#. pcs error message title
+#. request error message
 #: src\app\[locale]\dashboard\(components)\pcs\online-pcs.tsx
 msgctxt "online-pcs"
-msgid "1Cd1br"
-msgstr "Error occurred while fetching pcs"
+msgid "pJaRjO"
+msgstr "Error occurred while fetching user pcs"
 
 #. pcs error message title
 #: src\app\[locale]\dashboard\[slug]\(components)\page\page.tsx
