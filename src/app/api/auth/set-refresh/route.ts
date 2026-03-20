@@ -1,25 +1,9 @@
-/**
- * app/api/auth/set-refresh/route.ts
- *
- * Принимает refresh_token от клиента и сохраняет его в httpOnly cookie.
- *
- * ПОЧЕМУ НУЖЕН ОТДЕЛЬНЫЙ ENDPOINT:
- * Браузер не может установить httpOnly cookie через JS (это было бы
- * бессмысленно с точки зрения безопасности). Только HTTP-ответ сервера
- * может установить httpOnly cookie через Set-Cookie заголовок.
- *
- * БЕЗОПАСНОСТЬ:
- * - Принимает только POST
- * - В продакшене стоит добавить CSRF проверку или ограничить origin
- */
-
 import { NextRequest, NextResponse } from "next/server";
 
-// Имя cookie — вынесено в константу для переиспользования
-export const REFRESH_TOKEN_COOKIE = "rt"; // короткое имя уменьшает размер заголовка
+export const REFRESH_TOKEN_COOKIE = "rt";
 
 export async function POST(request: NextRequest) {
-  let body: { refresh_token: string; expires_in?: number };
+  let body: { refresh_token: string };
 
   try {
     body = await request.json();
@@ -27,9 +11,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { refresh_token, expires_in } = body;
+  const { refresh_token } = body;
 
-  if (!refresh_token || typeof refresh_token !== "string") {
+  if (!refresh_token) {
     return NextResponse.json(
       { error: "refresh_token is required" },
       { status: 400 },
@@ -38,14 +22,11 @@ export async function POST(request: NextRequest) {
 
   const response = NextResponse.json({ ok: true });
 
-  // Устанавливаем refresh_token в httpOnly Secure cookie
   response.cookies.set(REFRESH_TOKEN_COOKIE, refresh_token, {
-    httpOnly: true, // JS не может прочитать
-    secure: process.env.NODE_ENV === "production", // только HTTPS в продакшене
-    sameSite: "lax", // защита от CSRF при навигации
-    path: "/api/auth", // cookie отправляется только на /api/auth/*
-    // maxAge в секундах: refresh_token обычно живёт дольше access_token
-    // Ory Hydra по умолчанию: 30 дней
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    path: "/api/auth",
     maxAge: 60 * 60 * 24 * 30,
   });
 

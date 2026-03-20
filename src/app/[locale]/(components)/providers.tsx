@@ -17,13 +17,13 @@ export default async function Providers({ children, locale }: Props) {
   return (
     <NextIntlClientProvider messages={messages}>
       <LocaleProvider locale={locale}>
-        <QueryProvider>
-          <Provider>
+        <Provider>
+          <QueryProvider>
             <AuthProvider>
               <MQTTConnectionProvider>{children}</MQTTConnectionProvider>
             </AuthProvider>
-          </Provider>
-        </QueryProvider>
+          </QueryProvider>
+        </Provider>
       </LocaleProvider>
     </NextIntlClientProvider>
   );

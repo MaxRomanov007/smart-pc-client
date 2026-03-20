@@ -5,9 +5,9 @@ export interface IUserName {
 
 export interface IUser {
   id: string;
-  email: string; // traits.email (Ory format)
-  name: IUserName; // traits.name
-  picture: string; // traits.picture
+  email: string;
+  name: IUserName;
+  picture: string;
 }
 
 export interface ITokenResponse {
@@ -35,6 +35,11 @@ export interface IOryIdTokenPayload {
   };
 }
 
+export interface ISessionData {
+  accessToken: string;
+  expiresIn: number;
+}
+
 export interface IAuthState {
   user: IUser | null;
   accessToken: string | null;
@@ -47,4 +52,9 @@ export interface IAuthContext extends IAuthState {
   login: (redirectPath?: string) => Promise<void>;
   logout: () => Promise<void>;
   getValidToken: () => Promise<string | null>;
+}
+
+export interface IRefreshResult {
+  access_token: string;
+  expires_in: number;
 }

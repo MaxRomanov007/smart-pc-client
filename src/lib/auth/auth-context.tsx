@@ -1,22 +1,5 @@
 "use client";
 
-/**
- * AuthContext.tsx
- *
- * ИСПРАВЛЕНИЯ относительно предыдущей версии:
- *
- * 1. initSession теперь использует полный IRefreshResult (с idToken),
- *    чтобы восстановить user при перезагрузке страницы.
- *
- * 2. isLoading: true по умолчанию — компоненты обязаны ждать
- *    завершения initSession перед рендером защищённого контента.
- *
- * 3. setUserFromIdToken вынесен в контекст для callback страницы.
- *
- * 4. Подписка на auth:session-expired — синхронизирует состояние
- *    когда axios interceptor обнаруживает невосстановимый 401.
- */
-
 import {
   createContext,
   type ReactNode,
@@ -24,6 +7,7 @@ import {
   useContext,
   useEffect,
 } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { parseUserFromIdToken, tokenStorage } from "./tokens";
 import {
   generateChallenge,
@@ -33,15 +17,16 @@ import {
   PKCE_STATE_KEY,
   PKCE_VERIFIER_KEY,
 } from "./pkce";
-import type { IAuthContext, IAuthState, IUser } from "./types";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getOidcDiscovery } from "./discovery";
+import { showError } from "@/utils/errors";
+import type { IAuthContext, IAuthState, ISessionData, IUser } from "./types";
 
 export const AUTH_QUERY_KEY = ["auth-session"] as const;
-const REFRESH_BEFORE_EXPIRY_S = 60;
+const AUTH_USER_STORAGE_KEY = "auth_user";
 
 interface IAuthContextInternal extends IAuthContext {
   setSessionFromTokens: (
-    idToken: string,
+    idToken: string | undefined,
     accessToken: string,
     expiresIn: number,
   ) => void;
@@ -49,38 +34,47 @@ interface IAuthContextInternal extends IAuthContext {
 
 const AuthContext = createContext<IAuthContextInternal | null>(null);
 
-const OAUTH_CONFIG = {
-  clientId: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!,
-  authorizationEndpoint: process.env.NEXT_PUBLIC_OAUTH_AUTH_URL!,
-  scope: "openid offline mqtt:pc:read mqtt:pc:state:read mqtt:pc:command:write",
-};
+const OAUTH_SCOPE =
+  "openid offline mqtt:pc:read mqtt:pc:state:read mqtt:pc:command:write";
 
-interface ISessionData {
-  accessToken: string;
-  expiresIn: number;
-  idToken: string | null;
-  user: IUser | null;
+const REFRESH_BEFORE_EXPIRY_S = 60;
+const CHECK_INTERVAL_MS = 30_000;
+
+function saveUser(user: IUser): void {
+  try {
+    sessionStorage.setItem(AUTH_USER_STORAGE_KEY, JSON.stringify(user));
+  } catch {}
+}
+
+function loadUser(): IUser | null {
+  try {
+    const raw = sessionStorage.getItem(AUTH_USER_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as IUser) : null;
+  } catch {
+    return null;
+  }
+}
+
+function clearUser(): void {
+  try {
+    sessionStorage.removeItem(AUTH_USER_STORAGE_KEY);
+  } catch {
+    // ignore
+  }
 }
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const queryClient = useQueryClient();
 
-  const {
-    data: session,
-    isLoading,
-    isFetching,
-  } = useQuery<ISessionData | null>({
+  const { data: session, isLoading } = useQuery<ISessionData | null>({
     queryKey: AUTH_QUERY_KEY,
 
     queryFn: async (): Promise<ISessionData | null> => {
       const result = await tokenStorage.refresh();
       if (!result) return null;
-
       return {
-        accessToken: result.accessToken,
-        expiresIn: result.expiresIn,
-        idToken: result.idToken,
-        user: result.idToken ? parseUserFromIdToken(result.idToken) : null,
+        accessToken: result.access_token,
+        expiresIn: result.expires_in,
       };
     },
 
@@ -89,16 +83,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!data) return 0;
       return Math.max(data.expiresIn - REFRESH_BEFORE_EXPIRY_S, 5) * 1000;
     },
-    refetchOnWindowFocus: true,
 
-    refetchInterval: 30_000,
+    refetchOnWindowFocus: true, // visibilitychange бесплатно
+    refetchInterval: CHECK_INTERVAL_MS,
     refetchIntervalInBackground: false,
-
-    retry: 3,
-
-    // null = пользователь не залогинен, не считаем ошибкой
+    retry: 2,
     throwOnError: false,
   });
+
+  const user = session ? loadUser() : null;
 
   useEffect(() => {
     if (session?.accessToken) {
@@ -106,12 +99,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, [session]);
 
-  // auth:session-expired from axios interceptor
   useEffect(() => {
     const handleSessionExpired = () => {
-      // Сбрасываем кэш query — следующий mount вызовет queryFn заново
       queryClient.setQueryData(AUTH_QUERY_KEY, null);
+      queryClient.removeQueries({ queryKey: AUTH_QUERY_KEY });
       tokenStorage.clearAccessToken();
+      clearUser();
+      // Показываем toaster — пользователь должен понять почему его разлогинило
+      showError("Сессия истекла", "Пожалуйста, войдите снова");
     };
 
     window.addEventListener("auth:session-expired", handleSessionExpired);
@@ -121,6 +116,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [queryClient]);
 
   const login = useCallback(async (redirectPath?: string): Promise<void> => {
+    const discovery = await getOidcDiscovery();
+
     const verifier = generateVerifier();
     const challenge = await generateChallenge(verifier);
     const state = generateState();
@@ -132,23 +129,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const redirectUri = `${window.location.origin}/auth/callback`;
+
     const params = new URLSearchParams({
       response_type: "code",
-      client_id: OAUTH_CONFIG.clientId,
+      client_id: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!,
       redirect_uri: redirectUri,
-      scope: OAUTH_CONFIG.scope,
+      scope: OAUTH_SCOPE,
       state,
       code_challenge: challenge,
       code_challenge_method: "S256",
     });
 
-    window.location.href = `${OAUTH_CONFIG.authorizationEndpoint}?${params.toString()}`;
+    window.location.href = `${discovery.authorization_endpoint}?${params.toString()}`;
   }, []);
 
   const logout = useCallback(async (): Promise<void> => {
     await tokenStorage.logout();
+
     queryClient.setQueryData(AUTH_QUERY_KEY, null);
     queryClient.removeQueries({ queryKey: AUTH_QUERY_KEY });
+    clearUser();
   }, [queryClient]);
 
   const getValidToken = useCallback(async (): Promise<string | null> => {
@@ -160,12 +160,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       queryFn: async () => {
         const r = await tokenStorage.refresh();
         if (!r) return null;
-        return {
-          accessToken: r.accessToken,
-          expiresIn: r.expiresIn,
-          idToken: r.idToken,
-          user: r.idToken ? parseUserFromIdToken(r.idToken) : null,
-        };
+        return { accessToken: r.access_token, expiresIn: r.expires_in };
       },
       staleTime: 0,
     });
@@ -173,27 +168,30 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return result?.accessToken ?? null;
   }, [queryClient]);
 
+  // ─── setSessionFromTokens (callback страница) ─────────────────────────────
+
   const setSessionFromTokens = useCallback(
-    (idToken: string, accessToken: string, expiresIn: number) => {
-      const user = parseUserFromIdToken(idToken);
+    (idToken: string | undefined, accessToken: string, expiresIn: number) => {
       tokenStorage.setAccessToken(accessToken, expiresIn);
 
-      const sessionData: ISessionData = {
+      if (idToken) {
+        const user = parseUserFromIdToken(idToken);
+        if (user) saveUser(user);
+      }
+
+      queryClient.setQueryData(AUTH_QUERY_KEY, {
         accessToken,
         expiresIn,
-        idToken,
-        user,
-      };
-      queryClient.setQueryData(AUTH_QUERY_KEY, sessionData);
+      } satisfies ISessionData);
     },
     [queryClient],
   );
 
   const state: IAuthState = {
-    user: session?.user ?? null,
+    user,
     accessToken: session?.accessToken ?? null,
     isAuthenticated: !!session?.accessToken,
-    isLoading: isLoading || isFetching,
+    isLoading,
     error: null,
   };
 

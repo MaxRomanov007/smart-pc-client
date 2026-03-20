@@ -1,28 +1,37 @@
-/**
- * app/api/auth/refresh/route.ts — обновление access_token
- *
- * ПОЧЕМУ НЕЛЬЗЯ ДЕЛАТЬ REFRESH С КЛИЕНТА:
- * refresh_token хранится в httpOnly cookie — JS не может его прочитать.
- * Этот Route Handler работает на сервере Next.js и имеет доступ к cookies.
- * Он читает refresh_token, обращается к OAuth серверу, возвращает
- * новый access_token клиенту (но не refresh_token!).
- *
- * Если OAuth сервер вернул новый refresh_token — ротируем его в cookie.
- */
-
 import { type NextRequest, NextResponse } from "next/server";
 import { REFRESH_TOKEN_COOKIE } from "../set-refresh/route";
 
+async function getTokenEndpoint(): Promise<string> {
+  const issuer = process.env.NEXT_PUBLIC_OAUTH_ISSUER;
+  if (!issuer) throw new Error("NEXT_PUBLIC_OAUTH_ISSUER is not set");
+
+  const res = await fetch(`${issuer}/.well-known/openid-configuration`, {
+    next: { revalidate: 3600 },
+  });
+
+  if (!res.ok) throw new Error("OIDC discovery failed");
+  const data = await res.json();
+  return data.token_endpoint as string;
+}
+
 export async function POST(request: NextRequest) {
-  // Читаем refresh_token из httpOnly cookie
   const refreshToken = request.cookies.get(REFRESH_TOKEN_COOKIE)?.value;
 
   if (!refreshToken) {
-    // Нет refresh_token — пользователь не залогинен или сессия истекла
     return NextResponse.json({ error: "No refresh token" }, { status: 401 });
   }
 
-  // Обращаемся к OAuth серверу с сервера Next.js
+  let tokenEndpoint: string;
+  try {
+    tokenEndpoint = await getTokenEndpoint();
+  } catch (err) {
+    console.error("OIDC discovery failed in refresh:", err);
+    return NextResponse.json(
+      { error: "OIDC discovery failed" },
+      { status: 503 },
+    );
+  }
+
   const params = new URLSearchParams({
     grant_type: "refresh_token",
     client_id: process.env.NEXT_PUBLIC_OAUTH_CLIENT_ID!,
@@ -31,13 +40,13 @@ export async function POST(request: NextRequest) {
 
   let tokenResponse: Response;
   try {
-    tokenResponse = await fetch(process.env.NEXT_PUBLIC_OAUTH_TOKEN_URL!, {
+    tokenResponse = await fetch(tokenEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: params.toString(),
     });
-  } catch (networkError) {
-    console.error("OAuth server unreachable during refresh:", networkError);
+  } catch (err) {
+    console.error("OAuth server unreachable during refresh:", err);
     return NextResponse.json(
       { error: "OAuth server unavailable" },
       { status: 503 },
@@ -45,9 +54,8 @@ export async function POST(request: NextRequest) {
   }
 
   if (!tokenResponse.ok) {
-    console.log(tokenResponse);
     const errorText = await tokenResponse.text();
-    console.error("Refresh token rejected by OAuth server:", errorText);
+    console.error("Refresh rejected by Hydra:", errorText);
 
     const errorResponse = NextResponse.json(
       { error: "Refresh failed" },
@@ -62,7 +70,6 @@ export async function POST(request: NextRequest) {
   const response = NextResponse.json({
     access_token: tokens.access_token,
     expires_in: tokens.expires_in,
-    id_token: tokens.id_token ?? null,
   });
 
   if (tokens.refresh_token && tokens.refresh_token !== refreshToken) {
