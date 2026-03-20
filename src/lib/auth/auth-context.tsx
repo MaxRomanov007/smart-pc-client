@@ -38,7 +38,6 @@ const OAUTH_SCOPE =
   "openid offline mqtt:pc:read mqtt:pc:state:read mqtt:pc:command:write";
 
 const REFRESH_BEFORE_EXPIRY_S = 60;
-const CHECK_INTERVAL_MS = 30_000;
 
 function saveUser(user: IUser): void {
   try {
@@ -84,9 +83,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return Math.max(data.expiresIn - REFRESH_BEFORE_EXPIRY_S, 5) * 1000;
     },
 
-    refetchOnWindowFocus: true, // visibilitychange бесплатно
-    refetchInterval: CHECK_INTERVAL_MS,
-    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: true,
+
     retry: 2,
     throwOnError: false,
   });
@@ -105,7 +103,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       queryClient.removeQueries({ queryKey: AUTH_QUERY_KEY });
       tokenStorage.clearAccessToken();
       clearUser();
-      // Показываем toaster — пользователь должен понять почему его разлогинило
       showError("Сессия истекла", "Пожалуйста, войдите снова");
     };
 
@@ -155,6 +152,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const current = tokenStorage.getAccessToken();
     if (current && !tokenStorage.isAccessTokenExpiringSoon()) return current;
 
+    // Принудительный refetch через queryClient
     const result = await queryClient.fetchQuery<ISessionData | null>({
       queryKey: AUTH_QUERY_KEY,
       queryFn: async () => {
@@ -167,8 +165,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     return result?.accessToken ?? null;
   }, [queryClient]);
-
-  // ─── setSessionFromTokens (callback страница) ─────────────────────────────
 
   const setSessionFromTokens = useCallback(
     (idToken: string | undefined, accessToken: string, expiresIn: number) => {

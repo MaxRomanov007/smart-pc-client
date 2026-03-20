@@ -1,9 +1,14 @@
 "use client";
 
 import { MQTTProvider } from "@/lib/mqtt/provider";
+import type { IClientOptions } from "mqtt";
 import type { ReactNode } from "react";
 
-const MQTT_OPTIONS = { keepalive: 60, resubscribe: true };
+// Стабильный объект — создаётся один раз на уровне модуля
+const MQTT_OPTIONS: Omit<IClientOptions, "username" | "password"> = {
+  keepalive: 60,
+  resubscribe: true,
+};
 
 export default function MQTTConnectionProvider({
   children,

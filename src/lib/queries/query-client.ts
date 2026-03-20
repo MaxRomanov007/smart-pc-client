@@ -22,7 +22,17 @@ export function makeQueryClient(): QueryClient {
   });
 }
 
-export function attachGlobalQueryErrorHandler(client: QueryClient): void {
+type ErrorMessage =
+  | "noConnection"
+  | "noConnectionDescription"
+  | "queryError"
+  | "mutationError";
+type ErrorMessages = Record<ErrorMessage, string>;
+
+export function attachGlobalQueryErrorHandler(
+  client: QueryClient,
+  messages: ErrorMessages,
+): void {
   const queryCache = client.getQueryCache();
   const mutationCache = client.getMutationCache();
 
@@ -33,17 +43,16 @@ export function attachGlobalQueryErrorHandler(client: QueryClient): void {
     const error = event.query.state.error;
     if (!error) return;
 
-    // Не показываем toaster для auth query — там своя логика
     const queryKey = event.query.queryKey;
     if (Array.isArray(queryKey) && queryKey[0] === "auth-session") return;
 
     if (isNetworkError(error)) {
-      showError("Нет соединения", "Проверьте подключение к интернету");
+      showError(messages.noConnection, messages.noConnectionDescription);
       return;
     }
 
     const message = error instanceof Error ? error.message : String(error);
-    showError("Ошибка загрузки данных", message);
+    showError(messages.queryError, message);
   });
 
   mutationCache.subscribe((event) => {
@@ -54,11 +63,11 @@ export function attachGlobalQueryErrorHandler(client: QueryClient): void {
     if (!error) return;
 
     if (isNetworkError(error)) {
-      showError("Нет соединения", "Проверьте подключение к интернету");
+      showError(messages.noConnection, messages.noConnectionDescription);
       return;
     }
 
     const message = error instanceof Error ? error.message : String(error);
-    showError("Ошибка операции", message);
+    showError(messages.mutationError, message);
   });
 }

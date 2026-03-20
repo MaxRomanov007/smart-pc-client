@@ -1,8 +1,4 @@
-import {
-  type IClientOptions,
-  type IClientSubscribeOptions,
-  MqttClient,
-} from "mqtt";
+import { type IClientOptions, type IClientSubscribeOptions, type MqttClient } from "mqtt";
 import type { ReactNode } from "react";
 import type { IUser } from "@/types/auth/user";
 
@@ -38,6 +34,6 @@ export interface IMqttContext {
 export interface MQTTProviderProps {
   children: ReactNode;
   brokerUrl: string;
-  wsPath?: string; // например, '/mqtt'
+  wsPath?: string;
   options?: Omit<IClientOptions, "username" | "password">;
 }

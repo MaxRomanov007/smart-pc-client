@@ -284,6 +284,30 @@ msgctxt "pc-power-on-button"
 msgid "539b0C"
 msgstr "Power on"
 
+#. query error message
+#: src\components\providers\query\index.tsx
+msgctxt "query-provider"
+msgid "BNICMt"
+msgstr "Error loading data"
+
+#. no connection error description message
+#: src\components\providers\query\index.tsx
+msgctxt "query-provider"
+msgid "ILF2Fy"
+msgstr "Check your internet connection"
+
+#. no connection error message
+#: src\components\providers\query\index.tsx
+msgctxt "query-provider"
+msgid "NP4I0A"
+msgstr "No connection"
+
+#. mutation error message
+#: src\components\providers\query\index.tsx
+msgctxt "query-provider"
+msgid "Xjt487"
+msgstr "Operation error"
+
 #: src\components\ui\badge\offline-badge\client.tsx
 #: src\components\ui\badge\offline-badge\server.tsx
 msgctxt "offline-badge"
