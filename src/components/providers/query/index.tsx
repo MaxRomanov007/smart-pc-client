@@ -3,10 +3,7 @@
 import { type ReactNode, useEffect, useState } from "react";
 import { QueryClient } from "@tanstack/query-core";
 import { QueryClientProvider } from "@tanstack/react-query";
-import {
-  attachGlobalQueryErrorHandler,
-  makeQueryClient,
-} from "@/lib/queries/query-client";
+import { makeQueryClient } from "@/lib/queries/query-client";
 import { useExtracted } from "next-intl";
 
 interface Props {
@@ -14,11 +11,9 @@ interface Props {
 }
 
 export default function QueryProvider({ children }: Props) {
-  const [queryClient] = useState<QueryClient>(() => makeQueryClient());
   const t = useExtracted("query-provider");
-
-  useEffect(() => {
-    return attachGlobalQueryErrorHandler(queryClient, {
+  const [queryClient] = useState<QueryClient>(() =>
+    makeQueryClient({
       noConnection: t({
         message: "No connection",
         description: "no connection error message",
@@ -35,8 +30,8 @@ export default function QueryProvider({ children }: Props) {
         message: "Operation error",
         description: "mutation error message",
       }),
-    });
-  }, [queryClient, t]);
+    }),
+  );
 
   useEffect(() => {
     window.__TANSTACK_QUERY_CLIENT__ = queryClient;

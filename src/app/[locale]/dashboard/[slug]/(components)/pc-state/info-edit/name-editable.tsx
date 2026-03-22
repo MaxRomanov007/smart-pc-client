@@ -5,7 +5,7 @@ import EditableControl from "@/components/ui/editable/editable-control";
 import type { IPc } from "@/types/pc/pc";
 import { useCallback, useState } from "react";
 import { changeUserPc } from "@/services/pcs";
-import { StatusCodes } from "@/types/services/response";
+import { StatusCodes } from "@/types/api/response";
 import { toaster } from "@/components/ui/chakra/toaster";
 import { useExtracted } from "next-intl";
 import { redirect } from "@/i18n/navigation";

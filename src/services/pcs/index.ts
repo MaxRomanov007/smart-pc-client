@@ -1,6 +1,7 @@
 import type { IPc } from "@/types/pc/pc";
-import type { Response } from "@/types/services/response";
-import { createAxiosInstance } from "@/lib/axios/createAxiosInstance";
+import type { ApiResponse } from "@/types/api/response";
+import { createAxiosInstance } from "@/lib/axios/create-axios-instance";
+import { withHandleApiResponse } from "@/lib/axios/with-handle-api-response";
 
 const pcServiceAddress = process.env.NEXT_PUBLIC_PC_SERVICE_ADDRESS;
 
@@ -11,47 +12,17 @@ if (!pcServiceAddress) {
 const axios = createAxiosInstance(pcServiceAddress);
 
 export const pcsApi = {
-  fetchUserPcs: () =>
-    axios.get<Response<IPc[]>>("/pcs").then((resp) => resp.data),
+  fetchUserPcs: withHandleApiResponse(() => axios.get<IPc[]>("/pcs")),
+  fetchUserPcBySlug: withHandleApiResponse((slug: string) =>
+    axios.get<ApiResponse<IPc>>("/pcs", {
+      params: {
+        slug,
+      },
+    }),
+  ),
+  changeUserPc: (pc: IPcToPatch) =>
+    axios.patch<ApiResponse<IPc>>(`/pcs/${pc.id}`, pc),
 } as const;
-
-export async function fetchUserPcs(token: string): Promise<Response<IPc[]>> {
-  if (!token) {
-    return {};
-  }
-
-  try {
-    const response = await fetch(pcServiceAddress + "/pcs", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    return data as Response<IPc[]>;
-  } catch (e) {
-    return { error: e as Error };
-  }
-}
-
-export async function fetchUserPcBySlug(
-  token: string,
-  slug: string,
-): Promise<Response<IPc>> {
-  try {
-    const url = new URL(`${pcServiceAddress}/pcs`);
-    url.searchParams.set("slug", slug);
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    return data as Response<IPc>;
-  } catch (e) {
-    return { error: e as Error };
-  }
-}
 
 interface IPcToPatch {
   id: string;
@@ -63,7 +34,7 @@ interface IPcToPatch {
 export async function changeUserPc(
   token: string,
   pc: IPcToPatch,
-): Promise<Response<IPc>> {
+): Promise<ApiResponse<IPc>> {
   try {
     const response = await fetch(`${pcServiceAddress}/pcs/${pc.id}`, {
       method: "PATCH",
@@ -74,28 +45,8 @@ export async function changeUserPc(
       body: JSON.stringify(pc),
     });
     const data = await response.json();
-    return data as Response<IPc>;
+    return data as ApiResponse<IPc>;
   } catch (e) {
-    return { error: e as Error };
-  }
-}
-
-export async function fetchUserPcCommands(
-  token: string,
-  slug: string,
-): Promise<Response<IPc>> {
-  try {
-    const url = new URL(`${pcServiceAddress}/pcs`);
-    url.searchParams.set("slug", slug);
-
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    return data as Response<IPc>;
-  } catch (e) {
-    return { error: e as Error };
+    return { error: e as string };
   }
 }

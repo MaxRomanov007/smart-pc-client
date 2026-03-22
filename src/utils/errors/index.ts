@@ -9,7 +9,7 @@ function showErrorToast(title: string, description?: string) {
   );
 }
 
-export function handleError(title: string, message?: string) {
+export function handleError(title: string, message?: string): never {
   showErrorToast(title, message);
   throw new Error(title);
 }

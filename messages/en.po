@@ -29,24 +29,6 @@ msgctxt "auth-callback-page"
 msgid "ia2WSY"
 msgstr "Completing authorization..."
 
-#. request error message
-#: src\app\[locale]\dashboard\(components)\pcs\online-pcs.tsx
-msgctxt "online-pcs"
-msgid "pJaRjO"
-msgstr "Error occurred while fetching user pcs"
-
-#. pcs error message title
-#: src\app\[locale]\dashboard\[slug]\(components)\page\page.tsx
-msgctxt "slug-pc-page"
-msgid "6BQpYt"
-msgstr "Error occurred while fetching pc"
-
-#. page title
-#: src\app\[locale]\dashboard\[slug]\(components)\page\page.tsx
-msgctxt "slug-pc-page"
-msgid "9gf06z"
-msgstr "PC {name}"
-
 #: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
 msgctxt "pc-offline-state"
 msgid "d1pycG"

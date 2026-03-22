@@ -1,4 +1,8 @@
-import { type IClientOptions, type IClientSubscribeOptions, type MqttClient } from "mqtt";
+import {
+  type IClientOptions,
+  type IClientSubscribeOptions,
+  type MqttClient,
+} from "mqtt";
 import type { ReactNode } from "react";
 import type { IUser } from "@/types/auth/user";
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { type Response, StatusCodes } from "@/types/services/response";
+import { type ApiResponse, StatusCodes } from "@/types/services/apiResponse";
 
 interface UseServiceQueryOptions<T> {
   enabled?: boolean;
@@ -7,7 +7,7 @@ interface UseServiceQueryOptions<T> {
 }
 
 export default function useServiceQuery<T>(
-  queryFn: () => Promise<Response<T>>,
+  queryFn: () => Promise<ApiResponse<T>>,
   options: UseServiceQueryOptions<T> = {},
 ) {
   const { enabled = true, initialData } = options;
