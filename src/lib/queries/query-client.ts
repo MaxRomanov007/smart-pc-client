@@ -3,66 +3,68 @@ import { showError } from "@/utils/errors";
 import { AxiosError } from "axios";
 import { isNextRouterError } from "next/dist/client/components/is-next-router-error";
 
-type ErrorMessage =
-  | "noConnection"
-  | "noConnectionDescription"
-  | "queryError"
-  | "mutationError";
-type ErrorMessages = Record<ErrorMessage, string>;
+type ErrorMessage = {
+  title: string;
+  message: string;
+};
+type AxiosErrorMessage = (error: AxiosError) => ErrorMessage | undefined;
 
-function isNetworkError(error: unknown): boolean {
-  return (
-    (error instanceof TypeError && error.message === "Failed to fetch") ||
-    (error instanceof AxiosError && !error.status)
-  );
+type ErrorMessages = {
+  noConnection: ErrorMessage;
+  axiosError: AxiosErrorMessage;
+};
+
+function isNoConnectionError(error: unknown): boolean {
+  return error instanceof AxiosError && !error.status;
 }
 
-function handleError(
-  error: unknown,
-  fallbackMessage: string,
-  messages: ErrorMessages,
-): void {
-  if (isNetworkError(error)) {
-    showError(messages.noConnection, messages.noConnectionDescription);
-    return;
-  }
-  if (isNextRouterError(error)) {
-    return;
+function handleError(messages: ErrorMessages): (error: unknown) => void {
+  return (error) => {
+    if (isNextRouterError(error)) {
+      return;
+    }
+
+    if (isNoConnectionError(error)) {
+      showError(messages.noConnection.title, messages.noConnection.message);
+      return;
+    }
+
+    if (!(error instanceof AxiosError)) {
+      return;
+    }
+
+    const message = messages.axiosError(error);
+    if (!message) return;
+
+    showError(message.title, message.message);
+  };
+}
+
+function retry(failureCount: number, error: unknown) {
+  if (isNoConnectionError(error)) {
+    return failureCount < 2;
   }
 
-  const detail = error instanceof Error ? error.message : String(error);
-  showError(fallbackMessage, detail);
+  return false;
 }
 
 export function makeQueryClient(messages: ErrorMessages): QueryClient {
   return new QueryClient({
     queryCache: new QueryCache({
-      onError: (error, query) => {
-        if (
-          Array.isArray(query.queryKey) &&
-          query.queryKey[0] === "auth-session"
-        )
-          return;
-        handleError(error, messages.queryError, messages);
-      },
+      onError: handleError(messages),
     }),
     mutationCache: new MutationCache({
-      onError: (error) => {
-        handleError(error, messages.mutationError, messages);
-      },
+      onError: handleError(messages),
     }),
     defaultOptions: {
       queries: {
-        throwOnError: true,
-        retry: (failureCount, error) => {
-          if (error instanceof Response && error.status === 401) return false;
-          if (isNextRouterError(error)) return false;
-          return failureCount < 2;
-        },
+        throwOnError: isNextRouterError,
+        retry: retry,
         staleTime: 5 * 60 * 1000,
       },
       mutations: {
-        throwOnError: true,
+        throwOnError: isNextRouterError,
+        retry: retry,
       },
     },
   });

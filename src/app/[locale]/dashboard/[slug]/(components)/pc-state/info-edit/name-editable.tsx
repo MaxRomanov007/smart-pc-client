@@ -4,52 +4,29 @@ import { Editable } from "@chakra-ui/react";
 import EditableControl from "@/components/ui/editable/editable-control";
 import type { IPc } from "@/types/pc/pc";
 import { useCallback, useState } from "react";
-import { changeUserPc } from "@/services/pcs";
-import { StatusCodes } from "@/types/api/response";
-import { toaster } from "@/components/ui/chakra/toaster";
-import { useExtracted } from "next-intl";
-import { redirect } from "@/i18n/navigation";
-import { PAGES } from "@/config/navigation/pages";
-import { useRequireAuth } from "@/lib/auth/use-auth";
+import { useEditPcMutation } from "@/utils/hooks/queries/pcs";
 
 interface Props {
   pc: IPc;
 }
 
 export default function NameEditable({ pc }: Props) {
-  const { accessToken } = useRequireAuth();
-  const t = useExtracted("slug-pc-name-editable");
-
   const [name, setName] = useState<string>(pc.name);
 
-  const handleCommit = useCallback(async () => {
-    const response = await changeUserPc(accessToken ?? "", {
-      id: pc.id,
-      name,
-    });
+  const { mutate } = useEditPcMutation(pc.id);
 
-    if (response.status !== StatusCodes.ok) {
-      setName(pc.name);
-      toaster.info({
-        title: t({
-          message: "Error occurred while saving name",
-          description: "error toast title",
-        }),
-        description: response.error?.toString(),
-      });
+  const handleCommit = useCallback(() => {
+    if (name === pc.name) {
       return;
     }
-
-    if (response.data?.slug !== pc.slug) {
-      redirect({ href: PAGES.pc(response.data?.slug ?? pc.slug), locale: "" });
-    }
-  }, [name, pc.id, pc.name, pc.slug, t, accessToken]);
+    mutate({ ...pc, name });
+  }, [name, pc, mutate]);
 
   return (
     <Editable.Root
       value={name}
       onValueChange={(e) => setName(e.value)}
-      onValueCommit={async () => await handleCommit()}
+      onValueCommit={handleCommit}
     >
       <Editable.Preview />
       <Editable.Input />

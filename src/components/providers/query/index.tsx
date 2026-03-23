@@ -14,22 +14,27 @@ export default function QueryProvider({ children }: Props) {
   const t = useExtracted("query-provider");
   const [queryClient] = useState<QueryClient>(() =>
     makeQueryClient({
-      noConnection: t({
-        message: "No connection",
-        description: "no connection error message",
-      }),
-      noConnectionDescription: t({
-        message: "Check your internet connection",
-        description: "no connection error description message",
-      }),
-      queryError: t({
-        message: "Error loading data",
-        description: "query error message",
-      }),
-      mutationError: t({
-        message: "Operation error",
-        description: "mutation error message",
-      }),
+      noConnection: {
+        title: t({
+          message: "No connection",
+          description: "no connection error message",
+        }),
+        message: t({
+          message: "Check your internet connection",
+          description: "no connection error description message",
+        }),
+      },
+      axiosError: (error) => {
+        if (error.status === 401) return;
+
+        return {
+          title: t({
+            message: "Unexpected error",
+            description: "axios error handler title",
+          }),
+          message: error.message,
+        };
+      },
     }),
   );
 

@@ -2,13 +2,10 @@
 
 import PcListUpdater from "@/app/[locale]/dashboard/(components)/pcs/pc-list-updater";
 import PcListSkeleton from "@/app/[locale]/dashboard/(components)/pcs/pc-list-skeleton";
-import { useExtracted } from "next-intl";
 import { CommandsProvider } from "@/utils/hooks/commands/provider";
 import { usePcsQuery } from "@/utils/hooks/queries/pcs";
 
 export default function OnlinePcs() {
-  const t = useExtracted("online-pcs");
-
   const { data, isLoading, isError } = usePcsQuery();
 
   if (isError) {

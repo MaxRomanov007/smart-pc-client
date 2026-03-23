@@ -18,7 +18,6 @@ import {
   PKCE_VERIFIER_KEY,
 } from "./pkce";
 import { getOidcDiscovery } from "./discovery";
-import { showError } from "@/utils/errors";
 import type { IAuthContext, IAuthState, ISessionData, IUser } from "./types";
 
 export const AUTH_QUERY_KEY = ["auth-session"] as const;
@@ -103,7 +102,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       queryClient.removeQueries({ queryKey: AUTH_QUERY_KEY });
       tokenStorage.clearAccessToken();
       clearUser();
-      showError("Сессия истекла", "Пожалуйста, войдите снова");
     };
 
     window.addEventListener("auth:session-expired", handleSessionExpired);

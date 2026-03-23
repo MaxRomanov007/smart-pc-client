@@ -50,18 +50,6 @@ msgctxt "pc-offline-state"
 msgid "s7c1Bg"
 msgstr "Go to {pageName}"
 
-#. error toast title
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\info-edit\description-editable.tsx
-msgctxt "slug-pc-description-editable"
-msgid "MfXyNt"
-msgstr "Error occurred while saving description"
-
-#. error toast title
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\info-edit\name-editable.tsx
-msgctxt "slug-pc-name-editable"
-msgid "5vTv+5"
-msgstr "Error occurred while saving name"
-
 #. cpu metric label
 #: src\app\[locale]\dashboard\[slug]\(components)\pc-state\metrics\cpu-metric.tsx
 msgctxt "metrics"
@@ -266,11 +254,11 @@ msgctxt "pc-power-on-button"
 msgid "539b0C"
 msgstr "Power on"
 
-#. query error message
+#. axios error handler title
 #: src\components\providers\query\index.tsx
 msgctxt "query-provider"
-msgid "BNICMt"
-msgstr "Error loading data"
+msgid "1rlBUx"
+msgstr "Unexpected error"
 
 #. no connection error description message
 #: src\components\providers\query\index.tsx
@@ -283,12 +271,6 @@ msgstr "Check your internet connection"
 msgctxt "query-provider"
 msgid "NP4I0A"
 msgstr "No connection"
-
-#. mutation error message
-#: src\components\providers\query\index.tsx
-msgctxt "query-provider"
-msgid "Xjt487"
-msgstr "Operation error"
 
 #: src\components\ui\badge\offline-badge\client.tsx
 #: src\components\ui\badge\offline-badge\server.tsx
@@ -361,6 +343,18 @@ msgstr "Are you sure?"
 msgctxt "commands-provider"
 msgid "qcCX8I"
 msgstr "Are you sure you want to execute command {name}"
+
+#. not found error title
+#: src\utils\hooks\queries\pcs\queries\use-slug-pc-query.ts
+msgctxt "use-slug-pc-query"
+msgid "4+Iiep"
+msgstr "PC not found"
+
+#. not found error message
+#: src\utils\hooks\queries\pcs\queries\use-slug-pc-query.ts
+msgctxt "use-slug-pc-query"
+msgid "V7DSDW"
+msgstr "This PC can not be found"
 
 #. index breadcrumb
 #: src\utils\hooks\ui\breadcrumbs\client.ts

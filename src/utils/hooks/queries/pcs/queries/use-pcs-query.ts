@@ -8,6 +8,6 @@ export function usePcsQuery() {
 
   return useQuery({
     queryKey: pcsQueryKeys.pcs,
-    queryFn: () => pcsApi.fetchUserPcs(),
+    queryFn: pcsApi.fetchUserPcs(),
   });
 }
