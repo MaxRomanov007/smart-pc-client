@@ -42,7 +42,6 @@ export function PcInfo({ pc, volumeState, onVolumeChange, onPcChange }: Props) {
           onDescriptionChanged={(description) =>
             onPcChange?.({ ...pc, description })
           }
-          textarea
         />
       </Field.Root>
 
