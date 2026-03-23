@@ -7,13 +7,8 @@ import {
 } from "@/types/api/response";
 import { ApiError } from "@/types/api/error";
 import { enumValueToKey } from "@/utils/enums/enum-value-to-key";
-import { handleApiError } from "@/lib/axios/handle-api-error";
 
-type ErrorStatusKeys = {
-  [K in keyof typeof StatusCodes]: (typeof StatusCodes)[K] extends StatusCodes.ok
-    ? never
-    : K;
-}[keyof typeof StatusCodes];
+type ErrorStatusKeys = Exclude<keyof typeof StatusCodes, StatusCodes.ok>;
 
 interface ErrorOptions {
   title?: string;
@@ -21,7 +16,8 @@ interface ErrorOptions {
   block?: boolean;
 }
 
-type ErrorStatuses = Partial<Record<ErrorStatusKeys, ErrorOptions>>;
+type ErrorKeys = ErrorStatusKeys | "other";
+type ErrorStatuses = Partial<Record<ErrorKeys, ErrorOptions>>;
 
 export interface HandleApiResponseOptions {
   errors?: ErrorStatuses;
@@ -47,16 +43,16 @@ export function handleApiResponse<T, D, H>(
 
     const { ok: _, ...errorStatuses } = StatusCodes;
     const statusKey = enumValueToKey(errorStatuses, apiResponse.status);
-    const errorOpts = statusKey ? opts?.errors?.[statusKey] : undefined;
+    const errorOpts = statusKey
+      ? opts?.errors?.[statusKey]
+      : opts?.errors?.other;
 
-    handleApiError(
-      new ApiError({
-        title: errorOpts?.title,
-        message: errorOpts?.message,
-        block: errorOpts?.block,
-        response: apiResponse,
-      }),
-    );
+    new ApiError({
+      title: errorOpts?.title,
+      message: errorOpts?.message,
+      block: errorOpts?.block,
+      response: apiResponse,
+    }).handle();
 
     return apiResponse.data;
   };

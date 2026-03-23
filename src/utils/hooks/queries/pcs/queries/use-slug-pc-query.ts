@@ -13,6 +13,9 @@ export function useSlugPcQuery(slug: string) {
     queryFn: () =>
       pcsApi.fetchUserPcBySlug(slug, {
         errors: {
+          other: {
+            block: true,
+          },
           notFound: {
             message: "Hello",
             title: "Hello hello",

@@ -21,10 +21,7 @@ export type ApiResponse<T> = SuccessResponse<T> | ErrorResponse;
 export function isApiResponse<T>(obj: unknown): obj is ApiResponse<T> {
   if (typeof obj !== "object" || obj === null) return false;
 
-  const hasStatus = "status" in obj;
-  const statusValid = Object.values(StatusCodes).includes((obj as any).status);
-
-  return hasStatus && statusValid;
+  return "status" in obj;
 }
 
 export function isSuccessResponse<T>(
