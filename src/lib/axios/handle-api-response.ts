@@ -47,13 +47,14 @@ export function handleApiResponse<T, D, H>(
       ? opts?.errors?.[statusKey]
       : opts?.errors?.other;
 
-    new ApiError({
+    const err = new ApiError({
       title: errorOpts?.title,
       message: errorOpts?.message,
       block: errorOpts?.block,
       response: apiResponse,
-    }).handle();
+    });
 
-    return apiResponse.data;
+    err.handle();
+    throw err;
   };
 }

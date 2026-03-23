@@ -27,7 +27,7 @@ export class ApiError extends Error {
   constructor(opts?: ApiErrorConstructor) {
     super(opts?.message);
     this.name = "ApiError";
-    this.title = opts?.title ?? "ApiError";
+    this.title = opts?.title ?? "";
     this.block = opts?.block ?? false;
     this.response = opts?.response;
   }

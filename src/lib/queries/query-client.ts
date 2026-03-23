@@ -2,6 +2,7 @@ import { MutationCache, QueryCache, QueryClient } from "@tanstack/react-query";
 import { showError } from "@/utils/errors";
 import { AxiosError } from "axios";
 import { isNextRouterError } from "next/dist/client/components/is-next-router-error";
+import { ApiError } from "@/types/api/error";
 
 type ErrorMessage = {
   title: string;
@@ -21,6 +22,10 @@ function isNoConnectionError(error: unknown): boolean {
 function handleError(messages: ErrorMessages): (error: unknown) => void {
   return (error) => {
     if (isNextRouterError(error)) {
+      return;
+    }
+
+    if (error instanceof ApiError) {
       return;
     }
 
