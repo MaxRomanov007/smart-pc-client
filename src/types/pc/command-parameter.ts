@@ -18,7 +18,7 @@ export interface ICommandParameter<T extends CommandParameterValueType> {
   name: string;
   description?: string;
   type?: ParameterTypeFromValueType<T>;
-  value: T;
+  value?: T;
   shouldConvertToString?: boolean;
 }
 

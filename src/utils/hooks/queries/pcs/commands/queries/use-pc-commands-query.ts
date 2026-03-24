@@ -7,7 +7,7 @@ export function usePcCommandsQuery(pcId: string) {
   useRequireAuth();
 
   return useQuery({
-    queryKey: pcCommandsQueryKeys.pcCommand(pcId),
+    queryKey: pcCommandsQueryKeys.pcCommands(pcId),
     queryFn: pcsApi.fetchPcCommands(pcId),
   });
 }

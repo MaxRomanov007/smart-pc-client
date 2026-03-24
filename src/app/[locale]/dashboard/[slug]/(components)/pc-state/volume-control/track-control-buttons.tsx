@@ -28,7 +28,7 @@ export default function TrackControlButtons({ pc }: Props) {
         <CommandIconButton
           opts={{
             pc: pc,
-            name: "prev-track",
+            commandId: "prev-track",
             withoutDialog: true,
           }}
         >
@@ -45,7 +45,7 @@ export default function TrackControlButtons({ pc }: Props) {
         <CommandIconButton
           opts={{
             pc: pc,
-            name: "play-pause",
+            commandId: "play-pause",
             withoutDialog: true,
           }}
         >
@@ -62,7 +62,7 @@ export default function TrackControlButtons({ pc }: Props) {
         <CommandIconButton
           opts={{
             pc: pc,
-            name: "next-track",
+            commandId: "next-track",
             withoutDialog: true,
           }}
         >

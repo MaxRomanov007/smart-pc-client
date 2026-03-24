@@ -12,7 +12,7 @@ export function NumberParameter({ parameter, onValueChange }: Props) {
     <ParameterBase parameter={parameter}>
       <NumberInput.Root
         w="full"
-        value={parameter.value.toString()}
+        value={parameter.value?.toString()}
         onValueChange={(e) => onValueChange?.(e.valueAsNumber)}
       >
         <NumberInput.Control />

@@ -28,7 +28,7 @@ export default function VolumeSlider({ pc, state, onVolumeChange }: Props) {
 
     doCommand({
       pc,
-      name: "set-volume",
+      commandId: "set-volume",
       withoutDialog: true,
       params: [
         {

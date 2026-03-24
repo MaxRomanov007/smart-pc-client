@@ -9,12 +9,13 @@ export type DoCommandMessageType =
 
 export interface DoCommandOptions {
   pc: IPc;
-  name: string;
+  commandId: string;
   params?: CommandParameter[];
   messageType?: DoCommandMessageType;
   dialogTitle?: string;
   text?: string;
   withoutDialog?: boolean;
+  shouldRequest?: boolean;
 }
 
 export type DoCommandFunction = (options: DoCommandOptions) => Promise<void>;

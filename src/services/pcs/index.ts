@@ -4,8 +4,11 @@ import { createAxiosInstance } from "@/lib/axios/create-axios-instance";
 import {
   handleApiResponseMutation,
   handleApiResponseQuery,
+  handleApiResponseQueryMapped,
 } from "@/lib/axios/with-handle-api-response";
 import type { ICommand } from "@/types/pc/command";
+import type { CommandParameter } from "@/types/pc/command-parameter";
+import { initializeParameter } from "@/services/pcs/initialize-parameter";
 
 const pcServiceAddress = process.env.NEXT_PUBLIC_PC_SERVICE_ADDRESS;
 
@@ -30,6 +33,14 @@ export const pcsApi = {
 
   fetchPcCommands: handleApiResponseQuery((pcId: string) =>
     axios.get<ICommand[]>(`/pcs/${pcId}/commands`),
+  ),
+
+  fetchPcCommandParameters: handleApiResponseQueryMapped(
+    (pcId: string, commandId: string) =>
+      axios.get<CommandParameter[]>(
+        `/pcs/${pcId}/commands/${commandId}/parameters`,
+      ),
+    (params) => params.map(initializeParameter),
   ),
 } as const;
 

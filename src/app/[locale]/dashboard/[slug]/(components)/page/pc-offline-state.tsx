@@ -28,7 +28,7 @@ export default function PcOfflineState({ pc }: Props) {
   const handlePowerOn = useCallback(async () => {
     doCommand({
       pc,
-      name: "power-on",
+      commandId: "power-on",
       withoutDialog: true,
       messageType: MqttMessageTypes.wakerCommand,
     });

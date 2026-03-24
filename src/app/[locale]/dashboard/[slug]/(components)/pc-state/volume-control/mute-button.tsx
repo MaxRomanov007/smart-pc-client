@@ -48,7 +48,7 @@ export default function MuteButton({ pc, state, onMutedChange }: Props) {
       <CommandIconButton
         opts={{
           pc: pc,
-          name: state.muted ? "unmute" : "mute",
+          commandId: state.muted ? "unmute" : "mute",
           withoutDialog: true,
         }}
         variant="ghost"

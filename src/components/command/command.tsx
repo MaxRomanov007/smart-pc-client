@@ -13,10 +13,14 @@ export default function Command({ command, pc }: Props) {
   return (
     <Card.Root variant="elevated" mb={4}>
       <Card.Body>
-        <Flex>
+        <Flex alignItems="center">
           <Text>{command.name}</Text>
           <Spacer />
-          <CommandIconButton opts={{ pc, name: command.name }}>
+          <CommandIconButton
+            opts={{ pc, commandId: command.id, shouldRequest: true }}
+            variant={"subtle"}
+            size="sm"
+          >
             <LuPlay />
           </CommandIconButton>
         </Flex>

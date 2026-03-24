@@ -30,7 +30,7 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
       parametersRef.current.forEach((param) =>
         parameter.set(
           param.name,
-          param.shouldConvertToString ? param.value.toString() : param.value,
+          param.shouldConvertToString ? param.value?.toString() : param.value,
         ),
       );
 
@@ -51,7 +51,7 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
   const doCommand: DoCommandFunction = useCallback(
     async ({
       pc,
-      name,
+      commandId,
       params = [],
       messageType = MqttMessageTypes.command,
       dialogTitle = t({
@@ -60,17 +60,18 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
       }),
       text = t({
         message: "Are you sure you want to execute command {name}",
-        values: { name },
+        values: { name: commandId },
         description: "default confirmation dialog text",
       }),
       withoutDialog = false,
+      shouldRequest = false,
     }: DoCommandOptions) => {
       if (!isConnected) return;
 
       parametersRef.current = params;
 
       if (withoutDialog) {
-        await publishMessage(pc, name, messageType);
+        await publishMessage(pc, commandId, messageType);
         return;
       }
 
@@ -80,8 +81,11 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
           initialParameters={params}
           text={text}
           parametersRef={parametersRef}
+          pcId={pc.id}
+          commandId={commandId ?? ""}
+          shouldRequest={shouldRequest && !!commandId}
         />,
-        async () => await publishMessage(pc, name, messageType),
+        async () => await publishMessage(pc, commandId, messageType),
       );
     },
     [dialog, isConnected, publishMessage, t],

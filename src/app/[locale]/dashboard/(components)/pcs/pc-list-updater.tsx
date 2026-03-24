@@ -36,7 +36,7 @@ export default function PcListUpdater({ pcs }: Props) {
   const powerOnPc = (pc: IPcItem) => {
     doCommand({
       pc,
-      name: "power-on",
+      commandId: "power-on",
       withoutDialog: true,
       messageType: MqttMessageTypes.wakerCommand,
     });

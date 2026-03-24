@@ -36,6 +36,20 @@
         {
           "type": "route",
           "uuid": "27ba8f22-52f2-4b79-9cd2-166a58c513ab"
+        },
+        {
+          "type": "folder",
+          "uuid": "ea491be7-11b4-43bc-a2dd-783984d49577"
+        }
+      ]
+    },
+    {
+      "uuid": "ea491be7-11b4-43bc-a2dd-783984d49577",
+      "name": "parameters",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "b48fca79-e039-44fc-a8b9-5bb84cc5d522"
         }
       ]
     }
@@ -270,6 +284,64 @@
         },
         {
           "uuid": "10d025fd-d968-4e49-acbd-53586d5cd38a",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 401,
+          "label": "unauthorized",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "header",
+              "modifier": "Authorization",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b48fca79-e039-44fc-a8b9-5bb84cc5d522",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "pcs/:pcID/commands/:commandID/parameters",
+      "responses": [
+        {
+          "uuid": "4252b20d-903f-4873-aac5-8d91e64fa98d",
+          "body": "{\n  \"status\": \"ok\",\n  \"data\": {{data 'command-parameters'}} \n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "success",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f6b0052c-1b1f-425e-987f-72c58b9b7d6a",
           "body": "{}",
           "latency": 0,
           "statusCode": 401,

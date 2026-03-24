@@ -33,7 +33,7 @@ export default function PcCommandsCard({ pc }: Props) {
       </Card.Header>
 
       <Card.Body>
-        <CommandsList commands={data} />
+        <CommandsList commands={data} pc={pc} />
       </Card.Body>
 
       <Card.Footer />
