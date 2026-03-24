@@ -4,6 +4,7 @@ import { useExtracted } from "next-intl";
 import { Card } from "@chakra-ui/react";
 import type { IPc } from "@/types/pc/pc";
 import { usePcCommandsQuery } from "@/utils/hooks/queries/pcs/commands";
+import CommandsList from "@/components/command/commands-list";
 
 interface Props {
   pc: IPc;
@@ -32,11 +33,7 @@ export default function PcCommandsCard({ pc }: Props) {
       </Card.Header>
 
       <Card.Body>
-        {data.map((command) => (
-          <p key={command.id}>
-            {command.id}. {command.name}
-          </p>
-        ))}
+        <CommandsList commands={data} />
       </Card.Body>
 
       <Card.Footer />
