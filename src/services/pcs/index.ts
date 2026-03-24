@@ -5,6 +5,7 @@ import {
   handleApiResponseMutation,
   handleApiResponseQuery,
 } from "@/lib/axios/with-handle-api-response";
+import type { ICommand } from "@/types/pc/command";
 
 const pcServiceAddress = process.env.NEXT_PUBLIC_PC_SERVICE_ADDRESS;
 
@@ -15,16 +16,20 @@ if (!pcServiceAddress) {
 const axios = createAxiosInstance(pcServiceAddress);
 
 export const pcsApi = {
-  fetchUserPcs: handleApiResponseQuery(() => axios.get<IPc[]>("/pcs")),
-  fetchUserPcBySlug: handleApiResponseQuery((slug: string) =>
+  fetchPcs: handleApiResponseQuery(() => axios.get<IPc[]>("/pcs")),
+  fetchPcBySlug: handleApiResponseQuery((slug: string) =>
     axios.get<ApiResponse<IPc>>("/pcs", {
       params: {
         slug,
       },
     }),
   ),
-  editUserPc: handleApiResponseMutation((pc: PcToEdit) =>
+  editPc: handleApiResponseMutation((pc: PcToEdit) =>
     axios.patch<ApiResponse<IPc>>(`/pcs/${pc.id}`, pc),
+  ),
+
+  fetchPcCommands: handleApiResponseQuery((pcId: string) =>
+    axios.get<ICommand[]>(`/pcs/${pcId}/commands`),
   ),
 } as const;
 

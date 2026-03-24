@@ -12,7 +12,7 @@ export function useEditPcMutation(id: string) {
 
   return useMutation({
     mutationKey: pcsMutationKeys.editPc(id),
-    mutationFn: pcsApi.editUserPc(),
+    mutationFn: pcsApi.editPc(),
     onMutate: async (data) => {
       if (!data.slug) {
         return;

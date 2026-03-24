@@ -9,7 +9,9 @@ export default function PageScrollArea({ children, ...props }: Props) {
   return (
     <ScrollArea.Root {...props}>
       <ScrollArea.Viewport>
-        <ScrollArea.Content p={2}>{children}</ScrollArea.Content>
+        <ScrollArea.Content p={2} h={"full"}>
+          {children}
+        </ScrollArea.Content>
       </ScrollArea.Viewport>
       <ScrollArea.Scrollbar orientation="vertical" />
       <ScrollArea.Corner />

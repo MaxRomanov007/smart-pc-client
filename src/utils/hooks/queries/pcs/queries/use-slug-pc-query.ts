@@ -12,7 +12,7 @@ export function useSlugPcQuery(slug: string) {
 
   return useQuery({
     queryKey: pcsQueryKeys.slugPc(slug),
-    queryFn: pcsApi.fetchUserPcBySlug(slug, {
+    queryFn: pcsApi.fetchPcBySlug(slug, {
       errors: {
         notFound: {
           title: t({

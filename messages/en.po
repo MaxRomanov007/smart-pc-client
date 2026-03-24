@@ -29,6 +29,18 @@ msgctxt "auth-callback-page"
 msgid "ia2WSY"
 msgstr "Completing authorization..."
 
+#. card title
+#: src\app\[locale]\dashboard\[slug]\(components)\commands\pc-commands-card.tsx
+msgctxt "pc-commands-card"
+msgid "5/sFMo"
+msgstr "PC Commands"
+
+#. card description
+#: src\app\[locale]\dashboard\[slug]\(components)\commands\pc-commands-card.tsx
+msgctxt "pc-commands-card"
+msgid "6FUbkj"
+msgstr "Commands registered on PC {name}"
+
 #: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
 msgctxt "pc-offline-state"
 msgid "d1pycG"

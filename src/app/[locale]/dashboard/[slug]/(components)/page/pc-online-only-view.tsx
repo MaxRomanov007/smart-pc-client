@@ -6,6 +6,8 @@ import { type IMqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useState } from "react";
 import PcOfflineState from "@/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state";
 import PcStateCard from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card";
+import { Flex } from "@chakra-ui/react";
+import PcCommandsCard from "@/app/[locale]/dashboard/[slug]/(components)/commands/pc-commands-card";
 
 interface Props {
   pc: IPc;
@@ -28,5 +30,10 @@ export default function PcOnlineOnlyView({ pc }: Props) {
     return <PcOfflineState pc={pc} />;
   }
 
-  return <PcStateCard pc={pc} />;
+  return (
+    <Flex h="full" direction="column" gap={4}>
+      <PcStateCard pc={pc} />
+      <PcCommandsCard pc={pc} />
+    </Flex>
+  );
 }
