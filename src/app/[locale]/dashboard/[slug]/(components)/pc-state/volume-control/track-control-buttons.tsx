@@ -25,7 +25,13 @@ export default function TrackControlButtons({ pc }: Props) {
           description: "previous track button",
         })}
       >
-        <CommandIconButton pc={pc} commandName="prev-track">
+        <CommandIconButton
+          opts={{
+            pc: pc,
+            name: "prev-track",
+            withoutDialog: true,
+          }}
+        >
           <LuArrowLeftToLine />
         </CommandIconButton>
       </Tooltip>
@@ -36,7 +42,13 @@ export default function TrackControlButtons({ pc }: Props) {
           description: "play-pause button",
         })}
       >
-        <CommandIconButton pc={pc} commandName="play-pause">
+        <CommandIconButton
+          opts={{
+            pc: pc,
+            name: "play-pause",
+            withoutDialog: true,
+          }}
+        >
           <PiPlayPauseBold />
         </CommandIconButton>
       </Tooltip>
@@ -47,7 +59,13 @@ export default function TrackControlButtons({ pc }: Props) {
           description: "next track button",
         })}
       >
-        <CommandIconButton pc={pc} commandName="next-track">
+        <CommandIconButton
+          opts={{
+            pc: pc,
+            name: "next-track",
+            withoutDialog: true,
+          }}
+        >
           <LuArrowRightToLine />
         </CommandIconButton>
       </Tooltip>

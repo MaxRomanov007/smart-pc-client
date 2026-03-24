@@ -1,23 +1,5 @@
 "use client";
 
-/**
- * mqtt/provider.tsx
- *
- * ПРОБЛЕМА: каждые 30с TanStack Query делает фоновый refetch сессии.
- * Hydra всегда возвращает новый access_token → auth.accessToken меняется →
- * эффект видит tokenChanged=true → client.end() + reconnect.
- * Результат: MQTT рвётся каждые 30 секунд.
- *
- * РЕШЕНИЕ:
- * Убираем reconnect по смене токена вообще.
- * Вместо этого:
- * 1. При смене токена — обновляем client.options.password напрямую.
- *    mqtt.js читает его при следующем reconnect (если соединение упадёт).
- * 2. Принудительный reconnect делаем ТОЛЬКО при получении события
- *    "auth:mqtt-reauth" — его диспатчим из axios interceptor после 401+refresh.
- *    Это значит токен был реально протухший, а не просто ротированный.
- */
-
 import {
   useCallback,
   useContext,
@@ -42,6 +24,17 @@ import type {
 } from "./types";
 import { useAuth } from "@/lib/auth/use-auth";
 
+function isNotAuthorizedError(err: Error): boolean {
+  if (
+    "reasonCode" in err &&
+    (err as { reasonCode: number }).reasonCode === 135
+  ) {
+    return true;
+  }
+
+  return err.message.toLowerCase().includes("not authorized");
+}
+
 export function MQTTProvider({
   children,
   brokerUrl,
@@ -55,40 +48,20 @@ export function MQTTProvider({
 
   const optionsRef = useRef<typeof options>(options);
 
+  const getValidTokenRef = useRef(auth.getValidToken);
+  useEffect(() => {
+    getValidTokenRef.current = auth.getValidToken;
+  }, [auth.getValidToken]);
+
   const topicFactory = useMemo(
     () => (auth.user?.id ? new TopicFactory(auth.user.id) : null),
     [auth.user?.id],
   );
 
-  // ─── Тихое обновление пароля при ротации токена ───────────────────────────
-  //
-  // Не переподключаемся. Просто обновляем пароль в опциях клиента.
-  // mqtt.js использует client.options при следующем автоматическом reconnect.
-
-  useEffect(() => {
-    if (!auth.accessToken || !clientRef.current) return;
-
-    // Обновляем пароль напрямую в объекте опций клиента
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (clientRef.current as any).options.password = auth.accessToken;
-  }, [auth.accessToken]);
-
-  // ─── Принудительный reconnect при реальной протухшей сессии ──────────────
-  //
-  // Событие "auth:mqtt-reauth" диспатчит axios interceptor после успешного
-  // refresh по 401. Это единственный случай когда нам нужно переподключиться:
-  // текущее соединение использует старый (невалидный) токен как MQTT password.
-
-  useEffect(() => {
-    const handleReauth = () => {
-      const client = clientRef.current;
-      const userId = auth.user?.id;
-      const token = auth.accessToken;
-
-      if (!client || !userId || !token) return;
-
+  const createAndAttachClient = useCallback(
+    (userId: string, token: string): MqttClient => {
       const url = `${brokerUrl}${wsPath}`;
-      const newOptions: IClientOptions = {
+      const mqttOptions: IClientOptions = {
         ...optionsRef.current,
         clientId:
           optionsRef.current.clientId ??
@@ -101,19 +74,58 @@ export function MQTTProvider({
         protocol: brokerUrl.startsWith("wss") ? "wss" : "ws",
       };
 
-      client.end(true);
-      clientRef.current = null;
+      const client = mqtt.connect(url, mqttOptions);
 
-      const newClient = mqtt.connect(url, newOptions);
-      clientRef.current = newClient;
-      attachClientHandlers(newClient, setStatus, setError);
+      attachClientHandlers(client, setStatus, setError, async () => {
+        clientRef.current = null;
+        setStatus("connecting");
+
+        const freshToken = await getValidTokenRef.current();
+        if (!freshToken) {
+          console.error("[MQTT] Not authorized: can't get fresh token");
+          setStatus("error");
+          return;
+        }
+
+        console.debug(
+          "[MQTT] Not authorized: recreating client with fresh token",
+        );
+        clientRef.current = createAndAttachClient(userId, freshToken);
+      });
+
+      return client;
+    },
+    [brokerUrl, wsPath],
+  );
+
+  useEffect(() => {
+    if (!auth.accessToken || !clientRef.current) return;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (clientRef.current as any).options.password = auth.accessToken;
+  }, [auth.accessToken]);
+
+  useEffect(() => {
+    const handleReauth = async () => {
+      const client = clientRef.current;
+      const userId = auth.user?.id;
+
+      if (!userId) return;
+
+      const freshToken = await getValidTokenRef.current();
+      if (!freshToken) return;
+
+      if (client) {
+        client.end(true);
+        clientRef.current = null;
+      }
+
+      clientRef.current = createAndAttachClient(userId, freshToken);
     };
 
     window.addEventListener("auth:mqtt-reauth", handleReauth);
     return () => window.removeEventListener("auth:mqtt-reauth", handleReauth);
-  }, [auth.accessToken, auth.user?.id, brokerUrl, wsPath]);
-
-  // ─── Основное подключение: только при смене userId / brokerUrl ────────────
+  }, [auth.user?.id, createAndAttachClient]);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -130,23 +142,8 @@ export function MQTTProvider({
 
     if (clientRef.current) return;
 
-    const url = `${brokerUrl}${wsPath}`;
-    const mqttOptions: IClientOptions = {
-      ...optionsRef.current,
-      clientId:
-        optionsRef.current.clientId ??
-        `nextjs-${userId}-${Date.now().toString(36)}`,
-      username: userId,
-      password: auth.accessToken,
-      clean: true,
-      reconnectPeriod: 5_000,
-      connectTimeout: 30_000,
-      protocol: brokerUrl.startsWith("wss") ? "wss" : "ws",
-    };
-
-    const client = mqtt.connect(url, mqttOptions);
+    const client = createAndAttachClient(userId, auth.accessToken);
     clientRef.current = client;
-    attachClientHandlers(client, setStatus, setError);
 
     return () => {
       client.end(true);
@@ -154,9 +151,7 @@ export function MQTTProvider({
     };
     // auth.accessToken намеренно не в deps
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auth.isAuthenticated, auth.user?.id, brokerUrl, wsPath]);
-
-  // ─── publish / subscribe / disconnect ─────────────────────────────────────
+  }, [auth.isAuthenticated, auth.user?.id, createAndAttachClient]);
 
   const publish = useCallback(
     async (message: MQTTMessage): Promise<void> => {
@@ -224,7 +219,10 @@ function attachClientHandlers(
   client: MqttClient,
   setStatus: (s: MQTTConnectionStatus) => void,
   setError: (e: MQTTError | undefined) => void,
+  onNotAuthorized: () => void,
 ) {
+  let isHandlingAuthError = false;
+
   client.on("connect", () => {
     console.debug("[MQTT] Connected");
     setStatus("connected");
@@ -235,6 +233,16 @@ function attachClientHandlers(
     setStatus("connecting");
   });
   client.on("error", (err: Error) => {
+    if (isNotAuthorizedError(err)) {
+      if (isHandlingAuthError) return;
+      isHandlingAuthError = true;
+
+      console.warn("[MQTT] Not authorized — stopping client, refreshing token");
+      client.end(true);
+      onNotAuthorized();
+      return;
+    }
+
     console.error("[MQTT] Error:", err);
     setError({ name: err.name, message: err.message, stack: err.stack });
     setStatus("error");
