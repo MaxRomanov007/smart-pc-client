@@ -236,6 +236,18 @@ msgctxt "sign-in-button"
 msgid "Ub+AGc"
 msgstr "Sign In"
 
+#. description text
+#: src\components\command\commands-list-empty-state.tsx
+msgctxt "pc-commands-empty-state"
+msgid "QsJYGz"
+msgstr "Register it on your pc"
+
+#. title text
+#: src\components\command\commands-list-empty-state.tsx
+msgctxt "pc-commands-empty-state"
+msgid "xGSVMH"
+msgstr "There are no commands"
+
 #. localization select tooltip
 #: src\components\i18n\localization-select.tsx
 msgctxt "localization-select"

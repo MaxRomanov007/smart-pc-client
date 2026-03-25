@@ -11,10 +11,10 @@ interface Props {
 
 export default function Command({ command, pc }: Props) {
   return (
-    <Card.Root variant="elevated" mb={4}>
+    <Card.Root variant="elevated" mb={4} size="sm">
       <Card.Body>
         <Flex alignItems="center">
-          <Text>{command.name}</Text>
+          <Text lineClamp={1}>{command.name}</Text>
           <Spacer />
           <CommandIconButton
             opts={{ pc, commandId: command.id, shouldRequest: true }}

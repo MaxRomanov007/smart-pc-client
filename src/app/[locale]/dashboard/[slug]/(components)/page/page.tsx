@@ -29,8 +29,9 @@ export function SlugPcPage({ slug }: Props) {
             breadcrumbs.dashboard,
             { label: data.name },
           ]}
+          flexShrink={0}
         />
-        <PcOnlineOnlyView pc={data} />
+        <PcOnlineOnlyView pc={data} flexGrow={1} minH={0} />
       </Stack>
     </CommandsProvider>
   );

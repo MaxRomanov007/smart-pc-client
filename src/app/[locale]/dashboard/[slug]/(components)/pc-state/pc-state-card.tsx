@@ -5,12 +5,12 @@ import { useExtracted } from "next-intl";
 import type { IPc } from "@/types/pc/pc";
 import { PcInfo } from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-info";
 import type { IPcStateData } from "@/types/mqtt/pc-state";
-import { useCallback, useState } from "react";
+import { type ComponentProps, useCallback, useState } from "react";
 import { type IMqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
 import Metrics from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics";
 
-interface Props {
+interface Props extends ComponentProps<typeof Card.Root> {
   pc: IPc;
 }
 
@@ -20,7 +20,7 @@ const INITIAL_STATE: IPcStateData = {
   volume: { current: 100, muted: false },
 };
 
-export default function PcStateCard({ pc }: Props) {
+export default function PcStateCard({ pc, ...rest }: Props) {
   const t = useExtracted("pc-state-card");
   const [state, setState] = useState<IPcStateData>(INITIAL_STATE);
 
@@ -58,7 +58,7 @@ export default function PcStateCard({ pc }: Props) {
   );
 
   return (
-    <Card.Root>
+    <Card.Root {...rest}>
       <Card.Header>
         <Card.Title>
           {t({ message: "PC State", description: "card title" })}
