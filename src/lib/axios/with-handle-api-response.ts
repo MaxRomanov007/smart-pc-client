@@ -1,6 +1,9 @@
 import type { ApiResponse } from "@/types/api/response";
 import type { AxiosResponse } from "axios";
-import { handleApiResponse, type HandleApiResponseOptions } from "@/lib/axios/handle-api-response";
+import {
+  handleApiResponse,
+  type HandleApiResponseOptions,
+} from "@/lib/axios/handle-api-response";
 
 export function handleApiResponseQuery<A extends unknown[], T>(
   fn: (...args: A) => Promise<AxiosResponse<ApiResponse<T> | T>>,

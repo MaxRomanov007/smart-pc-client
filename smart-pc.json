@@ -26,6 +26,10 @@
         {
           "type": "folder",
           "uuid": "9efcbd4f-b8b4-467d-8717-f48ed351b749"
+        },
+        {
+          "type": "folder",
+          "uuid": "6237c0aa-1406-48d9-9292-7d6817a7f7da"
         }
       ]
     },
@@ -50,6 +54,16 @@
         {
           "type": "route",
           "uuid": "b48fca79-e039-44fc-a8b9-5bb84cc5d522"
+        }
+      ]
+    },
+    {
+      "uuid": "6237c0aa-1406-48d9-9292-7d6817a7f7da",
+      "name": "logs",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "c89c2220-660a-4e8d-aa27-362dd3b6cea5"
         }
       ]
     }
@@ -371,6 +385,248 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "c89c2220-660a-4e8d-aa27-362dd3b6cea5",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "pcs/:id/logs",
+      "responses": [
+        {
+          "uuid": "23d4ec62-c1a7-47d0-b574-cc6873e9d7e4",
+          "body": "{{setVar 'data' (sortBy (dataRaw 'pc-logs') 'receivedAt' (queryParam 'order'))}}\n\n{\n  \"status\": \"ok\",\n  \"data\": {{{stringify @data}}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "get all",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cf9cdc68-4ae5-4914-9030-404cbfb26007",
+          "body": "{\n  \"status\": \"invalid-request\",\n  \"error\": \"order does not match \\\"asc\\\" or \\\"desc\\\"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "invalid order",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "order",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "order",
+              "value": "^(asc|desc)$",
+              "invert": true,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5d05952c-f168-4ceb-b19f-2d72665c237b",
+          "body": "{\n  \"status\": \"invalid-request\",\n  \"error\": \"limit must be non negative integer number\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "inavalid limit",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "limit",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "limit",
+              "value": "^[0-9]+$",
+              "invert": true,
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "701fa762-8640-41aa-a4eb-a35256c02adc",
+          "body": "{\n  \"status\": \"invalid-request\",\n  \"error\": \"request can not contain \\\"before\\\" and \\\"after\\\" in one query\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "before and after in one query",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "before",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "after",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "e0614d1d-7060-49d8-b586-a9076a8280f9",
+          "body": "{{setVar 'order' (queryParam 'order')}}\n{{setVar 'limit' (parseInt (queryParam 'limit'))}}\n\n{{setVar 'data' (sortBy (dataRaw 'pc-logs') 'receivedAt' @order)}}\n\n{{setVar 'page' (slice @data 0 @limit)}}\n\n{{setVar 'hasNext' (gt (len @data) @limit)}}\n\n{\n  \"status\": \"ok\",\n  \"data\": {{{stringify @page}}},\n  \"pagination\": {\n    \"total\": {{len @data}},\n    {{#if @hasNext}}\n      \"nextCursor\": \"{{objectPath @data (concat (add @limit -1) '.id')}}\",\n    {{/if}}\n    \"hasPrev\": false,\n    \"hasNext\": {{@hasNext}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "first page",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "limit",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "before",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "after",
+              "value": "",
+              "invert": false,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "1844c387-3df2-43cd-9996-cb1267d09c1c",
+          "body": "{{setVar 'order' (queryParam 'order')}}\n{{setVar 'limit' (parseInt (queryParam 'limit'))}}\n{{setVar 'cursor' (queryParam 'after')}}\n\n{{setVar 'data' (sortBy (dataRaw 'pc-logs') 'receivedAt' @order)}}\n\n{{setGlobalVar 'startIndex' -1}}\n{{#each @data}}\n  {{#if (eq this.id @cursor)}}\n    {{setGlobalVar 'startIndex' @index}}\n  {{/if}}\n{{/each}}\n\n{{setVar 'startIndex' (getGlobalVar 'startIndex')}}\n{{setGlobalVar 'startIndex' null}}\n\n{{setVar 'page' (slice @data (add @startIndex 1) (add @startIndex @limit 1))}}\n\n{{setVar 'endIndex' (add @startIndex (len @page))}}\n\n{{setVar 'hasPrev' (gt @startIndex 0)}}\n{{setVar 'hasNext' (lt @endIndex (add (len @data) -1))}}\n\n{\n  \"status\": \"ok\",\n  \"data\": {{{stringify @page}}},\n  \"pagination\": {\n    \"total\": {{len @data}},\n    {{#if @hasPrev}}\n      \"prevCursor\": \"{{@page.0.id}}\",\n    {{/if}}\n    {{#if @hasNext}}\n      \"nextCursor\": \"{{objectPath @page (concat (add (len @page) -1) '.id')}}\",\n    {{/if}}\n    \"hasPrev\": {{@hasPrev}},\n    \"hasNext\": {{@hasNext}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "get after",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "limit",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "after",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "5e815efa-b888-4499-916c-abd4bb2da634",
+          "body": "{{setVar 'order' (queryParam 'order')}}\n{{setVar 'limit' (parseInt (queryParam 'limit'))}}\n{{setVar 'cursor' (queryParam 'before')}}\n\n{{setVar 'data' (sortBy (dataRaw 'pc-logs') 'receivedAt' @order)}}\n\n{{setGlobalVar 'endIndex' -1}}\n{{#each @data}}\n  {{#if (eq this.id @cursor)}}\n    {{setGlobalVar 'endIndex' @index}}\n  {{/if}}\n{{/each}}\n\n{{setVar 'endIndex' (getGlobalVar 'endIndex')}}\n{{setGlobalVar 'endIndex' null}}\n\n{{setVar 'startIndexInData' (subtract @endIndex @limit)}}\n{{#if (lt @startIndexInData 0)}}\n  {{setVar 'startIndexInData' 0}}\n{{/if}}\n{{setVar 'page' (slice @data @startIndexInData @endIndex)}}\n{{setVar 'startIndexInData' null}}\n\n{{setVar 'startIndex' (subtract @endIndex (len @page))}}\n\n{{setVar 'hasPrev' (gt @startIndex 0)}}\n{{setVar 'hasNext' (lt @endIndex (add (len @data) -1))}}\n\n{\n  \"status\": \"ok\",\n  \"data\": {{{stringify @page}}},\n  \"pagination\": {\n    \"total\": {{len @data}},\n    {{#if @hasPrev}}\n      \"prevCursor\": \"{{@page.0.id}}\",\n    {{/if}}\n    {{#if @hasNext}}\n      \"nextCursor\": \"{{objectPath @page (concat (add (len @page) -1) '.id')}}\",\n    {{/if}}\n    \"hasPrev\": {{@hasPrev}},\n    \"hasNext\": {{@hasNext}}\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "get before",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "limit",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            },
+            {
+              "target": "query",
+              "modifier": "before",
+              "value": "",
+              "invert": true,
+              "operator": "null"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
@@ -443,6 +699,13 @@
       "name": "command-parameters",
       "documentation": "",
       "value": "[\n  {\n    \"id\": \"parameter1\",\n    \"name\": \"Parameter1\",\n    \"description\": \"Parameter1 Parameter1 Parameter1\",\n    \"type\": 1\n  },\n  {\n    \"id\": \"parameter2\",\n    \"name\": \"Parameter2\",\n    \"description\": \"Parameter2 Parameter2 Parameter2\",\n    \"type\": 2\n  },\n  {\n    \"id\": \"parameter3\",\n    \"name\": \"Parameter3\",\n    \"description\": \"Parameter3 Parameter3 Parameter3\",\n    \"type\": 3\n  },\n  {{#repeat 2}}\n  {\n    \"id\": \"{{uuid}}\",\n    \"name\": \"{{faker 'person.jobTitle'}}\",\n    \"description\": \"{{faker 'food.description'}}\",\n    \"type\": {{oneOf (array 1 2 3)}}\n  }\n  {{/repeat}}\n]"
+    },
+    {
+      "uuid": "787e94fb-fec8-4b0b-9dec-ce5d11678d76",
+      "id": "7l48",
+      "name": "pc-logs",
+      "documentation": "",
+      "value": "[\n  {{setVar 'receivedAt' (date (dateTimeShift hours=-1) (now) \"yyyy-MM-dd'T'HH:mm:ss.SSSxxx\")}}\n  {\n    \"id\": \"log1\",\n    \"commandId\": \"command1\",\n    \"commandName\": \"Success command\",\n    \"receivedAt\": \"{{@receivedAt}}\",\n    \"completedAt\": \"{{dateTimeShift @receivedAt second=(int 1 40)}}\",\n    \"status\": \"ok\"\n  },\n  \n  {{setVar 'receivedAt' (date (dateTimeShift hours=-1) (now) \"yyyy-MM-dd'T'HH:mm:ss.SSSxxx\")}}\n  {\n    \"id\": \"log2\",\n    \"commandId\": \"command2\",\n    \"commandName\": \"Failed command\",\n    \"receivedAt\": \"{{@receivedAt}}\",\n    \"completedAt\": \"{{dateTimeShift @receivedAt second=(int 1 40)}}\",\n    \"status\": \"command-error\",\n    \"error\": \"command not found\"\n  },\n  \n  {{setVar 'receivedAt' (date (dateTimeShift hours=-1) (now) \"yyyy-MM-dd'T'HH:mm:ss.SSSxxx\")}}\n  {\n    \"id\": \"log3\",\n    \"commandId\": \"command3\",\n    \"commandName\": \"Internal error command\",\n    \"receivedAt\": \"{{@receivedAt}}\",\n    \"completedAt\": \"{{dateTimeShift @receivedAt second=(int 1 40)}}\",\n    \"status\": \"internal-error\"\n  },\n  \n  {{setVar 'receivedAt' (date (dateTimeShift hours=-1) (now) \"yyyy-MM-dd'T'HH:mm:ss.SSSxxx\")}}\n  {\n    \"id\": \"log4\",\n    \"commandId\": \"command4\",\n    \"receivedAt\": \"{{@receivedAt}}\",\n    \"completedAt\": \"{{dateTimeShift @receivedAt second=(int 1 40)}}\",\n    \"status\": \"ok\"\n  },\n  \n  {{#repeat 46}}\n    {{setVar 'receivedAt' (date (dateTimeShift hours=-2) (dateTimeShift hours=-1) \"yyyy-MM-dd'T'HH:mm:ss.SSSxxx\")}}\n    {{setVar 'status' (oneOf (array 'ok' 'ok' 'ok' 'ok' 'ok' 'ok' 'ok' 'ok' 'command-error' 'command-error' 'internal-error'))}}\n    {\n      {{#if (oneOf (array true true true true true true true true true false))}}\n        \"commandName\": \"{{faker 'person.jobTitle'}}\",\n      {{/if}}\n      \n      {{#if (eq @status 'command-error')}}\n        \"error\": \"{{faker 'food.description'}}\",\n      {{/if}}\n      \n      \"id\": \"{{uuid}}\",\n      \"commandId\": \"{{uuid}}\",\n      \"receivedAt\": \"{{@receivedAt}}\",\n      \"completedAt\": \"{{dateTimeShift @receivedAt second=(int 1 40)}}\",\n      \"status\": \"{{@status}}\"\n    }\n  {{/repeat}}\n]"
     }
   ],
   "callbacks": []
