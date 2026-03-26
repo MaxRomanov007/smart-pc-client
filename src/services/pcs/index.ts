@@ -2,13 +2,16 @@ import type { IPc } from "@/types/pc/pc";
 import type { ApiResponse } from "@/types/api/response";
 import { createAxiosInstance } from "@/lib/axios/create-axios-instance";
 import {
-  handleApiResponseMutation,
+  handleApiResponseInfiniteQuery,
+  handleApiResponseParametrized,
   handleApiResponseQuery,
   handleApiResponseQueryMapped,
 } from "@/lib/axios/with-handle-api-response";
 import type { ICommand } from "@/types/pc/command";
 import type { CommandParameter } from "@/types/pc/command-parameter";
 import { initializeParameter } from "@/services/pcs/initialize-parameter";
+import type { IPcLog } from "@/types/pc/pc-log";
+import type { PartialExcept } from "@/utils/types";
 
 const pcServiceAddress = process.env.NEXT_PUBLIC_PC_SERVICE_ADDRESS;
 
@@ -27,8 +30,19 @@ export const pcsApi = {
       },
     }),
   ),
-  editPc: handleApiResponseMutation((pc: PcToEdit) =>
+  editPc: handleApiResponseParametrized((pc: PcToEdit) =>
     axios.patch<ApiResponse<IPc>>(`/pcs/${pc.id}`, pc),
+  ),
+
+  fetchPcLogs: handleApiResponseInfiniteQuery(
+    (pcId: string, limit: number = 20, order: Order = "asc", cursor?: string) =>
+      axios.get<IPcLog[]>(`/pcs/${pcId}/logs`, {
+        params: {
+          limit,
+          order,
+          after: cursor,
+        },
+      }),
   ),
 
   fetchPcCommands: handleApiResponseQuery((pcId: string) =>
@@ -44,4 +58,5 @@ export const pcsApi = {
   ),
 } as const;
 
-export type PcToEdit = { id: string } & Partial<Omit<IPc, "id">>;
+export type PcToEdit = PartialExcept<IPc, "id">;
+export type Order = "asc" | "desc";

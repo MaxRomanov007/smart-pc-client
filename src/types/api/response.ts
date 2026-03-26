@@ -3,13 +3,23 @@ export enum StatusCodes {
   notFound = "not-found",
 }
 
+interface Pagination {
+  total: number;
+  hasPrev: boolean;
+  hasNext: boolean;
+  prevCursor?: string;
+  nextCursor?: string;
+}
+
 interface Response<S extends StatusCodes, D, E> {
   status: S;
   data: D;
   error: E;
 }
 
-export type SuccessResponse<T> = Response<StatusCodes.ok, T, never>;
+export type SuccessResponse<T> = Response<StatusCodes.ok, T, never> & {
+  pagination?: Pagination;
+};
 export type ErrorResponse = Response<
   Exclude<StatusCodes, StatusCodes.ok>,
   never,
