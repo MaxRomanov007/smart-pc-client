@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, ScrollArea, Spinner } from "@chakra-ui/react";
+import { Box, ScrollArea, Skeleton, Spinner } from "@chakra-ui/react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import React, { type ComponentProps, useEffect, useMemo, useRef } from "react";
 import { usePcLogsInfiniteQuery } from "@/utils/hooks/queries/pcs/logs";
@@ -32,7 +32,7 @@ const elementHeight = 48;
 export function PcLogsVirtualList({ pcId, ...rest }: Props) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isFetching } =
     usePcLogsInfiniteQuery({ pcId, order: "desc" });
 
   const logs = useMemo(
@@ -42,11 +42,12 @@ export function PcLogsVirtualList({ pcId, ...rest }: Props) {
 
   const count = hasNextPage ? logs.length + 1 : logs.length;
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const virtualizer = useVirtualizer({
     count,
     getScrollElement: () => scrollRef.current,
     estimateSize: () => elementHeight,
-    overscan: 5,
+    overscan: 15,
   });
 
   const virtualItems = virtualizer.getVirtualItems();
@@ -100,13 +101,17 @@ export function PcLogsVirtualList({ pcId, ...rest }: Props) {
               >
                 <Spinner size="sm" />
               </Box>
+            ) : isFetching && !isFetchingNextPage ? (
+              <Skeleton>
+                <Log log={log} h="full" alignItems="center" />
+              </Skeleton>
             ) : (
               <Log log={log} h="full" alignItems="center" />
             )}
           </div>
         );
       }),
-    [logs, virtualItems],
+    [isFetching, isFetchingNextPage, logs, virtualItems],
   );
 
   return (

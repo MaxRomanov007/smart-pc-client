@@ -1,10 +1,11 @@
 "use client";
 
 import { useExtracted } from "next-intl";
-import { Card } from "@chakra-ui/react";
+import { Card, HStack, Text } from "@chakra-ui/react";
 import type { IPc } from "@/types/pc/pc";
 import type { ComponentProps } from "react";
 import { PcLogsVirtualList } from "@/components/pc/log";
+import RefreshLogsButton from "@/app/[locale]/dashboard/[slug]/(components)/logs/refresh-logs-button";
 
 interface Props extends ComponentProps<typeof Card.Root> {
   pc: IPc;
@@ -17,7 +18,10 @@ export default function PcLogsCard({ pc, ...rest }: Props) {
     <Card.Root {...rest}>
       <Card.Header flexShrink={0}>
         <Card.Title>
-          {t({ message: "PC Logs", description: "card title" })}
+          <HStack gap={2}>
+            <Text>{t({ message: "PC Logs", description: "card title" })}</Text>
+            <RefreshLogsButton pcId={pc.id} size="xs" variant="ghost" />
+          </HStack>
         </Card.Title>
         <Card.Description>
           {t({

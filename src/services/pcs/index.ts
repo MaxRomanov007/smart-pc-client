@@ -2,7 +2,6 @@ import type { IPc } from "@/types/pc/pc";
 import type { ApiResponse } from "@/types/api/response";
 import { createAxiosInstance } from "@/lib/axios/create-axios-instance";
 import {
-  handleApiResponseInfiniteQuery,
   handleApiResponseInfiniteQueryMapped,
   handleApiResponseParametrized,
   handleApiResponseQuery,
