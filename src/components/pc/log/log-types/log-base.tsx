@@ -7,10 +7,10 @@ interface Props extends ComponentProps<typeof HStack> {
   badge?: string;
 }
 
-export default function LogBase({ log, badge, ...props }: Props) {
+export default function LogBase({ log, badge, colorPalette, ...props }: Props) {
   return (
     <HStack {...props}>
-      <Badge colorPalette={props.colorPalette}>{badge}</Badge>
+      <Badge colorPalette={colorPalette}>{badge}</Badge>
       <Text truncate>{log.commandName ?? "id:" + log.commandId}</Text>
     </HStack>
   );

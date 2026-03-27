@@ -266,6 +266,42 @@ msgctxt "localization-select"
 msgid "i3hxQt"
 msgstr "Choose locale"
 
+#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+msgctxt "log-info-tip"
+msgid "3fVD9R"
+msgstr "Status:"
+
+#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+msgctxt "log-info-tip"
+msgid "5elgIe"
+msgstr "Error:"
+
+#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+msgctxt "log-info-tip"
+msgid "bpJvUe"
+msgstr "Completed at:"
+
+#. status translation
+#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+msgctxt "log-info-tip"
+msgid "ESDZHW"
+msgstr "{status, select, ok {Success} command_error {Command failed} internal_error {Internal error} other {Completed}}"
+
+#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+msgctxt "log-info-tip"
+msgid "SOwXGn"
+msgstr "Received at:"
+
+#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+msgctxt "log-info-tip"
+msgid "SSjbtT"
+msgstr "Command name:"
+
+#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+msgctxt "log-info-tip"
+msgid "xymp4G"
+msgstr "Command ID:"
+
 #: src\components\pc\log\log-types\utils\use-log-type-props.ts
 msgctxt "use-log-types"
 msgid "2KtWqT"

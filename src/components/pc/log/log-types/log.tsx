@@ -4,7 +4,7 @@ import React from "react";
 import { type IPcLog } from "@/types/pc/pc-log";
 import { useLogTypeProps } from "@/components/pc/log/log-types/utils";
 import LogBase from "@/components/pc/log/log-types/log-base";
-import { InfoTip } from "@/components/ui/chakra/toggle-tip";
+import LogInfoTip from "@/components/pc/log/log-info-tip/log-info-tip";
 
 interface Props extends ComponentProps<typeof Flex> {
   log: IPcLog;
@@ -15,9 +15,13 @@ export default React.memo(function Log({ log, ...props }: Props) {
 
   return (
     <Flex direction="row" {...props}>
-      {logBaseProps ? <LogBase {...logBaseProps} /> : <LogBase log={log} />}
+      {logBaseProps ? (
+        <LogBase minW={0} flexGrow={0} {...logBaseProps} />
+      ) : (
+        <LogBase minW={0} flexGrow={0} log={log} />
+      )}
       <Spacer />
-      <InfoTip buttonProps={{ mr: 4 }}>Hello</InfoTip>
+      <LogInfoTip log={log} buttonProps={{ mr: 4 }} />
     </Flex>
   );
 });

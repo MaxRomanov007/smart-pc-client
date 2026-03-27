@@ -32,7 +32,7 @@ export default function PcOnlineOnlyView({ pc, ...rest }: Props) {
   }
 
   return (
-    <Flex direction="column" gap={4} h={"full"} {...rest}>
+    <Flex direction="column" gap={4} {...rest}>
       <PcStateCard pc={pc} flexShrink={0} />
       <Flex
         gap={4}
@@ -48,6 +48,7 @@ export default function PcOnlineOnlyView({ pc, ...rest }: Props) {
           flexDirection="column"
           minH={0}
           w="full"
+          h="full"
         />
         <PcLogsCard
           pc={pc}
@@ -57,6 +58,7 @@ export default function PcOnlineOnlyView({ pc, ...rest }: Props) {
           flexDirection="column"
           minH={0}
           w="full"
+          h="full"
         />
       </Flex>
     </Flex>

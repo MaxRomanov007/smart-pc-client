@@ -22,7 +22,7 @@ export function SlugPcPage({ slug }: Props) {
 
   return (
     <CommandsProvider>
-      <Stack gap={4} h="full">
+      <Stack gap={4} h={["200%", null, null, "full"]}>
         <Breadcrumbs
           items={[
             breadcrumbs.index,

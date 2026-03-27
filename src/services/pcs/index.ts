@@ -3,6 +3,7 @@ import type { ApiResponse } from "@/types/api/response";
 import { createAxiosInstance } from "@/lib/axios/create-axios-instance";
 import {
   handleApiResponseInfiniteQuery,
+  handleApiResponseInfiniteQueryMapped,
   handleApiResponseParametrized,
   handleApiResponseQuery,
   handleApiResponseQueryMapped,
@@ -12,6 +13,7 @@ import type { CommandParameter } from "@/types/pc/command-parameter";
 import { initializeParameter } from "@/services/pcs/initialize-parameter";
 import type { IPcLog } from "@/types/pc/pc-log";
 import type { PartialExcept } from "@/utils/types";
+import { initializeLog } from "@/services/pcs/initialize-log";
 
 const pcServiceAddress = process.env.NEXT_PUBLIC_PC_SERVICE_ADDRESS;
 
@@ -34,7 +36,7 @@ export const pcsApi = {
     axios.patch<ApiResponse<IPc>>(`/pcs/${pc.id}`, pc),
   ),
 
-  fetchPcLogs: handleApiResponseInfiniteQuery(
+  fetchPcLogs: handleApiResponseInfiniteQueryMapped(
     (pcId: string, limit: number = 20, order: Order = "asc", cursor?: string) =>
       axios.get<IPcLog[]>(`/pcs/${pcId}/logs`, {
         params: {
@@ -43,6 +45,7 @@ export const pcsApi = {
           after: cursor,
         },
       }),
+    (logs) => logs.map(initializeLog),
   ),
 
   fetchPcCommands: handleApiResponseQuery((pcId: string) =>

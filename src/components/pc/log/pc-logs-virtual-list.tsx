@@ -27,6 +27,8 @@ function getItemProps(
   };
 }
 
+const elementHeight = 48;
+
 export function PcLogsVirtualList({ pcId, ...rest }: Props) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
@@ -43,7 +45,7 @@ export function PcLogsVirtualList({ pcId, ...rest }: Props) {
   const virtualizer = useVirtualizer({
     count,
     getScrollElement: () => scrollRef.current,
-    estimateSize: () => 48,
+    estimateSize: () => elementHeight,
     overscan: 5,
   });
 
