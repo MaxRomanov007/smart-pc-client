@@ -41,6 +41,18 @@ msgctxt "pc-commands-card"
 msgid "6FUbkj"
 msgstr "Commands registered on PC {name}"
 
+#. card title
+#: src\app\[locale]\dashboard\[slug]\(components)\logs\pc-logs-card.tsx
+msgctxt "pc-logs-card"
+msgid "LwKIHO"
+msgstr "PC Logs"
+
+#. card description
+#: src\app\[locale]\dashboard\[slug]\(components)\logs\pc-logs-card.tsx
+msgctxt "pc-logs-card"
+msgid "t25/gS"
+msgstr "History of operations on PC {name}"
+
 #: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
 msgctxt "pc-offline-state"
 msgid "d1pycG"
@@ -253,6 +265,21 @@ msgstr "There are no commands"
 msgctxt "localization-select"
 msgid "i3hxQt"
 msgstr "Choose locale"
+
+#: src\components\pc\log\log-types\utils\use-log-type-props.ts
+msgctxt "use-log-types"
+msgid "2KtWqT"
+msgstr "Internal"
+
+#: src\components\pc\log\log-types\utils\use-log-type-props.ts
+msgctxt "use-log-types"
+msgid "kAEQyV"
+msgstr "OK"
+
+#: src\components\pc\log\log-types\utils\use-log-type-props.ts
+msgctxt "use-log-types"
+msgid "KN7zKn"
+msgstr "Error"
 
 #. link button text
 #: src\components\pc\pc-card.tsx

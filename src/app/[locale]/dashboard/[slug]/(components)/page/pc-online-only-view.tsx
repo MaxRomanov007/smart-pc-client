@@ -8,6 +8,7 @@ import PcOfflineState from "@/app/[locale]/dashboard/[slug]/(components)/page/pc
 import PcStateCard from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card";
 import { Flex } from "@chakra-ui/react";
 import PcCommandsCard from "@/app/[locale]/dashboard/[slug]/(components)/commands/pc-commands-card";
+import PcLogsCard from "@/app/[locale]/dashboard/[slug]/(components)/logs/pc-logs-card";
 
 interface Props extends ComponentProps<typeof Flex> {
   pc: IPc;
@@ -46,14 +47,16 @@ export default function PcOnlineOnlyView({ pc, ...rest }: Props) {
           display="flex"
           flexDirection="column"
           minH={0}
+          w="full"
         />
-        <PcCommandsCard
+        <PcLogsCard
           pc={pc}
           flexGrow={1}
           overflow="hidden"
           display="flex"
           flexDirection="column"
           minH={0}
+          w="full"
         />
       </Flex>
     </Flex>

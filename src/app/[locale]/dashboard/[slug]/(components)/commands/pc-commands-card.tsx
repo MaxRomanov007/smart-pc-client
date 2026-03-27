@@ -33,16 +33,16 @@ export default function PcCommandsCard({ pc, ...rest }: Props) {
         </Card.Description>
       </Card.Header>
 
-      <ScrollArea.Root flexGrow={1} overflow="hidden">
-        <ScrollArea.Viewport>
-          <ScrollArea.Content>
-            <Card.Body>
+      <Card.Body flexGrow={1} overflow="hidden">
+        <ScrollArea.Root>
+          <ScrollArea.Viewport>
+            <ScrollArea.Content>
               <CommandsList commands={data} pc={pc} />
-            </Card.Body>
-          </ScrollArea.Content>
-        </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar />
-      </ScrollArea.Root>
+            </ScrollArea.Content>
+          </ScrollArea.Viewport>
+          <ScrollArea.Scrollbar />
+        </ScrollArea.Root>
+      </Card.Body>
 
       <Card.Footer flexShrink={0} />
     </Card.Root>
