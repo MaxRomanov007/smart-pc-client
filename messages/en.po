@@ -29,6 +29,18 @@ msgctxt "auth-callback-page"
 msgid "ia2WSY"
 msgstr "Completing authorization..."
 
+#. title
+#: src/app/[locale]/dashboard/(components)/header.tsx:9
+msgctxt "dashboard-page-header"
+msgid "Iw3cCk"
+msgstr "My PCs"
+
+#. description
+#: src/app/[locale]/dashboard/(components)/header.tsx:15
+msgctxt "dashboard-page-header"
+msgid "hiUVv0"
+msgstr "Manage and control your registered computers"
+
 #. card title
 #: src/app/[locale]/dashboard/[slug]/(components)/commands/pc-commands-card.tsx:25
 msgctxt "pc-commands-card"
@@ -139,18 +151,6 @@ msgstr "Play / Pause"
 msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
 msgid "1iX+o8"
 msgstr "Next track"
-
-#. dashboard page title
-#: src/app/[locale]/dashboard/page.tsx:21
-msgctxt "dashboard-page"
-msgid "Iw3cCk"
-msgstr "My PCs"
-
-#. dashboard page description
-#: src/app/[locale]/dashboard/page.tsx:27
-msgctxt "dashboard-page"
-msgid "hiUVv0"
-msgstr "Manage and control your registered computers"
 
 #. error page title
 #: src/app/[locale]/error.tsx:20
@@ -471,6 +471,7 @@ msgstr "Dashboard"
 
 #. this pc breadcrumb
 #: src/utils/hooks/ui/breadcrumbs/client.ts:24
+#: src/utils/hooks/ui/breadcrumbs/server.ts:24
 msgctxt "breadcrumbs"
 msgid "XkhxhV"
 msgstr "This PC"

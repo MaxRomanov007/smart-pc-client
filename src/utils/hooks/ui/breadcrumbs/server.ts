@@ -19,5 +19,12 @@ export async function getStandardBreadcrumbs(current: boolean = false) {
         description: "dashboard breadcrumb",
       }),
     },
+    thisPc: {
+      href: current ? undefined : PAGES.thisPc,
+      label: t({
+        message: "This PC",
+        description: "this pc breadcrumb",
+      }),
+    },
   };
 }

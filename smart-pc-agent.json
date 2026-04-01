@@ -9,37 +9,6 @@
   "folders": [],
   "routes": [
     {
-      "uuid": "7ebc96a7-c0ba-4a25-9de1-f97fd49632ca",
-      "type": "ws",
-      "documentation": "",
-      "method": "get",
-      "endpoint": "state",
-      "responses": [
-        {
-          "uuid": "9c82b9cf-8b04-48f6-a21a-e2a95745df41",
-          "body": "{{setVar 'cpuPercent' (int 20 40)}}\n\n{{setVar 'virtualMemoryTotal' 34271326208}}\n{{setVar 'virtualMemoryAvailablePercent' (int 20 40)}}\n{{setVar 'virtualMemoryAvailable' (floor (multiply (divide @virtualMemoryTotal 100) @virtualMemoryAvailablePercent))}}\n\n{{setVar 'volumeCurrent' (int 20 40)}}\n{{setVar 'volumeMuted' (oneOf (array true true true true false))}}\n \n{\n  \"cpuPercent\": {{@cpuPercent}},\n  \"virtualMemory\": {\n    \"total\": {{@virtualMemoryTotal}},\n    \"available\": {{@virtualMemoryAvailable}}\n  },\n  \"volume\": {\n    \"current\":{{@volumeCurrent}},\n    \"muted\":{{@volumeMuted}}\n  }\n}",
-          "latency": 0,
-          "statusCode": 200,
-          "label": "",
-          "headers": [],
-          "bodyType": "INLINE",
-          "filePath": "",
-          "databucketID": "",
-          "sendFileAsBody": true,
-          "rules": [],
-          "rulesOperator": "OR",
-          "disableTemplating": false,
-          "fallbackTo404": false,
-          "default": true,
-          "crudKey": "id",
-          "callbacks": []
-        }
-      ],
-      "responseMode": null,
-      "streamingMode": "BROADCAST",
-      "streamingInterval": 1000
-    },
-    {
       "uuid": "e30524a2-4028-4a44-a74b-b0ee5a255b00",
       "type": "http",
       "documentation": "",
@@ -74,15 +43,11 @@
   "rootChildren": [
     {
       "type": "route",
-      "uuid": "7ebc96a7-c0ba-4a25-9de1-f97fd49632ca"
-    },
-    {
-      "type": "route",
       "uuid": "e30524a2-4028-4a44-a74b-b0ee5a255b00"
     }
   ],
-  "proxyMode": false,
-  "proxyHost": "",
+  "proxyMode": true,
+  "proxyHost": "http://localhost:18506",
   "proxyRemovePrefix": false,
   "tlsOptions": {
     "enabled": false,
