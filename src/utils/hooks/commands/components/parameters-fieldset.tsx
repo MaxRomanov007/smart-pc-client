@@ -1,6 +1,6 @@
 import { Fieldset } from "@chakra-ui/react";
 import type { CommandParameter } from "@/types/pc/command-parameter";
-import CommandParameters from "@/components/command/parameter/command-parameters";
+import CommandParameters from "@/components/command/commands-list/parameter/command-parameters";
 
 interface Props {
   parameters: CommandParameter[];

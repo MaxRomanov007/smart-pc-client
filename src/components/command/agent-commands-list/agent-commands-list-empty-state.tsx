@@ -2,8 +2,8 @@ import NotificationState from "@/components/ui/pages/notification-page";
 import { LuCuboid } from "react-icons/lu";
 import { useExtracted } from "next-intl";
 
-export default function CommandsListEmptyState() {
-  const t = useExtracted("pc-commands-empty-state");
+export function AgentCommandsListEmptyState() {
+  const t = useExtracted("agent-commands-empty-state");
 
   return (
     <NotificationState

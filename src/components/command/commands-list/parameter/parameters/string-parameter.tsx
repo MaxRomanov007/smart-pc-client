@@ -1,5 +1,5 @@
 import { type ICommandParameter } from "@/types/pc/command-parameter";
-import ParameterBase from "@/components/command/parameter/parameters/parameter-base";
+import ParameterBase from "@/components/command/commands-list/parameter/parameters/parameter-base";
 import { Input } from "@chakra-ui/react";
 
 interface Props {

@@ -2,7 +2,7 @@ import { handleApiResponseQuery } from "@/lib/axios/with-handle-api-response";
 import axios from "axios";
 import type { IAgentCommand } from "@/types/agent";
 
-const BASE_URL = "127.0.0.1";
+const BASE_URL = "http://127.0.0.1";
 
 export const agentApi = {
   fetchCommands: handleApiResponseQuery((port?: number) =>
@@ -11,5 +11,5 @@ export const agentApi = {
 };
 
 export function calculateAgentUrl(endpoint: string, port: number = 8506) {
-  return `${BASE_URL}/${port}${endpoint}`;
+  return `${BASE_URL}:${port}${endpoint}`;
 }

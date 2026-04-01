@@ -1,4 +1,5 @@
 import { useAgentStatus } from "@/utils/hooks/agent";
+import PcAgentCommandsCard from "@/app/[locale]/this-pc/(components)/pc-commands-card/pc-agent-commands-card";
 
 export function AgentOnlineOnlyView() {
   const state = useAgentStatus("http://localhost:8506");
@@ -7,5 +8,5 @@ export function AgentOnlineOnlyView() {
     return;
   }
 
-  return <div>Heloo</div>;
+  return <PcAgentCommandsCard />;
 }

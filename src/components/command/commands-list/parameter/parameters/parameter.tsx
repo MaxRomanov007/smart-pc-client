@@ -2,9 +2,9 @@ import {
   type CommandParameter,
   ParameterTypes,
 } from "@/types/pc/command-parameter";
-import { BooleanParameter } from "@/components/command/parameter/parameters/boolean-parameter";
-import { NumberParameter } from "@/components/command/parameter/parameters/number-parameter";
-import { StringParameter } from "@/components/command/parameter/parameters/string-parameter";
+import { BooleanParameter } from "@/components/command/commands-list/parameter/parameters/boolean-parameter";
+import { NumberParameter } from "@/components/command/commands-list/parameter/parameters/number-parameter";
+import { StringParameter } from "@/components/command/commands-list/parameter/parameters/string-parameter";
 
 interface Props {
   parameter: CommandParameter;

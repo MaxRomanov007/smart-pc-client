@@ -30,13 +30,13 @@ msgid "ia2WSY"
 msgstr "Completing authorization..."
 
 #. title
-#: src/app/[locale]/dashboard/(components)/header.tsx:9
+#: src/app/[locale]/dashboard/(components)/header.tsx:10
 msgctxt "dashboard-page-header"
 msgid "Iw3cCk"
 msgstr "My PCs"
 
 #. description
-#: src/app/[locale]/dashboard/(components)/header.tsx:15
+#: src/app/[locale]/dashboard/(components)/header.tsx:16
 msgctxt "dashboard-page-header"
 msgid "hiUVv0"
 msgstr "Manage and control your registered computers"
@@ -206,6 +206,18 @@ msgctxt "index-page"
 msgid "Oeu69m"
 msgstr "Go to dashboard"
 
+#. card title
+#: src/app/[locale]/this-pc/(components)/pc-commands-card/pc-agent-commands-card.tsx:21
+msgctxt "agent-commands-card"
+msgid "5/sFMo"
+msgstr "PC Commands"
+
+#. card description
+#: src/app/[locale]/this-pc/(components)/pc-commands-card/pc-agent-commands-card.tsx:24
+msgctxt "agent-commands-card"
+msgid "VSDJO5"
+msgstr "Commands registered on your PC"
+
 #. unauthorized page title
 #: src/app/[locale]/unauthorized.tsx:17
 msgctxt "unauthorized page"
@@ -249,13 +261,25 @@ msgid "Ub+AGc"
 msgstr "Sign In"
 
 #. title text
-#: src/components/command/commands-list-empty-state.tsx:11
+#: src/components/command/agent-commands-list/agent-commands-list-empty-state.tsx:11
+msgctxt "agent-commands-empty-state"
+msgid "xGSVMH"
+msgstr "There are no commands"
+
+#. description text
+#: src/components/command/agent-commands-list/agent-commands-list-empty-state.tsx:15
+msgctxt "agent-commands-empty-state"
+msgid "QsJYGz"
+msgstr "Register it on your pc"
+
+#. title text
+#: src/components/command/commands-list/commands-list-empty-state.tsx:11
 msgctxt "pc-commands-empty-state"
 msgid "xGSVMH"
 msgstr "There are no commands"
 
 #. description text
-#: src/components/command/commands-list-empty-state.tsx:15
+#: src/components/command/commands-list/commands-list-empty-state.tsx:15
 msgctxt "pc-commands-empty-state"
 msgid "QsJYGz"
 msgstr "Register it on your pc"

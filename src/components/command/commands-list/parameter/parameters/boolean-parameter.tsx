@@ -1,4 +1,4 @@
-import ParameterBase from "@/components/command/parameter/parameters/parameter-base";
+import ParameterBase from "@/components/command/commands-list/parameter/parameters/parameter-base";
 import { CheckboxCard } from "@chakra-ui/react";
 import type { ICommandParameter } from "@/types/pc/command-parameter";
 

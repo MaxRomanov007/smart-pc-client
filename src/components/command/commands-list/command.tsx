@@ -9,7 +9,7 @@ interface Props {
   pc: IPc;
 }
 
-export default function Command({ command, pc }: Props) {
+export function Command({ command, pc }: Props) {
   return (
     <Card.Root variant="elevated" mb={4} size="sm">
       <Card.Body>

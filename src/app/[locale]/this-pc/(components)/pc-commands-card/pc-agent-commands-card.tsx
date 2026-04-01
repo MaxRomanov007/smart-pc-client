@@ -1,20 +1,17 @@
 "use client";
 
 import { useExtracted } from "next-intl";
-import { Card, ScrollArea } from "@chakra-ui/react";
-import type { IPc } from "@/types/pc/pc";
-import { usePcCommandsQuery } from "@/utils/hooks/queries/pcs/commands";
-import { CommandsList } from "@/components/command/commands-list";
+import { Card, Grid, ScrollArea } from "@chakra-ui/react";
 import type { ComponentProps } from "react";
+import { useAgentCommands } from "@/utils/hooks/queries/agent";
+import { AgentCommandsList } from "@/components/command/agent-commands-list";
 
-interface Props extends ComponentProps<typeof Card.Root> {
-  pc: IPc;
-}
+type Props = ComponentProps<typeof Card.Root>;
 
-export default function PcCommandsCard({ pc, ...rest }: Props) {
-  const t = useExtracted("pc-commands-card");
+export default function PcAgentCommandsCard({ ...rest }: Props) {
+  const t = useExtracted("agent-commands-card");
 
-  const { data, isError } = usePcCommandsQuery(pc.id);
+  const { data, isError } = useAgentCommands();
 
   if (isError || !data) return null;
 
@@ -26,8 +23,7 @@ export default function PcCommandsCard({ pc, ...rest }: Props) {
         </Card.Title>
         <Card.Description>
           {t({
-            message: "Commands registered on PC {name}",
-            values: { name: pc.name },
+            message: "Commands registered on your PC",
             description: "card description",
           })}
         </Card.Description>
@@ -37,7 +33,9 @@ export default function PcCommandsCard({ pc, ...rest }: Props) {
         <ScrollArea.Root>
           <ScrollArea.Viewport>
             <ScrollArea.Content>
-              <CommandsList commands={data} pc={pc} />
+              <Grid gap={4} templateColumns="repeat(2, 1fr)">
+                <AgentCommandsList commands={data} />
+              </Grid>
             </ScrollArea.Content>
           </ScrollArea.Viewport>
           <ScrollArea.Scrollbar />

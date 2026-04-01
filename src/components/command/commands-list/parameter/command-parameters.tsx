@@ -1,7 +1,7 @@
 "use client";
 
 import { type CommandParameter } from "@/types/pc/command-parameter";
-import { Parameter } from "@/components/command/parameter/parameters/parameter";
+import { Parameter } from "@/components/command/commands-list/parameter/parameters/parameter";
 
 interface Props {
   parameters: CommandParameter[];
