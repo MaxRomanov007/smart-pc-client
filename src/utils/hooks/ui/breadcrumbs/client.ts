@@ -19,5 +19,12 @@ export function useStandardBreadcrumbs() {
         description: "dashboard breadcrumb",
       }),
     },
+    thisPc: {
+      href: PAGES.thisPc,
+      label: t({
+        message: "This PC",
+        description: "this pc breadcrumb",
+      }),
+    },
   };
 }

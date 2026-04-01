@@ -1,6 +1,6 @@
 "use client";
 
-import type { VolumeState } from "@/types/mqtt/pc-state";
+import type { VolumeState } from "@/types/pc/pc-state";
 import type { IPc } from "@/types/pc/pc";
 import { useCommands } from "@/utils/hooks/commands/hook";
 import { Slider } from "@chakra-ui/react";

@@ -1,7 +1,7 @@
 "use client";
 
 import { HStack } from "@chakra-ui/react";
-import type { VolumeState } from "@/types/mqtt/pc-state";
+import type { VolumeState } from "@/types/pc/pc-state";
 import MuteButton from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/mute-button";
 import type { IPc } from "@/types/pc/pc";
 import VolumeSlider from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/volume-slider";

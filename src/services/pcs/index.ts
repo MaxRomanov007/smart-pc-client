@@ -31,6 +31,9 @@ export const pcsApi = {
       },
     }),
   ),
+  fetchPcById: handleApiResponseQuery((id: string) =>
+    axios.get<IPc>(`/pcs/${id}`),
+  ),
   editPc: handleApiResponseParametrized((pc: PcToEdit) =>
     axios.patch<ApiResponse<IPc>>(`/pcs/${pc.id}`, pc),
   ),

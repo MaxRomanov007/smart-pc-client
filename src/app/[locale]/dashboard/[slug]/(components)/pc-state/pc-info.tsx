@@ -3,7 +3,7 @@
 import { Field, Stack } from "@chakra-ui/react";
 import type { IPc } from "@/types/pc/pc";
 import { useExtracted } from "next-intl";
-import type { VolumeState } from "@/types/mqtt/pc-state";
+import type { VolumeState } from "@/types/pc/pc-state";
 import VolumeControl from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control";
 import NameEditable from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/info-edit/name-editable";
 import DescriptionEditable from "./info-edit/description-editable";

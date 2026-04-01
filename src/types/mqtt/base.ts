@@ -1,5 +1,5 @@
 import type { IPcStatusData } from "@/types/mqtt/pc-status";
-import type { IPcStateData } from "@/types/mqtt/pc-state";
+import type { IPcStateData } from "@/types/pc/pc-state";
 import type { ICommandData } from "@/types/mqtt/command";
 
 export enum MqttMessageTypes {

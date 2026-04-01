@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { LuVolume, LuVolume1, LuVolume2, LuVolumeX } from "react-icons/lu";
 import type { IPc } from "@/types/pc/pc";
-import type { VolumeState } from "@/types/mqtt/pc-state";
+import type { VolumeState } from "@/types/pc/pc-state";
 import CommandIconButton from "@/components/button/command/command-icon-button";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
 import { useExtracted } from "next-intl";

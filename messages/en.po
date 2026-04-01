@@ -7,458 +7,484 @@ msgstr ""
 "X-Crowdin-SourceKey: msgstr\n"
 
 #. tooltip of change visibility button for side panel to hide it
-#: src\app\[locale]\(components)\layout\functional-block-left.tsx
+#: src/app/[locale]/(components)/layout/functional-block-left.tsx:23
 msgctxt "header-left-functional-block"
 msgid "f3RyOl"
 msgstr "Hide menu"
 
 #. tooltip of change visibility button for side panel to show it
-#: src\app\[locale]\(components)\layout\functional-block-left.tsx
+#: src/app/[locale]/(components)/layout/functional-block-left.tsx:28
 msgctxt "header-left-functional-block"
 msgid "hlmmXh"
 msgstr "Show menu"
 
 #. navigation menu title in the drawer
-#: src\app\[locale]\(components)\layout\menu-drawer.tsx
+#: src/app/[locale]/(components)/layout/menu-drawer.tsx:33
 msgctxt "header-menu-drawer"
 msgid "tKMlOc"
 msgstr "Menu"
 
-#: src\app\[locale]\auth\callback\page.tsx
+#: src/app/[locale]/auth/callback/page.tsx:99
 msgctxt "auth-callback-page"
 msgid "ia2WSY"
 msgstr "Completing authorization..."
 
 #. card title
-#: src\app\[locale]\dashboard\[slug]\(components)\commands\pc-commands-card.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/commands/pc-commands-card.tsx:25
 msgctxt "pc-commands-card"
 msgid "5/sFMo"
 msgstr "PC Commands"
 
 #. card description
-#: src\app\[locale]\dashboard\[slug]\(components)\commands\pc-commands-card.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/commands/pc-commands-card.tsx:28
 msgctxt "pc-commands-card"
 msgid "6FUbkj"
 msgstr "Commands registered on PC {name}"
 
 #. card title
-#: src\app\[locale]\dashboard\[slug]\(components)\logs\pc-logs-card.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/logs/pc-logs-card.tsx:22
 msgctxt "pc-logs-card"
 msgid "LwKIHO"
 msgstr "PC Logs"
 
 #. card description
-#: src\app\[locale]\dashboard\[slug]\(components)\logs\pc-logs-card.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/logs/pc-logs-card.tsx:27
 msgctxt "pc-logs-card"
 msgid "t25/gS"
 msgstr "History of operations on PC {name}"
 
-#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
-msgctxt "pc-offline-state"
-msgid "d1pycG"
-msgstr "This PC is offline, click on button below, to go to {pageName} page, or try to power it on"
-
 #. title
-#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:42
 msgctxt "pc-offline-state"
 msgid "e/wd7f"
 msgstr "PC is offline"
 
-#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:48
+msgctxt "pc-offline-state"
+msgid "d1pycG"
+msgstr "This PC is offline, click on button below, to go to {pageName} page, or try to power it on"
+
+#: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:55
 msgctxt "pc-offline-state"
 msgid "ir1oNB"
 msgstr "This PC is offline, click on button below, to go to {pageName} page"
 
-#: src\app\[locale]\dashboard\[slug]\(components)\page\pc-offline-state.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:65
 msgctxt "pc-offline-state"
 msgid "s7c1Bg"
 msgstr "Go to {pageName}"
 
 #. cpu metric label
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\metrics\cpu-metric.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics/cpu-metric.tsx:14
 msgctxt "metrics"
 msgid "20Sod8"
 msgstr "CPU:"
 
 #. ram metric label
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\metrics\ram-metric.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics/ram-metric.tsx:15
 msgctxt "metrics"
 msgid "C71NYG"
 msgstr "RAM:"
 
-#. pc description label
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
-msgctxt "slug-pc-info"
-msgid "uTnplY"
-msgstr "Description:"
-
 #. pc name label
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-info.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-info.tsx:25
 msgctxt "slug-pc-info"
 msgid "WF8jKB"
 msgstr "Name:"
 
+#. pc description label
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-info.tsx:35
+msgctxt "slug-pc-info"
+msgid "uTnplY"
+msgstr "Description:"
+
 #. card title
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-state-card.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card.tsx:64
 msgctxt "pc-state-card"
 msgid "M7sV9I"
 msgstr "PC State"
 
 #. card description
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\pc-state-card.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card.tsx:67
 msgctxt "pc-state-card"
 msgid "Q790HF"
 msgstr "State of PC {name}"
 
 #. unmute tooltip
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\mute-button.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/mute-button.tsx:38
 msgctxt "pc-slug-page.pc-state.volume-control.mute-button"
 msgid "W9355R"
 msgstr "Unmute"
 
 #. mute tooltip
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\mute-button.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/mute-button.tsx:42
 msgctxt "pc-slug-page.pc-state.volume-control.mute-button"
 msgid "x82IOl"
 msgstr "Mute"
 
-#. next track button
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\track-control-buttons.tsx
-msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
-msgid "1iX+o8"
-msgstr "Next track"
-
 #. previous track button
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\track-control-buttons.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/track-control-buttons.tsx:23
 msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
 msgid "PyAUyD"
 msgstr "Previous track"
 
 #. play-pause button
-#: src\app\[locale]\dashboard\[slug]\(components)\pc-state\volume-control\track-control-buttons.tsx
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/track-control-buttons.tsx:40
 msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
 msgid "QtwFGc"
 msgstr "Play / Pause"
 
-#. dashboard page description
-#: src\app\[locale]\dashboard\page.tsx
-msgctxt "dashboard-page"
-msgid "hiUVv0"
-msgstr "Manage and control your registered computers"
+#. next track button
+#: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/track-control-buttons.tsx:57
+msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
+msgid "1iX+o8"
+msgstr "Next track"
 
 #. dashboard page title
-#: src\app\[locale]\dashboard\page.tsx
+#: src/app/[locale]/dashboard/page.tsx:21
 msgctxt "dashboard-page"
 msgid "Iw3cCk"
 msgstr "My PCs"
 
-#. reset button text
-#: src\app\[locale]\error.tsx
-msgctxt "error-page"
-msgid "jm/spn"
-msgstr "Reset"
+#. dashboard page description
+#: src/app/[locale]/dashboard/page.tsx:27
+msgctxt "dashboard-page"
+msgid "hiUVv0"
+msgstr "Manage and control your registered computers"
 
 #. error page title
-#: src\app\[locale]\error.tsx
+#: src/app/[locale]/error.tsx:20
 msgctxt "error-page"
 msgid "JqiqNj"
 msgstr "Something went wrong"
 
-#. not found page link button for main page text
-#: src\app\[locale]\not-found.tsx
-msgctxt "not-found-page"
-msgid "/sD7Tl"
-msgstr "Go to main page"
+#. reset button text
+#: src/app/[locale]/error.tsx:27
+msgctxt "error-page"
+msgid "jm/spn"
+msgstr "Reset"
 
 #. not found page title
-#: src\app\[locale]\not-found.tsx
+#: src/app/[locale]/not-found.tsx:18
 msgctxt "not-found-page"
 msgid "2VD9+S"
 msgstr "This page couldn't be found"
 
 #. not found page help text with offer for go to the main page
-#: src\app\[locale]\not-found.tsx
+#: src/app/[locale]/not-found.tsx:22
 msgctxt "not-found-page"
 msgid "uZwoDU"
 msgstr "Looks like mistakes in url. Check it or go to the main page"
 
+#. not found page link button for main page text
+#: src/app/[locale]/not-found.tsx:29
+msgctxt "not-found-page"
+msgid "/sD7Tl"
+msgstr "Go to main page"
+
 #. title of index page in metadata
-#: src\app\[locale]\page.tsx
+#: src/app/[locale]/page.tsx:12
 msgctxt "index-page-metadata"
 msgid "FmhFdY"
 msgstr "Index page"
 
 #. title of index page
-#: src\app\[locale]\page.tsx
+#: src/app/[locale]/page.tsx:25
 msgctxt "index-page"
 msgid "FmhFdY"
 msgstr "Index page"
 
 #. description of index page
-#: src\app\[locale]\page.tsx
+#: src/app/[locale]/page.tsx:29
 msgctxt "index-page"
 msgid "J3/TKf"
 msgstr "Here you can navigate to any other page. Go to list of your pcs by button below"
 
 #. link button to dashboard text
-#: src\app\[locale]\page.tsx
+#: src/app/[locale]/page.tsx:36
 msgctxt "index-page"
 msgid "Oeu69m"
 msgstr "Go to dashboard"
 
 #. unauthorized page title
-#: src\app\[locale]\unauthorized.tsx
+#: src/app/[locale]/unauthorized.tsx:17
 msgctxt "unauthorized page"
 msgid "2uBtp/"
 msgstr "You're not authorized"
 
 #. description
-#: src\app\[locale]\unauthorized.tsx
+#: src/app/[locale]/unauthorized.tsx:21
 msgctxt "unauthorized page"
 msgid "3zq8KM"
 msgstr "You're not authorized. Sign in by click button below to access this page"
 
+#. confirmation dialog title for sign out action
+#: src/components/button/auth/profile-menu.tsx:28
+msgctxt "profile-button-menu"
+msgid "G2c0ij"
+msgstr "Sign out of your account?"
+
 #. confirmation dialog text for sign out action
-#: src\components\button\auth\profile-menu.tsx
+#: src/components/button/auth/profile-menu.tsx:32
 msgctxt "profile-button-menu"
 msgid "9rVNwM"
 msgstr "After sign out, you will be able to sign back into your account."
 
 #. user menu sign out text
-#: src\components\button\auth\profile-menu.tsx
+#: src/components/button/auth/profile-menu.tsx:53
 msgctxt "profile-button-menu"
 msgid "F62y+K"
 msgstr "Sign Out"
 
-#. confirmation dialog title for sign out action
-#: src\components\button\auth\profile-menu.tsx
-msgctxt "profile-button-menu"
-msgid "G2c0ij"
-msgstr "Sign out of your account?"
-
-#. sign in button tooltip
-#: src\components\button\auth\sign-in-button.tsx
-msgctxt "sign-in-button-tooltip"
-msgid "Ub+AGc"
-msgstr "Sign In"
-
 #. sign in button text
-#: src\components\button\auth\sign-in-button.tsx
+#: src/components/button/auth/sign-in-button.tsx:63
 msgctxt "sign-in-button"
 msgid "Ub+AGc"
 msgstr "Sign In"
 
-#. description text
-#: src\components\command\commands-list-empty-state.tsx
-msgctxt "pc-commands-empty-state"
-msgid "QsJYGz"
-msgstr "Register it on your pc"
+#. sign in button tooltip
+#: src/components/button/auth/sign-in-button.tsx:77
+msgctxt "sign-in-button-tooltip"
+msgid "Ub+AGc"
+msgstr "Sign In"
 
 #. title text
-#: src\components\command\commands-list-empty-state.tsx
+#: src/components/command/commands-list-empty-state.tsx:11
 msgctxt "pc-commands-empty-state"
 msgid "xGSVMH"
 msgstr "There are no commands"
 
+#. description text
+#: src/components/command/commands-list-empty-state.tsx:15
+msgctxt "pc-commands-empty-state"
+msgid "QsJYGz"
+msgstr "Register it on your pc"
+
 #. localization select tooltip
-#: src\components\i18n\localization-select.tsx
+#: src/components/i18n/localization-select.tsx:49
 msgctxt "localization-select"
 msgid "i3hxQt"
 msgstr "Choose locale"
 
-#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+#: src/components/pc/log/log-info-tip/log-info-tip.tsx:18
 msgctxt "log-info-tip"
 msgid "3fVD9R"
 msgstr "Status:"
 
-#: src\components\pc\log\log-info-tip\log-info-tip.tsx
-msgctxt "log-info-tip"
-msgid "5elgIe"
-msgstr "Error:"
-
-#: src\components\pc\log\log-info-tip\log-info-tip.tsx
-msgctxt "log-info-tip"
-msgid "bpJvUe"
-msgstr "Completed at:"
-
 #. status translation
-#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+#: src/components/pc/log/log-info-tip/log-info-tip.tsx:20
 msgctxt "log-info-tip"
 msgid "ESDZHW"
 msgstr "{status, select, ok {Success} command_error {Command failed} internal_error {Internal error} other {Completed}}"
 
-#: src\components\pc\log\log-info-tip\log-info-tip.tsx
-msgctxt "log-info-tip"
-msgid "SOwXGn"
-msgstr "Received at:"
-
-#: src\components\pc\log\log-info-tip\log-info-tip.tsx
-msgctxt "log-info-tip"
-msgid "SSjbtT"
-msgstr "Command name:"
-
-#: src\components\pc\log\log-info-tip\log-info-tip.tsx
+#: src/components/pc/log/log-info-tip/log-info-tip.tsx:30
 msgctxt "log-info-tip"
 msgid "xymp4G"
 msgstr "Command ID:"
 
-#: src\components\pc\log\log-types\utils\use-log-type-props.ts
-msgctxt "use-log-types"
-msgid "2KtWqT"
-msgstr "Internal"
+#: src/components/pc/log/log-info-tip/log-info-tip.tsx:35
+msgctxt "log-info-tip"
+msgid "SSjbtT"
+msgstr "Command name:"
 
-#: src\components\pc\log\log-types\utils\use-log-type-props.ts
+#: src/components/pc/log/log-info-tip/log-info-tip.tsx:42
+msgctxt "log-info-tip"
+msgid "5elgIe"
+msgstr "Error:"
+
+#: src/components/pc/log/log-info-tip/log-info-tip.tsx:47
+msgctxt "log-info-tip"
+msgid "SOwXGn"
+msgstr "Received at:"
+
+#: src/components/pc/log/log-info-tip/log-info-tip.tsx:50
+msgctxt "log-info-tip"
+msgid "bpJvUe"
+msgstr "Completed at:"
+
+#: src/components/pc/log/log-types/utils/use-log-type-props.ts:23
 msgctxt "use-log-types"
 msgid "kAEQyV"
 msgstr "OK"
 
-#: src\components\pc\log\log-types\utils\use-log-type-props.ts
+#: src/components/pc/log/log-types/utils/use-log-type-props.ts:24
 msgctxt "use-log-types"
 msgid "KN7zKn"
 msgstr "Error"
 
+#: src/components/pc/log/log-types/utils/use-log-type-props.ts:25
+msgctxt "use-log-types"
+msgid "2KtWqT"
+msgstr "Internal"
+
 #. link button text
-#: src\components\pc\pc-card.tsx
+#: src/components/pc/pc-card.tsx:50
 msgctxt "pc-card"
 msgid "d21Els"
 msgstr "Execute"
 
-#. pc list empty state description
-#: src\components\pc\pc-list-empty-state.tsx
-msgctxt "pc-list-empty-state"
-msgid "6Y8BHY"
-msgstr "There are not pcs registered on your account"
-
 #. pc list empty state title
-#: src\components\pc\pc-list-empty-state.tsx
+#: src/components/pc/pc-list-empty-state.tsx:18
 msgctxt "pc-list-empty-state"
 msgid "c5g+Gs"
 msgstr "Your pc list is empty"
 
+#. pc list empty state description
+#: src/components/pc/pc-list-empty-state.tsx:24
+msgctxt "pc-list-empty-state"
+msgid "6Y8BHY"
+msgstr "There are not pcs registered on your account"
+
 #. tooltip
-#: src\components\pc\power-on-button.tsx
+#: src/components/pc/power-on-button.tsx:26
 msgctxt "pc-power-on-button"
 msgid "539b0C"
 msgstr "Power on"
 
-#. axios error handler title
-#: src\components\providers\query\index.tsx
-msgctxt "query-provider"
-msgid "1rlBUx"
-msgstr "Unexpected error"
-
-#. no connection error description message
-#: src\components\providers\query\index.tsx
-msgctxt "query-provider"
-msgid "ILF2Fy"
-msgstr "Check your internet connection"
-
 #. no connection error message
-#: src\components\providers\query\index.tsx
+#: src/components/providers/query/index.tsx:18
 msgctxt "query-provider"
 msgid "NP4I0A"
 msgstr "No connection"
 
-#: src\components\ui\badge\offline-badge\client.tsx
-#: src\components\ui\badge\offline-badge\server.tsx
+#. no connection error description message
+#: src/components/providers/query/index.tsx:22
+msgctxt "query-provider"
+msgid "ILF2Fy"
+msgstr "Check your internet connection"
+
+#. axios error handler title
+#: src/components/providers/query/index.tsx:31
+msgctxt "query-provider"
+msgid "1rlBUx"
+msgstr "Unexpected error"
+
+#: src/components/ui/badge/offline-badge/client.tsx:12
+#: src/components/ui/badge/offline-badge/server.tsx:10
 msgctxt "offline-badge"
 msgid "K3uH1C"
 msgstr "offline"
 
-#: src\components\ui\badge\online-badge\client.tsx
-#: src\components\ui\badge\online-badge\server.tsx
+#: src/components/ui/badge/online-badge/client.tsx:12
+#: src/components/ui/badge/online-badge/server.tsx:10
 msgctxt "online-badge"
 msgid "v3MWTZ"
 msgstr "online"
 
-#. tooltip of color mode button to change to light theme
-#: src\components\ui\chakra\color-mode.tsx
-msgctxt "color-mode-button"
-msgid "7l91tE"
-msgstr "Change to light theme"
-
 #. tooltip of color mode button to change to dark theme
-#: src\components\ui\chakra\color-mode.tsx
+#: src/components/ui/chakra/color-mode.tsx:81
 msgctxt "color-mode-button"
 msgid "bT/Gni"
 msgstr "Change to dark theme"
 
+#. tooltip of color mode button to change to light theme
+#: src/components/ui/chakra/color-mode.tsx:86
+msgctxt "color-mode-button"
+msgid "7l91tE"
+msgstr "Change to light theme"
+
 #. tooltip of color mode button to change to system theme
-#: src\components\ui\chakra\color-mode.tsx
+#: src/components/ui/chakra/color-mode.tsx:91
 msgctxt "color-mode-button"
 msgid "JK+cUU"
 msgstr "Change to system theme"
 
 #. confirmation dialog cancel button text
-#: src\components\ui\dialog\confirmation-dialog\content.tsx
+#: src/components/ui/dialog/confirmation-dialog/content.tsx:34
 msgctxt "confirmation-dialog"
 msgid "47FYwb"
 msgstr "Cancel"
 
 #. confirmation dialog confirm button text
-#: src\components\ui\dialog\confirmation-dialog\content.tsx
+#: src/components/ui/dialog/confirmation-dialog/content.tsx:43
 msgctxt "confirmation-dialog"
 msgid "N2IrpM"
 msgstr "Confirm"
 
-#. cancel button tooltip
-#: src\components\ui\editable\editable-control.tsx
-msgctxt "components.ui.editable-control"
-msgid "47FYwb"
-msgstr "Cancel"
-
 #. edit button tooltip
-#: src\components\ui\editable\editable-control.tsx
+#: src/components/ui/editable/editable-control.tsx:14
 msgctxt "components.ui.editable-control"
 msgid "wEQDC6"
 msgstr "Edit"
 
+#. cancel button tooltip
+#: src/components/ui/editable/editable-control.tsx:27
+msgctxt "components.ui.editable-control"
+msgid "47FYwb"
+msgstr "Cancel"
+
 #. submit button tooltip
-#: src\components\ui\editable\editable-control.tsx
+#: src/components/ui/editable/editable-control.tsx:40
 msgctxt "components.ui.editable-control"
 msgid "wSZR47"
 msgstr "Submit"
 
 #. default confirmation dialog title
-#: src\utils\hooks\commands\provider.tsx
+#: src/utils/hooks/commands/provider.tsx:57
 msgctxt "commands-provider"
 msgid "2oCaym"
 msgstr "Are you sure?"
 
 #. default confirmation dialog text
-#: src\utils\hooks\commands\provider.tsx
+#: src/utils/hooks/commands/provider.tsx:61
 msgctxt "commands-provider"
 msgid "qcCX8I"
 msgstr "Are you sure you want to execute command {name}"
 
 #. not found error title
-#: src\utils\hooks\queries\pcs\queries\use-slug-pc-query.ts
+#: src/utils/hooks/queries/pcs/queries/use-id-pc-query.ts:16
+msgctxt "use-pc-query"
+msgid "4+Iiep"
+msgstr "PC not found"
+
+#. not found error message
+#: src/utils/hooks/queries/pcs/queries/use-id-pc-query.ts:20
+msgctxt "use-pc-query"
+msgid "V7DSDW"
+msgstr "This PC can not be found"
+
+#. not found error title
+#: src/utils/hooks/queries/pcs/queries/use-slug-pc-query.ts:18
 msgctxt "use-slug-pc-query"
 msgid "4+Iiep"
 msgstr "PC not found"
 
 #. not found error message
-#: src\utils\hooks\queries\pcs\queries\use-slug-pc-query.ts
+#: src/utils/hooks/queries/pcs/queries/use-slug-pc-query.ts:22
 msgctxt "use-slug-pc-query"
 msgid "V7DSDW"
 msgstr "This PC can not be found"
 
 #. index breadcrumb
-#: src\utils\hooks\ui\breadcrumbs\client.ts
-#: src\utils\hooks\ui\breadcrumbs\server.ts
+#: src/utils/hooks/ui/breadcrumbs/client.ts:10
+#: src/utils/hooks/ui/breadcrumbs/server.ts:10
 msgctxt "breadcrumbs"
 msgid "hCkFMJ"
 msgstr "Index"
 
 #. dashboard breadcrumb
-#: src\utils\hooks\ui\breadcrumbs\client.ts
-#: src\utils\hooks\ui\breadcrumbs\server.ts
+#: src/utils/hooks/ui/breadcrumbs/client.ts:17
+#: src/utils/hooks/ui/breadcrumbs/server.ts:17
 msgctxt "breadcrumbs"
 msgid "hzSNj4"
 msgstr "Dashboard"
 
-#. dashboard tab item tooltip
-#: src\utils\hooks\ui\tabs\client.tsx
+#. this pc breadcrumb
+#: src/utils/hooks/ui/breadcrumbs/client.ts:24
+msgctxt "breadcrumbs"
+msgid "XkhxhV"
+msgstr "This PC"
+
+#. dashboard tab item label
+#: src/utils/hooks/ui/tabs/client.tsx:13
+#: src/utils/hooks/ui/tabs/client.tsx:17
 msgctxt "navigation-tabs"
 msgid "hzSNj4"
 msgstr "Dashboard"
+
+#. this pc tab item label
+#: src/utils/hooks/ui/tabs/client.tsx:25
+#: src/utils/hooks/ui/tabs/client.tsx:29
+msgctxt "navigation-tabs"
+msgid "XkhxhV"
+msgstr "This PC"

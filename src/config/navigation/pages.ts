@@ -1,4 +1,4 @@
-export class PAGES {
+export abstract class PAGES {
   static index = "/";
 
   static dashboard = this.index + "dashboard";
@@ -6,4 +6,6 @@ export class PAGES {
   static pc(slug: string) {
     return this.dashboard + "/" + slug;
   }
+
+  static thisPc = this.index + "this-pc";
 }

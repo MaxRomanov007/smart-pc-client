@@ -1,7 +1,7 @@
 import { Flex } from "@chakra-ui/react";
 import CpuMetric from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics/cpu-metric";
 import RamMetric from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics/ram-metric";
-import type { VirtualMemoryState } from "@/types/mqtt/pc-state";
+import type { VirtualMemoryState } from "@/types/pc/pc-state";
 
 interface Props {
   cpuPercent: number;

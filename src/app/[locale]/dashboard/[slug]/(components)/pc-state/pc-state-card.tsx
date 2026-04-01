@@ -4,7 +4,7 @@ import { Card, Flex } from "@chakra-ui/react";
 import { useExtracted } from "next-intl";
 import type { IPc } from "@/types/pc/pc";
 import { PcInfo } from "@/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-info";
-import type { IPcStateData } from "@/types/mqtt/pc-state";
+import type { IPcStateData } from "@/types/pc/pc-state";
 import { type ComponentProps, useCallback, useState } from "react";
 import { type IMqttMessage, MqttMessageTypes } from "@/types/mqtt";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";

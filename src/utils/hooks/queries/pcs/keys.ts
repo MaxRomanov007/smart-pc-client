@@ -1,5 +1,7 @@
 export abstract class pcsQueryKeys {
-  static pcs = ["pcs"];
+  static index = ["pcs"];
+
+  static pcs = [...this.index, "pcs"];
 
   static slugPc(slug: string) {
     return [...this.pcs, "slug:" + slug];
