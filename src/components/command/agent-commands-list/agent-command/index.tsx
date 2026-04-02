@@ -17,7 +17,7 @@ export default function AgentCommand({ command }: Props) {
       </Card.Body>
       <Card.Footer justifyContent="space-between">
         <DeleteButton command={command} />
-        <EditButton />
+        <EditButton command={command} />
       </Card.Footer>
     </Card.Root>
   );

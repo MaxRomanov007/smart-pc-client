@@ -2,16 +2,27 @@
 
 import { useExtracted } from "next-intl";
 import { LuSquarePen } from "react-icons/lu";
-import { Button } from "@chakra-ui/react";
+import { Button, IconButton } from "@chakra-ui/react";
+import { EditDialog } from "./dialogs";
+import type { ComponentProps } from "react";
 
-export function EditButton() {
+interface Props extends Omit<
+  ComponentProps<typeof EditDialog>,
+  "children" | "tooltip"
+> {
+  buttonProps?: ComponentProps<typeof IconButton>;
+}
+
+export function EditButton({ buttonProps, ...props }: Props) {
   const t = useExtracted("agent-command-edit-button");
 
   return (
-    <Button>
-      <LuSquarePen />
+    <EditDialog {...props}>
+      <Button {...buttonProps}>
+        <LuSquarePen />
 
-      {t("Edit")}
-    </Button>
+        {t("Edit")}
+      </Button>
+    </EditDialog>
   );
 }

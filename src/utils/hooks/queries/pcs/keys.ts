@@ -14,6 +14,6 @@ export abstract class pcsQueryKeys {
 
 export abstract class pcsMutationKeys {
   static editPc(id: string) {
-    return ["editPc", id];
+    return ["edit-pc", id];
   }
 }

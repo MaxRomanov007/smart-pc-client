@@ -6,6 +6,10 @@ export abstract class agentQueryKeys {
 
 export abstract class agentMutationKeys {
   static deleteCommand(id: string) {
-    return ["deleteCommand", id];
+    return ["delete-command", id];
+  }
+
+  static editCommand(id: string) {
+    return ["edit-command", id];
   }
 }

@@ -261,36 +261,66 @@ msgid "Ub+AGc"
 msgstr "Sign In"
 
 #. tooltip text
-#: src/components/command/agent-commands-list/agent-command/buttons/delete-button.tsx:19
+#: src/components/command/agent-commands-list/agent-command/buttons/delete-button.tsx:21
 msgctxt "agent-command-delete-button"
 msgid "K3r6DQ"
 msgstr "Delete"
 
 #. header
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:28
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:32
 msgctxt "agent-command-delete-dialog"
 msgid "1moBXg"
 msgstr "Are you sure you want to delete command {name}"
 
 #. description
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:40
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:44
 msgctxt "agent-command-delete-dialog"
 msgid "L3EWIC"
 msgstr "Make sure you want to delete command, you will cannot restore it lately"
 
 #. cancel button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:51
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:55
 msgctxt "agent-command-delete-dialog"
 msgid "47FYwb"
 msgstr "Cancel"
 
 #. delete button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:60
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:64
 msgctxt "agent-command-delete-dialog"
 msgid "K3r6DQ"
 msgstr "Delete"
 
-#: src/components/command/agent-commands-list/agent-command/buttons/edit-button.tsx:14
+#. name field
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:18
+msgctxt "agent-command-edit-dialog-form"
+msgid "HAlOn1"
+msgstr "Name"
+
+#. description field
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:32
+msgctxt "agent-command-edit-dialog-form"
+msgid "Q8Qw5B"
+msgstr "Description"
+
+#. header
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:33
+msgctxt "agent-command-edit-dialog"
+msgid "CvdXPK"
+msgstr "Here you can edit command {name}"
+
+#. cancel button text
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:53
+msgctxt "agent-command-edit-dialog"
+msgid "47FYwb"
+msgstr "Cancel"
+
+#. edit button text
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:62
+msgctxt "agent-command-edit-dialog"
+msgid "wEQDC6"
+msgstr "Edit"
+
+#: src/components/command/agent-commands-list/agent-command/buttons/edit-button.tsx:24
 msgctxt "agent-command-edit-button"
 msgid "wEQDC6"
 msgstr "Edit"

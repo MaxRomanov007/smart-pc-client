@@ -16,12 +16,8 @@
           "uuid": "883d2fa2-3eb4-4061-81cf-58eae8d0c427"
         },
         {
-          "type": "route",
-          "uuid": "b153286b-2c6b-4ea4-b358-2737e7c6cd88"
-        },
-        {
-          "type": "route",
-          "uuid": "bc3539b0-615e-4946-a211-b1ce3d1c34b6"
+          "type": "folder",
+          "uuid": "b8aecc2d-7965-4260-b471-799b94ea028d"
         },
         {
           "type": "folder",
@@ -64,6 +60,20 @@
         {
           "type": "route",
           "uuid": "c89c2220-660a-4e8d-aa27-362dd3b6cea5"
+        }
+      ]
+    },
+    {
+      "uuid": "b8aecc2d-7965-4260-b471-799b94ea028d",
+      "name": ":id",
+      "children": [
+        {
+          "type": "route",
+          "uuid": "b153286b-2c6b-4ea4-b358-2737e7c6cd88"
+        },
+        {
+          "type": "route",
+          "uuid": "bc3539b0-615e-4946-a211-b1ce3d1c34b6"
         }
       ]
     }
