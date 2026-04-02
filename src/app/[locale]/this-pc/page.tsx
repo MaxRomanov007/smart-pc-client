@@ -1,7 +1,12 @@
-"use client";
+import { AgentOnlineOnlyView } from "./(components)/agent-online-only-view";
+import { ThisPcBreadcrumbs } from "./(components)/this-pc-breadcrumbs";
+import Header from "./(components)/header";
 
-import { AgentOnlineOnlyView } from "@/app/[locale]/this-pc/(components)/agent-online-only-view";
-
-export default function Page() {
-  return <AgentOnlineOnlyView />;
+export default async function Page() {
+  return (
+    <ThisPcBreadcrumbs>
+      <Header />
+      <AgentOnlineOnlyView h="full" />
+    </ThisPcBreadcrumbs>
+  );
 }

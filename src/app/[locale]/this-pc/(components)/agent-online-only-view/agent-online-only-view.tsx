@@ -1,12 +1,17 @@
-import { useAgentStatus } from "@/utils/hooks/agent";
-import PcAgentCommandsCard from "@/app/[locale]/this-pc/(components)/pc-commands-card/pc-agent-commands-card";
+"use client";
 
-export function AgentOnlineOnlyView() {
+import { useAgentStatus } from "@/utils/hooks/agent";
+import type { ComponentProps } from "react";
+import AgentCommands from "@/app/[locale]/this-pc/(components)/agent-commands";
+
+type Props = ComponentProps<typeof AgentCommands>;
+
+export function AgentOnlineOnlyView({ ...props }: Props) {
   const state = useAgentStatus("http://localhost:8506");
 
   if (state !== "online") {
     return;
   }
 
-  return <PcAgentCommandsCard />;
+  return <AgentCommands {...props} />;
 }

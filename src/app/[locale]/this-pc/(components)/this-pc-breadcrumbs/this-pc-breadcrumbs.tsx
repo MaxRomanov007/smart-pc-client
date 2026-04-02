@@ -3,7 +3,7 @@ import { getStandardBreadcrumbs } from "@/utils/hooks/ui/breadcrumbs/server";
 import { Flex } from "@chakra-ui/react";
 import Breadcrumbs from "@/components/breadcrumbs/breadcrumbs";
 
-export default async function Layout({ children }: { children: ReactNode }) {
+export async function ThisPcBreadcrumbs({ children }: { children: ReactNode }) {
   const breadcrumbs = await getStandardBreadcrumbs(true);
 
   return (

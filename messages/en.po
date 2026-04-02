@@ -206,17 +206,17 @@ msgctxt "index-page"
 msgid "Oeu69m"
 msgstr "Go to dashboard"
 
-#. card title
-#: src/app/[locale]/this-pc/(components)/pc-commands-card/pc-agent-commands-card.tsx:21
-msgctxt "agent-commands-card"
-msgid "5/sFMo"
-msgstr "PC Commands"
+#. title
+#: src/app/[locale]/this-pc/(components)/header.tsx:10
+msgctxt "this-pc-page-header"
+msgid "jUMGtK"
+msgstr "My commands"
 
-#. card description
-#: src/app/[locale]/this-pc/(components)/pc-commands-card/pc-agent-commands-card.tsx:24
-msgctxt "agent-commands-card"
-msgid "VSDJO5"
-msgstr "Commands registered on your PC"
+#. description
+#: src/app/[locale]/this-pc/(components)/header.tsx:16
+msgctxt "this-pc-page-header"
+msgid "2E8yxA"
+msgstr "Here you can add/edit your commands registered on this PC"
 
 #. unauthorized page title
 #: src/app/[locale]/unauthorized.tsx:17
@@ -259,6 +259,41 @@ msgstr "Sign In"
 msgctxt "sign-in-button-tooltip"
 msgid "Ub+AGc"
 msgstr "Sign In"
+
+#. tooltip text
+#: src/components/command/agent-commands-list/agent-command/buttons/delete-button.tsx:19
+msgctxt "agent-command-delete-button"
+msgid "K3r6DQ"
+msgstr "Delete"
+
+#. header
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:28
+msgctxt "agent-command-delete-dialog"
+msgid "1moBXg"
+msgstr "Are you sure you want to delete command {name}"
+
+#. description
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:40
+msgctxt "agent-command-delete-dialog"
+msgid "L3EWIC"
+msgstr "Make sure you want to delete command, you will cannot restore it lately"
+
+#. cancel button text
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:51
+msgctxt "agent-command-delete-dialog"
+msgid "47FYwb"
+msgstr "Cancel"
+
+#. delete button text
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:60
+msgctxt "agent-command-delete-dialog"
+msgid "K3r6DQ"
+msgstr "Delete"
+
+#: src/components/command/agent-commands-list/agent-command/buttons/edit-button.tsx:14
+msgctxt "agent-command-edit-button"
+msgid "wEQDC6"
+msgstr "Edit"
 
 #. title text
 #: src/components/command/agent-commands-list/agent-commands-list-empty-state.tsx:11

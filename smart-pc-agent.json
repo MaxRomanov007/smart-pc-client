@@ -38,12 +38,47 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "c55a8e85-3629-40dc-8340-809a60abdbc3",
+      "type": "http",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "commands/:id",
+      "responses": [
+        {
+          "uuid": "dce50b79-be10-414b-a665-7385597579b8",
+          "body": "{{setVar 'found' (find (dataRaw 'commands') (object id=(urlParam 'id')))}}\n\n{{#unless @found}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n\n  {{setData 'del' 'commands' (indexOf (dataRaw 'commands') @found)}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify @found}}}\n  }\n\n{{/unless}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
     {
       "type": "route",
       "uuid": "a4a5141a-2887-4fbf-8e7a-9b28c0082d7d"
+    },
+    {
+      "type": "route",
+      "uuid": "c55a8e85-3629-40dc-8340-809a60abdbc3"
     }
   ],
   "proxyMode": true,

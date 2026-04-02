@@ -1,6 +1,6 @@
 import { For } from "@chakra-ui/react";
-import { AgentCommandsListEmptyState } from "@/components/command/agent-commands-list/agent-commands-list-empty-state";
-import { AgentCommand } from "@/components/command/agent-commands-list/agent-command";
+import { AgentCommandsListEmptyState } from "./agent-commands-list-empty-state";
+import AgentCommand from "./agent-command";
 import type { IAgentCommand } from "@/types/agent";
 
 interface Props {
