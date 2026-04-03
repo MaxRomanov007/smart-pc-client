@@ -26,6 +26,7 @@ export type ColorMode = "light" | "dark" | "system";
 
 export interface UseColorModeReturn {
   colorMode: ColorMode;
+  resolvedColorMode: "light" | "dark";
   setColorMode: (colorMode: ColorMode) => void;
   toggleColorMode: () => void;
 }
@@ -47,14 +48,15 @@ export function useColorMode(): UseColorModeReturn {
 
   return {
     colorMode,
+    resolvedColorMode: (resolvedTheme ?? "dark") as "light" | "dark",
     setColorMode: setTheme,
     toggleColorMode,
   };
 }
 
 export function useColorModeValue<T>(light: T, dark: T) {
-  const { colorMode } = useColorMode();
-  return colorMode === "dark" ? dark : light;
+  const { resolvedColorMode } = useColorMode();
+  return resolvedColorMode === "dark" ? dark : light;
 }
 
 export function ColorModeIcon() {

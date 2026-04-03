@@ -218,6 +218,30 @@ msgctxt "this-pc-page-header"
 msgid "2E8yxA"
 msgstr "Here you can add/edit your commands registered on this PC"
 
+#. title
+#: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:15
+msgctxt "this-pc-offline-state"
+msgid "IDdEpA"
+msgstr "Cannot connect to agent"
+
+#. description
+#: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:19
+msgctxt "this-pc-offline-state"
+msgid "T4E/eA"
+msgstr "Cannot connect to agent, please check if agent is active and try again, or download it by button below if it not installed"
+
+#. try again button text
+#: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:27
+msgctxt "this-pc-offline-state"
+msgid "FazwRl"
+msgstr "Try again"
+
+#. download link button text
+#: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:34
+msgctxt "this-pc-offline-state"
+msgid "cav520"
+msgstr "Download from GitHub"
+
 #. unauthorized page title
 #: src/app/[locale]/unauthorized.tsx:17
 msgctxt "unauthorized page"
@@ -291,31 +315,37 @@ msgid "K3r6DQ"
 msgstr "Delete"
 
 #. name field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:18
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:21
 msgctxt "agent-command-edit-dialog-form"
 msgid "HAlOn1"
 msgstr "Name"
 
 #. description field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:32
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:35
 msgctxt "agent-command-edit-dialog-form"
 msgid "Q8Qw5B"
 msgstr "Description"
 
+#. script field
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:53
+msgctxt "agent-command-edit-dialog-form"
+msgid "cxkY9n"
+msgstr "Script"
+
 #. header
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:33
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:34
 msgctxt "agent-command-edit-dialog"
 msgid "CvdXPK"
 msgstr "Here you can edit command {name}"
 
 #. cancel button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:53
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:54
 msgctxt "agent-command-edit-dialog"
 msgid "47FYwb"
 msgstr "Cancel"
 
 #. edit button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:62
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:63
 msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
 msgstr "Edit"
@@ -461,19 +491,19 @@ msgid "v3MWTZ"
 msgstr "online"
 
 #. tooltip of color mode button to change to dark theme
-#: src/components/ui/chakra/color-mode.tsx:81
+#: src/components/ui/chakra/color-mode.tsx:83
 msgctxt "color-mode-button"
 msgid "bT/Gni"
 msgstr "Change to dark theme"
 
 #. tooltip of color mode button to change to light theme
-#: src/components/ui/chakra/color-mode.tsx:86
+#: src/components/ui/chakra/color-mode.tsx:88
 msgctxt "color-mode-button"
 msgid "7l91tE"
 msgstr "Change to light theme"
 
 #. tooltip of color mode button to change to system theme
-#: src/components/ui/chakra/color-mode.tsx:91
+#: src/components/ui/chakra/color-mode.tsx:93
 msgctxt "color-mode-button"
 msgid "JK+cUU"
 msgstr "Change to system theme"

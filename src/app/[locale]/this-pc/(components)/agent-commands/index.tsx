@@ -1,9 +1,9 @@
 import { AgentCommandsList } from "@/components/command/agent-commands-list";
-import { Grid } from "@chakra-ui/react";
 import { useAgentCommands } from "@/utils/hooks/queries/agent";
 import type { ComponentProps } from "react";
+import AgentCommandsGrid from "@/app/[locale]/this-pc/(components)/agent-commands-grid";
 
-type Props = ComponentProps<typeof Grid>;
+type Props = ComponentProps<typeof AgentCommandsGrid>;
 
 export default function AgentCommands({ ...props }: Props) {
   const { data, isError } = useAgentCommands();
@@ -11,12 +11,8 @@ export default function AgentCommands({ ...props }: Props) {
   if (isError || !data) return null;
 
   return (
-    <Grid
-      gap={4}
-      templateColumns="repeat(auto-fit, minmax(360px, 1fr))"
-      {...props}
-    >
+    <AgentCommandsGrid {...props}>
       <AgentCommandsList commands={data} />
-    </Grid>
+    </AgentCommandsGrid>
   );
 }
