@@ -10,7 +10,7 @@ export default function SidePanel({ open, ...props }: Props) {
   return (
     <VStack
       as="aside"
-      w={open ? 48 : 11}
+      w={open ? 52 : 11}
       transition="width 0.2s ease-in-out"
       overflow="hidden"
       {...props}

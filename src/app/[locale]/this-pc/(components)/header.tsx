@@ -14,7 +14,7 @@ export default async function Header() {
       </Heading>
       <Text color="fg.muted">
         {t({
-          message: "Here you can add/edit your commands registered on this PC",
+          message: "Add and manage commands registered on this PC",
           description: "description",
         })}
       </Text>

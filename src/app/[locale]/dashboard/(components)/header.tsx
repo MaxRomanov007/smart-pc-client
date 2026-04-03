@@ -14,7 +14,7 @@ export default async function Header() {
       </Heading>
       <Text color="fg.muted">
         {t({
-          message: "Manage and control your registered computers",
+          message: "Manage your registered computers",
           description: "description",
         })}
       </Text>

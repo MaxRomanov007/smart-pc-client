@@ -28,7 +28,7 @@ export default async function MainPage() {
       })}
       description={t({
         message:
-          "Here you can navigate to any other page. Go to list of your pcs by button below",
+          "Here you can navigate to any other page. Use the button below to go to your PC list",
         description: "description of index page",
       })}
     >

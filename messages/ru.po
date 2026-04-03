@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Language: en\n"
+"Language: ru\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: next-intl\n"
@@ -10,601 +10,601 @@ msgstr ""
 #: src/app/[locale]/(components)/layout/functional-block-left.tsx:23
 msgctxt "header-left-functional-block"
 msgid "f3RyOl"
-msgstr "Hide menu"
+msgstr "Скрыть меню"
 
 #. tooltip of change visibility button for side panel to show it
 #: src/app/[locale]/(components)/layout/functional-block-left.tsx:28
 msgctxt "header-left-functional-block"
 msgid "hlmmXh"
-msgstr "Show menu"
+msgstr "Показать меню"
 
 #. navigation menu title in the drawer
 #: src/app/[locale]/(components)/layout/menu-drawer.tsx:33
 msgctxt "header-menu-drawer"
 msgid "tKMlOc"
-msgstr "Menu"
+msgstr "Меню"
 
 #: src/app/[locale]/auth/callback/page.tsx:99
 msgctxt "auth-callback-page"
 msgid "ia2WSY"
-msgstr "Completing authorization..."
+msgstr "Завершение авторизации..."
 
 #. title
 #: src/app/[locale]/dashboard/(components)/header.tsx:10
 msgctxt "dashboard-page-header"
 msgid "Iw3cCk"
-msgstr "My PCs"
+msgstr "Мои ПК"
 
 #. description
 #: src/app/[locale]/dashboard/(components)/header.tsx:16
 msgctxt "dashboard-page-header"
 msgid "l9Ix9W"
-msgstr "Manage your registered computers"
+msgstr "Управляйте своими зарегистрированными компьютерами"
 
 #. card title
 #: src/app/[locale]/dashboard/[slug]/(components)/commands/pc-commands-card.tsx:25
 msgctxt "pc-commands-card"
 msgid "5/sFMo"
-msgstr "PC Commands"
+msgstr "Команды ПК"
 
 #. card description
 #: src/app/[locale]/dashboard/[slug]/(components)/commands/pc-commands-card.tsx:28
 msgctxt "pc-commands-card"
 msgid "6FUbkj"
-msgstr "Commands registered on PC {name}"
+msgstr "Команды, зарегистрированные на ПК {name}"
 
 #. card title
 #: src/app/[locale]/dashboard/[slug]/(components)/logs/pc-logs-card.tsx:22
 msgctxt "pc-logs-card"
 msgid "LwKIHO"
-msgstr "PC Logs"
+msgstr "Логи ПК"
 
 #. card description
 #: src/app/[locale]/dashboard/[slug]/(components)/logs/pc-logs-card.tsx:27
 msgctxt "pc-logs-card"
 msgid "t25/gS"
-msgstr "History of operations on PC {name}"
+msgstr "История операций на ПК {name}"
 
 #. title
 #: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:42
 msgctxt "pc-offline-state"
 msgid "e/wd7f"
-msgstr "PC is offline"
+msgstr "ПК недоступен"
 
 #: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:48
 msgctxt "pc-offline-state"
 msgid "MgbuKr"
-msgstr "This PC is offline. Click the button below to go to the {pageName} page or try to power it on"
+msgstr "ПК недоступен. Нажмите кнопку ниже, чтобы перейти на страницу {pageName}, или попробуйте включить компьютер"
 
 #: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:55
 msgctxt "pc-offline-state"
 msgid "cdHJOq"
-msgstr "This PC is offline. Click the button below to go to the {pageName} page"
+msgstr "ПК недоступен. Нажмите кнопку ниже, чтобы перейти на страницу {pageName}"
 
 #: src/app/[locale]/dashboard/[slug]/(components)/page/pc-offline-state.tsx:65
 msgctxt "pc-offline-state"
 msgid "s7c1Bg"
-msgstr "Go to {pageName}"
+msgstr "Перейти к {pageName}"
 
 #. cpu metric label
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics/cpu-metric.tsx:14
 msgctxt "metrics"
 msgid "20Sod8"
-msgstr "CPU:"
+msgstr "ЦП:"
 
 #. ram metric label
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/metrics/ram-metric.tsx:15
 msgctxt "metrics"
 msgid "C71NYG"
-msgstr "RAM:"
+msgstr "ОЗУ:"
 
 #. pc name label
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-info.tsx:25
 msgctxt "slug-pc-info"
 msgid "WF8jKB"
-msgstr "Name:"
+msgstr "Название:"
 
 #. pc description label
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-info.tsx:35
 msgctxt "slug-pc-info"
 msgid "uTnplY"
-msgstr "Description:"
+msgstr "Описание:"
 
 #. card title
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card.tsx:64
 msgctxt "pc-state-card"
 msgid "M7sV9I"
-msgstr "PC State"
+msgstr "Состояние ПК"
 
 #. card description
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/pc-state-card.tsx:67
 msgctxt "pc-state-card"
 msgid "Q790HF"
-msgstr "State of PC {name}"
+msgstr "Состояние ПК {name}"
 
 #. unmute tooltip
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/mute-button.tsx:38
 msgctxt "pc-slug-page.pc-state.volume-control.mute-button"
 msgid "W9355R"
-msgstr "Unmute"
+msgstr "Включить звук"
 
 #. mute tooltip
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/mute-button.tsx:42
 msgctxt "pc-slug-page.pc-state.volume-control.mute-button"
 msgid "x82IOl"
-msgstr "Mute"
+msgstr "Отключить звук"
 
 #. previous track button
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/track-control-buttons.tsx:23
 msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
 msgid "PyAUyD"
-msgstr "Previous track"
+msgstr "Предыдущий трек"
 
 #. play-pause button
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/track-control-buttons.tsx:40
 msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
 msgid "QtwFGc"
-msgstr "Play / Pause"
+msgstr "Воспроизвести / Пауза"
 
 #. next track button
 #: src/app/[locale]/dashboard/[slug]/(components)/pc-state/volume-control/track-control-buttons.tsx:57
 msgctxt "slug-pc-page.pc-state.volume-control.track-control-buttons"
 msgid "1iX+o8"
-msgstr "Next track"
+msgstr "Следующий трек"
 
 #. error page title
 #: src/app/[locale]/error.tsx:20
 msgctxt "error-page"
 msgid "JqiqNj"
-msgstr "Something went wrong"
+msgstr "Что-то пошло не так"
 
 #. reset button text
 #: src/app/[locale]/error.tsx:27
 msgctxt "error-page"
 msgid "jm/spn"
-msgstr "Reset"
+msgstr "Сбросить"
 
 #. not found page title
 #: src/app/[locale]/not-found.tsx:18
 msgctxt "not-found-page"
 msgid "2VD9+S"
-msgstr "This page couldn't be found"
+msgstr "Страница не найдена"
 
 #. not found page help text with offer for go to the main page
 #: src/app/[locale]/not-found.tsx:22
 msgctxt "not-found-page"
 msgid "7j5hx9"
-msgstr "Looks like there's a mistake in the URL. Check it or go to the main page"
+msgstr "Похоже, в адресе есть ошибка. Проверьте его или перейдите на главную страницу"
 
 #. not found page link button for main page text
 #: src/app/[locale]/not-found.tsx:30
 msgctxt "not-found-page"
 msgid "/sD7Tl"
-msgstr "Go to main page"
+msgstr "На главную"
 
 #. title of index page in metadata
 #: src/app/[locale]/page.tsx:12
 msgctxt "index-page-metadata"
 msgid "FmhFdY"
-msgstr "Index page"
+msgstr "Главная"
 
 #. title of index page
 #: src/app/[locale]/page.tsx:25
 msgctxt "index-page"
 msgid "FmhFdY"
-msgstr "Index page"
+msgstr "Главная"
 
 #. description of index page
 #: src/app/[locale]/page.tsx:29
 msgctxt "index-page"
 msgid "oLTAfX"
-msgstr "Here you can navigate to any other page. Use the button below to go to your PC list"
+msgstr "Отсюда вы можете перейти на любую другую страницу. Нажмите кнопку ниже, чтобы открыть список ваших ПК"
 
 #. link button to dashboard text
 #: src/app/[locale]/page.tsx:36
 msgctxt "index-page"
 msgid "Oeu69m"
-msgstr "Go to dashboard"
+msgstr "Перейти к панели управления"
 
 #. title
 #: src/app/[locale]/this-pc/(components)/header.tsx:10
 msgctxt "this-pc-page-header"
 msgid "jUMGtK"
-msgstr "My commands"
+msgstr "Мои команды"
 
 #. description
 #: src/app/[locale]/this-pc/(components)/header.tsx:16
 msgctxt "this-pc-page-header"
 msgid "C+YoDB"
-msgstr "Add and manage commands registered on this PC"
+msgstr "Добавляйте и управляйте командами, зарегистрированными на этом ПК"
 
 #. title
 #: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:17
 msgctxt "this-pc-offline-state"
 msgid "IDdEpA"
-msgstr "Cannot connect to agent"
+msgstr "Нет подключения к агенту"
 
 #. description
 #: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:21
 msgctxt "this-pc-offline-state"
 msgid "6RAhMy"
-msgstr "Cannot connect to agent. Please check if the agent is running and try again, or use the button below to download it if it is not installed"
+msgstr "Не удалось подключиться к агенту. Убедитесь, что агент запущен, и попробуйте снова. Если агент не установлен — загрузите его по кнопке ниже"
 
 #. download link button text
 #: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:32
 msgctxt "this-pc-offline-state"
 msgid "cav520"
-msgstr "Download from GitHub"
+msgstr "Скачать с GitHub"
 
 #. try again button text
 #: src/app/[locale]/this-pc/(components)/offline-state/index.tsx:39
 msgctxt "this-pc-offline-state"
 msgid "FazwRl"
-msgstr "Try again"
+msgstr "Попробовать снова"
 
 #. unauthorized page title
 #: src/app/[locale]/unauthorized.tsx:17
 msgctxt "unauthorized page"
 msgid "2uBtp/"
-msgstr "You're not authorized"
+msgstr "Нет доступа"
 
 #. description
 #: src/app/[locale]/unauthorized.tsx:21
 msgctxt "unauthorized page"
 msgid "3zq8KM"
-msgstr "You're not authorized. Sign in by click button below to access this page"
+msgstr "Вы не авторизованы. Войдите в аккаунт, нажав кнопку ниже, чтобы получить доступ к этой странице"
 
 #. confirmation dialog title for sign out action
 #: src/components/button/auth/profile-menu.tsx:28
 msgctxt "profile-button-menu"
 msgid "G2c0ij"
-msgstr "Sign out of your account?"
+msgstr "Выйти из аккаунта?"
 
 #. confirmation dialog text for sign out action
 #: src/components/button/auth/profile-menu.tsx:32
 msgctxt "profile-button-menu"
 msgid "9rVNwM"
-msgstr "After sign out, you will be able to sign back into your account."
+msgstr "После выхода вы сможете войти снова в любое время."
 
 #. user menu sign out text
 #: src/components/button/auth/profile-menu.tsx:53
 msgctxt "profile-button-menu"
 msgid "F62y+K"
-msgstr "Sign Out"
+msgstr "Выйти"
 
 #. sign in button text
 #: src/components/button/auth/sign-in-button.tsx:63
 msgctxt "sign-in-button"
 msgid "Ub+AGc"
-msgstr "Sign In"
+msgstr "Войти"
 
 #. sign in button tooltip
 #: src/components/button/auth/sign-in-button.tsx:77
 msgctxt "sign-in-button-tooltip"
 msgid "Ub+AGc"
-msgstr "Sign In"
+msgstr "Войти"
 
 #. tooltip text
 #: src/components/command/agent-commands-list/agent-command/buttons/delete-button.tsx:21
 msgctxt "agent-command-delete-button"
 msgid "K3r6DQ"
-msgstr "Delete"
+msgstr "Удалить"
 
 #. header
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:32
 msgctxt "agent-command-delete-dialog"
 msgid "UlY3KR"
-msgstr "Are you sure you want to delete the command \"{name}\"?"
+msgstr "Удалить команду «{name}»?"
 
 #. description
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:45
 msgctxt "agent-command-delete-dialog"
 msgid "AREyMx"
-msgstr "This action cannot be undone. The command will be permanently deleted"
+msgstr "Это действие необратимо. Команда будет удалена без возможности восстановления"
 
 #. cancel button text
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:56
 msgctxt "agent-command-delete-dialog"
 msgid "47FYwb"
-msgstr "Cancel"
+msgstr "Отмена"
 
 #. delete button text
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/delete-dialog.tsx:65
 msgctxt "agent-command-delete-dialog"
 msgid "K3r6DQ"
-msgstr "Delete"
+msgstr "Удалить"
 
 #. name field
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:21
 msgctxt "agent-command-edit-dialog-form"
 msgid "HAlOn1"
-msgstr "Name"
+msgstr "Название"
 
 #. description field
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:35
 msgctxt "agent-command-edit-dialog-form"
 msgid "Q8Qw5B"
-msgstr "Description"
+msgstr "Описание"
 
 #. script field
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:53
 msgctxt "agent-command-edit-dialog-form"
 msgid "cxkY9n"
-msgstr "Script"
+msgstr "Скрипт"
 
 #. header
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:34
 msgctxt "agent-command-edit-dialog"
 msgid "O+JC87"
-msgstr "Edit command \"{name}\""
+msgstr "Редактирование команды «{name}»"
 
 #. cancel button text
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:54
 msgctxt "agent-command-edit-dialog"
 msgid "47FYwb"
-msgstr "Cancel"
+msgstr "Отмена"
 
 #. edit button text
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:63
 msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
-msgstr "Edit"
+msgstr "Редактировать"
 
 #: src/components/command/agent-commands-list/agent-command/buttons/edit-button.tsx:24
 msgctxt "agent-command-edit-button"
 msgid "wEQDC6"
-msgstr "Edit"
+msgstr "Редактировать"
 
 #. title text
 #: src/components/command/agent-commands-list/agent-commands-list-empty-state.tsx:11
 msgctxt "agent-commands-empty-state"
 msgid "xGSVMH"
-msgstr "There are no commands"
+msgstr "Команд нет"
 
 #. description text
 #: src/components/command/agent-commands-list/agent-commands-list-empty-state.tsx:15
 msgctxt "agent-commands-empty-state"
 msgid "hg9Y9l"
-msgstr "Register commands on your PC first"
+msgstr "Сначала зарегистрируйте команды на этом ПК"
 
 #. title text
 #: src/components/command/commands-list/commands-list-empty-state.tsx:11
 msgctxt "pc-commands-empty-state"
 msgid "xGSVMH"
-msgstr "There are no commands"
+msgstr "Команд нет"
 
 #. description text
 #: src/components/command/commands-list/commands-list-empty-state.tsx:15
 msgctxt "pc-commands-empty-state"
 msgid "hg9Y9l"
-msgstr "Register commands on your PC first"
+msgstr "Сначала зарегистрируйте команды на этом ПК"
 
 #. localization select tooltip
 #: src/components/i18n/localization-select.tsx:49
 msgctxt "localization-select"
 msgid "i3hxQt"
-msgstr "Choose locale"
+msgstr "Выбрать язык"
 
 #: src/components/pc/log/log-info-tip/log-info-tip.tsx:18
 msgctxt "log-info-tip"
 msgid "3fVD9R"
-msgstr "Status:"
+msgstr "Статус:"
 
 #. status translation
 #: src/components/pc/log/log-info-tip/log-info-tip.tsx:20
 msgctxt "log-info-tip"
 msgid "ESDZHW"
-msgstr "{status, select, ok {Success} command_error {Command failed} internal_error {Internal error} other {Completed}}"
+msgstr "{status, select, ok {Успешно} command_error {Ошибка команды} internal_error {Внутренняя ошибка} other {Выполнено}}"
 
 #: src/components/pc/log/log-info-tip/log-info-tip.tsx:30
 msgctxt "log-info-tip"
 msgid "xymp4G"
-msgstr "Command ID:"
+msgstr "ID команды:"
 
 #: src/components/pc/log/log-info-tip/log-info-tip.tsx:35
 msgctxt "log-info-tip"
 msgid "SSjbtT"
-msgstr "Command name:"
+msgstr "Название команды:"
 
 #: src/components/pc/log/log-info-tip/log-info-tip.tsx:42
 msgctxt "log-info-tip"
 msgid "5elgIe"
-msgstr "Error:"
+msgstr "Ошибка:"
 
 #: src/components/pc/log/log-info-tip/log-info-tip.tsx:47
 msgctxt "log-info-tip"
 msgid "SOwXGn"
-msgstr "Received at:"
+msgstr "Получено:"
 
 #: src/components/pc/log/log-info-tip/log-info-tip.tsx:50
 msgctxt "log-info-tip"
 msgid "bpJvUe"
-msgstr "Completed at:"
+msgstr "Завершено:"
 
 #: src/components/pc/log/log-types/utils/use-log-type-props.ts:23
 msgctxt "use-log-types"
 msgid "kAEQyV"
-msgstr "OK"
+msgstr "ОК"
 
 #: src/components/pc/log/log-types/utils/use-log-type-props.ts:24
 msgctxt "use-log-types"
 msgid "KN7zKn"
-msgstr "Error"
+msgstr "Ошибка"
 
 #: src/components/pc/log/log-types/utils/use-log-type-props.ts:25
 msgctxt "use-log-types"
 msgid "2KtWqT"
-msgstr "Internal"
+msgstr "Внутренняя"
 
 #. link button text
 #: src/components/pc/pc-card.tsx:50
 msgctxt "pc-card"
 msgid "d21Els"
-msgstr "Execute"
+msgstr "Выполнить"
 
 #. pc list empty state title
 #: src/components/pc/pc-list-empty-state.tsx:18
 msgctxt "pc-list-empty-state"
 msgid "c5g+Gs"
-msgstr "Your pc list is empty"
+msgstr "Список ПК пуст"
 
 #. pc list empty state description
 #: src/components/pc/pc-list-empty-state.tsx:24
 msgctxt "pc-list-empty-state"
 msgid "qPxD9t"
-msgstr "There are no PCs registered on your account"
+msgstr "В вашем аккаунте нет зарегистрированных ПК"
 
 #. tooltip
 #: src/components/pc/power-on-button.tsx:26
 msgctxt "pc-power-on-button"
 msgid "539b0C"
-msgstr "Power on"
+msgstr "Включить"
 
 #. no connection error message
 #: src/components/providers/query/index.tsx:18
 msgctxt "query-provider"
 msgid "NP4I0A"
-msgstr "No connection"
+msgstr "Нет соединения"
 
 #. no connection error description message
 #: src/components/providers/query/index.tsx:22
 msgctxt "query-provider"
 msgid "ILF2Fy"
-msgstr "Check your internet connection"
+msgstr "Проверьте подключение к интернету"
 
 #. axios error handler title
 #: src/components/providers/query/index.tsx:31
 msgctxt "query-provider"
 msgid "1rlBUx"
-msgstr "Unexpected error"
+msgstr "Неожиданная ошибка"
 
 #: src/components/ui/badge/offline-badge/client.tsx:12
 #: src/components/ui/badge/offline-badge/server.tsx:10
 msgctxt "offline-badge"
 msgid "K3uH1C"
-msgstr "offline"
+msgstr "не в сети"
 
 #: src/components/ui/badge/online-badge/client.tsx:12
 #: src/components/ui/badge/online-badge/server.tsx:10
 msgctxt "online-badge"
 msgid "v3MWTZ"
-msgstr "online"
+msgstr "в сети"
 
 #. tooltip of color mode button to change to dark theme
 #: src/components/ui/chakra/color-mode.tsx:83
 msgctxt "color-mode-button"
 msgid "bT/Gni"
-msgstr "Change to dark theme"
+msgstr "Тёмная тема"
 
 #. tooltip of color mode button to change to light theme
 #: src/components/ui/chakra/color-mode.tsx:88
 msgctxt "color-mode-button"
 msgid "7l91tE"
-msgstr "Change to light theme"
+msgstr "Светлая тема"
 
 #. tooltip of color mode button to change to system theme
 #: src/components/ui/chakra/color-mode.tsx:93
 msgctxt "color-mode-button"
 msgid "JK+cUU"
-msgstr "Change to system theme"
+msgstr "Системная тема"
 
 #. confirmation dialog cancel button text
 #: src/components/ui/dialog/confirmation-dialog/content.tsx:34
 msgctxt "confirmation-dialog"
 msgid "47FYwb"
-msgstr "Cancel"
+msgstr "Отмена"
 
 #. confirmation dialog confirm button text
 #: src/components/ui/dialog/confirmation-dialog/content.tsx:43
 msgctxt "confirmation-dialog"
 msgid "N2IrpM"
-msgstr "Confirm"
+msgstr "Подтвердить"
 
 #. edit button tooltip
 #: src/components/ui/editable/editable-control.tsx:14
 msgctxt "components.ui.editable-control"
 msgid "wEQDC6"
-msgstr "Edit"
+msgstr "Редактировать"
 
 #. cancel button tooltip
 #: src/components/ui/editable/editable-control.tsx:27
 msgctxt "components.ui.editable-control"
 msgid "47FYwb"
-msgstr "Cancel"
+msgstr "Отмена"
 
 #. submit button tooltip
 #: src/components/ui/editable/editable-control.tsx:40
 msgctxt "components.ui.editable-control"
 msgid "wSZR47"
-msgstr "Submit"
+msgstr "Сохранить"
 
 #. default confirmation dialog title
 #: src/utils/hooks/commands/provider.tsx:57
 msgctxt "commands-provider"
 msgid "2oCaym"
-msgstr "Are you sure?"
+msgstr "Вы уверены?"
 
 #. default confirmation dialog text
 #: src/utils/hooks/commands/provider.tsx:61
 msgctxt "commands-provider"
 msgid "qcCX8I"
-msgstr "Are you sure you want to execute command {name}"
+msgstr "Вы уверены, что хотите выполнить команду {name}?"
 
 #. not found error title
 #: src/utils/hooks/queries/pcs/queries/use-id-pc-query.ts:16
 msgctxt "use-pc-query"
 msgid "4+Iiep"
-msgstr "PC not found"
+msgstr "ПК не найден"
 
 #. not found error message
 #: src/utils/hooks/queries/pcs/queries/use-id-pc-query.ts:20
 msgctxt "use-pc-query"
 msgid "V7DSDW"
-msgstr "This PC can not be found"
+msgstr "Этот ПК не найден"
 
 #. not found error title
 #: src/utils/hooks/queries/pcs/queries/use-slug-pc-query.ts:18
 msgctxt "use-slug-pc-query"
 msgid "4+Iiep"
-msgstr "PC not found"
+msgstr "ПК не найден"
 
 #. not found error message
 #: src/utils/hooks/queries/pcs/queries/use-slug-pc-query.ts:22
 msgctxt "use-slug-pc-query"
 msgid "V7DSDW"
-msgstr "This PC can not be found"
+msgstr "Этот ПК не найден"
 
 #. index breadcrumb
 #: src/utils/hooks/ui/breadcrumbs/client.ts:10
 #: src/utils/hooks/ui/breadcrumbs/server.ts:10
 msgctxt "breadcrumbs"
 msgid "hCkFMJ"
-msgstr "Index"
+msgstr "Главная"
 
 #. dashboard breadcrumb
 #: src/utils/hooks/ui/breadcrumbs/client.ts:17
 #: src/utils/hooks/ui/breadcrumbs/server.ts:17
 msgctxt "breadcrumbs"
 msgid "hzSNj4"
-msgstr "Dashboard"
+msgstr "Панель управления"
 
 #. this pc breadcrumb
 #: src/utils/hooks/ui/breadcrumbs/client.ts:24
 #: src/utils/hooks/ui/breadcrumbs/server.ts:24
 msgctxt "breadcrumbs"
 msgid "XkhxhV"
-msgstr "This PC"
+msgstr "Этот ПК"
 
 #. dashboard tab item label
 #: src/utils/hooks/ui/tabs/client.tsx:13
 #: src/utils/hooks/ui/tabs/client.tsx:17
 msgctxt "navigation-tabs"
 msgid "hzSNj4"
-msgstr "Dashboard"
+msgstr "Панель управления"
 
 #. this pc tab item label
 #: src/utils/hooks/ui/tabs/client.tsx:25
 #: src/utils/hooks/ui/tabs/client.tsx:29
 msgctxt "navigation-tabs"
 msgid "XkhxhV"
-msgstr "This PC"
+msgstr "Этот ПК"

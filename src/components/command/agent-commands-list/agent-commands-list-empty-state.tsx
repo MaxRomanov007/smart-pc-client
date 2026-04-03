@@ -13,7 +13,7 @@ export function AgentCommandsListEmptyState() {
         description: "title text",
       })}
       description={t({
-        message: "Register it on your pc",
+        message: "Register commands on your PC first",
         description: "description text",
       })}
     />

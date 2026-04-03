@@ -30,7 +30,8 @@ export function DeleteDialog({ command, tooltip, children, ...props }: Props) {
             <Dialog.Header>
               <Dialog.Title truncate>
                 {t({
-                  message: "Are you sure you want to delete command {name}",
+                  message:
+                    'Are you sure you want to delete the command "{name}"?',
                   values: {
                     name: command.name,
                   },
@@ -43,7 +44,7 @@ export function DeleteDialog({ command, tooltip, children, ...props }: Props) {
               <p>
                 {t({
                   message:
-                    "Make sure you want to delete command, you will cannot restore it lately",
+                    "This action cannot be undone. The command will be permanently deleted",
                   description: "description",
                 })}
               </p>

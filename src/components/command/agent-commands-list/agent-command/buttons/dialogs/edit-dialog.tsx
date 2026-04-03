@@ -32,7 +32,7 @@ export function EditDialog({ command, tooltip, children, ...props }: Props) {
             <Dialog.Header>
               <Dialog.Title truncate>
                 {t({
-                  message: "Here you can edit command {name}",
+                  message: 'Edit command "{name}"',
                   values: {
                     name: command.name,
                   },

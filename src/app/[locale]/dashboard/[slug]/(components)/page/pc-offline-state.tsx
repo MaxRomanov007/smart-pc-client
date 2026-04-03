@@ -47,14 +47,14 @@ export default function PcOfflineState({ pc }: Props) {
           pc.canPowerOn
             ? t({
                 message:
-                  "This PC is offline, click on button below, to go to {pageName} page, or try to power it on",
+                  "This PC is offline. Click the button below to go to the {pageName} page or try to power it on",
                 values: {
                   pageName: dashboardTab?.label ?? "",
                 },
               })
             : t({
                 message:
-                  "This PC is offline, click on button below, to go to {pageName} page",
+                  "This PC is offline. Click the button below to go to the {pageName} page",
                 values: {
                   pageName: dashboardTab?.label ?? "",
                 },

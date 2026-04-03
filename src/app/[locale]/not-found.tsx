@@ -20,7 +20,8 @@ export default async function LocalePage() {
         description: "not found page title",
       })}
       description={t({
-        message: "Looks like mistakes in url. Check it or go to the main page",
+        message:
+          "Looks like there's a mistake in the URL. Check it or go to the main page",
         description:
           "not found page help text with offer for go to the main page",
       })}

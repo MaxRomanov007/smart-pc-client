@@ -20,7 +20,7 @@ export default function OfflineState({ onRetry }: Props) {
       })}
       description={t({
         message:
-          "Cannot connect to agent, please check if agent is active and try again, or download it by button below if it not installed",
+          "Cannot connect to agent. Please check if the agent is running and try again, or use the button below to download it if it is not installed",
         description: "description",
       })}
     >

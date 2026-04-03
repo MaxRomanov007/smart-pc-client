@@ -22,7 +22,7 @@ export default function PcListEmptyState() {
           </EmptyState.Title>
           <EmptyState.Description>
             {t({
-              message: "There are not pcs registered on your account",
+              message: "There are no PCs registered on your account",
               description: "pc list empty state description",
             })}
           </EmptyState.Description>
