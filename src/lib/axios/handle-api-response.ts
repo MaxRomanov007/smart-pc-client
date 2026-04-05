@@ -6,7 +6,7 @@ import {
   StatusCodes,
 } from "@/types/api/response";
 import { ApiError } from "@/types/api/error";
-import { enumValueToKey } from "@/utils/enums/enum-value-to-key";
+import { enumValueToKey } from "@/utils/enums";
 
 type ErrorStatusKeys = Exclude<keyof typeof StatusCodes, StatusCodes.ok>;
 

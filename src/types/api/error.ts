@@ -1,7 +1,7 @@
 import { type ErrorResponse, StatusCodes } from "@/types/api/response";
 import { handleError, showError } from "@/utils/errors";
 import { notFound } from "next/navigation";
-import { enumValueToKey } from "@/utils/enums/enum-value-to-key";
+import { enumValueToKey } from "@/utils/enums";
 
 type ErrorHandler = (error: ApiError) => void;
 type Handlers = Readonly<

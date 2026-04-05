@@ -2,7 +2,7 @@ import { type IPcLog, PcLogStatus } from "@/types/pc/pc-log";
 import { useExtracted } from "next-intl";
 import type LogBase from "@/components/pc/log/log-types/log-base";
 import type { ComponentProps } from "react";
-import { enumValueToKey } from "@/utils/enums/enum-value-to-key";
+import { enumValueToKey } from "@/utils/enums";
 
 type Props = ComponentProps<typeof LogBase>;
 

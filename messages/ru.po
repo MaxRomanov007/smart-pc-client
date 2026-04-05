@@ -284,6 +284,42 @@ msgctxt "sign-in-button-tooltip"
 msgid "Ub+AGc"
 msgstr "Войти"
 
+#. name field
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:19
+msgctxt "agent-command-parameter-body"
+msgid "HAlOn1"
+msgstr ""
+
+#. description field
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:33
+msgctxt "agent-command-parameter-body"
+msgid "Q8Qw5B"
+msgstr ""
+
+#. type field label
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:52
+msgctxt "agent-command-parameter-body"
+msgid "+U6ozc"
+msgstr ""
+
+#. type field placeholder
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:56
+msgctxt "agent-command-parameter-body"
+msgid "PaEvpZ"
+msgstr ""
+
+#. item label
+#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:31
+msgctxt "agent-command-parameter-type-select"
+msgid "F2ShNF"
+msgstr ""
+
+#. item description
+#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:39
+msgctxt "agent-command-parameter-type-select"
+msgid "UaSk4n"
+msgstr ""
+
 #. tooltip text
 #: src/components/command/agent-commands-list/agent-command/buttons/delete-button.tsx:21
 msgctxt "agent-command-delete-button"
