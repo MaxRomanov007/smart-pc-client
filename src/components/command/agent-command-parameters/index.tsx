@@ -40,6 +40,7 @@ export default function AgentCommandParametersList({
           }
           onDelete={onDeleteParameter}
           errors={errors?.(parameter)}
+          size="sm"
         />
       )}
     </For>

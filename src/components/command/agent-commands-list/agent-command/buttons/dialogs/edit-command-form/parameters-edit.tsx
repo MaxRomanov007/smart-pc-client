@@ -55,7 +55,7 @@ export default function ParametersEdit({
     <ScrollArea.Root>
       <ScrollArea.Viewport>
         <ScrollArea.Content>
-          <HStack alignItems="stretch">
+          <HStack alignItems="stretch" mb={4}>
             <AgentCommandParametersList
               parameters={parameters}
               onParametersChange={onParametersChange}

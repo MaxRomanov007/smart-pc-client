@@ -1,7 +1,7 @@
 import { useExtracted } from "next-intl";
 import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
-import { type ComponentProps, useState } from "react";
+import { type ComponentProps, useMemo, useState } from "react";
 import type { IAgentCommand } from "@/types/agent";
 import { useEditCommandMutation } from "@/utils/hooks/queries/agent/mutations/use-edit-command-mutation";
 import type { AgentCommandToEdit } from "@/services/agent";
@@ -17,6 +17,18 @@ export function EditDialog({ command, tooltip, children, ...props }: Props) {
   const { mutate } = useEditCommandMutation(command.id);
   const [commandToEdit, setCommandToEdit] =
     useState<AgentCommandToEdit>(command);
+
+  const canEdit = useMemo<boolean>(() => {
+    if (!commandToEdit.parameters) {
+      return true;
+    }
+
+    return !commandToEdit.parameters.some((parameter) =>
+      commandToEdit.parameters?.some(
+        (param) => param.name === parameter.name && param.id !== parameter.id,
+      ),
+    );
+  }, [commandToEdit.parameters]);
 
   return (
     <Dialog.Root size={{ mdDown: "full", md: "lg" }} {...props}>
@@ -59,7 +71,10 @@ export function EditDialog({ command, tooltip, children, ...props }: Props) {
               </Dialog.ActionTrigger>
 
               <Dialog.ActionTrigger asChild>
-                <Button onClick={() => mutate(commandToEdit)}>
+                <Button
+                  onClick={() => mutate(commandToEdit)}
+                  disabled={!canEdit}
+                >
                   {t({
                     message: "Edit",
                     description: "edit button text",

@@ -2,7 +2,7 @@ import type { IAgentCommandParameter } from "@/types/agent";
 import { Field, Input, Textarea, VStack } from "@chakra-ui/react";
 import { useExtracted } from "next-intl";
 import TypeSelect from "@/components/command/agent-command-parameters/parameter/type-select";
-import type { ChangeEventHandler } from "react";
+import { type FocusEventHandler, useState } from "react";
 
 export type Errors = Partial<Record<"name" | "description", string>>;
 
@@ -15,10 +15,13 @@ interface Props {
 export default function Body({ parameter, onParameterChange, errors }: Props) {
   const t = useExtracted("agent-command-parameter-body");
 
-  const onNameChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const [name, setName] = useState<string>(parameter.name);
+  const [description, setDescription] = useState<string>(parameter.description);
+
+  const onNameChange: FocusEventHandler<HTMLInputElement> = (e) => {
     onParameterChange?.({ ...parameter, name: e.target.value });
   };
-  const onDescriptionChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+  const onDescriptionChange: FocusEventHandler<HTMLTextAreaElement> = (e) => {
     onParameterChange?.({ ...parameter, description: e.target.value });
   };
 
@@ -32,7 +35,11 @@ export default function Body({ parameter, onParameterChange, errors }: Props) {
           })}
         </Field.Label>
 
-        <Input value={parameter.name} onChange={onNameChange} />
+        <Input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          onBlur={onNameChange}
+        />
 
         {!!errors?.name && <Field.ErrorText>{errors.name}</Field.ErrorText>}
       </Field.Root>
@@ -46,8 +53,10 @@ export default function Body({ parameter, onParameterChange, errors }: Props) {
         </Field.Label>
 
         <Textarea
-          value={parameter.description}
-          onChange={onDescriptionChange}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          onBlur={onDescriptionChange}
+          minH="5lh"
           maxH="5lh"
           autoresize
         />
