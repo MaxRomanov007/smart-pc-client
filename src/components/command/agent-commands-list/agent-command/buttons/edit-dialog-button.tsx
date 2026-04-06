@@ -13,7 +13,7 @@ interface Props extends Omit<
   buttonProps?: ComponentProps<typeof IconButton>;
 }
 
-export function EditButton({ buttonProps, ...props }: Props) {
+export function EditDialogButton({ buttonProps, ...props }: Props) {
   const t = useExtracted("agent-command-edit-button");
 
   return (

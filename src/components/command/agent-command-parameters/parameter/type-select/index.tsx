@@ -13,7 +13,8 @@ import type { ComponentProps } from "react";
 type TypeItem = {
   label: string;
   description: string;
-  value: ParameterTypes;
+  value: string;
+  type: ParameterTypes;
 };
 
 interface Props extends Omit<ComponentProps<typeof Select.Root>, "collection"> {
@@ -50,7 +51,8 @@ export default function TypeSelect({
         },
         description: "item description",
       }),
-      value: value,
+      type: value,
+      value: key,
     })),
   });
 
@@ -61,7 +63,7 @@ export default function TypeSelect({
       collection={types}
       defaultValue={[ParameterTypes.string.toString()]}
       value={value && [value]}
-      onValueChange={(e) => onTypeChange?.(e.items[0].value)}
+      onValueChange={(e) => onTypeChange?.(e.items[0].type)}
       {...props}
     >
       <Select.HiddenSelect />
@@ -80,12 +82,12 @@ export default function TypeSelect({
       <Portal>
         <Select.Positioner>
           <Select.Content>
-            {types.items.map((type) => (
-              <Select.Item item={type} key={type.value}>
+            {types.items.map((item) => (
+              <Select.Item item={item} key={item.value}>
                 <Stack gap={0}>
-                  <Select.ItemText>{type.label}</Select.ItemText>
+                  <Select.ItemText>{item.label}</Select.ItemText>
                   <Span color="fg.muted" textStyle="xs">
-                    {type.description}
+                    {item.description}
                   </Span>
                 </Stack>
                 <Select.ItemIndicator />

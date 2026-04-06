@@ -285,43 +285,43 @@ msgid "Ub+AGc"
 msgstr "Войти"
 
 #. name field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:19
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:22
 msgctxt "agent-command-parameter-body"
 msgid "HAlOn1"
 msgstr ""
 
 #. description field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:33
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:38
 msgctxt "agent-command-parameter-body"
 msgid "Q8Qw5B"
 msgstr ""
 
 #. type field label
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:52
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:61
 msgctxt "agent-command-parameter-body"
 msgid "+U6ozc"
 msgstr ""
 
 #. type field placeholder
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:56
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:65
 msgctxt "agent-command-parameter-body"
 msgid "PaEvpZ"
 msgstr ""
 
 #. item label
-#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:31
+#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:38
 msgctxt "agent-command-parameter-type-select"
 msgid "F2ShNF"
 msgstr ""
 
 #. item description
-#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:39
+#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:46
 msgctxt "agent-command-parameter-type-select"
 msgid "UaSk4n"
 msgstr ""
 
 #. tooltip text
-#: src/components/command/agent-commands-list/agent-command/buttons/delete-button.tsx:21
+#: src/components/command/agent-commands-list/agent-command/buttons/delete-dialog-button.tsx:21
 msgctxt "agent-command-delete-button"
 msgid "K3r6DQ"
 msgstr "Удалить"
@@ -351,22 +351,34 @@ msgid "K3r6DQ"
 msgstr "Удалить"
 
 #. name field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:21
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:23
 msgctxt "agent-command-edit-dialog-form"
 msgid "HAlOn1"
 msgstr "Название"
 
 #. description field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:35
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:37
 msgctxt "agent-command-edit-dialog-form"
 msgid "Q8Qw5B"
 msgstr "Описание"
 
+#. parameters field
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:55
+msgctxt "agent-command-edit-dialog-form"
+msgid "BkOSF2"
+msgstr ""
+
 #. script field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:53
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:71
 msgctxt "agent-command-edit-dialog-form"
 msgid "cxkY9n"
 msgstr "Скрипт"
+
+#. error message on same name is exists
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:34
+msgctxt "agent-commands-parameters-edit"
+msgid "hFv6sd"
+msgstr ""
 
 #. header
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:34
@@ -386,7 +398,7 @@ msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
 msgstr "Редактировать"
 
-#: src/components/command/agent-commands-list/agent-command/buttons/edit-button.tsx:24
+#: src/components/command/agent-commands-list/agent-command/buttons/edit-dialog-button.tsx:24
 msgctxt "agent-command-edit-button"
 msgid "wEQDC6"
 msgstr "Редактировать"

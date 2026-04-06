@@ -285,43 +285,43 @@ msgid "Ub+AGc"
 msgstr "Sign In"
 
 #. name field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:19
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:22
 msgctxt "agent-command-parameter-body"
 msgid "HAlOn1"
 msgstr "Name"
 
 #. description field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:33
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:38
 msgctxt "agent-command-parameter-body"
 msgid "Q8Qw5B"
 msgstr "Description"
 
 #. type field label
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:52
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:61
 msgctxt "agent-command-parameter-body"
 msgid "+U6ozc"
 msgstr "Type"
 
 #. type field placeholder
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:56
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:65
 msgctxt "agent-command-parameter-body"
 msgid "PaEvpZ"
 msgstr "Select parameter type"
 
 #. item label
-#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:31
+#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:38
 msgctxt "agent-command-parameter-type-select"
 msgid "F2ShNF"
 msgstr "{type, select, string {String} number {Number} boolean {Boolean} other {Unknown}}"
 
 #. item description
-#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:39
+#: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:46
 msgctxt "agent-command-parameter-type-select"
 msgid "UaSk4n"
 msgstr "{type, select, string {You can use such a parameter as a string variable, it will be displayed as a text field} number {You can use such a parameter as a number variable, it will be displayed as a number select field} boolean {You can use such a parameter as a boolean variable, it will be displayed as a checkbox field} other {Unknown}}"
 
 #. tooltip text
-#: src/components/command/agent-commands-list/agent-command/buttons/delete-button.tsx:21
+#: src/components/command/agent-commands-list/agent-command/buttons/delete-dialog-button.tsx:21
 msgctxt "agent-command-delete-button"
 msgid "K3r6DQ"
 msgstr "Delete"
@@ -351,22 +351,34 @@ msgid "K3r6DQ"
 msgstr "Delete"
 
 #. name field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:21
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:23
 msgctxt "agent-command-edit-dialog-form"
 msgid "HAlOn1"
 msgstr "Name"
 
 #. description field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:35
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:37
 msgctxt "agent-command-edit-dialog-form"
 msgid "Q8Qw5B"
 msgstr "Description"
 
+#. parameters field
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:55
+msgctxt "agent-command-edit-dialog-form"
+msgid "BkOSF2"
+msgstr "Parameters"
+
 #. script field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:53
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:71
 msgctxt "agent-command-edit-dialog-form"
 msgid "cxkY9n"
 msgstr "Script"
+
+#. error message on same name is exists
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:34
+msgctxt "agent-commands-parameters-edit"
+msgid "hFv6sd"
+msgstr "A parameter with this name already exists"
 
 #. header
 #: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:34
@@ -386,7 +398,7 @@ msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
 msgstr "Edit"
 
-#: src/components/command/agent-commands-list/agent-command/buttons/edit-button.tsx:24
+#: src/components/command/agent-commands-list/agent-command/buttons/edit-dialog-button.tsx:24
 msgctxt "agent-command-edit-button"
 msgid "wEQDC6"
 msgstr "Edit"

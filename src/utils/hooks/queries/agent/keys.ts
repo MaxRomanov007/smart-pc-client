@@ -5,11 +5,17 @@ export abstract class agentQueryKeys {
 }
 
 export abstract class agentMutationKeys {
-  static deleteCommand(id: string) {
-    return ["delete-command", id];
+  static index = ["agent", "commands"];
+
+  static currentCommand(commandId: string) {
+    return [...this.index, commandId];
   }
 
-  static editCommand(id: string) {
-    return ["edit-command", id];
+  static deleteCommand(commandId: string) {
+    return [...this.currentCommand(commandId), "delete"];
+  }
+
+  static editCommand(commandId: string) {
+    return [...this.currentCommand(commandId), "edit"];
   }
 }

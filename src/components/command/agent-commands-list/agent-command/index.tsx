@@ -1,6 +1,6 @@
 import { Card } from "@chakra-ui/react";
 import type { IAgentCommand } from "@/types/agent";
-import { DeleteButton, EditButton } from "./buttons";
+import { DeleteDialogButton, EditDialogButton } from "./buttons";
 
 interface Props {
   command: IAgentCommand;
@@ -16,8 +16,8 @@ export default function AgentCommand({ command }: Props) {
         <Card.Description lineClamp={3}>{command.description}</Card.Description>
       </Card.Body>
       <Card.Footer justifyContent="space-between">
-        <DeleteButton command={command} />
-        <EditButton command={command} />
+        <DeleteDialogButton command={command} />
+        <EditDialogButton command={command} />
       </Card.Footer>
     </Card.Root>
   );
