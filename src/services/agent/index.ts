@@ -24,9 +24,17 @@ export const agentApi = {
       command,
     ),
   ),
+  createCommand: handleApiResponseParametrized(
+    (command: AgentCommandToCreate) =>
+      axios.post<ApiResponse<IAgentCommand>>(
+        calculateAgentUrl(`/commands`),
+        command,
+      ),
+  ),
 };
 
 export type AgentCommandToEdit = PartialExcept<IAgentCommand, "id">;
+export type AgentCommandToCreate = Partial<Omit<IAgentCommand, "id">>;
 
 export function calculateAgentUrl(endpoint: string, port: number = 8506) {
   return `${BASE_URL}:${port}${endpoint}`;

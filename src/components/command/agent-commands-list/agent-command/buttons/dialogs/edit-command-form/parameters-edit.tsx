@@ -1,13 +1,13 @@
-import { Float, HStack, IconButton, ScrollArea } from "@chakra-ui/react";
+import { Float, HStack, ScrollArea } from "@chakra-ui/react";
 import AgentCommandParametersList, {
   type ErrorsFunction,
   type ParameterDeleteHandler,
 } from "@/components/command/agent-command-parameters";
 import type { IAgentCommandParameter } from "@/types/agent";
-import { LuPlus } from "react-icons/lu";
 import { useCallback } from "react";
 import { ParameterTypes } from "@/types/pc/command-parameter";
 import { useExtracted } from "next-intl";
+import AddButton from "@/components/button/add-button";
 
 interface Props {
   parameters?: IAgentCommandParameter[];
@@ -66,9 +66,7 @@ export default function ParametersEdit({
         </ScrollArea.Content>
       </ScrollArea.Viewport>
       <Float placement="bottom-end" offset={7}>
-        <IconButton size="xs" variant="outline" onClick={addParameter}>
-          <LuPlus />
-        </IconButton>
+        <AddButton size="xs" variant="outline" onClick={addParameter} />
       </Float>
       <ScrollArea.Scrollbar orientation="horizontal" />
       <ScrollArea.Corner />

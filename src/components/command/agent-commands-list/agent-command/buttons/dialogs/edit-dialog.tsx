@@ -3,7 +3,7 @@ import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
 import { type ComponentProps, useMemo, useState } from "react";
 import type { IAgentCommand } from "@/types/agent";
-import { useEditCommandMutation } from "@/utils/hooks/queries/agent/mutations/use-edit-command-mutation";
+import { useEditCommandMutation } from "@/utils/hooks/queries/agent";
 import type { AgentCommandToEdit } from "@/services/agent";
 import EditCommandForm from "@/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form";
 

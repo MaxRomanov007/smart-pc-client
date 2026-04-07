@@ -16,6 +16,10 @@
           "uuid": "a4a5141a-2887-4fbf-8e7a-9b28c0082d7d"
         },
         {
+          "type": "route",
+          "uuid": "a824bad8-2b57-41b6-a680-44bb20fb8bae"
+        },
+        {
           "type": "folder",
           "uuid": "62b434eb-2ada-4975-8936-409ac3de48ff"
         }
@@ -77,7 +81,7 @@
       "responses": [
         {
           "uuid": "dce50b79-be10-414b-a665-7385597579b8",
-          "body": "{{setVar 'found' (find (dataRaw 'commands') (object id=(urlParam 'id')))}}\n\n{{#unless @found}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n\n  {{setData 'del' 'commands' (indexOf (dataRaw 'commands') @found)}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify @found}}}\n  }\n\n{{/unless}}",
+          "body": "{{setVar 'data' (dataRaw 'commands')}}\n{{setVar 'found' (find @data (object id=(urlParam 'id')))}}\n\n{{#unless @found}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n\n  {{setGlobalVar 'foundIndex' -1}}\n  {{#each @data}}\n    {{#if (eq this.id @found.id)}}\n      {{setGlobalVar 'foundIndex' @index}}\n    {{/if}}\n  {{/each}}\n  \n  {{setVar 'foundIndex' (getGlobalVar 'foundIndex')}}\n  {{setGlobalVar 'foundIndex' null}}\n  \n  {{setData 'del' 'commands' @foundIndex}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify @found}}}\n  }\n\n{{/unless}}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -108,7 +112,38 @@
       "responses": [
         {
           "uuid": "f63b6103-d56f-4897-adbe-23627bf3ec07",
-          "body": "{{setVar 'found' (find (dataRaw 'commands') (object id=(urlParam 'id')))}}\n\n{{#unless @found}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n\n  {{setVar 'value' (object)}}\n      \n  {{#if (lookup (bodyRaw) 'name')}}\n    {{setVar 'value' (objectMerge @value (object name=(bodyRaw 'name')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'description')}}\n    {{setVar 'value' (objectMerge @value (object description=(bodyRaw 'description')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'script')}}\n    {{setVar 'value' (objectMerge @value (object script=(bodyRaw 'script')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'parameters')}}\n    {{setVar 'value' (objectMerge @value (object parameters=(bodyRaw 'parameters')))}}\n  {{/if}}\n\n  {{setData 'merge' 'commands' (indexOf (dataRaw 'commands') @found) @value}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify (find (dataRaw 'commands') (object id=(urlParam 'id')))}}}\n  }\n{{/unless}}",
+          "body": "{{setVar 'data' (dataRaw 'commands')}}\n{{setVar 'found' (find (dataRaw 'commands') (object id=(urlParam 'id')))}}\n\n{{#unless @found}}\n  {\n    \"status\": \"not-found\",\n    \"error\": \"not found\"\n  }\n{{else}}\n\n  {{setGlobalVar 'foundIndex' -1}}\n  {{#each @data}}\n    {{#if (eq this.id @found.id)}}\n      {{setGlobalVar 'foundIndex' @index}}\n    {{/if}}\n  {{/each}}\n  \n  {{setVar 'foundIndex' (getGlobalVar 'foundIndex')}}\n  {{setGlobalVar 'foundIndex' null}}\n\n  {{setVar 'value' (object)}}\n      \n  {{#if (lookup (bodyRaw) 'name')}}\n    {{setVar 'value' (objectMerge @value (object name=(bodyRaw 'name')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'description')}}\n    {{setVar 'value' (objectMerge @value (object description=(bodyRaw 'description')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'script')}}\n    {{setVar 'value' (objectMerge @value (object script=(bodyRaw 'script')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'parameters')}}\n    {{setVar 'value' (objectMerge @value (object parameters=(bodyRaw 'parameters')))}}\n  {{/if}}\n\n  {{setData 'merge' 'commands' @foundIndex @value}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify (find @data (object id=(urlParam 'id')))}}}\n  }\n{{/unless}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "a824bad8-2b57-41b6-a680-44bb20fb8bae",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "commands",
+      "responses": [
+        {
+          "uuid": "9bc1f651-76a4-448b-a37a-bfbd5e0fd5f7",
+          "body": "{{setVar 'value' (object id=(uuid) name='' description='' script='' parameters=(array))}}\n      \n  {{#if (lookup (bodyRaw) 'name')}}\n    {{setVar 'value' (objectMerge @value (object name=(bodyRaw 'name')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'description')}}\n    {{setVar 'value' (objectMerge @value (object description=(bodyRaw 'description')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'script')}}\n    {{setVar 'value' (objectMerge @value (object script=(bodyRaw 'script')))}}\n  {{/if}}\n  {{#if (lookup (bodyRaw) 'parameters')}}\n    {{setVar 'value' (objectMerge @value (object parameters=(bodyRaw 'parameters')))}}\n  {{/if}}\n\n  {{setData 'push' 'commands' '' @value}}\n  \n  {\n    \"status\": \"ok\",\n    \"data\": {{{stringify (find (dataRaw 'commands') (object id=@value.id))}}}\n  }",
           "latency": 0,
           "statusCode": 200,
           "label": "",

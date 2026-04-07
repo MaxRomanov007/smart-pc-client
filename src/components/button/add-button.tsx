@@ -1,13 +1,13 @@
-import { LuTrash2 } from "react-icons/lu";
+import { LuPlus } from "react-icons/lu";
 import { IconButton } from "@chakra-ui/react";
 import type { ComponentProps } from "react";
 
-export default function DeleteButton(
+export default function AddButton(
   props: Omit<ComponentProps<typeof IconButton>, "children">,
 ) {
   return (
-    <IconButton variant="ghost" colorPalette="red" {...props}>
-      <LuTrash2 />
+    <IconButton {...props}>
+      <LuPlus />
     </IconButton>
   );
 }

@@ -3,12 +3,12 @@ import { agentMutationKeys, agentQueryKeys } from "@/utils/hooks/queries/agent";
 import { agentApi } from "@/services/agent";
 import type { IAgentCommand } from "@/types/agent";
 
-export function useEditCommandMutation(id: string) {
+export function useCreateCommandMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationKey: agentMutationKeys.editCommand(id),
-    mutationFn: agentApi.editCommand(),
+    mutationKey: agentMutationKeys.createCommand(),
+    mutationFn: agentApi.createCommand(),
     onMutate: async (data) => {
       await queryClient.cancelQueries({
         queryKey: agentQueryKeys.commands,
@@ -18,20 +18,20 @@ export function useEditCommandMutation(id: string) {
         agentQueryKeys.commands,
       );
 
+      const optimisticCommand: IAgentCommand = {
+        id: crypto.randomUUID(),
+        name: data.name ?? "",
+        description: data.description ?? "",
+        script: data.script ?? "",
+        parameters: data.parameters ?? [],
+      };
+
       queryClient.setQueryData(
         agentQueryKeys.commands,
-        (oldData: IAgentCommand[]): IAgentCommand[] =>
-          oldData.map((command) =>
-            command.id === data.id
-              ? {
-                  id: command.id,
-                  name: data.name ?? command.name,
-                  description: data.description ?? command.description,
-                  script: data.script ?? command.script,
-                  parameters: data.parameters ?? command.parameters,
-                }
-              : command,
-          ),
+        (oldData: IAgentCommand[]): IAgentCommand[] => [
+          ...oldData,
+          optimisticCommand,
+        ],
       );
 
       return { previousCommands };
@@ -45,6 +45,11 @@ export function useEditCommandMutation(id: string) {
         agentQueryKeys.commands,
         context.previousCommands,
       );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: agentQueryKeys.commands,
+      });
     },
   });
 }
