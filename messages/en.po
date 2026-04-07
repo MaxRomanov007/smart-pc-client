@@ -185,8 +185,8 @@ msgstr "Go to main page"
 #. title of index page in metadata
 #: src/app/[locale]/page.tsx:12
 msgctxt "index-page-metadata"
-msgid "FmhFdY"
-msgstr "Index page"
+msgid "U3l+Q9"
+msgstr "Home page"
 
 #. title of index page
 #: src/app/[locale]/page.tsx:25
@@ -251,8 +251,8 @@ msgstr "You're not authorized"
 #. description
 #: src/app/[locale]/unauthorized.tsx:21
 msgctxt "unauthorized page"
-msgid "3zq8KM"
-msgstr "You're not authorized. Sign in by click button below to access this page"
+msgid "/UGGDM"
+msgstr "You're not authorized. Sign in by clicking button below to access this page"
 
 #. confirmation dialog title for sign out action
 #: src/components/button/auth/profile-menu.tsx:28
@@ -285,25 +285,25 @@ msgid "Ub+AGc"
 msgstr "Sign In"
 
 #. name field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:22
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:32
 msgctxt "agent-command-parameter-body"
 msgid "HAlOn1"
 msgstr "Name"
 
 #. description field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:38
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:49
 msgctxt "agent-command-parameter-body"
 msgid "Q8Qw5B"
 msgstr "Description"
 
 #. type field label
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:61
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:72
 msgctxt "agent-command-parameter-body"
 msgid "+U6ozc"
 msgstr "Type"
 
 #. type field placeholder
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:65
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:76
 msgctxt "agent-command-parameter-body"
 msgid "PaEvpZ"
 msgstr "Select parameter type"
@@ -317,11 +317,11 @@ msgstr "{type, select, string {String} number {Number} boolean {Boolean} other {
 #. item description
 #: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:46
 msgctxt "agent-command-parameter-type-select"
-msgid "UaSk4n"
-msgstr "{type, select, string {You can use such a parameter as a string variable, it will be displayed as a text field} number {You can use such a parameter as a number variable, it will be displayed as a number select field} boolean {You can use such a parameter as a boolean variable, it will be displayed as a checkbox field} other {Unknown}}"
+msgid "qOERS4"
+msgstr "{type, select, string {You can use such a parameter as a string variable, it will be displayed as a text field} number {You can use such a parameter as a number variable, it will be displayed as a number input field} boolean {You can use such a parameter as a boolean variable, it will be displayed as a checkbox field} other {Unknown}}"
 
 #. tooltip text
-#: src/components/command/agent-commands-list/agent-command/buttons/delete-dialog-button.tsx:21
+#: src/components/command/agent-commands-list/agent-command/buttons/delete-dialog-button.tsx:20
 msgctxt "agent-command-delete-button"
 msgid "K3r6DQ"
 msgstr "Delete"
@@ -351,49 +351,49 @@ msgid "K3r6DQ"
 msgstr "Delete"
 
 #. name field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:23
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:22
 msgctxt "agent-command-edit-dialog-form"
 msgid "HAlOn1"
 msgstr "Name"
 
 #. description field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:37
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:36
 msgctxt "agent-command-edit-dialog-form"
 msgid "Q8Qw5B"
 msgstr "Description"
 
 #. parameters field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:55
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:54
 msgctxt "agent-command-edit-dialog-form"
 msgid "BkOSF2"
 msgstr "Parameters"
 
 #. script field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:71
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:70
 msgctxt "agent-command-edit-dialog-form"
 msgid "cxkY9n"
 msgstr "Script"
 
 #. error message on same name is exists
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:34
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:40
 msgctxt "agent-commands-parameters-edit"
 msgid "hFv6sd"
 msgstr "A parameter with this name already exists"
 
 #. header
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:34
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:46
 msgctxt "agent-command-edit-dialog"
 msgid "O+JC87"
 msgstr "Edit command \"{name}\""
 
 #. cancel button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:54
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:66
 msgctxt "agent-command-edit-dialog"
 msgid "47FYwb"
 msgstr "Cancel"
 
 #. edit button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:63
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:78
 msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
 msgstr "Edit"
@@ -493,8 +493,8 @@ msgstr "Execute"
 #. pc list empty state title
 #: src/components/pc/pc-list-empty-state.tsx:18
 msgctxt "pc-list-empty-state"
-msgid "c5g+Gs"
-msgstr "Your pc list is empty"
+msgid "Zyqv8d"
+msgstr "Your PC list is empty"
 
 #. pc list empty state description
 #: src/components/pc/pc-list-empty-state.tsx:24
@@ -595,8 +595,8 @@ msgstr "Are you sure?"
 #. default confirmation dialog text
 #: src/utils/hooks/commands/provider.tsx:61
 msgctxt "commands-provider"
-msgid "qcCX8I"
-msgstr "Are you sure you want to execute command {name}"
+msgid "yHiOam"
+msgstr "Are you sure you want to execute command {name}?"
 
 #. not found error title
 #: src/utils/hooks/queries/pcs/queries/use-id-pc-query.ts:16

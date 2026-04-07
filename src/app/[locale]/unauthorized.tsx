@@ -20,7 +20,7 @@ export default async function UnauthorizedPage() {
       })}
       description={t({
         message:
-          "You're not authorized. Sign in by click button below to access this page",
+          "You're not authorized. Sign in by clicking button below to access this page",
         description: "description",
       })}
     >

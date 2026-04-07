@@ -185,7 +185,7 @@ msgstr "На главную"
 #. title of index page in metadata
 #: src/app/[locale]/page.tsx:12
 msgctxt "index-page-metadata"
-msgid "FmhFdY"
+msgid "U3l+Q9"
 msgstr "Главная"
 
 #. title of index page
@@ -251,7 +251,7 @@ msgstr "Нет доступа"
 #. description
 #: src/app/[locale]/unauthorized.tsx:21
 msgctxt "unauthorized page"
-msgid "3zq8KM"
+msgid "/UGGDM"
 msgstr "Вы не авторизованы. Войдите в аккаунт, нажав кнопку ниже, чтобы получить доступ к этой странице"
 
 #. confirmation dialog title for sign out action
@@ -285,43 +285,43 @@ msgid "Ub+AGc"
 msgstr "Войти"
 
 #. name field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:22
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:32
 msgctxt "agent-command-parameter-body"
 msgid "HAlOn1"
-msgstr ""
+msgstr "Название"
 
 #. description field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:38
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:49
 msgctxt "agent-command-parameter-body"
 msgid "Q8Qw5B"
-msgstr ""
+msgstr "Описание"
 
 #. type field label
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:61
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:72
 msgctxt "agent-command-parameter-body"
 msgid "+U6ozc"
-msgstr ""
+msgstr "Тип"
 
 #. type field placeholder
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:65
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:76
 msgctxt "agent-command-parameter-body"
 msgid "PaEvpZ"
-msgstr ""
+msgstr "Выберите тип параметра"
 
 #. item label
 #: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:38
 msgctxt "agent-command-parameter-type-select"
 msgid "F2ShNF"
-msgstr ""
+msgstr "{type, select, string {Строка} number {Число} boolean {Булево} other {Неизвестно}}"
 
 #. item description
 #: src/components/command/agent-command-parameters/parameter/type-select/index.tsx:46
 msgctxt "agent-command-parameter-type-select"
-msgid "UaSk4n"
-msgstr ""
+msgid "qOERS4"
+msgstr "{type, select, string {Параметр используется как строковая переменная и отображается в виде текстового поля} number {Параметр используется как числовая переменная и отображается в виде числового поля ввода} boolean {Параметр используется как булева переменная и отображается в виде флажка} other {Неизвестно}}"
 
 #. tooltip text
-#: src/components/command/agent-commands-list/agent-command/buttons/delete-dialog-button.tsx:21
+#: src/components/command/agent-commands-list/agent-command/buttons/delete-dialog-button.tsx:20
 msgctxt "agent-command-delete-button"
 msgid "K3r6DQ"
 msgstr "Удалить"
@@ -351,49 +351,49 @@ msgid "K3r6DQ"
 msgstr "Удалить"
 
 #. name field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:23
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:22
 msgctxt "agent-command-edit-dialog-form"
 msgid "HAlOn1"
 msgstr "Название"
 
 #. description field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:37
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:36
 msgctxt "agent-command-edit-dialog-form"
 msgid "Q8Qw5B"
 msgstr "Описание"
 
 #. parameters field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:55
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:54
 msgctxt "agent-command-edit-dialog-form"
 msgid "BkOSF2"
-msgstr ""
+msgstr "Параметры"
 
 #. script field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:71
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:70
 msgctxt "agent-command-edit-dialog-form"
 msgid "cxkY9n"
 msgstr "Скрипт"
 
 #. error message on same name is exists
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:34
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:40
 msgctxt "agent-commands-parameters-edit"
 msgid "hFv6sd"
-msgstr ""
+msgstr "Параметр с таким именем уже существует"
 
 #. header
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:34
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:46
 msgctxt "agent-command-edit-dialog"
 msgid "O+JC87"
 msgstr "Редактирование команды «{name}»"
 
 #. cancel button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:54
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:66
 msgctxt "agent-command-edit-dialog"
 msgid "47FYwb"
 msgstr "Отмена"
 
 #. edit button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:63
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:78
 msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
 msgstr "Редактировать"
@@ -493,7 +493,7 @@ msgstr "Выполнить"
 #. pc list empty state title
 #: src/components/pc/pc-list-empty-state.tsx:18
 msgctxt "pc-list-empty-state"
-msgid "c5g+Gs"
+msgid "Zyqv8d"
 msgstr "Список ПК пуст"
 
 #. pc list empty state description
@@ -595,7 +595,7 @@ msgstr "Вы уверены?"
 #. default confirmation dialog text
 #: src/utils/hooks/commands/provider.tsx:61
 msgctxt "commands-provider"
-msgid "qcCX8I"
+msgid "yHiOam"
 msgstr "Вы уверены, что хотите выполнить команду {name}?"
 
 #. not found error title

@@ -10,7 +10,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: t({
-      message: "Index page",
+      message: "Home page",
       description: "title of index page in metadata",
     }),
   };

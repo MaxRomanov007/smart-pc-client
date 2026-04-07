@@ -59,7 +59,7 @@ export function CommandsProvider({ children }: { children: ReactNode }) {
         description: "default confirmation dialog title",
       }),
       text = t({
-        message: "Are you sure you want to execute command {name}",
+        message: "Are you sure you want to execute command {name}?",
         values: { name: commandId },
         description: "default confirmation dialog text",
       }),

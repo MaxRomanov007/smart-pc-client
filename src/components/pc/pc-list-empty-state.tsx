@@ -16,7 +16,7 @@ export default function PcListEmptyState() {
         <VStack textAlign="center">
           <EmptyState.Title>
             {t({
-              message: "Your pc list is empty",
+              message: "Your PC list is empty",
               description: "pc list empty state title",
             })}
           </EmptyState.Title>

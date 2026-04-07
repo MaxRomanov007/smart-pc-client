@@ -45,7 +45,7 @@ export default function TypeSelect({
       }),
       description: t({
         message:
-          "{type, select, string {You can use such a parameter as a string variable, it will be displayed as a text field} number {You can use such a parameter as a number variable, it will be displayed as a number select field} boolean {You can use such a parameter as a boolean variable, it will be displayed as a checkbox field} other {Unknown}}",
+          "{type, select, string {You can use such a parameter as a string variable, it will be displayed as a text field} number {You can use such a parameter as a number variable, it will be displayed as a number input field} boolean {You can use such a parameter as a boolean variable, it will be displayed as a checkbox field} other {Unknown}}",
         values: {
           type: key,
         },
