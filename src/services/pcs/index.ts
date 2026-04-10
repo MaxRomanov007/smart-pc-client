@@ -23,24 +23,32 @@ if (!pcServiceAddress) {
 const axios = createAxiosInstance(pcServiceAddress);
 
 export const pcsApi = {
-  fetchPcs: handleApiResponseQuery(() => axios.get<IPc[]>("/pcs")),
-  fetchPcBySlug: handleApiResponseQuery((slug: string) =>
-    axios.get<ApiResponse<IPc>>("/pcs", {
+  fetchPcs: handleApiResponseQuery((uid: string) =>
+    axios.get<IPc[]>(`/u/${uid}/pcs`),
+  ),
+  fetchPcBySlug: handleApiResponseQuery((uid: string, slug: string) =>
+    axios.get<ApiResponse<IPc>>(`/u/${uid}/pcs`, {
       params: {
         slug,
       },
     }),
   ),
-  fetchPcById: handleApiResponseQuery((id: string) =>
-    axios.get<IPc>(`/pcs/${id}`),
+  fetchPcById: handleApiResponseQuery((uid: string, id: string) =>
+    axios.get<IPc>(`/u/${uid}/pcs/${id}`),
   ),
-  editPc: handleApiResponseParametrized((pc: PcToEdit) =>
-    axios.patch<ApiResponse<IPc>>(`/pcs/${pc.id}`, pc),
+  editPc: handleApiResponseParametrized((uid: string, pc: PcToEdit) =>
+    axios.patch<ApiResponse<IPc>>(`/u/${uid}/pcs/${pc.id}`, pc),
   ),
 
   fetchPcLogs: handleApiResponseInfiniteQueryMapped(
-    (pcId: string, limit: number = 20, order: Order = "asc", cursor?: string) =>
-      axios.get<IPcLog[]>(`/pcs/${pcId}/logs`, {
+    (
+      uid: string,
+      pcId: string,
+      limit: number = 20,
+      order: Order = "asc",
+      cursor?: string,
+    ) =>
+      axios.get<IPcLog[]>(`/u/${uid}/pcs/${pcId}/logs`, {
         params: {
           limit,
           order,
@@ -50,14 +58,14 @@ export const pcsApi = {
     (logs) => logs.map(initializeLog),
   ),
 
-  fetchPcCommands: handleApiResponseQuery((pcId: string) =>
-    axios.get<ICommand[]>(`/pcs/${pcId}/commands`),
+  fetchPcCommands: handleApiResponseQuery((uid: string, pcId: string) =>
+    axios.get<ICommand[]>(`/u/${uid}/pcs/${pcId}/commands`),
   ),
 
   fetchPcCommandParameters: handleApiResponseQueryMapped(
-    (pcId: string, commandId: string) =>
+    (uid: string, pcId: string, commandId: string) =>
       axios.get<CommandParameter[]>(
-        `/pcs/${pcId}/commands/${commandId}/parameters`,
+        `/u/${uid}/pcs/${pcId}/commands/${commandId}/parameters`,
       ),
     (params) => params.map(initializeParameter),
   ),

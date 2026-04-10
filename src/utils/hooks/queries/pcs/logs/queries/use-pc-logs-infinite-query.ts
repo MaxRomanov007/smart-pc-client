@@ -3,6 +3,7 @@ import { pcLogsQueryKeys } from "@/utils/hooks/queries/pcs/logs";
 import { type Order, pcsApi } from "@/services/pcs";
 import { type IPcLog, PcLogStatus } from "@/types/pc/pc-log";
 import type { PaginatedResult } from "@/lib/axios/handle-api-paginated-response";
+import { useRequireAuth } from "@/lib/auth/use-auth";
 
 export interface UsePcLogsInfiniteQueryOptions {
   pcId: string;
@@ -38,12 +39,15 @@ const placeholderData: InfiniteData<
 } as const;
 
 export function usePcLogsInfiniteQuery(opts: UsePcLogsInfiniteQueryOptions) {
+  const { user } = useRequireAuth();
+
   return useInfiniteQuery({
     queryKey: pcLogsQueryKeys.pcLogs(opts.pcId),
-    queryFn: pcsApi.fetchPcLogs(opts.pcId, opts.limit, opts.order),
+    queryFn: pcsApi.fetchPcLogs(user?.id ?? "", opts.pcId, opts.limit, opts.order),
     initialPageParam: undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
     getPreviousPageParam: (firstPage) => firstPage.prevCursor,
     placeholderData,
+    enabled: !!user,
   });
 }

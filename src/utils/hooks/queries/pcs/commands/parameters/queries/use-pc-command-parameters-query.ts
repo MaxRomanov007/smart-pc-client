@@ -14,12 +14,12 @@ export function usePcCommandParametersQuery(
   commandId: string,
   opts?: UsePcCommandParametersQueryOptions,
 ) {
-  useRequireAuth();
+  const {user} = useRequireAuth();
 
   return useQuery({
     queryKey: pcCommandParametersQueryKeys.pcCommandParameters(pcId, commandId),
-    queryFn: pcsApi.fetchPcCommandParameters(pcId, commandId),
-    enabled: opts?.enabled,
+    queryFn: pcsApi.fetchPcCommandParameters(user?.id ?? "", pcId, commandId),
+    enabled: opts?.enabled && !!user,
     placeholderData: opts?.placeholder,
   });
 }

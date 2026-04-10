@@ -4,10 +4,11 @@ import { pcsApi } from "@/services/pcs";
 import { useRequireAuth } from "@/lib/auth/use-auth";
 
 export function usePcCommandsQuery(pcId: string) {
-  useRequireAuth();
+  const { user } = useRequireAuth();
 
   return useQuery({
     queryKey: pcCommandsQueryKeys.pcCommands(pcId),
-    queryFn: pcsApi.fetchPcCommands(pcId),
+    queryFn: pcsApi.fetchPcCommands(user?.id ?? "", pcId),
+    enabled: !!user,
   });
 }

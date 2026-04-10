@@ -84,7 +84,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "pcs",
+      "endpoint": "u/:uid/pcs",
       "responses": [
         {
           "uuid": "b6c4baff-888b-4122-bb65-b3b4cb13cc82",
@@ -169,7 +169,7 @@
       "type": "http",
       "documentation": "",
       "method": "patch",
-      "endpoint": "pcs/:id",
+      "endpoint": "u/:uid/pcs/:id",
       "responses": [
         {
           "uuid": "c612f6f3-4142-4217-98bb-6d7f5011623d",
@@ -227,7 +227,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "pcs/:id",
+      "endpoint": "u/:uid/pcs/:id",
       "responses": [
         {
           "uuid": "d2336bfe-cc94-4fa2-a553-f2ecdc264d1f",
@@ -285,7 +285,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "pcs/:pcID/commands",
+      "endpoint": "u/:uid/pcs/:pcID/commands",
       "responses": [
         {
           "uuid": "0c231228-0b96-4063-83ed-618fa8e3e618",
@@ -343,7 +343,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "pcs/:pcID/commands/:commandID/parameters",
+      "endpoint": "u/:uid/pcs/:pcID/commands/:commandID/parameters",
       "responses": [
         {
           "uuid": "4252b20d-903f-4873-aac5-8d91e64fa98d",
@@ -401,7 +401,7 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "pcs/:id/logs",
+      "endpoint": "u/:uid/pcs/:id/logs",
       "responses": [
         {
           "uuid": "23d4ec62-c1a7-47d0-b574-cc6873e9d7e4",

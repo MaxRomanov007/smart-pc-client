@@ -1,4 +1,4 @@
-import { pcsApi } from "@/services/pcs";
+import { pcsApi, type PcToEdit } from "@/services/pcs";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRequireAuth } from "@/lib/auth/use-auth";
 import { pcsMutationKeys, pcsQueryKeys } from "@/utils/hooks/queries/pcs";
@@ -7,12 +7,12 @@ import { redirect } from "@/i18n/navigation";
 import { PAGES } from "@/config/navigation/pages";
 
 export function useEditPcMutation(id: string) {
-  useRequireAuth();
+  const { user } = useRequireAuth();
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationKey: pcsMutationKeys.editPc(id),
-    mutationFn: pcsApi.editPc(),
+    mutationFn: (pc: PcToEdit) => pcsApi.editPc()(user?.id ?? "", pc),
     onMutate: async (data) => {
       if (!data.slug) {
         return;

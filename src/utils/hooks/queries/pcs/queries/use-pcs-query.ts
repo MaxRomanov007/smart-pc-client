@@ -4,10 +4,11 @@ import { pcsApi } from "@/services/pcs";
 import { pcsQueryKeys } from "../keys";
 
 export function usePcsQuery() {
-  useRequireAuth();
+  const { user } = useRequireAuth();
 
   return useQuery({
     queryKey: pcsQueryKeys.pcs,
-    queryFn: pcsApi.fetchPcs(),
+    queryFn: pcsApi.fetchPcs(user?.id ?? ""),
+    enabled: !!user,
   });
 }

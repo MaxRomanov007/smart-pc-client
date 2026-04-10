@@ -5,12 +5,12 @@ import { pcsQueryKeys } from "@/utils/hooks/queries/pcs";
 import { pcsApi } from "@/services/pcs";
 
 export function useIdPcQuery(id?: string) {
-  useRequireAuth();
+  const { user } = useRequireAuth();
   const t = useExtracted("use-pc-query");
 
   return useQuery({
     queryKey: pcsQueryKeys.idPc(id ?? ""),
-    queryFn: pcsApi.fetchPcById(id ?? "", {
+    queryFn: pcsApi.fetchPcById(user?.id ?? "", id ?? "", {
       errors: {
         notFound: {
           title: t({
@@ -25,6 +25,6 @@ export function useIdPcQuery(id?: string) {
         },
       },
     }),
-    enabled: !!id,
+    enabled: !!id && !!user,
   });
 }

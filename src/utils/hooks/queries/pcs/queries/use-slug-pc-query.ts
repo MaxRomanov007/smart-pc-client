@@ -6,13 +6,13 @@ import type { IPc } from "@/types/pc/pc";
 import { useExtracted } from "next-intl";
 
 export function useSlugPcQuery(slug: string) {
-  useRequireAuth();
+  const { user } = useRequireAuth();
   const queryClient = useQueryClient();
   const t = useExtracted("use-slug-pc-query");
 
   return useQuery({
     queryKey: pcsQueryKeys.slugPc(slug),
-    queryFn: pcsApi.fetchPcBySlug(slug, {
+    queryFn: pcsApi.fetchPcBySlug(user?.id ?? "", slug, {
       errors: {
         notFound: {
           title: t({
@@ -27,6 +27,7 @@ export function useSlugPcQuery(slug: string) {
         },
       },
     }),
+    enabled: !!user,
     placeholderData: () => {
       const pcs = queryClient.getQueryData<IPc[]>(pcsQueryKeys.pcs);
 
