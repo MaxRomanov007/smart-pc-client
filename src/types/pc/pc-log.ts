@@ -1,3 +1,5 @@
+import type { ICommand } from "@/types/pc/command";
+
 export enum PcLogStatus {
   ok = "ok",
   commandError = "command-error",
@@ -7,9 +9,10 @@ export enum PcLogStatus {
 export interface IPcLog {
   id: string;
   commandId: string;
-  commandName?: string;
   receivedAt: Date;
   completedAt: Date;
   status: PcLogStatus;
   error?: string;
+
+  command?: ICommand;
 }

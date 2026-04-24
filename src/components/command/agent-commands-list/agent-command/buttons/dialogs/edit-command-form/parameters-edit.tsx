@@ -53,7 +53,7 @@ export default function ParametersEdit({
 
   return (
     <ScrollArea.Root>
-      <ScrollArea.Viewport>
+      <ScrollArea.Viewport minH={12}>
         <ScrollArea.Content>
           <HStack alignItems="stretch" mb={4}>
             <AgentCommandParametersList

@@ -7,15 +7,21 @@ import ConfirmationDialogWithStore from "@/components/ui/dialog/confirmation-dia
 import { useConfirmationDialog } from "@/utils/hooks/ui/dialogs/confirmation/useConfirmationDialog";
 import type { SelectionDetails } from "@zag-js/menu";
 import { useAuth } from "@/lib/auth/use-auth";
+import { useRouter } from "@/i18n/navigation";
 
 const MenuItemValues = {
+  editAccount: "edit-account",
   signOut: "sign-out",
 } as const;
+
+const SETTINGS_URL =
+  process.env.NEXT_PUBLIC_KRATOS_SELFSERVICE_URL + "/settings";
 
 export default function ProfileMenu() {
   const t = useExtracted("profile-button-menu");
   const confirmationDialog = useConfirmationDialog();
   const { logout, user } = useAuth();
+  const router = useRouter();
 
   const handleSignOut = async () => {
     await logout();
@@ -23,6 +29,9 @@ export default function ProfileMenu() {
 
   const handleSelect = (details: SelectionDetails) => {
     switch (details.value) {
+      case MenuItemValues.editAccount:
+        router.push(SETTINGS_URL);
+        break;
       case MenuItemValues.signOut:
         confirmationDialog.show(
           t({
@@ -49,7 +58,13 @@ export default function ProfileMenu() {
         <Portal>
           <Menu.Positioner>
             <Menu.Content>
-              <Menu.Item value={MenuItemValues.signOut}>
+              <Menu.Item value={MenuItemValues.editAccount}>
+                {t({
+                  message: "Edit Account",
+                  description: "user menu edit account text",
+                })}
+              </Menu.Item>
+              <Menu.Item value={MenuItemValues.signOut} color={"fg.error"}>
                 {t({
                   message: "Sign Out",
                   description: "user menu sign out text",

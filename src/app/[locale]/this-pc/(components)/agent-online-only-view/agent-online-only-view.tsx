@@ -10,7 +10,6 @@ type Props = ComponentProps<typeof AgentCommands>;
 
 export function AgentOnlineOnlyView({ ...props }: Props) {
   const { status, retry } = useAgentStatus("http://localhost:8506");
-
   if (status === "connecting") {
     return <LoadingState />;
   }

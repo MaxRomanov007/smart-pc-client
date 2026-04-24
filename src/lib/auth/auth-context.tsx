@@ -40,13 +40,13 @@ const REFRESH_BEFORE_EXPIRY_S = 60;
 
 function saveUser(user: IUser): void {
   try {
-    sessionStorage.setItem(AUTH_USER_STORAGE_KEY, JSON.stringify(user));
+    localStorage.setItem(AUTH_USER_STORAGE_KEY, JSON.stringify(user));
   } catch {}
 }
 
 function loadUser(): IUser | null {
   try {
-    const raw = sessionStorage.getItem(AUTH_USER_STORAGE_KEY);
+    const raw = localStorage.getItem(AUTH_USER_STORAGE_KEY);
     return raw ? (JSON.parse(raw) as IUser) : null;
   } catch {
     return null;
@@ -55,7 +55,7 @@ function loadUser(): IUser | null {
 
 function clearUser(): void {
   try {
-    sessionStorage.removeItem(AUTH_USER_STORAGE_KEY);
+    localStorage.removeItem(AUTH_USER_STORAGE_KEY);
   } catch {
     // ignore
   }

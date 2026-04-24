@@ -2,9 +2,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { agentMutationKeys, agentQueryKeys } from "@/utils/hooks/queries/agent";
 import { agentApi } from "@/services/agent";
 import type { IAgentCommand } from "@/types/agent";
+import { usePcId } from "@/utils/hooks/queries/agent/queries/use-pc-id";
+import { pcCommandsQueryKeys } from "@/utils/hooks/queries/pcs/commands";
 
 export function useCreateCommandMutation() {
   const queryClient = useQueryClient();
+  const { data: pcId } = usePcId();
 
   return useMutation({
     mutationKey: agentMutationKeys.createCommand(),
@@ -50,6 +53,12 @@ export function useCreateCommandMutation() {
       queryClient.invalidateQueries({
         queryKey: agentQueryKeys.commands,
       });
+
+      if (pcId) {
+        queryClient.invalidateQueries({
+          queryKey: pcCommandsQueryKeys.pcCommands(pcId),
+        });
+      }
     },
   });
 }

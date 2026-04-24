@@ -30,10 +30,10 @@ export default function LogInfoTip({ log, ...props }: Props) {
         <Text>{t("Command ID:")}</Text>
         <ValueText>{log.commandId}</ValueText>
 
-        {log.commandName && (
+        {log.command?.name && (
           <>
             <Text>{t("Command name:")}</Text>
-            <ValueText>{log.commandName}</ValueText>
+            <ValueText>{log.command.name}</ValueText>
           </>
         )}
 

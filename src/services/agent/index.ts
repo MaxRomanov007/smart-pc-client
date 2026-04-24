@@ -13,6 +13,9 @@ export const agentApi = {
   fetchCommands: handleApiResponseQuery((port?: number) =>
     axios.get<IAgentCommand[]>(calculateAgentUrl("/commands", port)),
   ),
+  fetchPcId: handleApiResponseQuery((port?: number) =>
+    axios.get<string>(calculateAgentUrl("/pc-id", port)),
+  ),
   deleteCommand: handleApiResponseParametrized((commandId: string) =>
     axios.delete<ApiResponse<IAgentCommand>>(
       calculateAgentUrl(`/commands/${commandId}`),

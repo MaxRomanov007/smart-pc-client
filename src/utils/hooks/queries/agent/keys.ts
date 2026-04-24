@@ -2,6 +2,8 @@ export abstract class agentQueryKeys {
   static index = ["agent"];
 
   static commands = [...this.index, "commands"];
+
+  static pcId = [...this.index, "pcId"];
 }
 
 export abstract class agentMutationKeys {

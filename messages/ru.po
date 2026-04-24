@@ -255,19 +255,25 @@ msgid "/UGGDM"
 msgstr "Вы не авторизованы. Войдите в аккаунт, нажав кнопку ниже, чтобы получить доступ к этой странице"
 
 #. confirmation dialog title for sign out action
-#: src/components/button/auth/profile-menu.tsx:28
+#: src/components/button/auth/profile-menu.tsx:36
 msgctxt "profile-button-menu"
 msgid "G2c0ij"
 msgstr "Выйти из аккаунта?"
 
 #. confirmation dialog text for sign out action
-#: src/components/button/auth/profile-menu.tsx:32
+#: src/components/button/auth/profile-menu.tsx:40
 msgctxt "profile-button-menu"
 msgid "9rVNwM"
 msgstr "После выхода вы сможете войти снова в любое время."
 
+#. user menu edit account text
+#: src/components/button/auth/profile-menu.tsx:61
+msgctxt "profile-button-menu"
+msgid "wjB0LJ"
+msgstr "Редактировать аккаунт"
+
 #. user menu sign out text
-#: src/components/button/auth/profile-menu.tsx:53
+#: src/components/button/auth/profile-menu.tsx:67
 msgctxt "profile-button-menu"
 msgid "F62y+K"
 msgstr "Выйти"
@@ -380,25 +386,37 @@ msgctxt "agent-commands-parameters-edit"
 msgid "hFv6sd"
 msgstr "Параметр с таким именем уже существует"
 
+#. title on create dialog
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:54
+msgctxt "agent-command-edit-dialog"
+msgid "n2vf2p"
+msgstr "Создание команды"
+
 #. header
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:46
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:58
 msgctxt "agent-command-edit-dialog"
 msgid "O+JC87"
 msgstr "Редактирование команды «{name}»"
 
 #. cancel button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:66
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:78
 msgctxt "agent-command-edit-dialog"
 msgid "47FYwb"
 msgstr "Отмена"
 
+#. create button text
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:91
+msgctxt "agent-command-edit-dialog"
+msgid "VzzYJk"
+msgstr "Создать"
+
 #. edit button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:78
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:95
 msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
 msgstr "Редактировать"
 
-#: src/components/command/agent-commands-list/agent-command/buttons/edit-dialog-button.tsx:24
+#: src/components/command/agent-commands-list/agent-command/buttons/edit-dialog-button.tsx:26
 msgctxt "agent-command-edit-button"
 msgid "wEQDC6"
 msgstr "Редактировать"

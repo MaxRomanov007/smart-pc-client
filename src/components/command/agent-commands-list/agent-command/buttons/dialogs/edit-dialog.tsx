@@ -3,18 +3,25 @@ import { Button, CloseButton, Dialog, Portal } from "@chakra-ui/react";
 import { Tooltip } from "@/components/ui/chakra/tooltip";
 import { type ComponentProps, useMemo, useState } from "react";
 import type { IAgentCommand } from "@/types/agent";
-import { useEditCommandMutation } from "@/utils/hooks/queries/agent";
 import type { AgentCommandToEdit } from "@/services/agent";
 import EditCommandForm from "@/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form";
 
 interface Props extends ComponentProps<typeof Dialog.Root> {
   command: IAgentCommand;
   tooltip?: string;
+  onEdit?: (command: AgentCommandToEdit) => void;
+  create?: boolean;
 }
 
-export function EditDialog({ command, tooltip, children, ...props }: Props) {
+export function EditDialog({
+  command,
+  tooltip,
+  children,
+  onEdit,
+  create,
+  ...props
+}: Props) {
   const t = useExtracted("agent-command-edit-dialog");
-  const { mutate } = useEditCommandMutation(command.id);
   const [commandToEdit, setCommandToEdit] =
     useState<AgentCommandToEdit>(command);
 
@@ -43,13 +50,18 @@ export function EditDialog({ command, tooltip, children, ...props }: Props) {
           <Dialog.Content>
             <Dialog.Header>
               <Dialog.Title truncate>
-                {t({
-                  message: 'Edit command "{name}"',
-                  values: {
-                    name: command.name,
-                  },
-                  description: "header",
-                })}
+                {create
+                  ? t({
+                      message: "Create new command",
+                      description: "title on create dialog",
+                    })
+                  : t({
+                      message: 'Edit command "{name}"',
+                      values: {
+                        name: command.name,
+                      },
+                      description: "header",
+                    })}
               </Dialog.Title>
             </Dialog.Header>
 
@@ -72,13 +84,18 @@ export function EditDialog({ command, tooltip, children, ...props }: Props) {
 
               <Dialog.ActionTrigger asChild>
                 <Button
-                  onClick={() => mutate(commandToEdit)}
+                  onClick={() => onEdit?.(commandToEdit)}
                   disabled={!canEdit}
                 >
-                  {t({
-                    message: "Edit",
-                    description: "edit button text",
-                  })}
+                  {create
+                    ? t({
+                        message: "Create",
+                        description: "create button text",
+                      })
+                    : t({
+                        message: "Edit",
+                        description: "edit button text",
+                      })}
                 </Button>
               </Dialog.ActionTrigger>
             </Dialog.Footer>

@@ -13,7 +13,7 @@ export function useRequireAuth(): IAuthContext {
   const auth = useAuthContextInternal();
 
   useEffect(() => {
-    if (!auth.isLoading && !auth.isAuthenticated) {
+    if (!auth.isLoading && !auth.user) {
       unauthorized();
     }
   }, [auth]);
