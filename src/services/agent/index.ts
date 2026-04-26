@@ -6,6 +6,7 @@ import axios from "axios";
 import type { IAgentCommand } from "@/types/agent";
 import type { ApiResponse } from "@/types/api/response";
 import type { PartialExcept } from "@/utils/types";
+import type { IPc } from "@/types/pc/pc";
 
 const BASE_URL = "http://127.0.0.1";
 
@@ -20,6 +21,9 @@ export const agentApi = {
     axios.delete<ApiResponse<IAgentCommand>>(
       calculateAgentUrl(`/commands/${commandId}`),
     ),
+  ),
+  deleteThisPc: handleApiResponseParametrized(() =>
+    axios.delete<ApiResponse<IPc>>(calculateAgentUrl("")),
   ),
   editCommand: handleApiResponseParametrized((command: AgentCommandToEdit) =>
     axios.patch<ApiResponse<IAgentCommand>>(

@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, Flex, HStack, Spacer } from "@chakra-ui/react";
+import { Card, Flex, Float, HStack, Spacer } from "@chakra-ui/react";
 import type { IPcItem } from "@/types/pc/pc";
 import LinkButton from "@/components/ui/button/link-button";
 import { PAGES } from "@/config/navigation/pages";
@@ -11,6 +11,9 @@ import OnlineBadge from "../ui/badge/online-badge/client";
 import OfflineBadge from "../ui/badge/offline-badge/client";
 import { useCallback } from "react";
 import PowerOnButton from "@/components/pc/power-on-button";
+import DeleteButton from "@/components/button/delete-button";
+import ConfirmationDialog from "@/components/ui/dialog/confirmation-dialog/dialog";
+import { useDeletePcMutation } from "@/utils/hooks/queries/pcs/mutations/use-delete-pc-mutation";
 
 interface Props {
   pc: IPcItem;
@@ -19,6 +22,8 @@ interface Props {
 
 export default function PcCard({ pc, powerOn }: Props) {
   const t = useExtracted("pc-card");
+
+  const { mutate } = useDeletePcMutation(pc.id);
 
   const handleClick = useCallback(async () => {
     powerOn?.();
@@ -37,6 +42,31 @@ export default function PcCard({ pc, powerOn }: Props) {
         </Flex>
         <Card.Title>{pc.name}</Card.Title>
         <Card.Description lineClamp="2">{pc.description}</Card.Description>
+        <Spacer />
+
+        {!pc.online && (
+          <Float placement="middle-end" offset={11}>
+            <ConfirmationDialog
+              title={t({
+                message: "Are you sure you want to delete this PC?",
+                description: "delete this pc confirmation dialog title",
+              })}
+              content={t({
+                message: "All data and commands will be lost forever.",
+                description: "delete this pc confirmation dialog description",
+              })}
+              tooltip={t({
+                message: "Delete this PC",
+                description: "delete this pc button text",
+              })}
+              confirmButtonProps={{ colorPalette: "red", variant: "outline" }}
+              cancelButtonProps={{ variant: "solid" }}
+              onConfirm={() => mutate()}
+            >
+              <DeleteButton variant="ghost" />
+            </ConfirmationDialog>
+          </Float>
+        )}
       </Card.Body>
       <Card.Footer>
         <HStack w="full">

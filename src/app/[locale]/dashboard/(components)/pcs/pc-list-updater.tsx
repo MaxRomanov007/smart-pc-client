@@ -12,9 +12,7 @@ interface Props {
 }
 
 export default function PcListUpdater({ pcs }: Props) {
-  const [pcItems, setPcItems] = useState<IPcItem[]>(
-    pcs.map<IPcItem>((pc) => ({ ...pc, online: false })),
-  );
+  const [onlineMap, setOnlineMap] = useState<Record<string, boolean>>({});
 
   const topics = useMemo(() => pcs.map((pc) => `pcs/${pc.id}/status`), [pcs]);
   useMqttJsonSubscribe<IMqttMessage<MqttMessageTypes.pcStatus>>(topics, {
@@ -23,15 +21,16 @@ export default function PcListUpdater({ pcs }: Props) {
       const changedPcId = getPcIdFromTopic(message.topic);
       const online = message.payload.data.status === "online";
 
-      setPcItems((prevItems) =>
-        prevItems.map((pcItem) =>
-          pcItem.id === changedPcId ? { ...pcItem, online } : pcItem,
-        ),
-      );
+      setOnlineMap((prev) => ({ ...prev, [changedPcId]: online }));
     },
   });
 
   const { doCommand } = useCommands();
+
+  const pcItems = pcs.map((pc) => ({
+    ...pc,
+    online: onlineMap[pc.id] ?? false,
+  }));
 
   const powerOnPc = (pc: IPcItem) => {
     doCommand({

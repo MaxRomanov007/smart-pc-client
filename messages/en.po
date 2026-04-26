@@ -206,6 +206,24 @@ msgctxt "index-page"
 msgid "Oeu69m"
 msgstr "Go to dashboard"
 
+#. delete this pc confirmation dialog title
+#: src/app/[locale]/this-pc/(components)/agent-commands/index.tsx:48
+msgctxt "agent-commands"
+msgid "oI3qzk"
+msgstr "Are you sure you want to delete this PC?"
+
+#. delete this pc confirmation dialog description
+#: src/app/[locale]/this-pc/(components)/agent-commands/index.tsx:52
+msgctxt "agent-commands"
+msgid "WFz1jR"
+msgstr "All data and commands will be lost forever."
+
+#. delete this pc button text
+#: src/app/[locale]/this-pc/(components)/agent-commands/index.tsx:56
+msgctxt "agent-commands"
+msgid "oLPgcq"
+msgstr "Delete this PC"
+
 #. title
 #: src/app/[locale]/this-pc/(components)/header.tsx:10
 msgctxt "this-pc-page-header"
@@ -255,25 +273,25 @@ msgid "/UGGDM"
 msgstr "You're not authorized. Sign in by clicking button below to access this page"
 
 #. confirmation dialog title for sign out action
-#: src/components/button/auth/profile-menu.tsx:36
+#: src/components/button/auth/profile-menu.tsx:37
 msgctxt "profile-button-menu"
 msgid "G2c0ij"
 msgstr "Sign out of your account?"
 
 #. confirmation dialog text for sign out action
-#: src/components/button/auth/profile-menu.tsx:40
+#: src/components/button/auth/profile-menu.tsx:41
 msgctxt "profile-button-menu"
 msgid "9rVNwM"
 msgstr "After sign out, you will be able to sign back into your account."
 
 #. user menu edit account text
-#: src/components/button/auth/profile-menu.tsx:61
+#: src/components/button/auth/profile-menu.tsx:62
 msgctxt "profile-button-menu"
 msgid "wjB0LJ"
 msgstr "Edit Account"
 
 #. user menu sign out text
-#: src/components/button/auth/profile-menu.tsx:67
+#: src/components/button/auth/profile-menu.tsx:68
 msgctxt "profile-button-menu"
 msgid "F62y+K"
 msgstr "Sign Out"
@@ -502,8 +520,26 @@ msgctxt "use-log-types"
 msgid "2KtWqT"
 msgstr "Internal"
 
+#. delete this pc confirmation dialog title
+#: src/components/pc/pc-card.tsx:49
+msgctxt "pc-card"
+msgid "oI3qzk"
+msgstr "Are you sure you want to delete this PC?"
+
+#. delete this pc confirmation dialog description
+#: src/components/pc/pc-card.tsx:53
+msgctxt "pc-card"
+msgid "WFz1jR"
+msgstr "All data and commands will be lost forever."
+
+#. delete this pc button text
+#: src/components/pc/pc-card.tsx:57
+msgctxt "pc-card"
+msgid "oLPgcq"
+msgstr "Delete this PC"
+
 #. link button text
-#: src/components/pc/pc-card.tsx:50
+#: src/components/pc/pc-card.tsx:79
 msgctxt "pc-card"
 msgid "d21Els"
 msgstr "Execute"
@@ -575,13 +611,13 @@ msgid "JK+cUU"
 msgstr "Change to system theme"
 
 #. confirmation dialog cancel button text
-#: src/components/ui/dialog/confirmation-dialog/content.tsx:34
+#: src/components/ui/dialog/confirmation-dialog/content.tsx:36
 msgctxt "confirmation-dialog"
 msgid "47FYwb"
 msgstr "Cancel"
 
 #. confirmation dialog confirm button text
-#: src/components/ui/dialog/confirmation-dialog/content.tsx:43
+#: src/components/ui/dialog/confirmation-dialog/content.tsx:45
 msgctxt "confirmation-dialog"
 msgid "N2IrpM"
 msgstr "Confirm"
@@ -625,18 +661,6 @@ msgstr "PC not found"
 #. not found error message
 #: src/utils/hooks/queries/pcs/queries/use-id-pc-query.ts:20
 msgctxt "use-pc-query"
-msgid "V7DSDW"
-msgstr "This PC can not be found"
-
-#. not found error title
-#: src/utils/hooks/queries/pcs/queries/use-slug-pc-query.ts:18
-msgctxt "use-slug-pc-query"
-msgid "4+Iiep"
-msgstr "PC not found"
-
-#. not found error message
-#: src/utils/hooks/queries/pcs/queries/use-slug-pc-query.ts:22
-msgctxt "use-slug-pc-query"
 msgid "V7DSDW"
 msgstr "This PC can not be found"
 

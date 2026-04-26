@@ -1,16 +1,28 @@
 "use client";
 
 import { Button, CloseButton, Dialog, Text } from "@chakra-ui/react";
-import { type MouseEventHandler, type ReactNode } from "react";
+import {
+  type ComponentProps,
+  type MouseEventHandler,
+  type ReactNode,
+} from "react";
 import { useExtracted } from "next-intl";
 
 interface Props {
   title?: string;
   content?: string | ReactNode;
   onConfirm?: MouseEventHandler<HTMLButtonElement>;
+  confirmButtonProps?: ComponentProps<typeof Button>;
+  cancelButtonProps?: ComponentProps<typeof Button>;
 }
 
-export default function Content({ title, content, onConfirm }: Props) {
+export default function Content({
+  title,
+  content,
+  onConfirm,
+  confirmButtonProps,
+  cancelButtonProps,
+}: Props) {
   const t = useExtracted("confirmation-dialog");
 
   return (
@@ -30,7 +42,7 @@ export default function Content({ title, content, onConfirm }: Props) {
           </Dialog.Body>
           <Dialog.Footer>
             <Dialog.ActionTrigger asChild>
-              <Button variant="outline">
+              <Button variant="outline" {...cancelButtonProps}>
                 {t({
                   message: "Cancel",
                   description: "confirmation dialog cancel button text",
@@ -39,7 +51,7 @@ export default function Content({ title, content, onConfirm }: Props) {
             </Dialog.ActionTrigger>
 
             <Dialog.ActionTrigger asChild>
-              <Button onClick={onConfirm}>
+              <Button onClick={onConfirm} {...confirmButtonProps}>
                 {t({
                   message: "Confirm",
                   description: "confirmation dialog confirm button text",

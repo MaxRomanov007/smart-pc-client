@@ -16,4 +16,8 @@ export abstract class pcsMutationKeys {
   static editPc(id: string) {
     return ["edit-pc", id];
   }
+
+  static deletePc(id: string) {
+    return ["delete-pc", id];
+  }
 }

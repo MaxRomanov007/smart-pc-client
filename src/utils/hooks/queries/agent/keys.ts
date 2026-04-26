@@ -17,6 +17,10 @@ export abstract class agentMutationKeys {
     return [...this.index, "create"];
   }
 
+  static deleteThisPc() {
+    return [...this.index, "delete-this-pc"];
+  }
+
   static deleteCommand(commandId: string) {
     return [...this.currentCommand(commandId), "delete"];
   }

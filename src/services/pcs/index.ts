@@ -39,6 +39,9 @@ export const pcsApi = {
   editPc: handleApiResponseParametrized((uid: string, pc: PcToEdit) =>
     axios.patch<ApiResponse<IPc>>(`/u/${uid}/pcs/${pc.id}`, pc),
   ),
+  deletePc: handleApiResponseParametrized((uid: string, pcId: string) =>
+    axios.delete<ApiResponse<IPc>>(`/u/${uid}/pcs/${pcId}`),
+  ),
 
   fetchPcLogs: handleApiResponseInfiniteQueryMapped(
     (

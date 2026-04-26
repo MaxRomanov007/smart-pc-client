@@ -6,7 +6,7 @@ export default function DeleteButton(
   props: Omit<ComponentProps<typeof IconButton>, "children">,
 ) {
   return (
-    <IconButton variant="ghost" colorPalette="red" {...props}>
+    <IconButton variant="subtle" colorPalette="red" {...props}>
       <LuTrash2 />
     </IconButton>
   );

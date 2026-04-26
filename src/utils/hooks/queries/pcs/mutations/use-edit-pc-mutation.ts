@@ -38,10 +38,17 @@ export function useEditPcMutation(id: string) {
 
       return { previousPc, previousQueryKey };
     },
-    onSuccess: (data, _, context) => {
+    onSuccess: async (data, _, context) => {
       const queryKey = pcsQueryKeys.slugPc(data.slug);
 
       queryClient.setQueryData(queryKey, data);
+      queryClient.setQueryData<IPc[]>(
+        pcsQueryKeys.pcs,
+        (oldPcs: IPc[] | undefined): IPc[] =>
+          (oldPcs ?? []).map<IPc>((oldPc) =>
+            oldPc.id === data.id ? data : oldPc,
+          ),
+      );
 
       if (context?.previousPc?.slug !== data.slug) {
         queryClient.removeQueries({ queryKey: context?.previousQueryKey });
