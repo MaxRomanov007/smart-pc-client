@@ -521,25 +521,25 @@ msgid "2KtWqT"
 msgstr "Внутренняя"
 
 #. delete this pc confirmation dialog title
-#: src/components/pc/pc-card.tsx:49
+#: src/components/pc/pc-card.tsx:50
 msgctxt "pc-card"
 msgid "oI3qzk"
 msgstr ""
 
 #. delete this pc confirmation dialog description
-#: src/components/pc/pc-card.tsx:53
+#: src/components/pc/pc-card.tsx:54
 msgctxt "pc-card"
 msgid "WFz1jR"
 msgstr ""
 
 #. delete this pc button text
-#: src/components/pc/pc-card.tsx:57
+#: src/components/pc/pc-card.tsx:58
 msgctxt "pc-card"
 msgid "oLPgcq"
 msgstr ""
 
 #. link button text
-#: src/components/pc/pc-card.tsx:79
+#: src/components/pc/pc-card.tsx:80
 msgctxt "pc-card"
 msgid "d21Els"
 msgstr "Выполнить"
@@ -611,13 +611,13 @@ msgid "JK+cUU"
 msgstr "Системная тема"
 
 #. confirmation dialog cancel button text
-#: src/components/ui/dialog/confirmation-dialog/content.tsx:36
+#: src/components/ui/dialog/confirmation-dialog/content.tsx:46
 msgctxt "confirmation-dialog"
 msgid "47FYwb"
 msgstr "Отмена"
 
 #. confirmation dialog confirm button text
-#: src/components/ui/dialog/confirmation-dialog/content.tsx:45
+#: src/components/ui/dialog/confirmation-dialog/content.tsx:55
 msgctxt "confirmation-dialog"
 msgid "N2IrpM"
 msgstr "Подтвердить"

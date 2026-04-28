@@ -1,12 +1,17 @@
 "use client";
 
-import { ColorModeProvider, type ColorModeProviderProps } from "./color-mode";
+import { type ColorModeProviderProps } from "./color-mode";
 import system from "@/config/ui/chakra";
 import dynamic from "next/dynamic";
 import { Toaster } from "@/components/ui/chakra/toaster";
 
 const ChakraProvider = dynamic(
   () => import("@chakra-ui/react").then((mod) => mod.ChakraProvider),
+  { ssr: false },
+);
+
+const ColorModeProvider = dynamic(
+  () => import("./color-mode").then((mod) => mod.ColorModeProvider),
   { ssr: false },
 );
 
