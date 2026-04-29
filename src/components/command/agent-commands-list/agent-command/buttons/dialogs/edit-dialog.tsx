@@ -38,7 +38,11 @@ export function EditDialog({
   }, [commandToEdit.parameters]);
 
   return (
-    <Dialog.Root size={{ mdDown: "full", md: "lg" }} {...props}>
+    <Dialog.Root
+      closeOnEscape={false}
+      size={{ mdDown: "full", md: "lg" }}
+      {...props}
+    >
       <Tooltip content={tooltip}>
         <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       </Tooltip>

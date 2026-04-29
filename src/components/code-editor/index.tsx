@@ -22,57 +22,61 @@ export default function CodeEditor({
   ...props
 }: CodeEditorProps) {
   const lualsDisposablesRef = useRef<monaco.IDisposable[]>([]);
-  const wsRef = useRef<WebSocket | null>(null);
+  const lualsDisposeRef = useRef<(() => void) | null>(null);
   const connectionRef = useRef<MessageConnection | null>(null);
   const docVersionRef = useRef<number>(2);
   const unmountedRef = useRef<boolean>(false);
 
   const editorTheme = useColorModeValue("light", "vs-dark");
 
-  const handleEditorDidMount = async (
+  const handleEditorDidMount = (
     editor: monaco.editor.IStandaloneCodeEditor,
     monacoInst: typeof monaco,
   ) => {
-    // Синхронизируем изменения с LuaLS
-    editor.onDidChangeModelContent(() => {
+    // Synchronizing changes with LuaLS
+    editor.onDidChangeModelContent(async () => {
       const connection = connectionRef.current;
       if (!connection) return;
-      connection.sendNotification("textDocument/didChange", {
+      await connection.sendNotification("textDocument/didChange", {
         textDocument: { uri: SCRIPT_URI, version: docVersionRef.current++ },
         contentChanges: [{ text: editor.getValue() }],
       });
     });
 
-    try {
-      const ws = await setupLuaLS(editor, monacoInst, (conn) => {
+    // We register providers once - they read connectionRef dynamically,
+    // so they will work correctly after each reconnection
+    lualsDisposablesRef.current.forEach((d) => d.dispose());
+    lualsDisposablesRef.current = registerLuaLSProviders(
+      monacoInst,
+      () => connectionRef.current,
+    );
+
+    lualsDisposeRef.current = setupLuaLS(
+      editor,
+      monacoInst,
+      (conn) => {
         if (unmountedRef.current) {
           conn.dispose();
           return;
         }
+        // When reconnecting, the old connection is closed automatically,
+        // just replace the ref - providers will pick up the new one on the next call
+        connectionRef.current?.dispose();
         connectionRef.current = conn;
-      });
-
-      if (unmountedRef.current) {
-        ws.close();
-        return;
-      }
-
-      wsRef.current = ws;
-
-      // Регистрируем провайдеры completion + hover через LuaLS
-      // monacoInst из onMount гарантированно не null в отличие от useMonaco()
-      lualsDisposablesRef.current.forEach((d) => d.dispose());
-      lualsDisposablesRef.current = registerLuaLSProviders(
-        monacoInst,
-        () => connectionRef.current,
-      );
-    } catch (e) {
-      console.warn("[CodeEditor] LuaLS unavailable:", e);
-    }
+        // Resetting the document version - LuaLS gets didOpen again after reconnect
+        docVersionRef.current = 2;
+      },
+      () => {
+        // onDisconnect: resets the connection so that providers don't send requests
+        // to a dead connection while reconnecting.
+        connectionRef.current = null;
+      },
+    );
 
     editorProps?.onMount?.(editor, monacoInst);
   };
 
+  // clean on unmount
   useEffect(() => {
     unmountedRef.current = false;
     return () => {
@@ -81,8 +85,8 @@ export default function CodeEditor({
       lualsDisposablesRef.current = [];
       connectionRef.current?.dispose();
       connectionRef.current = null;
-      wsRef.current?.close();
-      wsRef.current = null;
+      lualsDisposeRef.current?.();
+      lualsDisposeRef.current = null;
     };
   }, []);
 
@@ -98,7 +102,7 @@ export default function CodeEditor({
     >
       <Editor
         language="lua"
-        defaultValue={"-- Lua 5.1\nlocal x = math.floor(3.7)\nprint(x)\n"}
+        defaultValue={"-- Lua 5.1\n"}
         value={value}
         onChange={onChange}
         theme={editorTheme}

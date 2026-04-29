@@ -1,9 +1,29 @@
 import * as monaco from "monaco-editor";
 import type { MessageConnection } from "vscode-jsonrpc";
-import type { DiagnosticSeverity, PublishDiagnosticsParams } from "./types";
+import type {
+  DiagnosticSeverity,
+  LspDiagnostic,
+  PublishDiagnosticsParams,
+} from "./types";
 
 const LUALS_ADDRESS = process.env.NEXT_PUBLIC_LUALS_ADDRESS;
+
+// Cache of the latest diagnostics from LuaLS — needed for codeAction requests
+// to pass original objects with the code field (Monaco markers do not store it)
+export const latestDiagnostics = new Map<string, LspDiagnostic[]>();
 export const SCRIPT_URI = "file:///workspace/script.lua";
+
+// Closing codes that make it worth reconnecting
+const RECONNECTABLE_CODES = new Set([
+  1001, // Going Away
+  1006, // Abnormal closure (APISIX timeout, network drop)
+  1012, // Service Restart
+  1013, // Try Again Later
+]);
+
+const RECONNECT_BASE_MS = 1_000;
+const RECONNECT_MAX_MS = 30_000;
+const RECONNECT_JITTER_MS = 500;
 
 function getLuaLSUrl(): string {
   const proto = window.location.protocol === "https:" ? "wss" : "ws";
@@ -52,6 +72,7 @@ function setupDiagnostics(
       );
 
       monacoInst.editor.setModelMarkers(model, "lua-ls", markers);
+      latestDiagnostics.set(params.uri, params.diagnostics);
     },
   );
 }
@@ -75,6 +96,14 @@ async function handshake(
       textDocument: {
         publishDiagnostics: { relatedInformation: true },
         synchronization: { didSave: false, willSave: false },
+        codeAction: {
+          codeActionLiteralSupport: {
+            codeActionKind: {
+              valueSet: ["", "quickfix", "refactor", "refactor.rewrite"],
+            },
+          },
+          isPreferredSupport: true,
+        },
       },
       workspace: { didChangeConfiguration: {} },
     },
@@ -82,8 +111,8 @@ async function handshake(
     initializationOptions: {},
   });
 
-  connection.sendNotification("initialized", {});
-  connection.sendNotification("textDocument/didOpen", {
+  await connection.sendNotification("initialized", {});
+  await connection.sendNotification("textDocument/didOpen", {
     textDocument: {
       uri: SCRIPT_URI,
       languageId: "lua",
@@ -93,7 +122,7 @@ async function handshake(
   });
 }
 
-export async function setupLuaLS(
+async function connect(
   editor: monaco.editor.IStandaloneCodeEditor,
   monacoInst: typeof monaco,
   onConnection: (conn: MessageConnection) => void,
@@ -135,4 +164,84 @@ export async function setupLuaLS(
 
   onConnection(connection);
   return ws;
+}
+
+// The controller manages the connection lifecycle and reconnection.
+// It returns the dispose() function to completely stop
+// (when the component is unmounted).
+export function setupLuaLS(
+  editor: monaco.editor.IStandaloneCodeEditor,
+  monacoInst: typeof monaco,
+  onConnection: (conn: MessageConnection) => void,
+  onDisconnect: () => void,
+): () => void {
+  let ws: WebSocket | null = null;
+  let attempt = 0;
+  let stopped = false;
+  let retryTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function clearRetryTimer(): void {
+    if (retryTimer !== null) {
+      clearTimeout(retryTimer);
+      retryTimer = null;
+    }
+  }
+
+  function scheduleReconnect(closeCode: number): void {
+    if (stopped) return;
+    if (!RECONNECTABLE_CODES.has(closeCode)) {
+      console.warn(
+        `[LuaLS] connection closed with code ${closeCode}, not reconnecting`,
+      );
+      return;
+    }
+
+    const delay = Math.min(
+      RECONNECT_BASE_MS * 2 ** attempt + Math.random() * RECONNECT_JITTER_MS,
+      RECONNECT_MAX_MS,
+    );
+    attempt++;
+    console.log(
+      `[LuaLS] reconnecting in ${Math.round(delay)}ms (attempt ${attempt})`,
+    );
+    retryTimer = setTimeout(run, delay);
+  }
+
+  function run(): void {
+    if (stopped) return;
+
+    connect(editor, monacoInst, onConnection)
+      .then((socket) => {
+        if (stopped) {
+          socket.close();
+          return;
+        }
+
+        ws = socket;
+        attempt = 0; // reset the counter after a successful connection
+
+        ws.addEventListener(
+          "close",
+          (ev) => {
+            onDisconnect();
+            ws = null;
+            scheduleReconnect(ev.code);
+          },
+          { once: true },
+        );
+      })
+      .catch((e) => {
+        console.warn("[LuaLS] connection failed:", e);
+        scheduleReconnect(1006); // We consider it as abnormal closure
+      });
+  }
+
+  run();
+
+  return function dispose(): void {
+    stopped = true;
+    clearRetryTimer();
+    ws?.close();
+    ws = null;
+  };
 }

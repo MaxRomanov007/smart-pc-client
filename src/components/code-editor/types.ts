@@ -13,8 +13,9 @@ export interface LspRange {
 export interface LspDiagnostic {
   range: LspRange;
   severity?: DiagnosticSeverity;
-  message: string;
+  code?: string | number;
   source?: string;
+  message: string;
 }
 
 export interface PublishDiagnosticsParams {
@@ -29,7 +30,7 @@ export type LspCompletionItemKind = number;
 // insertTextFormat: 1 = PlainText, 2 = Snippet
 export type InsertTextFormat = 1 | 2;
 
-export interface LspTextEdit {
+export interface LspInsertTextEdit {
   newText: string;
 }
 
@@ -40,7 +41,7 @@ export interface LspCompletionItem {
   documentation?: string | MarkupContent;
   insertText?: string;
   insertTextFormat?: InsertTextFormat;
-  textEdit?: LspTextEdit;
+  textEdit?: LspInsertTextEdit;
 }
 
 export interface LspCompletionList {
@@ -50,7 +51,7 @@ export interface LspCompletionList {
 
 export type CompletionResult = LspCompletionItem[] | LspCompletionList | null;
 
-// MarkedString — deprecated в LSP 3.x но LuaLS всё ещё может его слать
+// MarkedString is deprecated in LSP 3.x, but LuaLS can still send it.
 export type MarkedString = string | { language: string; value: string };
 
 export interface MarkupContent {
@@ -64,3 +65,34 @@ export interface LspHover {
   contents: HoverContents;
   range?: LspRange;
 }
+
+// Code Actions
+
+export interface LspWorkspaceTextEdit {
+  range: LspRange;
+  newText: string;
+}
+
+export interface LspWorkspaceEdit {
+  changes?: Record<string, LspWorkspaceTextEdit[]>;
+  // We don't use documentChanges — we work only with changes.
+}
+
+export interface LspCommand {
+  title: string;
+  command: string;
+  arguments?: unknown[];
+}
+
+export type LspCodeActionKind = string; // "quickfix" | "refactor" | ...
+
+export interface LspCodeAction {
+  title: string;
+  kind?: LspCodeActionKind;
+  diagnostics?: LspDiagnostic[];
+  isPreferred?: boolean;
+  edit?: LspWorkspaceEdit;
+  command?: LspCommand;
+}
+
+export type CodeActionResult = (LspCodeAction | LspCommand)[] | null;
