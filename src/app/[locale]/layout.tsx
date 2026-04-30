@@ -5,10 +5,7 @@ import { notFound } from "next/navigation";
 import { hasLocale } from "next-intl";
 import Providers from "@/app/[locale]/(components)/providers";
 import Layout from "@/app/[locale]/(components)/layout/layout";
-import Head from "next/head";
 import type { Metadata } from "next";
-import iconLight from "@/../public/logo/romanov-digital/mini.svg";
-import iconDark from "@/../public/logo/romanov-digital/mini-dark.svg";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -21,18 +18,6 @@ type Props = {
 
 export const metadata: Metadata = {
   title: "Smart PC",
-  icons: [
-    {
-      type: "image/svg+xml",
-      url: iconDark.src,
-      media: "(prefers-color-scheme: light)",
-    },
-    {
-      type: "image/svg+xml",
-      url: iconLight.src,
-      media: "(prefers-color-scheme: dark)",
-    },
-  ],
 };
 
 export default async function RootLayout({ children, params }: Props) {
@@ -45,13 +30,6 @@ export default async function RootLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} suppressHydrationWarning>
-      <Head>
-        <link
-          rel="icon"
-          href="/logo/romanov-digital/mini.svg"
-          type="image/svg+xml"
-        />
-      </Head>
       <body>
         <Providers locale={locale}>
           <Layout>{children}</Layout>

@@ -118,7 +118,6 @@ export default function CodeEditor({
           scrollBeyondLastLine: false,
           automaticLayout: true,
           suggestOnTriggerCharacters: true,
-          quickSuggestions: true,
           parameterHints: { enabled: true },
           renderValidationDecorations: "on",
         }}

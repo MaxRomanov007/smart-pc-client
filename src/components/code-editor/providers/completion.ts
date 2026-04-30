@@ -6,6 +6,7 @@ import type {
 } from "@/types/luals";
 import * as monaco from "monaco-editor";
 import { SCRIPT_URI } from "@/components/code-editor/luals";
+import { debouncedProvider } from "@/utils/time/debounce";
 
 function lspItemToMonaco(
   item: LspCompletionItem,
@@ -49,12 +50,12 @@ export function registerCompletion(
   monacoInst: typeof monaco,
   getConnection: GetConnection,
 ): monaco.IDisposable {
-  return monacoInst.languages.registerCompletionItemProvider("lua", {
-    triggerCharacters: [".", ":", "("],
+  const EMPTY: monaco.languages.CompletionList = { suggestions: [] };
 
-    async provideCompletionItems(model, position) {
+  const provide = debouncedProvider(
+    async (model: monaco.editor.ITextModel, position: monaco.Position) => {
       const connection = getConnection();
-      if (!connection) return { suggestions: [] };
+      if (!connection) return EMPTY;
 
       try {
         const result = await connection.sendRequest<CompletionResult>(
@@ -89,5 +90,12 @@ export function registerCompletion(
         return { suggestions: [] };
       }
     },
+    EMPTY,
+    500,
+  );
+
+  return monacoInst.languages.registerCompletionItemProvider("lua", {
+    triggerCharacters: [".", ":", "("],
+    provideCompletionItems: provide,
   });
 }
