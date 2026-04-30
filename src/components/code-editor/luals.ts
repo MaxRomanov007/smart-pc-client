@@ -4,7 +4,7 @@ import type {
   DiagnosticSeverity,
   LspDiagnostic,
   PublishDiagnosticsParams,
-} from "./types";
+} from "@/types/luals";
 
 const LUALS_ADDRESS = process.env.NEXT_PUBLIC_LUALS_ADDRESS;
 

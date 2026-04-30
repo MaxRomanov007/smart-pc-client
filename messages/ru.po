@@ -405,31 +405,31 @@ msgid "hFv6sd"
 msgstr "Параметр с таким именем уже существует"
 
 #. title on create dialog
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:54
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:58
 msgctxt "agent-command-edit-dialog"
 msgid "n2vf2p"
 msgstr "Создание команды"
 
 #. header
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:58
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:62
 msgctxt "agent-command-edit-dialog"
 msgid "O+JC87"
 msgstr "Редактирование команды «{name}»"
 
 #. cancel button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:78
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:82
 msgctxt "agent-command-edit-dialog"
 msgid "47FYwb"
 msgstr "Отмена"
 
 #. create button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:91
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:95
 msgctxt "agent-command-edit-dialog"
 msgid "VzzYJk"
 msgstr "Создать"
 
 #. edit button text
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:95
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-dialog.tsx:99
 msgctxt "agent-command-edit-dialog"
 msgid "wEQDC6"
 msgstr "Редактировать"

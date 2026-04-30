@@ -1,3 +1,5 @@
+import type { MessageConnection } from "vscode-jsonrpc";
+
 export type DiagnosticSeverity = 1 | 2 | 3 | 4; // Error | Warning | Information | Hint
 
 export interface LspPosition {
@@ -96,3 +98,5 @@ export interface LspCodeAction {
 }
 
 export type CodeActionResult = (LspCodeAction | LspCommand)[] | null;
+
+export type GetConnection = () => MessageConnection | null;

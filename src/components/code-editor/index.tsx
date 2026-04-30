@@ -8,6 +8,9 @@ import type { MessageConnection } from "vscode-jsonrpc";
 import { useColorModeValue } from "@/components/ui/chakra/color-mode";
 import { SCRIPT_URI, setupLuaLS } from "./luals";
 import { registerLuaLSProviders } from "./providers";
+import { debounce } from "@/utils/time/debounce";
+
+const LUALS_DEBOUNCE_MS = 300;
 
 interface CodeEditorProps extends Omit<ComponentProps<typeof Box>, "onChange"> {
   value?: string;
@@ -33,14 +36,16 @@ export default function CodeEditor({
     editor: monaco.editor.IStandaloneCodeEditor,
     monacoInst: typeof monaco,
   ) => {
-    // Synchronizing changes with LuaLS
-    editor.onDidChangeModelContent(async () => {
-      const connection = connectionRef.current;
-      if (!connection) return;
-      await connection.sendNotification("textDocument/didChange", {
-        textDocument: { uri: SCRIPT_URI, version: docVersionRef.current++ },
-        contentChanges: [{ text: editor.getValue() }],
+    const sendDidChange = debounce((text: string, version: number) => {
+      connectionRef.current?.sendNotification("textDocument/didChange", {
+        textDocument: { uri: SCRIPT_URI, version },
+        contentChanges: [{ text }],
       });
+    }, LUALS_DEBOUNCE_MS);
+
+    editor.onDidChangeModelContent(() => {
+      if (!connectionRef.current) return;
+      sendDidChange(editor.getValue(), docVersionRef.current++);
     });
 
     // We register providers once - they read connectionRef dynamically,
@@ -102,8 +107,7 @@ export default function CodeEditor({
     >
       <Editor
         language="lua"
-        defaultValue={"-- Lua 5.1\n"}
-        value={value}
+        defaultValue={value ?? `-- Lua 5.1\n`}
         onChange={onChange}
         theme={editorTheme}
         onMount={handleEditorDidMount}
