@@ -17,6 +17,7 @@ export function ColorModeProvider(props: ColorModeProviderProps) {
       attribute="class"
       defaultTheme="system"
       disableTransitionOnChange
+      scriptProps={{ "data-cfasync": "false" }}
       {...props}
     />
   );
