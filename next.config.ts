@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
     authInterrupts: true,
   },
 
+  allowedDevOrigins: ["smartpc.site"],
+
   images: {
     remotePatterns: [new URL(process.env.IMAGES_SERVER_URL_PATTERN!)],
   },

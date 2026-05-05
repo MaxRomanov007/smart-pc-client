@@ -7,11 +7,11 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 export function Provider({ children, ...props }: ColorModeProviderProps) {
   return (
-    <ColorModeProvider {...props}>
-      <ChakraProvider value={system}>
+    <ChakraProvider value={system}>
+      <ColorModeProvider {...props}>
         {children}
         <Toaster />
-      </ChakraProvider>
-    </ColorModeProvider>
+      </ColorModeProvider>
+    </ChakraProvider>
   );
 }

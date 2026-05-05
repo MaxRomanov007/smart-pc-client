@@ -593,19 +593,19 @@ msgid "v3MWTZ"
 msgstr "в сети"
 
 #. tooltip of color mode button to change to dark theme
-#: src/components/ui/chakra/color-mode.tsx:83
+#: src/components/ui/chakra/color-mode.tsx:84
 msgctxt "color-mode-button"
 msgid "bT/Gni"
 msgstr "Тёмная тема"
 
 #. tooltip of color mode button to change to light theme
-#: src/components/ui/chakra/color-mode.tsx:88
+#: src/components/ui/chakra/color-mode.tsx:89
 msgctxt "color-mode-button"
 msgid "7l91tE"
 msgstr "Светлая тема"
 
 #. tooltip of color mode button to change to system theme
-#: src/components/ui/chakra/color-mode.tsx:93
+#: src/components/ui/chakra/color-mode.tsx:94
 msgctxt "color-mode-button"
 msgid "JK+cUU"
 msgstr "Системная тема"
