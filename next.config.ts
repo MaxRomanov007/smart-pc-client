@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   /* configs options here */
   reactCompiler: true,
 
+  output: "standalone",
+
   experimental: {
     optimizePackageImports: ["@chakra-ui/react"],
     authInterrupts: true,

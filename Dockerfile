@@ -1,0 +1,61 @@
+FROM oven/bun:1 AS base
+WORKDIR /app
+
+# deps: install only dependencies
+FROM base AS deps
+COPY package.json bun.lock* ./
+RUN bun install --frozen-lockfile
+
+# builder: compile the app
+FROM base AS builder
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# NEXT_PUBLIC_* vars are baked into the JS bundle at build time — must be ARGs here
+ARG NEXT_PUBLIC_OAUTH_CLIENT_ID
+ARG NEXT_PUBLIC_OAUTH_ISSUER
+ARG NEXT_PUBLIC_KRATOS_SELFSERVICE_URL
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_PC_SERVICE_ADDRESS
+ARG NEXT_PUBLIC_MQTT_BROKER_URL
+ARG NEXT_PUBLIC_AGENT_ADDRESS
+ARG NEXT_PUBLIC_LUALS_ADDRESS
+ARG IMAGES_SERVER_URL_PATTERN
+
+ENV NEXT_PUBLIC_OAUTH_CLIENT_ID=${NEXT_PUBLIC_OAUTH_CLIENT_ID}
+ENV NEXT_PUBLIC_OAUTH_ISSUER=${NEXT_PUBLIC_OAUTH_ISSUER}
+ENV NEXT_PUBLIC_KRATOS_SELFSERVICE_URL=${NEXT_PUBLIC_KRATOS_SELFSERVICE_URL}
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+ENV NEXT_PUBLIC_PC_SERVICE_ADDRESS=${NEXT_PUBLIC_PC_SERVICE_ADDRESS}
+ENV NEXT_PUBLIC_MQTT_BROKER_URL=${NEXT_PUBLIC_MQTT_BROKER_URL}
+ENV NEXT_PUBLIC_AGENT_ADDRESS=${NEXT_PUBLIC_AGENT_ADDRESS}
+ENV NEXT_PUBLIC_LUALS_ADDRESS=${NEXT_PUBLIC_LUALS_ADDRESS}
+ENV IMAGES_SERVER_URL_PATTERN=${IMAGES_SERVER_URL_PATTERN}
+
+RUN bun run build
+
+# runner: production image
+FROM base AS runner
+WORKDIR /app
+
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+RUN groupadd --system --gid 1001 nodejs && \
+    useradd  --system --uid 1001 --gid nodejs nextjs
+
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+CMD ["bun", "./server.js"]
