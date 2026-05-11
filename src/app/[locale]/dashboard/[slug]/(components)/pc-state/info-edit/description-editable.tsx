@@ -33,6 +33,7 @@ export default function DescriptionEditable({
     <Editable.Root
       value={description}
       onValueChange={(e) => setDescription(e.value)}
+      maxLength={1024}
       onValueCommit={handleCommit}
     >
       <Editable.Preview lineClamp={5} wordBreak="break-word" />

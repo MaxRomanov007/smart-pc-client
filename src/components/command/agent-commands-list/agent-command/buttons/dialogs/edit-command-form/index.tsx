@@ -28,6 +28,7 @@ export default function EditCommandForm({ command, onCommandUpdate }: Props) {
         <Editable
           value={command.name}
           onValueChange={(name) => onCommandUpdate({ ...command, name })}
+          maxLength={255}
         />
       </Field.Root>
 
@@ -46,6 +47,7 @@ export default function EditCommandForm({ command, onCommandUpdate }: Props) {
           onValueChange={(description) =>
             onCommandUpdate({ ...command, description })
           }
+          maxLength={1024}
         />
       </Field.Root>
 
@@ -62,6 +64,7 @@ export default function EditCommandForm({ command, onCommandUpdate }: Props) {
           onParametersChange={(parameters) =>
             onCommandUpdate({ ...command, parameters })
           }
+          maxItems={5}
         />
       </Field.Root>
 
@@ -76,6 +79,7 @@ export default function EditCommandForm({ command, onCommandUpdate }: Props) {
         <CodeEditor
           value={command.script}
           onChange={(script) => onCommandUpdate({ ...command, script })}
+          maxChars={8196}
           w="full"
           h={400}
         />

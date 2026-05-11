@@ -26,6 +26,7 @@ export default function NameEditable({ pc }: Props) {
     <Editable.Root
       value={name}
       onValueChange={(e) => setName(e.value)}
+      maxLength={255}
       onValueCommit={handleCommit}
     >
       <Editable.Preview />

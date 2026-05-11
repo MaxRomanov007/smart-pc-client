@@ -16,12 +16,14 @@ interface CodeEditorProps extends Omit<ComponentProps<typeof Box>, "onChange"> {
   value?: string;
   onChange?: (value: string | undefined) => void;
   editorProps?: ComponentProps<typeof Editor>;
+  maxChars?: number;
 }
 
 export default function CodeEditor({
   value,
   onChange,
   editorProps,
+  maxChars,
   ...props
 }: CodeEditorProps) {
   const lualsDisposablesRef = useRef<monaco.IDisposable[]>([]);
@@ -44,6 +46,19 @@ export default function CodeEditor({
     }, LUALS_DEBOUNCE_MS);
 
     editor.onDidChangeModelContent(() => {
+      if (maxChars !== undefined) {
+        const model = editor.getModel();
+        if (model) {
+          const text = model.getValue();
+          if (text.length > maxChars) {
+            const position = editor.getPosition();
+            model.setValue(text.substring(0, maxChars));
+            if (position) editor.setPosition(position);
+            return;
+          }
+        }
+      }
+
       if (!connectionRef.current) return;
       sendDidChange(editor.getValue(), docVersionRef.current++);
     });

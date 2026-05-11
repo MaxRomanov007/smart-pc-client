@@ -530,19 +530,19 @@ msgstr "Внутренняя"
 #: src/components/pc/pc-card.tsx:63
 msgctxt "pc-card"
 msgid "oI3qzk"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить этот компьютер?"
 
 #. delete this pc confirmation dialog description
 #: src/components/pc/pc-card.tsx:67
 msgctxt "pc-card"
 msgid "WFz1jR"
-msgstr ""
+msgstr "Все данные и команды будут безвозвратно утеряны."
 
 #. delete this pc button text
 #: src/components/pc/pc-card.tsx:71
 msgctxt "pc-card"
 msgid "oLPgcq"
-msgstr ""
+msgstr "Удалить этот ПК"
 
 #. link button text
 #: src/components/pc/pc-card.tsx:93

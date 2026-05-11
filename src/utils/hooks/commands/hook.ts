@@ -4,8 +4,6 @@ import { CommandsContext } from "@/utils/hooks/commands/context";
 export function useCommands() {
   const context = useContext(CommandsContext);
 
-  console.log(context);
-
   if (!context) {
     throw new Error("useCommands must be used within CommandsProvider");
   }

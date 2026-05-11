@@ -39,6 +39,7 @@ export default function Body({ parameter, onParameterChange, errors }: Props) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           onBlur={onNameChange}
+          maxLength={255}
         />
 
         {!!errors?.name && <Field.ErrorText>{errors.name}</Field.ErrorText>}
@@ -59,6 +60,7 @@ export default function Body({ parameter, onParameterChange, errors }: Props) {
           minH="5lh"
           maxH="5lh"
           autoresize
+          maxLength={1024}
         />
 
         {!!errors?.description && (

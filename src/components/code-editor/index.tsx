@@ -9,6 +9,7 @@ const CodeEditorClient = dynamic(() => import("./client"), { ssr: false });
 interface CodeEditorProps extends Omit<ComponentProps<typeof Box>, "onChange"> {
   value?: string;
   onChange?: (value: string | undefined) => void;
+  maxChars?: number;
   editorProps?: ComponentProps<typeof import("@monaco-editor/react").default>;
 }
 

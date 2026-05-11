@@ -12,11 +12,13 @@ import AddButton from "@/components/button/add-button";
 interface Props {
   parameters?: IAgentCommandParameter[];
   onParametersChange?: (parameters: IAgentCommandParameter[]) => void;
+  maxItems?: number;
 }
 
 export default function ParametersEdit({
   parameters,
   onParametersChange,
+  maxItems,
 }: Props) {
   const t = useExtracted("agent-commands-parameters-edit");
 
@@ -66,7 +68,12 @@ export default function ParametersEdit({
         </ScrollArea.Content>
       </ScrollArea.Viewport>
       <Float placement="bottom-end" offset={7}>
-        <AddButton size="xs" variant="outline" onClick={addParameter} />
+        <AddButton
+          size="xs"
+          variant="outline"
+          onClick={addParameter}
+          disabled={parameters && !!maxItems && parameters.length >= maxItems}
+        />
       </Float>
       <ScrollArea.Scrollbar orientation="horizontal" />
       <ScrollArea.Corner />

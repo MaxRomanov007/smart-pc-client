@@ -39,7 +39,7 @@ export function AgentCommands({ ...props }: Props) {
           }}
           onEdit={createCommand}
         >
-          <AddButton />
+          <AddButton disabled={data.length >= 15} />
         </EditDialog>
       </Float>
 
