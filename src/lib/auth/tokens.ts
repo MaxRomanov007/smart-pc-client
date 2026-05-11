@@ -132,12 +132,15 @@ export function parseUserFromIdToken(idToken: string): IUser | null {
     const parts = idToken.split(".");
     if (parts.length !== 3) return null;
 
-    const payload = parts[1]
+    const base64 = parts[1]
       .replace(/-/g, "+")
       .replace(/_/g, "/")
       .padEnd(parts[1].length + ((4 - (parts[1].length % 4)) % 4), "=");
 
-    const decoded: IOryIdTokenPayload = JSON.parse(atob(payload));
+    const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+    const decoded: IOryIdTokenPayload = JSON.parse(
+      new TextDecoder().decode(bytes),
+    );
 
     return {
       id: decoded.sub,

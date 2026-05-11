@@ -24,7 +24,7 @@ msgctxt "header-menu-drawer"
 msgid "tKMlOc"
 msgstr "Меню"
 
-#: src/app/[locale]/auth/callback/page.tsx:99
+#: src/app/[locale]/auth/callback/auth-callback-inner.tsx:99
 msgctxt "auth-callback-page"
 msgid "ia2WSY"
 msgstr "Завершение авторизации..."
@@ -321,19 +321,19 @@ msgid "HAlOn1"
 msgstr "Название"
 
 #. description field
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:49
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:50
 msgctxt "agent-command-parameter-body"
 msgid "Q8Qw5B"
 msgstr "Описание"
 
 #. type field label
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:72
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:74
 msgctxt "agent-command-parameter-body"
 msgid "+U6ozc"
 msgstr "Тип"
 
 #. type field placeholder
-#: src/components/command/agent-command-parameters/parameter/body/index.tsx:76
+#: src/components/command/agent-command-parameters/parameter/body/index.tsx:78
 msgctxt "agent-command-parameter-body"
 msgid "PaEvpZ"
 msgstr "Выберите тип параметра"
@@ -387,25 +387,25 @@ msgid "HAlOn1"
 msgstr "Название"
 
 #. description field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:36
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:37
 msgctxt "agent-command-edit-dialog-form"
 msgid "Q8Qw5B"
 msgstr "Описание"
 
 #. parameters field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:54
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:56
 msgctxt "agent-command-edit-dialog-form"
 msgid "BkOSF2"
 msgstr "Параметры"
 
 #. script field
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:70
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/index.tsx:73
 msgctxt "agent-command-edit-dialog-form"
 msgid "cxkY9n"
 msgstr "Скрипт"
 
 #. error message on same name is exists
-#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:40
+#: src/components/command/agent-commands-list/agent-command/buttons/dialogs/edit-command-form/parameters-edit.tsx:42
 msgctxt "agent-commands-parameters-edit"
 msgid "hFv6sd"
 msgstr "Параметр с таким именем уже существует"
@@ -527,25 +527,25 @@ msgid "2KtWqT"
 msgstr "Внутренняя"
 
 #. delete this pc confirmation dialog title
-#: src/components/pc/pc-card.tsx:63
+#: src/components/pc/pc-card.tsx:57
 msgctxt "pc-card"
 msgid "oI3qzk"
 msgstr "Вы уверены, что хотите удалить этот компьютер?"
 
 #. delete this pc confirmation dialog description
-#: src/components/pc/pc-card.tsx:67
+#: src/components/pc/pc-card.tsx:61
 msgctxt "pc-card"
 msgid "WFz1jR"
 msgstr "Все данные и команды будут безвозвратно утеряны."
 
 #. delete this pc button text
-#: src/components/pc/pc-card.tsx:71
+#: src/components/pc/pc-card.tsx:65
 msgctxt "pc-card"
 msgid "oLPgcq"
 msgstr "Удалить этот ПК"
 
 #. link button text
-#: src/components/pc/pc-card.tsx:93
+#: src/components/pc/pc-card.tsx:87
 msgctxt "pc-card"
 msgid "d21Els"
 msgstr "Выполнить"
