@@ -12,7 +12,10 @@ export default function PcListGrid({ children, empty }: Props) {
   }
 
   return (
-    <Grid templateColumns="repeat(auto-fit, minmax(360px, 1fr))" gap={4}>
+    <Grid
+      templateColumns={["full", null, "repeat(auto-fit, minmax(360px, 1fr))"]}
+      gap={4}
+    >
       {children}
     </Grid>
   );

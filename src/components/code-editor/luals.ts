@@ -25,13 +25,6 @@ const RECONNECT_BASE_MS = 1_000;
 const RECONNECT_MAX_MS = 30_000;
 const RECONNECT_JITTER_MS = 500;
 
-function getLuaLSUrl(): string {
-  const proto = window.location.protocol === "https:" ? "wss" : "ws";
-  return LUALS_ADDRESS
-    ? `${proto}://${LUALS_ADDRESS}`
-    : `${proto}://${window.location.host}/luals/`;
-}
-
 function lspSeverityToMonaco(
   severity: DiagnosticSeverity | undefined,
   monacoInst: typeof monaco,
@@ -131,7 +124,7 @@ async function connect(
     await import("vscode-ws-jsonrpc");
   const { createMessageConnection } = await import("vscode-jsonrpc/browser");
 
-  const ws = new WebSocket(getLuaLSUrl());
+  const ws = new WebSocket(LUALS_ADDRESS!);
 
   await new Promise<void>((resolve, reject) => {
     ws.addEventListener("open", () => resolve(), { once: true });

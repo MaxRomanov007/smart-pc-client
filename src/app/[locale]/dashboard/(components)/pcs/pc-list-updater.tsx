@@ -6,6 +6,7 @@ import type { IPc, IPcItem } from "@/types/pc/pc";
 import PcList from "@/components/pc/pc-list";
 import { useMqttJsonSubscribe } from "@/lib/mqtt/hooks/use-mqtt-json-subscribe";
 import { useCommands } from "@/utils/hooks/commands/hook";
+import { useExtracted } from "next-intl";
 
 interface Props {
   pcs: IPc[];
@@ -13,6 +14,7 @@ interface Props {
 
 export default function PcListUpdater({ pcs }: Props) {
   const [onlineMap, setOnlineMap] = useState<Record<string, boolean>>({});
+  const t = useExtracted("pc-list-updater");
 
   const topics = useMemo(() => pcs.map((pc) => `pcs/${pc.id}/status`), [pcs]);
   useMqttJsonSubscribe<IMqttMessage<MqttMessageTypes.pcStatus>>(topics, {
@@ -41,7 +43,18 @@ export default function PcListUpdater({ pcs }: Props) {
     });
   };
 
-  return <PcList pcs={pcItems} powerOn={powerOnPc} />;
+  const powerOffPc = (pc: IPcItem) => {
+    doCommand({
+      pc,
+      commandId: "power-off",
+      text: t({
+        message: "Are you sure you want to power off this PC?",
+        description: "power off button dialog text",
+      }),
+    });
+  };
+
+  return <PcList pcs={pcItems} powerOn={powerOnPc} powerOff={powerOffPc} />;
 }
 
 function getPcIdFromTopic(topic: string) {

@@ -14,21 +14,28 @@ import PowerOnButton from "@/components/pc/power-on-button";
 import DeleteButton from "@/components/button/delete-button";
 import ConfirmationDialog from "@/components/ui/dialog/confirmation-dialog/dialog";
 import { useDeletePcMutation } from "@/utils/hooks/queries/pcs/mutations/use-delete-pc-mutation";
+import PowerOffButton from "@/components/pc/power-off-button";
 
 interface Props {
   pc: IPcItem;
   powerOn?: () => void;
+  powerOff?: () => void;
 }
 
-export default function PcCard({ pc, powerOn }: Props) {
+export default function PcCard({ pc, powerOn, powerOff }: Props) {
   const t = useExtracted("pc-card");
 
   const { mutate } = useDeletePcMutation(pc.id);
 
-  const handleClick = useCallback(async () => {
+  const handePowerOn = useCallback(async () => {
     powerOn?.();
     await new Promise((r) => setTimeout(r, 1000));
   }, [powerOn]);
+
+  const handePowerOff = useCallback(async () => {
+    powerOff?.();
+    await new Promise((r) => setTimeout(r, 1000));
+  }, [powerOff]);
 
   return (
     <Card.Root opacity={pc.online || pc.canPowerOn ? 1 : 0.6}>
@@ -85,8 +92,10 @@ export default function PcCard({ pc, powerOn }: Props) {
 
           <PowerOnButton
             hidden={pc.online || !pc.canPowerOn}
-            onClick={handleClick}
+            onClick={handePowerOn}
           />
+
+          <PowerOffButton hidden={!pc.online} onClick={handePowerOff} />
         </HStack>
       </Card.Footer>
     </Card.Root>
